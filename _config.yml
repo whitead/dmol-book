@@ -1,0 +1,8 @@
+# Book settings
+title: Machine Learning of Molecules and Materials
+author: Andrew D. White
+logo: logo.png
+
+latex:
+  latex_documents:
+    targetname: book.tex
