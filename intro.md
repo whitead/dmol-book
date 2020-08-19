@@ -1,7 +1,5 @@
-Welcome to your Jupyter Book
-============================
+Course Notes for Machine Learning of Molecules and Materials
+=================================================================
 
-This is a small sample book to give you a feel for how book content is
-structured.
-
-Check out the content pages bundled with this sample book to get started.
+This course is taught by Andrew White at the University of Rochester,
+first offered in Fall 2020.
