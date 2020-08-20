@@ -4,3 +4,4 @@ numpy
 jax
 pandas
 seaborn
+tabulate
