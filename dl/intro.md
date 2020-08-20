@@ -1,0 +1,4 @@
+Intro to Deep Learning
+=======================
+
+*Deep learning* is a category of *machine learning*. Machine learning is a category of *artificial intelligence*. These notes are mostly about deep learning, hence the name of the book. Deep learning is mostly concerned with using neural networks to classify and regress data. I am a chemical engineering professor though and writing an introduction to deep learning is a hopeless task for me. I recommend reading the excellent introduction from [Ian Goodfellow's book](https://www.deeplearningbook.org/contents/intro.html). If you're more visually oriented, Grant Sanderson has made a [short video series](https://www.youtube.com/watch?v=aircAruvnKk) specifically about neural networks that make a more applied introduction to the topic.

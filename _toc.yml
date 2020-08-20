@@ -1,5 +1,9 @@
 - file: intro
-- file: content
-  sections:
-    - file: markdown
-    - file: notebooks
+
+- part: Machine Learning
+  chapters:
+    - file: ml/intro
+
+- part: Deep Learning
+  chapters:
+    - file: dl/intro
