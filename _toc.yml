@@ -2,7 +2,7 @@
 
 - part: Machine Learning
   chapters:
-    - file: ml/intro
+    - file: ml/Introduction
 
 - part: Deep Learning
   chapters:
