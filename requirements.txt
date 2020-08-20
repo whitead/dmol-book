@@ -2,5 +2,5 @@ jupyter-book
 matplotlib
 numpy
 jax
-pands
+pandas
 seaborn
