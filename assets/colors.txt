@@ -1,5 +1,1 @@
-#5C4B51
-#8CBEB2
-#F2EBBF
-#F3B562
-#F06060
+color_cycle = ['#1BBC9B', '#F06060', '#8CBEB2', '#5C4B51', '#F3B562']

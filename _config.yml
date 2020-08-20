@@ -14,3 +14,10 @@ html:
   extra_navbar              : Made with <a href="https://jupyterbook.org">Jupyter Book</a>  # Will be displayed underneath the left navbar.
   extra_footer              : <a href="http://thewhitelab.org">thewhitelab.org</a>  # Will be displayed underneath the footer.
   baseurl                   : ""  # The base URL where your book will be hosted. Used for creating image previews and social links. e.g.: https://mypage.com/mybook/
+
+  # Information about where the book exists on the web
+repository:
+  url                       : https://github.com/whitead/dmol-book  # Online location of your book
+
+launch_buttons:
+  colab_url: "https://colab.research.google.com"
