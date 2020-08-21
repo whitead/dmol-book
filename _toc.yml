@@ -1,5 +1,10 @@
 - file: intro
 
+- part: Math Review
+  chapters:
+    - file: math/Tensors and Shapes
+
+
 - part: Machine Learning
   chapters:
     - file: ml/Introduction
