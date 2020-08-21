@@ -1,0 +1,47 @@
+/* The Modal (background) */
+#wh-modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 9999; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+  }
+
+  /* Modal Content (Image) */
+  #wh-modal-img {
+    margin: auto;
+    display: block;
+    max-width: min(1200px, 100%);
+  }
+
+/* The Close Button */
+#wh-modal-close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+  }
+
+  #wh-modal-close:hover,
+  #wh-modal-close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .wh-fig-a:hover {
+    cursor: pointer;
+  }
+
+  .wh-venti-button {
+      background-color: transparent;
+      border: none;
+  }

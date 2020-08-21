@@ -6,3 +6,4 @@ jax
 pandas
 seaborn
 tabulate
+sklearn
