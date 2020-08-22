@@ -2,13 +2,13 @@
 
 - part: Math Review
   chapters:
-    - file: math/Tensors and Shapes
+    - file: math/tensors-and-shapes
 
 
 - part: Machine Learning
   chapters:
-    - file: ml/Introduction
+    - file: ml/introduction
 
 - part: Deep Learning
   chapters:
-    - file: dl/intro
+    - file: dl/introduction
