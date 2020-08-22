@@ -63,6 +63,15 @@
     height: 22px;
     background-color: #1BBC9B;
     border-radius: 3px;
-
+    text-align: center;
+    color: #ffffff;
     transition: width 500ms ease-in-out;
+}
+
+td > p {
+  margin-bottom: 0;
+  margin-top: 0;
+}
+.table td, .table th {
+  padding: 0.2rem 0.75rem 0.2rem 0.75rem;
 }
