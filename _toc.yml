@@ -1,14 +1,18 @@
 - file: intro
+  numbered: true
 
-- part: Math Review
-  chapters:
+- part: A. Math Review
+  numbered: true
+  sections:
     - file: math/tensors-and-shapes
 
 
-- part: Machine Learning
-  chapters:
+- part: B. Machine Learning
+  numbered: true
+  sections:
     - file: ml/introduction
 
-- part: Deep Learning
-  chapters:
+- part: C. Deep Learning
+  numbered: true
+  sections:
     - file: dl/introduction
