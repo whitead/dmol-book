@@ -1,3 +1,6 @@
+![Overhead view of a waves on a beach](_static/images/header_small.jpg)
+
+
 # Deep Learning for Molecules and Materials
 
 These are course notes for *Deep learning for molecules and materials* taught by Andrew White at the University of Rochester,
@@ -7,7 +10,7 @@ first offered in Fall 2020. They aspirationally make a "book."
 This book is being written and revised currently. It is incomplete and probably has lots of errors. Have a suggestion? [Go here](https://github.com/whitead/dmol-book/issues) or email me.
 ```
 
-## Why Deep Learning?
+## Why Deep Learning
 
 Before deep learning, machine learning was popular. Prior to machine learning's popularity, data science was proclaimed the fourth pillar of science. The materials genome project was going to revolutionize materials like informatics did to biology. In the 90s, quantitative structure-activity relationship modeling was revolutionizing drug discovery. Before that, we had the expert systems that could replace a chemist. Artificial neural networks were popular in the late 80s and people were able to predict melting points just from molecular structure. Many of these areas are important and research is ongoing, but I think expectations have been reassessed for most of them.
 
@@ -36,3 +39,7 @@ Chapter Goal: 20
 Please cite as
 
 > White, Andrew D. *Deep Learning for Molecules and Materials*. 2020.
+
+## Image Credit
+
+[@alinnnaaaa](https://unsplash.com/@alinnnaaaa)

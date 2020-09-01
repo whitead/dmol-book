@@ -75,3 +75,24 @@ td > p {
 .table td, .table th {
   padding: 0.2rem 0.75rem 0.2rem 0.75rem;
 }
+
+.wh-container {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.wh-div-centered {
+  position: absolute;
+  top: 50%;
+  left: 25%;
+  transform: translate(-17%, -50%);
+  background: rgba(0, 0, 0, .75);
+}
+
+.wh-hero {
+  color: #FFFFFF !important;
+  padding: 1em;
+  margin: 0;
+  height: 100%;
+}
