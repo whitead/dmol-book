@@ -21,3 +21,10 @@ repository:
 
 launch_buttons:
   colab_url: "https://colab.research.google.com"
+
+parse:
+  myst_extended_syntax: true
+
+sphinx:
+  config:
+    mathjax_path: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
