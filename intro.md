@@ -7,7 +7,7 @@ These are course notes for *Deep learning for molecules and materials* taught by
 first offered in Fall 2020. They aspirationally make a "book."
 
 ```{danger}
-This book is being written and revised currently. It is incomplete and probably has lots of errors. Have a suggestion? [Go here](https://github.com/whitead/dmol-book/issues) or email me.
+This book is being written and revised currently. It is incomplete and has errors. Have a suggestion? [Go here](https://github.com/whitead/dmol-book/issues) or email me.
 ```
 
 ## Why Deep Learning
@@ -24,7 +24,7 @@ Chapter Goal: 20
 
 <div class="wh-wrapper">
     <div class="wh-progress-bar">
-        <span class="wh-progress-bar-fill" style="width: 15%;"> 15% </span>
+        <span class="wh-progress-bar-fill" style="width: 17.%;"> 17.5% </span>
     </div>
 </div>
 
