@@ -7,3 +7,4 @@ pandas
 seaborn
 tabulate
 sklearn
+mordred[full]
