@@ -12,6 +12,7 @@
   sections:
     - file: ml/introduction
     - file: ml/regression
+    - file: ml/classification
 
 - part: C. Deep Learning
   numbered: true
