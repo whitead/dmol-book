@@ -1,4 +1,4 @@
-![Overhead view of a waves on a beach](_static/images/header_small.jpg)
+![Picture of art installation of networked cables](_static/images/header_small.jpg)
 
 
 # Deep Learning for Molecules and Materials
@@ -24,7 +24,7 @@ Chapter Goal: 20
 
 <div class="wh-wrapper">
     <div class="wh-progress-bar">
-        <span class="wh-progress-bar-fill" style="width: 20%;"> 20% </span>
+        <span class="wh-progress-bar-fill" style="width: 25%;"> 25% </span>
     </div>
 </div>
 
