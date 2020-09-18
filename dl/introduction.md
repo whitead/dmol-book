@@ -8,7 +8,7 @@ The main advice I would give to beginners in deep learning are to focus less on 
 
 ## Neural Networks
 
-The *deep* in deep learning means we have many layers in our neural networks. What is a neural network? Without loss of generality, we can view neural networks as 2 components: (1) a non-linear function $g(\cdot)$ which operates on our input features $\mathbf{X}$ and output a new set of features $\mathbf{H} = g(\mathbf{X})$ and (2) a linear model like we saw in our Machine Learning chapter. Our model equation for deep learning regression is:
+The *deep* in deep learning means we have many layers in our neural networks. What is a neural network? Without loss of generality, we can view neural networks as 2 components: (1) a non-linear function $g(\cdot)$ which operates on our input features $\mathbf{X}$ and outputs a new set of features $\mathbf{H} = g(\mathbf{X})$ and (2) a linear model like we saw in our Machine Learning chapter. Our model equation for deep learning regression is:
 
 \begin{equation}
     y = \vec{w}g(\vec{x}) + b
