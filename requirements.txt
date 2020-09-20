@@ -4,6 +4,7 @@ numpy
 jaxlib
 jax
 pandas
+tensorflow
 seaborn
 tabulate
 sklearn
