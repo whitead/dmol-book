@@ -18,3 +18,4 @@
   numbered: true
   sections:
     - file: dl/introduction
+    - file: dl/layers
