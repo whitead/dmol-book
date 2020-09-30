@@ -8,4 +8,6 @@ tensorflow
 seaborn
 tabulate
 sklearn
+pydot
+Pillow
 mordred[full]
