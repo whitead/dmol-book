@@ -11,3 +11,5 @@ sklearn
 pydot
 Pillow
 mordred[full]
+moviepy
+networkx

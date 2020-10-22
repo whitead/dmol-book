@@ -19,3 +19,4 @@
   sections:
     - file: dl/introduction
     - file: dl/layers
+    - file: dl/gnn
