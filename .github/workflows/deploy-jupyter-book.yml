@@ -31,6 +31,7 @@ jobs:
     - name: Build the book
       run: |
         jupyter-book build .
+        cat _build/html/reports/*.log
     - name: Deploy Jupyter book to GitHub pages
       uses: peaceiris/actions-gh-pages@v3.6.1
       with:
