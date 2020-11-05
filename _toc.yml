@@ -20,3 +20,4 @@
     - file: dl/introduction
     - file: dl/layers
     - file: dl/gnn
+    - file: dl/attention

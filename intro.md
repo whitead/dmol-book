@@ -24,7 +24,7 @@ Chapter Goal: 20
 
 <div class="wh-wrapper">
     <div class="wh-progress-bar">
-        <span class="wh-progress-bar-fill" style="width: 35%;"> 35% </span>
+        <span class="wh-progress-bar-fill" style="width: 40%;"> 40% </span>
     </div>
 </div>
 
