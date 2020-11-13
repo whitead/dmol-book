@@ -23,3 +23,8 @@
     - file: dl/gnn
     - file: dl/attention
     - file: dl/data
+
+- part: D. Applications
+  numbered: true
+  section:
+    - file: applied/QM9
