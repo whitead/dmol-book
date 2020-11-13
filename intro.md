@@ -1,7 +1,7 @@
 ![Picture of art installation of networked cables](_static/images/header_small.jpg)
 
 
-# Deep Learning for Molecules and Materials
+# Overview
 
 These are course notes for *Deep learning for molecules and materials* taught by Andrew White at the University of Rochester,
 first offered in Fall 2020. They aspirationally make a "book."
@@ -24,7 +24,7 @@ Chapter Goal: 20
 
 <div class="wh-wrapper">
     <div class="wh-progress-bar">
-        <span class="wh-progress-bar-fill" style="width: 45%;"> 45% </span>
+        <span class="wh-progress-bar-fill" style="width: 50%;"> 50% </span>
     </div>
 </div>
 

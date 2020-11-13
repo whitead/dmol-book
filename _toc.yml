@@ -22,3 +22,4 @@
     - file: dl/layers
     - file: dl/gnn
     - file: dl/attention
+    - file: dl/data
