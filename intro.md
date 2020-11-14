@@ -1,6 +1,5 @@
 ![Picture of art installation of networked cables](_static/images/header_small.jpg)
 
-
 # Overview
 
 These are course notes for *Deep learning for molecules and materials* taught by Andrew White at the University of Rochester,
@@ -24,7 +23,7 @@ Chapter Goal: 20
 
 <div class="wh-wrapper">
     <div class="wh-progress-bar">
-        <span class="wh-progress-bar-fill" style="width: 52.5%;"> 52.5% </span>
+        <span class="wh-progress-bar-fill" style="width: 53%;"> 52.5% </span>
     </div>
 </div>
 
