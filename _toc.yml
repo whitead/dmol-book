@@ -22,6 +22,7 @@
     - file: dl/gnn
     - file: dl/attention
     - file: dl/data
+    - file: dl/VAE
 
 - part: D. Applications
   numbered: true
