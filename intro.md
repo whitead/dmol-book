@@ -49,6 +49,13 @@ Please cite as
 
 > White, Andrew D. *Deep Learning for Molecules and Materials*. 2020.
 
+## Contributors
+
+Thank you to contributions from students in my class:
+
+1. Oion Akif
+2. Heta Gandhi
+
 ## Image Credit
 
 [@alinnnaaaa](https://unsplash.com/@alinnnaaaa)
