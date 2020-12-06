@@ -23,6 +23,7 @@
     - file: dl/attention
     - file: dl/data
     - file: dl/VAE
+    - file: dl/flows
 
 - part: D. Applications
   numbered: true
