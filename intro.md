@@ -21,6 +21,16 @@ In this work, we will view deep learning as a set of tools that allows us to cre
 
 Chapter Goal: 20
 
+To come:
+
+1. Application: VAE CG
+2. Complex Training (Meta-learning, Active Learning)
+3. Representation Learning
+4. Application: Boltzmann Generator
+5. Symbolic Regression
+6. Network Distillation
+7. Application: JS deployment
+
 <div class="wh-wrapper">
     <div class="wh-progress-bar">
         <span class="wh-progress-bar-fill" style="width: 65%;"> 65% </span>
