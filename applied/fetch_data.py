@@ -4,6 +4,8 @@ import tarfile
 import urllib.request
 import os.path
 
+AA_atoms = 22
+
 
 def _float_feature(value):
     return tf.train.Feature(float_list=tf.train.FloatList(value=[value]))
@@ -20,7 +22,7 @@ def _float(x):
         return 0
 
 
-def data_parse(record):
+def qm9_data_parse(record):
     features = {
         'N': tf.io.FixedLenFeature([], tf.int64),
         'labels': tf.io.FixedLenFeature([16], tf.float32),
@@ -35,7 +37,17 @@ def data_parse(record):
     return (elements, coords), parsed_features['labels']
 
 
-def prepare_qm9_record(lines):
+def aa_data_parse(record):
+    features = {
+        'coords': tf.io.FixedLenFeature([AA_atoms * 3], tf.float32),
+    }
+    parsed_features = tf.io.parse_single_example(
+        serialized=record, features=features)
+    coords = tf.reshape(parsed_features['coords'], [-1, 3])
+    return coords
+
+
+def qm9_prepare_records(lines):
     pt = {'C': 6, 'H': 1, 'O': 8, 'N': 7, 'F': 9}
     N = int(lines[0])
     labels = [float(x) for x in lines[1].split('gdb')[1].split()]
@@ -52,7 +64,44 @@ def prepare_qm9_record(lines):
     return tf.train.Example(features=tf.train.Features(feature=feature))
 
 
-def fetch_qm9():
+def aa_fetch():
+    raw_filepath = 'aa0.dcd'
+    record_file = 'aa.tfrecords'
+
+    if os.path.isfile(record_file):
+        print('Found existing record file, delete if you want to re-fetch')
+        return record_file
+
+    if not os.path.isfile(raw_filepath):
+        print('Downloading AA data...', end='')
+        urllib.request.urlretrieve(
+            'https://ndownloader.figshare.com/files/1497002', raw_filepath)
+        print('File downloaded')
+
+    else:
+        print(
+            f'Found downloaded file {raw_filepath}, delete if you want to redownload')
+    print('Converting...')
+
+    try:
+        import MDAnalysis
+        from MDAnalysis.lib.formats.libdcd import DCDFile
+    except ImportError:
+        raise ImportError('Please install MDanalysis with pip first')
+
+    with tf.io.TFRecordWriter(record_file, options=tf.io.TFRecordOptions(compression_type='GZIP')) as writer:
+        with DCDFile(raw_filepath) as dcd:
+            for frame in dcd:
+                feature = {
+                    'coords': tf.train.Feature(float_list=tf.train.FloatList(value=frame.xyz.flatten()))
+                }
+                example = tf.train.Example(
+                    features=tf.train.Features(feature=feature))
+                writer.write(example.SerializeToString())
+    return record_file
+
+
+def qm9_fetch():
 
     raw_filepath = 'qm9.tar.bz2'
     record_file = 'qm9.tfrecords'
@@ -80,7 +129,7 @@ def fetch_qm9():
             with tar.extractfile(f'dsgdb9nsd_{i:06d}.xyz') as f:
                 lines = [l.decode('UTF-8') for l in f.readlines()]
                 try:
-                    writer.write(prepare_qm9_record(
+                    writer.write(qm9_prepare_records(
                         lines).SerializeToString())
                 except ValueError as e:
                     print(i)
@@ -89,6 +138,11 @@ def fetch_qm9():
     return record_file
 
 
-def get_qm9(record_file):
+def qm9_parse(record_file):
     return tf.data.TFRecordDataset(
-        record_file, compression_type='GZIP').map(data_parse)
+        record_file, compression_type='GZIP').map(qm9_data_parse)
+
+
+def aa_parse(record_file):
+    return tf.data.TFRecordDataset(
+        record_file, compression_type='GZIP').map(aa_data_parse)

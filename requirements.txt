@@ -14,3 +14,4 @@ mordred[full]
 moviepy
 networkx
 pygraphviz
+mdanalysis
