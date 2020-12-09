@@ -1,1 +1,0 @@
-https://twitter.com/janhjensen/status/1273607905061765120?s=20

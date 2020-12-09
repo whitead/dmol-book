@@ -5,8 +5,8 @@
 These are course notes for *Deep learning for molecules and materials* taught by Andrew White at the University of Rochester,
 first offered in Fall 2020. They aspirationally make a "book."
 
-```{danger}
-This book is being written and revised currently. It is incomplete and has errors. Have a suggestion? [Go here](https://github.com/whitead/dmol-book/issues) or email me.
+```{warning}
+This book is continuously being revised. Found a mistake? [Go here](https://github.com/whitead/dmol-book/issues) or email me.
 ```
 
 ## Why Deep Learning
@@ -19,21 +19,20 @@ In this work, we will view deep learning as a set of tools that allows us to cre
 
 ## Progress Bar
 
-Chapter Goal: 20
+Chapter Goal: 18
 
 To come:
 
 1. Application: VAE CG
 2. Complex Training (Meta-learning, Active Learning)
-3. Representation Learning
-4. Application: Boltzmann Generator
-5. Symbolic Regression
-6. Network Distillation
-7. Application: JS deployment
+3. Symbolic Regression
+4. Application: JS deployment
+5. Application: Zeolites
+6. Normalizing flow with AA
 
 <div class="wh-wrapper">
     <div class="wh-progress-bar">
-        <span class="wh-progress-bar-fill" style="width: 65%;"> 65% </span>
+        <span class="wh-progress-bar-fill" style="width: 72%;"> 72% </span>
     </div>
 </div>
 
