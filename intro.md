@@ -27,6 +27,7 @@ To come:
 4. Equivariant networks as separate chapter
 5. Application: Zeolites
 6. Normalizing flow with AA
+7. XAI
 
 <div class="wh-wrapper">
     <div class="wh-progress-bar">
@@ -48,10 +49,11 @@ Please cite as
 
 ## Contributors
 
-Thank you to contributions from students in my class:
+Thank you to contributions (students in my class):
 
 1. Oion Akif
 2. Heta Gandhi
+3. Mattias Hartveit
 
 ## Image Credit
 
