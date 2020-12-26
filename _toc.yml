@@ -24,6 +24,7 @@
     - file: dl/data
     - file: dl/VAE
     - file: dl/flows
+    - file: dl/Equivariant
 
 - part: D. Applications
   numbered: true

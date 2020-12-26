@@ -96,3 +96,9 @@ td > p {
   margin: 0;
   height: 100%;
 }
+
+/* Not sure why, but pasted images are going display:blocks(??)*/
+
+.pasted-inline > img {
+  display: inline !important;
+}
