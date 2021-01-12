@@ -28,8 +28,8 @@ Chapter Goal: 18
 To come:
 
 1. Complex Training (Meta-learning, Active Learning)
-2. Symbolic Regression
-3. Equivariant networks as separate chapter
+2. NLP representations (DeepSMILES, VAE on Smiles, SELFIES)
+3. Equivariant networks as separate chapter (in progress)
 4. Application: Zeolites
 5. XAI
 
