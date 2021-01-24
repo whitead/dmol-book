@@ -29,13 +29,13 @@ To come:
 
 1. Complex Training (Meta-learning, Active Learning)
 2. NLP representations (DeepSMILES, VAE on Smiles, SELFIES)
-3. Equivariant networks as separate chapter (in progress)
+3. Equivariant networks -- complete harmonic analysis section
 4. Application: Zeolites
 5. XAI
 
 <div class="wh-wrapper">
     <div class="wh-progress-bar">
-        <span class="wh-progress-bar-fill" style="width: 75%;"> 75% </span>
+        <span class="wh-progress-bar-fill" style="width: 78%;"> 78% </span>
     </div>
 </div>
 
@@ -43,7 +43,7 @@ To come:
 
 Please cite as
 
-> White, Andrew D. *Deep Learning for Molecules and Materials*. 2020.
+> White, Andrew D. *Deep Learning for Molecules and Materials*. 2021.
 
 ## Contributors
 
