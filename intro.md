@@ -47,7 +47,7 @@ Please cite as
 
 ## Contributors
 
-Thank you to contributions (students in my class):
+Thank you to Contributors (students in my class):
 
 1. Oion Akif
 2. Heta Gandhi
