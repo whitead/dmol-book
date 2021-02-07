@@ -23,8 +23,10 @@ repository:
 launch_buttons:
   colab_url: "https://colab.research.google.com"
 
-parse:
-  myst_extended_syntax: true
+bibtex_bibfiles:
+   - ml/references.bib
+   - dl/references.bib
+   - applied/references.bib
 
 sphinx:
   config:

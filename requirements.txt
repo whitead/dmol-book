@@ -1,5 +1,5 @@
-jupyter-book==0.9.1
-sphinxcontrib-bibtex<2.0.0
+jupyter-book==0.10.0
+sphinxcontrib-bibtex
 matplotlib
 numpy
 jaxlib
