@@ -35,7 +35,7 @@ To come:
 
 <div class="wh-wrapper">
     <div class="wh-progress-bar">
-        <span class="wh-progress-bar-fill" style="width: 78%;"> 78% </span>
+        <span class="wh-progress-bar-fill" style="width: 80%;"> 80% </span>
     </div>
 </div>
 

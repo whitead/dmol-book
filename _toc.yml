@@ -25,6 +25,7 @@
     - file: dl/VAE
     - file: dl/flows
     - file: dl/Equivariant
+    - file: dl/NLP
 
 - part: D. Applications
   numbered: true
