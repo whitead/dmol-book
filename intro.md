@@ -28,14 +28,13 @@ Chapter Goal: 18
 To come:
 
 1. Complex Training (Meta-learning, Active Learning)
-2. NLP representations (DeepSMILES, VAE on Smiles, SELFIES)
-3. Equivariant networks -- complete harmonic analysis section
-4. Application: Zeolites
-5. XAI
+2. Equivariant networks -- complete harmonic analysis section
+3. Application: Zeolites
+4. XAI
 
 <div class="wh-wrapper">
     <div class="wh-progress-bar">
-        <span class="wh-progress-bar-fill" style="width: 80%;"> 80% </span>
+        <span class="wh-progress-bar-fill" style="width: 82%;"> 82% </span>
     </div>
 </div>
 
