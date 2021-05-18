@@ -23,17 +23,16 @@ One of the most common mistakes I see of students is that they try to learn deep
 
 ## Progress Bar
 
-Chapter Goal: 18
+Chapter Goal: 17
 
 To come:
 
-1. Equivariant networks -- complete harmonic analysis section
-2. Application: Zeolites
-3. XAI
+1. Application: Zeolites
+2. XAI
 
 <div class="wh-wrapper">
     <div class="wh-progress-bar">
-        <span class="wh-progress-bar-fill" style="width: 82%;"> 82% </span>
+        <span class="wh-progress-bar-fill" style="width: 88%;"> 88% </span>
     </div>
 </div>
 
