@@ -28,11 +28,11 @@ Chapter Goal: 17
 To come:
 
 1. Application: Zeolites
-2. XAI
+2. XAI (complete)
 
 <div class="wh-wrapper">
     <div class="wh-progress-bar">
-        <span class="wh-progress-bar-fill" style="width: 88%;"> 88% </span>
+        <span class="wh-progress-bar-fill" style="width: 88%;"> 91% </span>
     </div>
 </div>
 
