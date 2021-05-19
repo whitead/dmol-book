@@ -44,7 +44,7 @@ Please cite as
 
 ## Contributors
 
-Thank you to Contributors (students in my class):
+Thank you to student contributors for identifying errors in drafts of this book:
 
 1. Oion Akif
 2. Heta Gandhi
