@@ -1045,12 +1045,12 @@
 
 
 @book{molnar2019,
-  title    = {Interpretable Machine Learning},
-  author   = {Christoph Molnar},
-  note     = {\url{https://christophm.github.io/interpretable-ml-book/}},
-  year     = {2019},
+  title     = {Interpretable Machine Learning},
+  author    = {Christoph Molnar},
+  note      = {\url{https://christophm.github.io/interpretable-ml-book/}},
+  year      = {2019},
   publisher = {Lulu.com},
-  subtitle = {A Guide for Making Black Box Models Explainable}
+  subtitle  = {A Guide for Making Black Box Models Explainable}
 }
 
 @article{bahdanau2014neural,
@@ -1060,4 +1060,41 @@
   year    = {2014}
 }
 
- @InProceedings{pmlr-v70-balduzzi17b, title = {The Shattered Gradients Problem: If resnets are the answer, then what is the question?}, author = {David Balduzzi and Marcus Frean and Lennox Leary and J. P. Lewis and Kurt Wan-Duo Ma and Brian McWilliams}, booktitle = {Proceedings of the 34th International Conference on Machine Learning}, pages = {342--350}, year = {2017}, editor = {Precup, Doina and Teh, Yee Whye}, volume = {70}, series = {Proceedings of Machine Learning Research}, month = {06--11 Aug}, publisher = {PMLR}, pdf = {http://proceedings.mlr.press/v70/balduzzi17b/balduzzi17b.pdf}, url = { http://proceedings.mlr.press/v70/balduzzi17b.html }, abstract = {A long-standing obstacle to progress in deep learning is the problem of vanishing and exploding gradients. Although, the problem has largely been overcome via carefully constructed initializations and batch normalization, architectures incorporating skip-connections such as highway and resnets perform much better than standard feedforward architectures despite well-chosen initialization and batch normalization. In this paper, we identify the shattered gradients problem. Specifically, we show that the correlation between gradients in standard feedforward networks decays exponentially with depth resulting in gradients that resemble white noise whereas, in contrast, the gradients in architectures with skip-connections are far more resistant to shattering, decaying sublinearly. Detailed empirical evidence is presented in support of the analysis, on both fully-connected networks and convnets. Finally, we present a new “looks linear” (LL) initialization that prevents shattering, with preliminary experiments showing the new initialization allows to train very deep networks without the addition of skip-connections.} }
+ @inproceedings{pmlr-v70-balduzzi17b,
+  title     = {The Shattered Gradients Problem: If resnets are the answer, then what is the question?},
+  author    = {David Balduzzi and Marcus Frean and Lennox Leary and J. P. Lewis and Kurt Wan-Duo Ma and Brian McWilliams},
+  booktitle = {Proceedings of the 34th International Conference on Machine Learning},
+  pages     = {342--350},
+  year      = {2017},
+  editor    = {Precup, Doina and Teh, Yee Whye},
+  volume    = {70},
+  series    = {Proceedings of Machine Learning Research},
+  month     = {06--11 Aug},
+  publisher = {PMLR},
+  pdf       = {http://proceedings.mlr.press/v70/balduzzi17b/balduzzi17b.pdf},
+  url       = { http://proceedings.mlr.press/v70/balduzzi17b.html },
+  abstract  = {A long-standing obstacle to progress in deep learning is the problem of vanishing and exploding gradients. Although, the problem has largely been overcome via carefully constructed initializations and batch normalization, architectures incorporating skip-connections such as highway and resnets perform much better than standard feedforward architectures despite well-chosen initialization and batch normalization. In this paper, we identify the shattered gradients problem. Specifically, we show that the correlation between gradients in standard feedforward networks decays exponentially with depth resulting in gradients that resemble white noise whereas, in contrast, the gradients in architectures with skip-connections are far more resistant to shattering, decaying sublinearly. Detailed empirical evidence is presented in support of the analysis, on both fully-connected networks and convnets. Finally, we present a new “looks linear” (LL) initialization that prevents shattering, with preliminary experiments showing the new initialization allows to train very deep networks without the addition of skip-connections.}
+}
+
+ @article{jang2016categorical,
+  title   = {Categorical reparameterization with gumbel-softmax},
+  author  = {Jang, Eric and Gu, Shixiang and Poole, Ben},
+  journal = {arXiv preprint arXiv:1611.01144},
+  year    = {2016}
+}
+
+@inproceedings{sundararajan2017axiomatic,
+  title        = {Axiomatic attribution for deep networks},
+  author       = {Sundararajan, Mukund and Taly, Ankur and Yan, Qiqi},
+  booktitle    = {International Conference on Machine Learning},
+  pages        = {3319--3328},
+  year         = {2017},
+  organization = {PMLR}
+}
+
+@article{smilkov2017smoothgrad,
+  title   = {Smoothgrad: removing noise by adding noise},
+  author  = {Smilkov, Daniel and Thorat, Nikhil and Kim, Been and Vi{\'e}gas, Fernanda and Wattenberg, Martin},
+  journal = {arXiv preprint arXiv:1706.03825},
+  year    = {2017}
+}
