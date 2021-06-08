@@ -17,3 +17,4 @@ networkx
 pygraphviz
 mdanalysis
 emlp
+dm-haiku
