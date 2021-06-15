@@ -1,5 +1,4 @@
 jupyter-book==0.10.0
-sphinxcontrib-bibtex==2.3.0
 matplotlib==3.4.2
 numpy
 jax==0.2.14
