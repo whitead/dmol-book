@@ -1,5 +1,5 @@
 jupyter-book==0.10.0
-matplotlib==3.4.2
+matplotlib~=3.3
 numpy
 jax==0.2.14
 jaxlib==0.1.67
