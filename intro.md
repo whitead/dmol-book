@@ -21,21 +21,13 @@ One of the most common mistakes I see of students is that they try to learn deep
 ```{tableofcontents}
 ```
 
-## Progress Bar
+## TODO
 
-Chapter Goal: 17
+These are tasks I would like to get to as my time
+becomes available.
 
-To come:
-
-1. Application: Zeolites
-2. XAI (complete)
-
-<div class="wh-wrapper">
-    <div class="wh-progress-bar">
-        <span class="wh-progress-bar-fill" style="width: 88%;"> 91% </span>
-    </div>
-</div>
-
+1. Add self-supervised learning porous material chapter with EQNN in apps
+2. Put an authentic dataset (materials) in normalizing flow chapter
 ## Citation
 
 Please cite as
