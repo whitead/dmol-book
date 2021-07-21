@@ -1,0 +1,45 @@
+Traceback (most recent call last):
+  File "/usr/share/miniconda/lib/python3.7/site-packages/jupyter_cache/executors/utils.py", line 56, in single_nb_execution
+    record_timing=False,
+  File "/usr/share/miniconda/lib/python3.7/site-packages/nbclient/client.py", line 1112, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/usr/share/miniconda/lib/python3.7/site-packages/nbclient/util.py", line 74, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/usr/share/miniconda/lib/python3.7/site-packages/nbclient/util.py", line 53, in just_run
+    return loop.run_until_complete(coro)
+  File "/usr/share/miniconda/lib/python3.7/asyncio/base_events.py", line 587, in run_until_complete
+    return future.result()
+  File "/usr/share/miniconda/lib/python3.7/site-packages/nbclient/client.py", line 554, in async_execute
+    cell, index, execution_count=self.code_cells_executed + 1
+  File "/usr/share/miniconda/lib/python3.7/site-packages/nbclient/client.py", line 857, in async_execute_cell
+    self._check_raise_for_error(cell, exec_reply)
+  File "/usr/share/miniconda/lib/python3.7/site-packages/nbclient/client.py", line 760, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+urllib.request.urlretrieve(
+    'https://github.com/whitead/dmol-book/raw/master/data/long_paths.npz', 'long_paths.npz')
+paths = np.load('long_paths.npz')['arr']
+# transform to be rot/trans invariant
+data = align_principle(center_com(paths))
+cmap = plt.get_cmap('cool')
+for i in range(0, data.shape[0], 16):
+    plt.plot(data[i, :, 0], data[i, :, 1], '-', alpha=0.1, color='C2')
+plt.title('All Points')
+plt.xticks([])
+plt.yticks([])
+plt.show()
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mNameError[0m                                 Traceback (most recent call last)
+[0;32m/tmp/ipykernel_6650/1870547038.py[0m in [0;36m<module>[0;34m[0m
+[0;32m----> 1[0;31m urllib.request.urlretrieve(
+[0m[1;32m      2[0m     'https://github.com/whitead/dmol-book/raw/master/data/long_paths.npz', 'long_paths.npz')
+[1;32m      3[0m [0mpaths[0m [0;34m=[0m [0mnp[0m[0;34m.[0m[0mload[0m[0;34m([0m[0;34m'long_paths.npz'[0m[0;34m)[0m[0;34m[[0m[0;34m'arr'[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
+[1;32m      4[0m [0;31m# transform to be rot/trans invariant[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      5[0m [0mdata[0m [0;34m=[0m [0malign_principle[0m[0;34m([0m[0mcenter_com[0m[0;34m([0m[0mpaths[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+
+[0;31mNameError[0m: name 'urllib' is not defined
+NameError: name 'urllib' is not defined
+
