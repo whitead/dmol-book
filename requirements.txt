@@ -16,4 +16,5 @@ networkx==2.5.1
 pygraphviz==1.7
 MDAnalysis==1.1.1
 emlp==0.9.1
+tensorflow-probabilty==0.13.0
 dm-haiku @ git+https://github.com/deepmind/dm-haiku@b2ae68ecbec47e75f12eb318c40b0b9cb61b5bce
