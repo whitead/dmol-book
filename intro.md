@@ -33,6 +33,7 @@ Thank you to contributors for offering suggestions, identifying errors, and help
 2. Heta Gandhi (@gandhi_heta)
 3. Mattias Hartveit
 4. Lily Wang (@lilyminium)
+5. Andreas Krämer
 
 ## Image Credit
 
