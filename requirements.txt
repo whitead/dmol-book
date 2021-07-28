@@ -1,4 +1,4 @@
-jupyter-book==0.10.0
+jupyter-book==0.11.2
 matplotlib~=3.3
 numpy
 jax==0.2.14
@@ -15,6 +15,6 @@ moviepy==1.0.3
 networkx==2.5.1
 pygraphviz==1.7
 MDAnalysis==1.1.1
-emlp==0.9.1
+emlp
 tensorflow-probability==0.13.0
 dm-haiku @ git+https://github.com/deepmind/dm-haiku@b2ae68ecbec47e75f12eb318c40b0b9cb61b5bce

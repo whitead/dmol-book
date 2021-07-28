@@ -1,34 +1,31 @@
-- file: intro
+format: jb-book
+root: intro
+parts:
+- caption: A. Math Review
   numbered: true
-
-- part: A. Math Review
+  chapters:
+  - file: math/tensors-and-shapes
+- caption: B. Machine Learning
   numbered: true
-  sections:
-    - file: math/tensors-and-shapes
-
-- part: B. Machine Learning
+  chapters:
+  - file: ml/introduction
+  - file: ml/regression
+  - file: ml/classification
+  - file: ml/kernel
+- caption: C. Deep Learning
   numbered: true
-  sections:
-    - file: ml/introduction
-    - file: ml/regression
-    - file: ml/classification
-    - file: ml/kernel
-
-- part: C. Deep Learning
+  chapters:
+  - file: dl/introduction
+  - file: dl/layers
+  - file: dl/gnn
+  - file: dl/attention
+  - file: dl/data
+  - file: dl/VAE
+  - file: dl/flows
+  - file: dl/Equivariant
+  - file: dl/NLP
+  - file: dl/xai
+- caption: D. Applications
   numbered: true
-  sections:
-    - file: dl/introduction
-    - file: dl/layers
-    - file: dl/gnn
-    - file: dl/attention
-    - file: dl/data
-    - file: dl/VAE
-    - file: dl/flows
-    - file: dl/Equivariant
-    - file: dl/NLP
-    - file: dl/xai
-
-- part: D. Applications
-  numbered: true
-  sections:
-    - file: applied/QM9
+  chapters:
+  - file: applied/QM9
