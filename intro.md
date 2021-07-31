@@ -50,7 +50,3 @@ becomes available.
 
 1. Add self-supervised learning porous material chapter with EQNN in apps
 2. Put an authentic dataset (materials) in normalizing flow chapter
-
-```python
-
-```
