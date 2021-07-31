@@ -41,13 +41,14 @@ sphinx:
       pandas [latest?]: ['https://pandas.pydata.org/docs/', null]
       scikit-learn [stable]: ['https://scikit-learn.org/stable/', null]
       scipy [latest]: ['https://docs.scipy.org/doc/scipy/reference/', null]
-      jax [latest]: ['https://jax.readthedocs.io/en/latest', null]
+      jax [latest]: ['https://jax.readthedocs.io/en/latest/', null]
+      seaborn [stable]: ['https://seaborn.pydata.org/', null]
 
 
 execute:
   timeout: -1
 
-# jupyter_execute_notebooks: force
+#jupyter_execute_notebooks: force
 
 parse:
   myst_enable_extensions:
