@@ -43,11 +43,3 @@ Thank you to contributors for offering suggestions, identifying errors, and help
 ## Funding Support
 
 Research reported in this work was supported by the National Institute of General Medical Sciences of the National Institutes of Health under award number R35GM137966. This material is based upon work supported by the National Science Foundation under Grant No. 1764415.
-
-## TODO
-
-These are tasks I would like to get to as my time
-becomes available.
-
-1. Add self-supervised learning porous material chapter with EQNN in apps
-2. Put an authentic dataset (materials) in normalizing flow chapter
