@@ -2,7 +2,7 @@
 
 # Overview
 
-Deep learning is becoming a standard tool in chemistry and materials science. Deep learning is specifically about connecting two types of data with a neural network function, which is differentiable and able to approximate any function. The classic example is connecting a molecule's activity and structure. A recent example is dramatically accelerating quantum calculations to the point that you can achieve DFT level accuracy with a rapid differentiable calculation. What makes deep learning especially relevant is that it's a powerful tool for approximating previously intractable functions **and** its ability to generate new data.
+Deep learning is becoming a standard tool in chemistry and materials science. Deep learning is specifically about connecting some input data (features) and output data (labels) with a neural network function, which is differentiable and able to approximate any function. The classic example is connecting a molecule's activity and structure. A recent example is dramatically accelerating quantum calculations to the point that you can achieve DFT level accuracy with a rapid differentiable calculation. What makes deep learning especially relevant is that it's a powerful tool for approximating previously intractable functions **and** its ability to generate new data.
 
 In this book, we will view deep learning as a set of tools that allows us to create models that either were previously infeasible or incredibly difficult to construct. One example that sets deep learning apart from classic machine learning is feature engineering. Much of the data-driven work in the past required decisions about what features are important and create quantitative values that capture them correctly. These are called molecular descriptors. Deep learning is typically trained end-to-end, meaning decisions about which features are important are no longer relevant.
 
@@ -34,7 +34,8 @@ Thank you to contributors for offering suggestions, identifying errors, and help
 3. Mattias Hartveit
 4. Lily Wang (@lilyminium)
 5. Andreas Krämer
-6. Mehrad Ansari
+6. Mehrad Ansari (@MehradAnsari)
+7. Kevin Jablonka (@kmjablonka)
 
 ## Image Credit
 
