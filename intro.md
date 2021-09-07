@@ -36,6 +36,7 @@ Thank you to contributors for offering suggestions, identifying errors, and help
 5. Andreas Krämer
 6. Mehrad Ansari (@MehradAnsari)
 7. Kevin Jablonka (@kmjablonka)
+8. Ritsuya Niwayama
 
 ## Image Credit
 
