@@ -27,7 +27,7 @@ Please cite as
 
 ## Contributors
 
-Thank you to contributors for offering suggestions, identifying errors, and helping improve this book!
+Thank you to contributors for offering suggestions, identifying errors, and helping improve this book! Twitter handles, if available
 
 1. Oion Akif
 2. Heta Gandhi (@gandhi_heta)
@@ -37,6 +37,8 @@ Thank you to contributors for offering suggestions, identifying errors, and help
 6. Mehrad Ansari (@MehradAnsari)
 7. Kevin Jablonka (@kmjablonka)
 8. Ritsuya Niwayama
+9. Elana Simon
+10. Marc Finzi (@m_finzi)
 
 ## Image Credit
 
