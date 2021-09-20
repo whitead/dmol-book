@@ -18,7 +18,7 @@ html:
 
   # Information about where the book exists on the web
 repository:
-  url                       : https://dmol.pub  # Online location of your book
+  url                       : https://github.com/whitead/dmol-book  # Online location of your book
 
 launch_buttons:
   colab_url: "https://colab.research.google.com"
