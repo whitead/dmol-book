@@ -13,3 +13,7 @@ repos:
         description: strip output and black source
         additional_dependencies: ['black[jupyter]']
         args: ["--clear-output"]
+  - repo: https://github.com/psf/black
+    rev: 20.8b1
+    hooks:
+    - id: black
