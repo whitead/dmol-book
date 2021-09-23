@@ -23,8 +23,7 @@ jobs:
         conda install -c conda-forge rdkit pygraphviz
         python -m pip install --no-cache-dir -r requirements.txt
     - name: Build the book
-      run: |
-        env TF_CPP_MIN_LOG_LEVEL=3 jupyter-book build .
+      run: env TF_CPP_MIN_LOG_LEVEL=3 jupyter-book build .
     - name: Deploy Jupyter book to GitHub pages
       uses: peaceiris/actions-gh-pages@v3.6.1
       with:
