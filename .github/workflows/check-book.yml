@@ -15,7 +15,7 @@ jobs:
       run: |
         python -m pip install --no-cache-dir -r requirements.txt
     - name: Check pre-commit
-        run:
+        run: |
           pre-commit run --all-files || ( git status --short ; git diff ; exit 1 )
 
   check-build-book:
