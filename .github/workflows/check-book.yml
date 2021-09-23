@@ -21,10 +21,7 @@ jobs:
     - name: Check pre-commit
       run: pre-commit run --all-files || ( git status --short ; git diff ; exit 1 )
     - name: Build the book
-      id: jb
       run: env TF_CPP_MIN_LOG_LEVEL=3 jupyter-book build -W -n .
-    - name: Fail if there were build errors
-      run: exit ${{ steps.lc.outputs.exit_code }}
     - name: Link Checker
       uses: lycheeverse/lychee-action@v1.0.8
       id: lc

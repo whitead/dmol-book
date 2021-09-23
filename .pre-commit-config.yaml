@@ -11,3 +11,5 @@ repos:
     hooks:
       - id: black-nb
         description: strip output and black source
+        additional_dependencies: ['black[jupyter]']
+        args: ["--clear-output"]
