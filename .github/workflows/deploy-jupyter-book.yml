@@ -5,12 +5,6 @@ on:
   push:
     branches:
     - master
-    # If your git repository has the Jupyter Book within some-subfolder next to
-    # unrelated files, you can make this run only if a file within that specific
-    # folder has been modified.
-    #
-    # paths:
-    # - some-subfolder/**
 
 # This job installs dependencies, build the book, and pushes it to `gh-pages`
 jobs:
@@ -29,8 +23,7 @@ jobs:
         conda install -c conda-forge rdkit pygraphviz
         python -m pip install --no-cache-dir -r requirements.txt
     - name: Build the book
-      run: |
-        env TF_CPP_MIN_LOG_LEVEL=3 jupyter-book build .
+      run: env TF_CPP_MIN_LOG_LEVEL=3 jupyter-book build .
     - name: Deploy Jupyter book to GitHub pages
       uses: peaceiris/actions-gh-pages@v3.6.1
       with:
