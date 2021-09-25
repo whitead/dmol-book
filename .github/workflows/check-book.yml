@@ -26,6 +26,6 @@ jobs:
       uses: lycheeverse/lychee-action@v1.0.8
       id: lc
       with:
-          args: --verbose --no-progress  _build/dl/**/*.html _build/ml/**/*.html _build/applied/**/*.html _build/intro.html
+          args: --verbose --no-progress  _build/html/dl/**/*.html _build/html/ml/**/*.html _build/html/applied/**/*.html _build/html/intro.html
     - name: Fail if there were link errors
       run: exit ${{ steps.lc.outputs.exit_code }}
