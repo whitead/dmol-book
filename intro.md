@@ -29,20 +29,27 @@ Please cite as
 
 Thank you to contributors for offering suggestions, identifying errors, and helping improve this book! Twitter handles, if available
 
+### Substantial Feedback on Content
+
+1. Lily Wang (@lilyminium)
+2. Marc Finzi (@m_finzi)
+3. Kevin Jablonka (@kmjablonka)
+4. Elana Simon
+
+### Code Fixes, Language Fixes
+
 1. Oion Akif
 2. Heta Gandhi (@gandhi_heta)
 3. Mattias Hartveit
-4. Lily Wang (@lilyminium)
-5. Andreas Krämer
-6. Mehrad Ansari (@MehradAnsari)
-7. Kevin Jablonka (@kmjablonka)
-8. Ritsuya Niwayama
-9. Elana Simon
-10. Marc Finzi (@m_finzi)
+4. Andreas Krämer
+5. Mehrad Ansari (@MehradAnsari)
+6. Ritsuya Niwayama
+7. Varsha Jain
+8. Simon Duerr
 
 ## Image Credit
 
-[@alinnnaaaa](https://unsplash.com/@alinnnaaaa)
+A picture by [@alinnnaaaa](https://unsplash.com/@alinnnaaaa) of art by Tomás Saraceno.
 
 ## Funding Support
 
