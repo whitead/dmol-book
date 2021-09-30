@@ -46,6 +46,7 @@ Thank you to contributors for offering suggestions, identifying errors, and help
 6. Ritsuya Niwayama
 7. Varsha Jain
 8. Simon Duerr
+9. Julia Westermayr (@JWestermayr)
 
 ## Image Credit
 
