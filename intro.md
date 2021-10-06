@@ -25,6 +25,15 @@ Please cite as
 
 > White, Andrew D. *Deep Learning for Molecules and Materials*. 2021.
 
+```bibtex
+@book{whiteDeep2021,
+  title={Deep Learning for Molecules and Materials},
+  author={White, Andrew D},
+  url={https://dmol.pub},
+  year={2021}  
+}
+```
+
 ## Contributors
 
 Thank you to contributors for offering suggestions, identifying errors, and helping improve this book! Twitter handles, if available
