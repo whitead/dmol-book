@@ -44,7 +44,7 @@ Thank you to contributors for offering suggestions, identifying errors, and help
 2. Marc Finzi (@m_finzi)
 3. Kevin Jablonka (@kmjablonka)
 4. Elana Simon
-5. Cathrine Bergh
+5. Cathrine Bergh (@cathrinebergh)
 
 ### Code Fixes, Language Fixes
 
@@ -57,6 +57,7 @@ Thank you to contributors for offering suggestions, identifying errors, and help
 7. Varsha Jain
 8. Simon Duerr
 9. Julia Westermayr (@JWestermayr)
+10. Ernest Awoonor-Williams
 
 ## Image Credit
 
