@@ -15,9 +15,9 @@ moviepy==1.0.3
 networkx==2.5.1
 pygraphviz==1.7
 MDAnalysis==1.1.1
-emlp @ git+https://github.com/mfinzi/equivariant-MLP@9ba699a2c911a323c56f5a98a572d672b4655713
+emlp==1.0.2
 tensorflow-probability==0.13.0
-dm-haiku @ git+https://github.com/deepmind/dm-haiku@b2ae68ecbec47e75f12eb318c40b0b9cb61b5bce
+dm-haiku
 selfies
 tensorflowjs
 pre-commit
