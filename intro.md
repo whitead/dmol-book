@@ -58,6 +58,7 @@ Thank you to contributors for offering suggestions, identifying errors, and help
 8. Simon Duerr
 9. Julia Westermayr (@JWestermayr)
 10. Ernest Awoonor-Williams
+11. Joshua Schrier (@joshuaschrier)
 
 ## Image Credit
 
