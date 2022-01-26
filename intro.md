@@ -46,7 +46,7 @@ Thank you to contributors for offering suggestions, identifying errors, and help
 4. Elana Simon
 5. Cathrine Bergh (@cathrinebergh)
 
-### Code Fixes, Language Fixes
+### Code Fixes, Math Fixes, Language Fixes
 
 1. Oion Akif
 2. Heta Gandhi (@gandhi_heta)
@@ -59,6 +59,7 @@ Thank you to contributors for offering suggestions, identifying errors, and help
 9. Julia Westermayr (@JWestermayr)
 10. Ernest Awoonor-Williams
 11. Joshua Schrier (@joshuaschrier)
+12. Marin Bukov
 
 ## Image Credit
 
