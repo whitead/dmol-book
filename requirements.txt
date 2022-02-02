@@ -21,3 +21,4 @@ dm-haiku
 selfies < 2
 tensorflowjs
 pre-commit
+black < 22
