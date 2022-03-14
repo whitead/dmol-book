@@ -17,15 +17,16 @@ jobs:
     - name: Install dependencies
       run: |
         conda install -c conda-forge rdkit pygraphviz
-        python -m pip install --no-cache-dir -r requirements.txt
+        python -m pip install --use-deprecated=legacy-resolver --no-cache-dir -r requirements.txt
     - name: Check pre-commit
       run: pre-commit run --all-files || ( git status --short ; git diff ; exit 1 )
     - name: Build the book
       run: env TF_CPP_MIN_LOG_LEVEL=3 jupyter-book build -n .
     - name: Link Checker
-      uses: lycheeverse/lychee-action@v1.0.8
+      uses: lycheeverse/lychee-action@v1.2.0
       id: lc
+      env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
       with:
           args: --verbose --exclude rdkit.org/xml --max-redirects 100 --no-progress  _build/html/dl/**/*.html _build/html/ml/**/*.html _build/html/applied/**/*.html _build/html/intro.html
-    - name: Fail if there were link errors
-      run: exit ${{ steps.lc.outputs.exit_code }}
+          fail: true
