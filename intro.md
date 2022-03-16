@@ -38,6 +38,10 @@ Please cite as
 
 Thank you to contributors for offering suggestions, identifying errors, and helping improve this book! Twitter handles, if available
 
+### Contributed Content to Chapter
+
+1. Geemi Wellawatte (@GWellawatte)
+
 ### Substantial Feedback on Content
 
 1. Lily Wang (@lilyminium)
