@@ -22,3 +22,4 @@ selfies < 2
 tensorflowjs
 pre-commit
 black==21.9b0
+exmol
