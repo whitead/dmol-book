@@ -25,9 +25,7 @@ launch_buttons:
   binderhub_url: ""  # Binder seems to be broken often during link checks?
 
 bibtex_bibfiles:
-   - ml/references.bib
-   - dl/references.bib
-   - applied/references.bib
+  - references.bib
 
 sphinx:
   extra_extensions:
