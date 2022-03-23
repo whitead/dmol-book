@@ -22,11 +22,10 @@ repository:
 
 launch_buttons:
   colab_url: "https://colab.research.google.com"
+  binderhub_url: ""  # Binder seems to be broken often during link checks?
 
 bibtex_bibfiles:
-   - ml/references.bib
-   - dl/references.bib
-   - applied/references.bib
+  - references.bib
 
 sphinx:
   extra_extensions:
@@ -43,10 +42,12 @@ sphinx:
       scipy [latest]: ['https://docs.scipy.org/doc/scipy/reference/', null]
       jax [latest]: ['https://jax.readthedocs.io/en/latest/', null]
       seaborn [stable]: ['https://seaborn.pydata.org/', null]
+      exmol [latest]: ['https://ur-whitelab.github.io/exmol/', null]
 
 
 execute:
   timeout: -1
+  #exclude_patterns          : ['ml/*', 'applied/*', 'math/*']
 
 #jupyter_execute_notebooks: force
 
