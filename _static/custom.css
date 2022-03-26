@@ -102,3 +102,15 @@ td > p {
 .pasted-inline > img {
   display: inline !important;
 }
+
+div.sidebar, aside.sidebar {
+  border: none;
+  clear: right;
+  width: 31% !important;
+  margin: 0 -35% 0 0 !important;
+  padding: 0 !important;
+  font-size: 0.9rem;
+  line-height: 1.3;
+  vertical-align: baseline;
+  position: relative;
+}
