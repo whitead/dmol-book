@@ -24,7 +24,7 @@ On each chapter, you'll see the &nbsp;<i aria-label="Launch interactive content"
 
 When using interactivity, many of the chapter will benefit from using a graphics processing unit (GPU). GPUs are what makes deep learning fast enough to be practical on large dataset. This is possible in Google Colab, but may require additional steps if running this locally. Check the documentation of the package you're using (e.g., `Jax`, `PyTorch`, `Tensorflow`) to find out how to use a GPU locally. I have carefully constructed the examples to be small enough though to run on a normal CPU in a laptop though, so the GPU is optional.
 
-````
+
 ## Table of Contents
 
 ```{tableofcontents}
