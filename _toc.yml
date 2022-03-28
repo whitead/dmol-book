@@ -19,15 +19,19 @@ parts:
   - file: dl/layers
   - file: dl/Hyperparameter_tuning
   - file: dl/gnn
-  - file: dl/attention
   - file: dl/data
+  - file: dl/Equivariant
+  - file: dl/xai
+  - file: dl/attention
+  - file: dl/NLP
   - file: dl/VAE
   - file: dl/flows
-  - file: dl/Equivariant
-  - file: dl/NLP
-  - file: dl/xai
 - caption: D. Applications
   numbered: true
   chapters:
   - file: applied/QM9
   - file: applied/MolGenerator
+- caption: E. Appendix
+  numbered: true
+  chapters:
+  - file: style
