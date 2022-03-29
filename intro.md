@@ -1,3 +1,13 @@
+---
+html_meta:
+  "description lang=en": "Deep Learning for Molecules & Materials Book"
+  "property=og:locale": "en_US"
+  "twitter:card": "summary"
+  "twitter:description": "Deep Learning for Molecules & Materials Book"
+  "twitter:title": "dmol.pub 📖"
+  "twitter:image": "_static/logo.png"
+  "twitter:site": "@andrewwhite01"
+---
 ![Picture of art installation of networked cables](_static/images/header_small.jpg)
 
 # Overview
