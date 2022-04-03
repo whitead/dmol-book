@@ -31,6 +31,8 @@ parts:
   - file: applied/QM9
   - file: applied/MolGenerator
 - caption: E. In Progress
+  numbered: true
+  chapters:
   - file: dl/Hyperparameter_tuning
 - caption: F. Appendix
   numbered: true
