@@ -17,7 +17,6 @@ parts:
   chapters:
   - file: dl/introduction
   - file: dl/layers
-  - file: dl/Hyperparameter_tuning
   - file: dl/gnn
   - file: dl/data
   - file: dl/Equivariant
@@ -31,7 +30,9 @@ parts:
   chapters:
   - file: applied/QM9
   - file: applied/MolGenerator
-- caption: E. Appendix
+- caption: E. In Progress
+  - file: dl/Hyperparameter_tuning
+- caption: F. Appendix
   numbered: true
   chapters:
   - file: style
