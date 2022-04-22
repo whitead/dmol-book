@@ -6,10 +6,10 @@ These are some notes for me and contributors on some style choice specific to th
 
 The goal of this book is instructional and not a comprehensive review of the literature.
 Citations should be added as needed for explaining concepts and justifying statements. Citations
-should be added as without citations as
+should be added as:
 
 <pre>
-This is an citation{cite}`foo2020`.
+This is a citation{cite}`foo2020`.
 </pre>
 
 ## Links to Other Resources
