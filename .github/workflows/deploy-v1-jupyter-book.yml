@@ -28,6 +28,7 @@ jobs:
         cd package && python -m build --sdist --wheel --outdir dist/ .
     - name: Publish distribution 📦 to PyPI
       uses: pypa/gh-action-pypi-publish@master
+      continue-on-error: true
       with:
         password: ${{ secrets.PYPI_API_TOKEN }}
         packages_dir: package/dist/

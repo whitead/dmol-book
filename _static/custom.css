@@ -1,3 +1,16 @@
+/* Style changes*/
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+/* update font variable */
+:root{
+  --font-family-sans-serif:-apple-system,BlinkMacSystemFont, 'Raleway', "Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji" !important;
+  --pst-font-family-base: var(--font-family-sans-serif);
+  --pst-color-preformatted-background: #f5f4e9;
+}
+
+p {
+  text-align: justify;
+}
+
 /* The Modal (background) */
 #wh-modal {
     display: none; /* Hidden by default */
