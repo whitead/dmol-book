@@ -39,12 +39,12 @@ setup(
     ],
     test_suite="tests",
     long_description="""
-    # Style and Imports for dmol Book
+# Style and Imports for dmol Book
 
-    This is the style and imports for deep learning for molecules and materials
-    written by Andrew White. Please see the [dmol book](https://dmol.pub) or
-    root package at [github](https://github.com/whitead/dmol-book).
-    """,
+This is the style and imports for deep learning for molecules and materials
+written by Andrew White. Please see the [dmol book](https://dmol.pub) or
+root package at [github](https://github.com/whitead/dmol-book).
+""",
     long_description_content_type="text/markdown",
     classifiers=[
         "Programming Language :: Python :: 3",
