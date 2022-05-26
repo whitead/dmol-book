@@ -21,8 +21,7 @@ jobs:
     - name: Install dependencies
       run: |
         conda install -c conda-forge pygraphviz
-        python -m pip install --use-deprecated=legacy-resolver --no-cache-dir -r requirements.txt
-        cd package && python -m pip install .
+        python -m pip --use-deprecated=legacy-resolver --no-cache-dir install package
     - name: Build dmol-book package
       run: |
         pip install build
