@@ -1,5 +1,5 @@
-jupyter-book==0.12.2
-matplotlib~=3.3
+jupyter-book==0.12.3
+matplotlib
 numpy
 jax
 jaxlib
@@ -14,11 +14,11 @@ mordred[full]
 moviepy
 networkx
 pygraphviz
-MDAnalysis < 2
+MDAnalysis
 emlp==1.0.2
 tensorflow-probability
 dm-haiku
-selfies < 2
+selfies
 tensorflowjs
-pre-commit
 exmol
+rdkit-pypi>=2022

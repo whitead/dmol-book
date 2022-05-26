@@ -1,0 +1,44 @@
+name: deploy-book-v1
+
+# Only run this when the master branch changes
+on:
+  push:
+    branches:
+    - v1
+
+# This job installs dependencies, build the book, and pushes it to `gh-pages`
+jobs:
+
+  deploy-book:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: s-weigand/setup-conda@v1
+      with:
+        python-version: 3.8
+
+    - name: Install dependencies
+      run: |
+        conda install -c conda-forge pygraphviz
+        python -m pip install --use-deprecated=legacy-resolver --no-cache-dir -r requirements.txt
+        python -m pip install package/
+    - name: Build dmol-book package
+      run: |
+        pip install build
+        cd package && python -m build --sdist --wheel --outdir dist/ .
+    - name: Publish distribution 📦 to PyPI
+      uses: pypa/gh-action-pypi-publish@v1
+      with:
+        password: ${{ secrets.PYPI_API_TOKEN }}
+        packages_dir: package/dist/
+    - name: Build the book
+      run: env TF_CPP_MIN_LOG_LEVEL=3 jupyter-book build .
+    - name: Deploy Jupyter book to GitHub pages
+      uses: peaceiris/actions-gh-pages@v3.6.1
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: _build/html
+        # force_orphan: true
+        destination_dir: v1/
+        cname: dmol.pub

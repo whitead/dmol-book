@@ -38,3 +38,4 @@ parts:
   numbered: true
   chapters:
   - file: style
+  - file: changelog

@@ -1,7 +1,7 @@
 # Book settings
 title: Deep Learning for Molecules and Materials
 author: Andrew D. White
-logo: logo.png
+logo: _static/images/robot-chem.png
 copyright: "2022"
 
 latex:
@@ -13,7 +13,7 @@ html:
   use_edit_page_button      : false  # Whether to add an "edit this page" button to pages. If `true`, repository information in repository: must be filled in
   extra_navbar              : <script async defer src="https://api.dmol.pub/latest.js"></script><noscript><img src="https://api.dmol.pub/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript> By <a href="https://twitter.com/andrewwhite01">Andrew White</a>
   extra_footer              : <a href="http://thewhitelab.org">thewhitelab.org</a> <div id="wh-modal"> <button class="wh-venti-button" aria-label="close modal" id="wh-modal-close">✕</button> <img id="wh-modal-img"> </div>  # Will be displayed underneath the footer.
-  baseurl                   : ""  # The base URL where your book will be hosted. Used for creating image previews and social links. e.g.: https://mypage.com/mybook/
+  baseurl                   : "https://dmol.pub"  # The base URL where your book will be hosted. Used for creating image previews and social links. e.g.: https://mypage.com/mybook/
   use_repository_button     : true
 
   # Information about where the book exists on the web
@@ -47,7 +47,7 @@ sphinx:
 
 execute:
   timeout: -1
-  #exclude_patterns          : ['ml/*', 'applied/*', 'math/*']
+  #exclude_patterns          : ['dl/*']
 
 #jupyter_execute_notebooks: force
 

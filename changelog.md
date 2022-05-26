@@ -4,3 +4,6 @@
 
 * First versioned released
 * Added consistent style to plots
+* Simplifed header
+* Replaced logo
+* Bumped to latest dependencies
