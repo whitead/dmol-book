@@ -1,5 +1,10 @@
 # Changelog
 
+## Version 0.2
+
+* Put package onto pypi
+* Revised fonts
+
 ## Version 0.1
 
 * First versioned released

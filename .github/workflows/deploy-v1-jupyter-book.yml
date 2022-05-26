@@ -35,10 +35,11 @@ jobs:
     - name: Build the book
       run: env TF_CPP_MIN_LOG_LEVEL=3 jupyter-book build .
     - name: Deploy Jupyter book to GitHub pages
-      uses: peaceiris/actions-gh-pages@v3.6.1
+      uses: peaceiris/actions-gh-pages@main
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: _build/html
         # force_orphan: true
-        destination_dir: v1/
+        keep_files: true
+        destination_dir: ${( steps.branch.outputs.BRANCH_NAME }}
         cname: dmol.pub
