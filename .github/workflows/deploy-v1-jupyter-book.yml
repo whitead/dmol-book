@@ -22,7 +22,7 @@ jobs:
       run: |
         conda install -c conda-forge pygraphviz
         python -m pip install --use-deprecated=legacy-resolver --no-cache-dir -r requirements.txt
-        python -m pip install package/
+        cd package && python -m pip install .
     - name: Build dmol-book package
       run: |
         pip install build
