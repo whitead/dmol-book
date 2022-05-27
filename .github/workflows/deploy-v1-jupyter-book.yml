@@ -41,5 +41,5 @@ jobs:
         publish_dir: _build/html
         # force_orphan: true
         keep_files: true
-        destination_dir: ${( steps.branch.outputs.BRANCH_NAME }}
+        destination_dir: v1
         cname: dmol.pub
