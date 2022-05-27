@@ -1,4 +1,9 @@
 # Changelog
+## Version 0.3
+
+* Centered output figures
+* Made github button open on github
+
 
 ## Version 0.2
 

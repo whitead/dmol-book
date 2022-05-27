@@ -4,7 +4,7 @@
 :root{
   --font-family-sans-serif:-apple-system,BlinkMacSystemFont, 'Raleway', "Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji" !important;
   --pst-font-family-base: var(--font-family-sans-serif);
-  --pst-color-preformatted-background: #f5f4e9;
+  --pst-background-color: #f5f4e9;
 }
 
 p {
@@ -127,4 +127,9 @@ div.sidebar, aside.sidebar {
   vertical-align: baseline;
   position: relative;
   background-color: #FFF;
+}
+
+.wh-flex-center{
+  display: flex;
+  justify-content: center;
 }
