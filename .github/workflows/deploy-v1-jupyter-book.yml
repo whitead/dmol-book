@@ -35,7 +35,7 @@ jobs:
     - name: Build the book
       run: env TF_CPP_MIN_LOG_LEVEL=3 jupyter-book build .
     - name: Deploy Jupyter book to GitHub pages
-      uses: peaceiris/actions-gh-pages@main
+      uses: peaceiris/actions-gh-pages@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: _build/html
