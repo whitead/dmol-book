@@ -24,6 +24,7 @@ jobs:
       run: env TF_CPP_MIN_LOG_LEVEL=3 jupyter-book build -n .
     - name: Link Checker
       uses: lycheeverse/lychee-action@v1.2.0
+      continue-on-error: true
       id: lc
       env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
