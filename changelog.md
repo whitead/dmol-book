@@ -3,6 +3,7 @@
 
 * Centered output figures
 * Made github button open on github
+* Add SchNet description to GNN
 
 
 ## Version 0.2
