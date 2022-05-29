@@ -23,6 +23,7 @@ urllib.request.urlretrieve(
 )
 fe = mpl.font_manager.FontEntry(fname="CourierPrime-Regular.ttf", name="courierprime")
 mpl.font_manager.fontManager.ttflist.append(fe)
+color_cycle = ["#444444", "#1BBC9B", "#a895bb", "#F06060", "#F3B562", "#80cedb"]
 plt.rcParams.update(
     {
         "axes.facecolor": "#f5f4e9",
@@ -30,7 +31,7 @@ plt.rcParams.update(
         "axes.edgecolor": "#333333",
         "figure.facecolor": "#fafafa",
         "axes.grid": False,
-        "axes.prop_cycle": plt.cycler("color", plt.cm.Dark2.colors),
+        "axes.prop_cycle": plt.cycler(color=color_cycle),
         "font.family": fe.name,
         "figure.figsize": (3.5, 3.5 / 1.2),
         "figure.dpi": 160,
@@ -40,5 +41,3 @@ plt.rcParams.update(
         "lines.markersize": 6,
     }
 )
-color_cycle = ["#444444", "#1BBC9B", "#a895bb", "#F06060", "#F3B562", "#80cedb"]
-mpl.rcParams["axes.prop_cycle"] = mpl.cycler(color=color_cycle)

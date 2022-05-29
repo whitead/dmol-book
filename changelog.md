@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 0.4.1 (2022-05-29)
+
+* Add SchNet implementation
+* Switched to three version scheme
+
+
 ## Version 0.3 (2022-05-28)
 
 * Centered output figures
