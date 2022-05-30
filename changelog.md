@@ -5,6 +5,7 @@
 * Doubled DPI on figures
 * Revised GNN chapter to have discussion of future section
 * Fixed long-standing emlp bug
+* Improved logic on branch deploy
 
 ## Version 0.4.1 (2022-05-29)
 
