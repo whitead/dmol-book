@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 0.4.2 (2022-05-30)
+
+* Doubled DPI on figures
+* Revised GNN chapter to have discussion of future section
+* Fixed long-standing emlp bug
+
 ## Version 0.4.1 (2022-05-29)
 
 * Add SchNet implementation
