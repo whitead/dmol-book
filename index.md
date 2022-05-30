@@ -5,7 +5,7 @@ html_meta:
   "twitter:card": "summary"
   "twitter:description": "Deep Learning for Molecules & Materials Book"
   "twitter:title": "dmol.pub 📖"
-  "twitter:image": "_static/logo.png"
+  "twitter:image": "https://dmol.pub/_static/robot-chem.png"
   "twitter:site": "@andrewwhite01"
 ---
 ![Picture of art installation of networked cables](_static/images/header_small.jpg)

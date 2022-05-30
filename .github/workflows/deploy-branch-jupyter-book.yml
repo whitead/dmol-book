@@ -1,10 +1,8 @@
 name: deploy-book-v1
 
-# Only run this when the master branch changes
 on:
-  push:
-    branches:
-    - v1
+  pull_request:
+    branches: [ master ]
 
 # This job installs dependencies, build the book, and pushes it to `gh-pages`
 jobs:
