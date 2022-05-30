@@ -2,6 +2,10 @@
 
 These are some notes for me and contributors on some style choice specific to this book.
 
+## Plots
+
+Import `dmol` package. It will set-up the style for all plots.
+
 ## Citations
 
 The goal of this book is instructional and not a comprehensive review of the literature.
