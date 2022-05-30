@@ -32,11 +32,21 @@ function insertAnchors(element) {
         newButtonContainer.classList.add('wh-flex-center')
     }
 }
+function halfSize(img) {
+    // we render at 200 dpi, so need to half the size of images
+    // check if it's already modified
+    if (!img.style.width) {
+        img.style.width = img.naturalWidth / 2 + 'px'
+        //img.style.height = img.naturalHeight / 2 + 'px'
+    }
+}
 
 function addImgAnchors() {
     let figs = document.querySelectorAll('.figure img')
+    figs.forEach(halfSize)
     figs.forEach(insertAnchors)
     let cellOutputs = document.querySelectorAll('.cell_output img')
+    cellOutputs.forEach(halfSize)
     cellOutputs.forEach(insertAnchors)
 }
 

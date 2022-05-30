@@ -12,6 +12,10 @@ p {
   text-align: justify;
 }
 
+div.math {
+  overflow-x: hidden !important;
+}
+
 /* The Modal (background) */
 #wh-modal {
   display: none;
@@ -43,6 +47,7 @@ p {
   max-width: min(1200px, 100%);
 }
 
+
 /* The Close Button */
 #wh-modal-close {
   position: absolute;
@@ -66,6 +71,7 @@ p {
 
 .wh-venti-button {
   background-color: transparent;
+  max-width: min(1200px, 100%);
   border: none;
 }
 

@@ -1,14 +1,20 @@
-from IPython.display import set_matplotlib_formats
-import numpy as np
-import matplotlib.pyplot as plt
-import matplotlib as mpl
-from rdkit.rdBase import BlockLogs
-from rdkit.Chem.Draw import IPythonConsole
-import warnings
-import urllib.request
 import random
+import urllib.request
+import warnings
+from rdkit.Chem.Draw import IPythonConsole
+from rdkit.rdBase import BlockLogs
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+import numpy as np
+import matplotlib_inline.backend_inline
+
+# make sure it is called here!
+from IPython import get_ipython
+
+get_ipython().run_line_magic("matplotlib", "inline")
 
 
+# matplotlib_inline.backend_inline.set_matplotlib_formats()
 block = BlockLogs()
 random.seed(0)
 np.random.seed(0)
@@ -24,17 +30,18 @@ urllib.request.urlretrieve(
 fe = mpl.font_manager.FontEntry(fname="CourierPrime-Regular.ttf", name="courierprime")
 mpl.font_manager.fontManager.ttflist.append(fe)
 color_cycle = ["#444444", "#1BBC9B", "#a895bb", "#F06060", "#F3B562", "#80cedb"]
-plt.rcParams.update(
+mpl.rcParams.update(
     {
         "axes.facecolor": "#f5f4e9",
         "grid.color": "#AAAAAA",
         "axes.edgecolor": "#333333",
-        "figure.facecolor": "#fafafa",
+        "figure.facecolor": "#FFFFFFFF",
         "axes.grid": False,
         "axes.prop_cycle": plt.cycler(color=color_cycle),
         "font.family": fe.name,
-        "figure.figsize": (3.5, 3.5 / 1.2),
-        "figure.dpi": 160,
+        "font.size": 14,
+        "figure.figsize": (4, 4 / 1.2),
+        "figure.dpi": 200,
         "ytick.left": True,
         "xtick.bottom": True,
         "image.cmap": "gist_yarg",
