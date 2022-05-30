@@ -152,3 +152,7 @@ aside.sidebar {
   display: flex;
   justify-content: center;
 }
+
+div.output .text_html {
+  overlfow-x: auto;
+}
