@@ -25,16 +25,6 @@ jobs:
       run: |
         conda install -c conda-forge pygraphviz
         cd package && python -m pip --use-deprecated=legacy-resolver --no-cache-dir install .
-    - name: Build dmol-book package
-      run: |
-        pip install build
-        cd package && python -m build --sdist --wheel --outdir dist/ .
-    - name: Publish distribution 📦 to PyPI
-      uses: pypa/gh-action-pypi-publish@master
-      continue-on-error: true
-      with:
-        password: ${{ secrets.PYPI_API_TOKEN }}
-        packages_dir: package/dist/
     - name: Build the book
       run: env TF_CPP_MIN_LOG_LEVEL=3 jupyter-book build .
     - name: Deploy Jupyter book to GitHub pages
