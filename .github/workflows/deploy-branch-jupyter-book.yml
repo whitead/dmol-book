@@ -1,4 +1,4 @@
-name: deploy-book-v1
+name: deploy-book-pr
 
 on:
   pull_request:
