@@ -19,7 +19,9 @@ jobs:
         conda install -c conda-forge pygraphviz
         cd package && python -m pip --use-deprecated=legacy-resolver --no-cache-dir install .
     - name: Check pre-commit
-      run: pre-commit run --all-files || ( git status --short ; git diff ; exit 1 )
+      run: |
+        pip install pre-commit
+        pre-commit run --all-files || ( git status --short ; git diff ; exit 1 )
     - name: Build the book
       run: env TF_CPP_MIN_LOG_LEVEL=3 jupyter-book build -n .
     - name: Link Checker
