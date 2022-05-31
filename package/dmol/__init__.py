@@ -40,7 +40,7 @@ mpl.rcParams.update(
         "axes.prop_cycle": plt.cycler(color=color_cycle),
         "font.family": fe.name,
         "font.size": 14,
-        "figure.figsize": (4, 4 / 1.2),
+        "figure.figsize": (4.5, 4.5 / 1.3),
         "figure.dpi": 200,
         "ytick.left": True,
         "xtick.bottom": True,

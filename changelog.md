@@ -1,5 +1,10 @@
 # Changelog
 
+## Version 0.4.3 (2022-05-31)
+
+* Increased standard figure size a bit
+* Revised GNN intro
+
 ## Version 0.4.2 (2022-05-30)
 
 * Doubled DPI on figures
