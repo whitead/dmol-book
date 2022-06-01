@@ -1,5 +1,5 @@
 format: jb-book
-root: intro
+root: index
 parts:
 - caption: A. Math Review
   numbered: true
@@ -38,3 +38,4 @@ parts:
   numbered: true
   chapters:
   - file: style
+  - file: changelog

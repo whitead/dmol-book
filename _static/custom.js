@@ -18,25 +18,45 @@ function openModal(src, lastFocus) {
 
 function insertAnchors(element) {
     if (element.parentElement.tagName !== 'A') {
-        let newButton = document.createElement('button')
-        //newButton.href = element.getAttribute('src')
-        //newButton.href = ''
-        let p = element.parentElement
+        const newButtonContainer = document.createElement('div')
+        const newButton = document.createElement('button')
+        newButtonContainer.appendChild(newButton)
+        const p = element.parentElement
         element.parentElement.removeChild(element)
         newButton.appendChild(element)
-        p.appendChild(newButton)
+        p.appendChild(newButtonContainer)
         newButton.onclick = () => openModal(element.getAttribute('src'), newButton)
         newButton.classList.add('wh-fig-a')
         newButton.classList.add('wh-venti-button')
         newButton.setAttribute('tabIndex', '0')
+        newButtonContainer.classList.add('wh-flex-center')
+    }
+}
+function halfSize(img) {
+    // we render at 200 dpi, so need to half the size of images
+    // check if it's already modified
+    if (!img.style.width) {
+        img.style.width = img.naturalWidth / 2 + 'px'
+        //img.style.height = img.naturalHeight / 2 + 'px'
     }
 }
 
 function addImgAnchors() {
     let figs = document.querySelectorAll('.figure img')
+    figs.forEach(halfSize)
     figs.forEach(insertAnchors)
     let cellOutputs = document.querySelectorAll('.cell_output img')
+    cellOutputs.forEach(halfSize)
     cellOutputs.forEach(insertAnchors)
 }
 
+function addGithubLink() {
+    const github_button = document.querySelector('.fa-github').closest('button')
+    // add a target href to the github button
+    github_button.onclick = () => {
+        window.open('https://github.com/whitead/dmol-book', '_blank').focus();
+    }
+}
+
 window.addEventListener('load', addImgAnchors)
+window.addEventListener('load', addGithubLink)
