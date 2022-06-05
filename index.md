@@ -59,6 +59,10 @@ Please cite as
 
 Thank you to contributors for offering suggestions, identifying errors, and helping improve this book! Twitter handles, if available
 
+### Contributed Chapter
+
+1. Mehrad Ansari (@MehradAnsari)
+
 ### Contributed Content to Chapter
 
 1. Geemi Wellawatte (@GWellawatte)
