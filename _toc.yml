@@ -30,7 +30,7 @@ parts:
   chapters:
   - file: applied/QM9
   - file: applied/MolGenerator
-- caption: E. In Progress
+- caption: E. Contributed Chapters
   numbered: true
   chapters:
   - file: dl/Hyperparameter_tuning
