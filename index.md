@@ -89,6 +89,7 @@ Thank you to contributors for offering suggestions, identifying errors, and help
 10. Ernest Awoonor-Williams
 11. Joshua Schrier (@joshuaschrier)
 12. Marin Bukov
+13. Arun Pa Thiagarajan (@arunppsg)
 
 ## Image Credit
 
