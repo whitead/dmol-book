@@ -1,5 +1,13 @@
 # Changelog
 
+
+## Version 0.5.0 (2022-06-17)
+
+* Added Merhad's Chapter on Hyperparameter optimization
+* Removed permutation equivariance from equivariance chapter
+* Finished irrep discussion in that chapter
+* Started new chapter on modern molecule nets
+
 ## Version 0.4.3 (2022-05-31)
 
 * Increased standard figure size a bit
