@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
     name="dmol-book",
-    version="0.4.3",
+    version="0.5.0",
     description="Style and Imports for dmol Book",
     author="Andrew D White",
     author_email="andrew.white@rochester.edu",
@@ -27,7 +27,6 @@ setup(
         "mordred[full]",
         "moviepy",
         "networkx",
-        "pygraphviz",
         "MDAnalysis",
         "emlp==1.0.2",
         "tensorflow-probability",
@@ -35,7 +34,7 @@ setup(
         "selfies",
         "tensorflowjs",
         "exmol",
-        "rdkit-pypi>=2022",
+        "rdkit>=2022",
     ],
     test_suite="tests",
     long_description="""
