@@ -7,6 +7,8 @@
 * Removed permutation equivariance from equivariance chapter
 * Finished irrep discussion in that chapter
 * Started new chapter on modern molecule nets
+* Removed pygraphviz
+* Switched to rdkit
 
 ## Version 0.4.3 (2022-05-31)
 
