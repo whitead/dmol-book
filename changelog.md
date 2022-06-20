@@ -1,5 +1,10 @@
 # Changelog
 
+## Version 0.5.1 (2022-06-20)
+
+* Added SymPy
+* Added description of nonlinearity to equiv chapter
+* Added example implementation to equiv chapter
 
 ## Version 0.5.0 (2022-06-17)
 

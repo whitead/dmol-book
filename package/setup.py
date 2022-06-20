@@ -35,6 +35,7 @@ setup(
         "tensorflowjs",
         "exmol",
         "rdkit>=2022",
+        "sympy",
     ],
     test_suite="tests",
     long_description="""
