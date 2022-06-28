@@ -40,21 +40,6 @@ When using interactivity, many of the chapter will benefit from using a graphics
 ```{tableofcontents}
 ```
 
-## Citation
-
-Please cite as
-
-> White, Andrew D. *Deep Learning for Molecules and Materials*. 2021.
-
-```bibtex
-@book{whiteDeep2021,
-  title={Deep Learning for Molecules and Materials},
-  author={White, Andrew D},
-  url={https://dmol.pub},
-  year={2021}
-}
-```
-
 ## Contributors
 
 Thank you to contributors for offering suggestions, identifying errors, and helping improve this book! Twitter handles, if available
@@ -93,6 +78,21 @@ Thank you to contributors for offering suggestions, identifying errors, and help
 14. Ankur Parmar
 15. Erik Thiede (@erik_der_elch)
 
+## Citation
+
+Please cite as
+
+> White, Andrew D. *Deep Learning for Molecules and Materials*. 2021.
+
+```bibtex
+@book{whiteDeep2021,
+  title={Deep Learning for Molecules and Materials},
+  author={White, Andrew D},
+  url={https://dmol.pub},
+  year={2021}
+}
+```
+
 ## Image Credit
 
 A picture by [@alinnnaaaa](https://unsplash.com/@alinnnaaaa) of art by Tomás Saraceno.
@@ -100,3 +100,11 @@ A picture by [@alinnnaaaa](https://unsplash.com/@alinnnaaaa) of art by Tomás Sa
 ## Funding Support
 
 Research reported in this work was supported by the National Institute of General Medical Sciences of the National Institutes of Health under award number R35GM137966. This material is based upon work supported by the National Science Foundation under Grant No. 1764415.
+
+## License (CC BY-NC 3.0)
+
+Creative Commons Legal Code
+
+Attribution-NonCommercial 3.0 Unported
+
+See complete description of license at [https://creativecommons.org/licenses/by-nc/3.0/](https://creativecommons.org/licenses/by-nc/3.0/) or at repo [https://github.com/whitead/dmol-book](https://github.com/whitead/dmol-book)
