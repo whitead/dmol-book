@@ -90,6 +90,8 @@ Thank you to contributors for offering suggestions, identifying errors, and help
 11. Joshua Schrier (@joshuaschrier)
 12. Marin Bukov
 13. Arun Pa Thiagarajan (@arunppsg)
+14. Ankur Parmar
+15. Erik Thiede (@erik_der_elch)
 
 ## Image Credit
 
