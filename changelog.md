@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 1.0.0 (2022-07-01)
+
+* Livecommsj release
+
 ## Version 0.5.1 (2022-06-20)
 
 * Added SymPy

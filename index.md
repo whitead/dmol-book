@@ -80,16 +80,19 @@ Thank you to contributors for offering suggestions, identifying errors, and help
 
 ## Citation
 
-Please cite as
-
-> White, Andrew D. *Deep Learning for Molecules and Materials*. 2021.
+Please cite the [livecommsj overview article](https://doi.org/10.33011/livecoms.3.1.1499) to cite the book at:
 
 ```bibtex
-@book{whiteDeep2021,
+@article{white2022deep,
   title={Deep Learning for Molecules and Materials},
+  journal={Living Journal of Computational Molecular Science},
   author={White, Andrew D},
   url={https://dmol.pub},
-  year={2021}
+  year={2022},
+  volume={3},
+  number={1},
+  pages={1499},
+  doi={10.33011/livecoms.3.1.1499}
 }
 ```
 
