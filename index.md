@@ -8,7 +8,7 @@ html_meta:
   "twitter:image": "https://dmol.pub/_static/robot-chem.png"
   "twitter:site": "@andrewwhite01"
 ---
-![Picture of art installation of networked cables](_static/images/header_small.jpg)
+![Picture of art installation of networked cables](_static/images/header.png)
 
 # Overview
 
@@ -80,7 +80,7 @@ Thank you to contributors for offering suggestions, identifying errors, and help
 
 ## Citation
 
-Please cite the [livecommsj overview article](https://doi.org/10.33011/livecoms.3.1.1499) to cite the book at:
+Please cite the [livecommsj overview article](https://doi.org/10.33011/livecoms.3.1.1499):
 
 ```bibtex
 @article{white2022deep,
@@ -95,10 +95,6 @@ Please cite the [livecommsj overview article](https://doi.org/10.33011/livecoms.
   doi={10.33011/livecoms.3.1.1499}
 }
 ```
-
-## Image Credit
-
-A picture by [@alinnnaaaa](https://unsplash.com/@alinnnaaaa) of art by Tomás Saraceno.
 
 ## Funding Support
 

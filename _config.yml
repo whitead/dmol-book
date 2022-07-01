@@ -1,7 +1,7 @@
 # Book settings
-title: Deep Learning for Molecules and Materials
+title: deep learning for molecules & materials
 author: Andrew D. White
-logo: _static/images/robot-chem.png
+logo: _static/images/logo.png
 copyright: "2022"
 
 latex:
@@ -50,7 +50,7 @@ sphinx:
       "twitter:card": "summary"
       "twitter:description": "Deep Learning for Molecules & Materials Book"
       "twitter:title": "dmol.pub 📖"
-      "twitter:image": "https://dmol.pub/_static/robot-chem.png"
+      "twitter:image": "https://dmol.pub/_static/logo.png"
       "twitter:site": "@andrewwhite01"
 
 execute:
