@@ -35,6 +35,20 @@ On each chapter, you'll see the &nbsp;<i aria-label="Launch interactive content"
 When using interactivity, many of the chapter will benefit from using a graphics processing unit (GPU). GPUs are what makes deep learning fast enough to be practical on large dataset. This is possible in Google Colab, but may require additional steps if running this locally. Check the documentation of the package you're using (e.g., `Jax`, `PyTorch`, `Tensorflow`) to find out how to use a GPU locally. I have carefully constructed the examples to be small enough though to run on a normal CPU in a laptop though, so the GPU is optional.
 
 
+## Example models
+
+Here are the major models we will construct learn to implement in this book: *Sorry, but I'm unable to link directly to the examples, so you'll need to scroll to them.*
+
+1. We explore predicting solubility of molecules with {doc}`graph convolutional neural networks<dl/gnn>`, {doc}`recurrent neural networks<dl/NLP>`, {doc}`dense neural networks<dl/xai>`, and {doc}`kernel learning<ml/kernel>`.
+2. We implement a SchNet model to {doc}`predict what space group a structure belongs to<dl/gnn>`.
+3. We implement a Recurrent Neural Network to {doc}`predict the solubility of proteins/peptides<dl/layers>` and {doc}`predict the if a peptide will lyse red blood cells<dl/xai>`.
+4. We predict the DFT single-point energy of molecules {doc}`with a graph convolutional neural network<applied/QM9>`.
+5. We propose new molecules with a generative {doc}`recurrent neural network<applied/MolGenerator>`.
+6. We learn to align and embed polymer trajectories with {doc}`variational autoencoders<dl/VAE>` and {doc}`equivariant data representations<dl/data>`.
+7. We classify if molecules are likely to be toxic with {doc}`logistic regression<ml/classification>`.
+
+and there are many smaller examples throughout the book.
+
 ## Table of Contents
 
 ```{tableofcontents}
