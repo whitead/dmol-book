@@ -58,5 +58,35 @@ function addGithubLink() {
     }
 }
 
+function autoplayVideos() {
+    // get parent elements with autoplay-video class
+    const vps = document.querySelectorAll('.autoplay-video');
+    // loop through them and play them
+    vps.forEach(vps => {
+        // check if there is an img instead of video
+        const img = vps.querySelector('img')
+        let video = vps.querySelector('video')
+        if (img) {
+            const src = img.getAttribute('src')
+            // get width from style
+            const width = img.style.width
+            // now create the video element
+            video = document.createElement('video')
+            // set the src
+            video.src = src
+            // set the width (have to convert though from string to px)
+            if (width)
+                video.style.width = width
+            // replace the img with the video
+            vps.replaceChild(video, img)
+        }
+        if (video) {
+            video.loop = true;
+            video.autoplay = true;
+        }
+    })
+}
+
+window.addEventListener('load', autoplayVideos)
 window.addEventListener('load', addImgAnchors)
 window.addEventListener('load', addGithubLink)

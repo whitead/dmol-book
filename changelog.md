@@ -1,5 +1,10 @@
 # Changelog
 
+## Version 1.1.0 (2022-07-05)
+
+* Added more information on stereochemistry
+* Added autoplayer for mp4s
+
 ## Version 1.0.0 (2022-07-01)
 
 * Livecommsj release
