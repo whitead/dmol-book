@@ -87,6 +87,6 @@ function autoplayVideos() {
     })
 }
 
-window.addEventListener('load', autoplayVideos)
 window.addEventListener('load', addImgAnchors)
+window.addEventListener('load', autoplayVideos)
 window.addEventListener('load', addGithubLink)
