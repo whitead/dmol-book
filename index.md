@@ -97,12 +97,12 @@ Thank you to contributors for offering suggestions, identifying errors, and help
 Please cite the [livecommsj overview article](https://doi.org/10.33011/livecoms.3.1.1499):
 
 ```bibtex
-@article{white2022deep,
+@article{white2021deep,
   title={Deep Learning for Molecules and Materials},
   journal={Living Journal of Computational Molecular Science},
   author={White, Andrew D},
   url={https://dmol.pub},
-  year={2022},
+  year={2021},
   volume={3},
   number={1},
   pages={1499},
