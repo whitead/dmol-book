@@ -41,7 +41,7 @@ Here are the major models we will construct learn to implement in this book: *So
 
 1. We explore predicting solubility of molecules with {doc}`graph convolutional neural networks<dl/gnn>`, {doc}`recurrent neural networks<dl/NLP>`, {doc}`dense neural networks<dl/xai>`, and {doc}`kernel learning<ml/kernel>`.
 2. We implement a SchNet model to {doc}`predict what space group a structure belongs to<dl/gnn>`.
-3. We implement a Recurrent Neural Network to {doc}`predict the solubility of proteins/peptides<dl/layers>` and {doc}`predict the if a peptide will lyse red blood cells<dl/xai>`.
+3. We implement a Recurrent Neural Network to {doc}`predict the solubility of proteins/peptides<dl/layers>` and {doc}`predict if a peptide will lyse red blood cells<dl/xai>`.
 4. We predict the DFT single-point energy of molecules {doc}`with a graph convolutional neural network<applied/QM9>`.
 5. We propose new molecules with a generative {doc}`recurrent neural network<applied/MolGenerator>`.
 6. We learn to align and embed polymer trajectories with {doc}`variational autoencoders<dl/VAE>` and {doc}`equivariant data representations<dl/data>`.
@@ -91,6 +91,7 @@ Thank you to contributors for offering suggestions, identifying errors, and help
 13. Arun Pa Thiagarajan (@arunppsg)
 14. Ankur Parmar
 15. Erik Thiede (@erik_der_elch)
+16. Killian Sheriff(@KillianSheriff)
 
 ## Citation
 
