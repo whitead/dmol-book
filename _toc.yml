@@ -20,7 +20,6 @@ parts:
   - file: dl/gnn
   - file: dl/data
   - file: dl/Equivariant
-  - file: dl/molnets
   - file: dl/xai
   - file: dl/attention
   - file: dl/NLP
@@ -40,3 +39,7 @@ parts:
   chapters:
   - file: style
   - file: changelog
+- caption: G. In Progress
+  numbered: true
+  chapters:
+   - file: dl/molnets
