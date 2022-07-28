@@ -37,6 +37,7 @@ setup(
         "rdkit>=2022",
         "sympy",
         "e3nn",
+        "torch==1.12.0",
         "torch-scatter@https://data.pyg.org/whl/torch-1.12.0+cpu.html",
         "torch-sparse@https://data.pyg.org/whl/torch-1.12.0+cpu.html",
         "torch-cluster@https://data.pyg.org/whl/torch-1.12.0+cpu.html",
