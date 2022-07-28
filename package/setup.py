@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
     name="dmol-book",
-    version="1.0.0",
+    version="0.5.0",
     description="Style and Imports for dmol Book",
     author="Andrew D White",
     author_email="andrew.white@rochester.edu",
@@ -36,6 +36,13 @@ setup(
         "exmol",
         "rdkit>=2022",
         "sympy",
+        "e3nn",
+        "torch-scatter@https://data.pyg.org/whl/torch-1.12.0+cpu.html",
+        "torch-sparse@https://data.pyg.org/whl/torch-1.12.0+cpu.html",
+        "torch-cluster@https://data.pyg.org/whl/torch-1.12.0+cpu.html",
+        "torch-spline-conv@https://data.pyg.org/whl/torch-1.12.0+cpu.html",
+        "torch-geometric@https://data.pyg.org/whl/torch-1.12.0+cpu.html",
+        "torch-spline-conv@https://data.pyg.org/whl/torch-1.12.0+cpu.html",
     ],
     test_suite="tests",
     long_description="""
