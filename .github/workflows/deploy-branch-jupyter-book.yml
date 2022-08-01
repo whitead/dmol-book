@@ -23,6 +23,7 @@ jobs:
       run: |
         conda install -c conda-forge pygraphviz
         cd package && python -m pip --use-deprecated=legacy-resolver --no-cache-dir install .
+        conda install pyg -c pyg
     - name: Build the book
       run: env TF_CPP_MIN_LOG_LEVEL=3 jupyter-book build .
     - name: Deploy Jupyter book to GitHub pages

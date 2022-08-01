@@ -25,6 +25,7 @@ jobs:
       run: |
         conda install -c conda-forge pygraphviz
         cd package && python -m pip --use-deprecated=legacy-resolver --no-cache-dir install .
+        conda install pyg -c pyg
     - name: Build dmol-book package
       run: |
         pip install build
