@@ -36,6 +36,7 @@ setup(
         "exmol",
         "rdkit>=2022",
         "sympy",
+        "e3nn",
     ],
     test_suite="tests",
     long_description="""
