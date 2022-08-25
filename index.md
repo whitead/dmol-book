@@ -92,6 +92,7 @@ Thank you to contributors for offering suggestions, identifying errors, and help
 14. Ankur Parmar
 15. Erik Thiede (@erik_der_elch)
 16. Killian Sheriff(@KillianSheriff)
+17. Parsa Pourghasem
 
 ## Citation
 
