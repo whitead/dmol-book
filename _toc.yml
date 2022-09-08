@@ -1,5 +1,5 @@
 format: jb-book
-root: intro
+root: index
 parts:
 - caption: A. Math Review
   numbered: true
@@ -18,15 +18,28 @@ parts:
   - file: dl/introduction
   - file: dl/layers
   - file: dl/gnn
-  - file: dl/attention
   - file: dl/data
+  - file: dl/Equivariant
+  - file: dl/xai
+  - file: dl/attention
+  - file: dl/NLP
   - file: dl/VAE
   - file: dl/flows
-  - file: dl/Equivariant
-  - file: dl/NLP
-  - file: dl/xai
 - caption: D. Applications
   numbered: true
   chapters:
   - file: applied/QM9
   - file: applied/MolGenerator
+- caption: E. Contributed Chapters
+  numbered: true
+  chapters:
+  - file: dl/Hyperparameter_tuning
+- caption: F. Appendix
+  numbered: true
+  chapters:
+  - file: style
+  - file: changelog
+- caption: G. In Progress
+  numbered: true
+  chapters:
+   - file: dl/molnets
