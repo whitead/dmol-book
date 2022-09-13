@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 1.1.1 (2022-09-13)
+
+* Various typos/bug fixes in chapters
+* Fixed import errors in dmol package
+* Removed constantly failing branch deploy
+
 ## Version 1.1.0 (2022-07-05)
 
 * Added more information on stereochemistry
