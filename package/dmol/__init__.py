@@ -6,15 +6,12 @@ from rdkit.rdBase import BlockLogs
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import numpy as np
-import matplotlib_inline.backend_inline
 
 # make sure it is called here!
 from IPython import get_ipython
 
 get_ipython().run_line_magic("matplotlib", "inline")
 
-
-# matplotlib_inline.backend_inline.set_matplotlib_formats()
 block = BlockLogs()
 random.seed(0)
 np.random.seed(0)
