@@ -1,8 +1,8 @@
 name: deploy-book-pr
 
 on:
-  pull_request:
-    branches: [ master ]
+  # pull_request:
+  #   branches: [ master ]
 
 # This job installs dependencies, build the book, and pushes it to `gh-pages`
 jobs:
