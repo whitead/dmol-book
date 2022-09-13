@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
     name="dmol-book",
-    version="1.0.0",
+    version="1.1.1",
     description="Style and Imports for dmol Book",
     author="Andrew D White",
     author_email="andrew.white@rochester.edu",
