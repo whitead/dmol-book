@@ -73,6 +73,7 @@ Thank you to contributors for offering suggestions, identifying errors, and help
 3. Kevin Jablonka (@kmjablonka)
 4. Elana Simon
 5. Cathrine Bergh (@cathrinebergh)
+6. Sam Cox (@SamCox822)
 
 ### Code Fixes, Math Fixes, Language Fixes
 
@@ -94,6 +95,7 @@ Thank you to contributors for offering suggestions, identifying errors, and help
 16. Killian Sheriff(@KillianSheriff)
 17. Parsa Pourghasem
 18. Zonglun Li
+19. Santanu Poddar
 
 
 ## Citation
