@@ -37,6 +37,7 @@ setup(
         "rdkit>=2022",
         "sympy",
         "e3nn",
+        "transformers==4.11.3",
         "simpletransformers==0.63.9",
     ],
     test_suite="tests",
