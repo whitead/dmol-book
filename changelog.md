@@ -1,5 +1,12 @@
 # Changelog
 
+
+## Version 1.2.0 (2022-10-04)
+
+* Added simpletransformers and e3nn dependencies
+* Added two new chapters - e3nn_traj, pre-training
+* Various fixes in Equivariant, tuning chapters.
+
 ## Version 1.1.1 (2022-09-13)
 
 * Various typos/bug fixes in chapters

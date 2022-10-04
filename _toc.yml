@@ -34,6 +34,7 @@ parts:
   numbered: true
   chapters:
   - file: dl/Hyperparameter_tuning
+  - file: applied/e3nn_traj
 - caption: F. Appendix
   numbered: true
   chapters:
