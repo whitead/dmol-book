@@ -55,7 +55,7 @@ sphinx:
 
 execute:
   timeout: -1
-  #exclude_patterns          : ['dl/flows.ipynb', 'dl/Hyperparameter_tuning.ipynb', 'dl/attention.ipynb', 'dl/data.ipynb', 'dl/Equivariant.ipynb', 'dl/layers.ipynb', 'dl/VAE.ipynb', 'dl/NLP.ipynb', 'dl/xai.ipynb','math/*', 'ml/*', 'applied/*']
+  exclude_patterns          : ['dl/pretraining.ipynb']
 
 #jupyter_execute_notebooks: force
 

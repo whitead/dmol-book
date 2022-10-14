@@ -1,6 +1,5 @@
 # Changelog
 
-
 ## Version 1.2.0 (2022-10-04)
 
 * Added simpletransformers and e3nn dependencies
