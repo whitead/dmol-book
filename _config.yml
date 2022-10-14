@@ -54,7 +54,7 @@ sphinx:
       "twitter:site": "@andrewwhite01"
 
 execute:
-  timeout: -1
+  timeout: 1000
   #exclude_patterns          : ['dl/flows.ipynb', 'dl/Hyperparameter_tuning.ipynb', 'dl/attention.ipynb', 'dl/data.ipynb', 'dl/Equivariant.ipynb', 'dl/layers.ipynb', 'dl/VAE.ipynb', 'dl/NLP.ipynb', 'dl/xai.ipynb','math/*', 'ml/*', 'applied/*']
 
 #jupyter_execute_notebooks: force
