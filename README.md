@@ -5,3 +5,21 @@
 View book at [dmol.pub](https://dmol.pub)
 
 &copy; Andrew White
+
+## Build Book Locally
+
+To build the book locally you need to install [Jupyter Book](https://jupyterbook.org/en/stable/intro.html):
+
+```bash
+python -m pip install -U jupyter-book
+# conda install -c conda-forge jupyter-book
+```
+
+With [Jupyter Book](https://jupyterbook.org/en/stable/intro.html) installed you can build the book locally as follows:
+
+```bash
+# From the root directory of the repository
+jupyter-book build .
+```
+
+The HTML of the book are located in the `_build/html` directory. Open the `index.html` file to land on the home page of the book.
