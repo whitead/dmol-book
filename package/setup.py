@@ -12,7 +12,7 @@ setup(
     license="MIT",
     packages=["dmol"],
     install_requires=[
-        "jupyter-book==0.12.3",
+        "jupyter-book==0.13.1",
         "matplotlib",
         "numpy",
         "jax",
