@@ -26,5 +26,5 @@ The HTML of the book are located in the `_build/html` directory. Open the `index
 
 ## Developing
 
-This repo uses pre-commit, so after cloning run `pip install -r dev-requirements.txt` and `pre-commit install` prior to committing. 
-If you have already committed, but your PR is failing because of a pre-commit error, run `pre-commit run --all` 
+This repo uses pre-commit, so after cloning run `pip install -r dev-requirements.txt` and `pre-commit install` prior to committing.
+If you have already committed, but your PR is failing because of a pre-commit error, run `pre-commit run --all`
