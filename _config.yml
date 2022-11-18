@@ -55,7 +55,6 @@ sphinx:
 
 execute:
   timeout: -1
-  exclude_patterns          : ['dl/pretraining.ipynb']
 
 #jupyter_execute_notebooks: force
 
