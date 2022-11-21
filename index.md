@@ -61,10 +61,13 @@ Thank you to contributors for offering suggestions, identifying errors, and help
 ### Contributed Chapter
 
 1. Mehrad Ansari (@MehradAnsari)
+2. Sam Cox (@SamCox822)
+3. Heta Gandhi (@gandhi_heta)
 
 ### Contributed Content to Chapter
 
 1. Geemi Wellawatte (@GWellawatte)
+
 
 ### Substantial Feedback on Content
 
@@ -74,6 +77,7 @@ Thank you to contributors for offering suggestions, identifying errors, and help
 4. Elana Simon
 5. Cathrine Bergh (@cathrinebergh)
 6. Sam Cox (@SamCox822)
+7. Erik Thiede (@erik_der_elch)
 
 ### Code Fixes, Math Fixes, Language Fixes
 
@@ -91,11 +95,10 @@ Thank you to contributors for offering suggestions, identifying errors, and help
 12. Marin Bukov
 13. Arun Pa Thiagarajan (@arunppsg)
 14. Ankur Parmar
-15. Erik Thiede (@erik_der_elch)
-16. Killian Sheriff(@KillianSheriff)
-17. Parsa Pourghasem
-18. Zonglun Li
-19. Santanu Poddar
+15. Killian Sheriff(@KillianSheriff)
+16. Parsa Pourghasem
+17. Zonglun Li
+18. Santanu Poddar
 
 
 ## Citation
