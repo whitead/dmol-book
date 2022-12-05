@@ -54,8 +54,8 @@ sphinx:
       "twitter:site": "@andrewwhite01"
 
 execute:
-  exclude_patterns          : ['livecomj/*', 'dl/pretraining.ipynb', 'applied/*', 'ml/*', 'dl/xai.ipynb', 'NLP.ipynb', 'flows.ipynb',
-  'dl/Equivariant.ipynb', 'dl/gnn.ipynb', 'dl/data.ipynb', 'VAE.ipynb', 'dl/introduction.ipynb', 'dl/Hyperparameter_tuning.ipynb', 'attention.ipynb', 'layers.ipynb']
+  #exclude_patterns          : ['livecomj/*', 'dl/pretraining.ipynb', 'applied/*', 'ml/*', 'dl/xai.ipynb', 'NLP.ipynb', 'flows.ipynb',
+  #'dl/Equivariant.ipynb', 'dl/gnn.ipynb', 'dl/data.ipynb', 'VAE.ipynb', 'dl/introduction.ipynb', 'dl/Hyperparameter_tuning.ipynb', 'attention.ipynb', 'layers.ipynb']
   timeout: -1
 
 #jupyter_execute_notebooks: force
