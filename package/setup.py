@@ -21,7 +21,7 @@ setup(
         "tensorflow>=2.7",
         "seaborn",
         "tabulate",
-        "sklearn",
+        "scikit-learn",
         "pydot",
         "pillow>=8.3.2",
         "mordred[full]",
