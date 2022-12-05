@@ -1,5 +1,13 @@
 # Changelog
 
+## Version 1.3.0 (2022-12-05)
+
+* Fixed sklean pip install name
+* Updated batch norm discussion
+* Added exercises to GNN, XAI chapters
+* Fixed discussion of pooling invariance
+* Progress on molnet chapter
+
 ## Version 1.2.0 (2022-10-04)
 
 * Added simpletransformers and e3nn dependencies
