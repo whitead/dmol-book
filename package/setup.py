@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
     name="dmol-book",
-    version="1.2.0",
+    version="1.3.0",
     description="Style and Imports for dmol Book",
     author="Andrew D White",
     author_email="andrew.white@rochester.edu",
@@ -12,7 +12,7 @@ setup(
     license="MIT",
     packages=["dmol"],
     install_requires=[
-        "jupyter-book==0.12.3",
+        "jupyter-book==0.13.1",
         "matplotlib",
         "numpy",
         "jax",

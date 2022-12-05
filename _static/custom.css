@@ -134,7 +134,7 @@ td>p {
   display: inline !important;
 }
 
-div.sidebar,
+/* div.sidebar,
 aside.sidebar {
   border: none;
   clear: right;
@@ -146,7 +146,7 @@ aside.sidebar {
   vertical-align: baseline;
   position: relative;
   background-color: #FFF;
-}
+} */
 
 .wh-flex-center {
   display: flex;
