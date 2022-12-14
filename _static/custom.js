@@ -32,6 +32,12 @@ function insertAnchors(element) {
         newButtonContainer.classList.add('wh-flex-center')
     }
 }
+
+function addAlts(img) {
+    // we overwrite because some weird alts show-up
+    img.alt = 'Output image from code cell above'
+}
+
 function halfSize(img) {
     // we render at 200 dpi, so need to half the size of images
     // check if it's already modified
@@ -47,6 +53,7 @@ function addImgAnchors() {
     figs.forEach(insertAnchors)
     let cellOutputs = document.querySelectorAll('.cell_output img')
     cellOutputs.forEach(halfSize)
+    cellOutputs.forEach(addAlts)
     cellOutputs.forEach(insertAnchors)
 }
 
