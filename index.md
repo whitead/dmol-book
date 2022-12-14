@@ -99,6 +99,7 @@ Thank you to contributors for offering suggestions, identifying errors, and help
 16. Parsa Pourghasem
 17. Zonglun Li
 18. Santanu Poddar
+19. Robert Bridges
 
 
 ## Citation
