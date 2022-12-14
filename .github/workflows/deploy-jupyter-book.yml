@@ -1,10 +1,9 @@
 name: deploy-book
 
-# Only run this when the master branch changes
+# Only run this when the main branch changes
 on:
   push:
     branches:
-    - master
     - main
 
   workflow_dispatch:
@@ -31,7 +30,7 @@ jobs:
         pip install build
         cd package && python -m build --sdist --wheel --outdir dist/ .
     - name: Publish distribution 📦 to PyPI
-      uses: pypa/gh-action-pypi-publish@master
+      uses: pypa/gh-action-pypi-publish@v1
       continue-on-error: true
       with:
         password: ${{ secrets.PYPI_API_TOKEN }}
@@ -39,9 +38,11 @@ jobs:
     - name: Build the book
       run: env TF_CPP_MIN_LOG_LEVEL=3 jupyter-book build .
     - name: Deploy Jupyter book to GitHub pages
-      uses: peaceiris/actions-gh-pages@v3.6.1
+      uses: peaceiris/actions-gh-pages@v3.9.0
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: _build/html
         force_orphan: true
+        #keep_files: true
         cname: dmol.pub
+        destination_dir: latest
