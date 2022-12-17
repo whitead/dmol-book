@@ -8,7 +8,7 @@ html_meta:
   "twitter:image": "https://dmol.pub/_static/robot-chem.png"
   "twitter:site": "@andrewwhite01"
 ---
-![Picture of art installation of networked cables](_static/images/header.png)
+![Header image showing molecules plotted in two different ways](_static/images/header.png)
 
 # Overview
 
@@ -100,7 +100,6 @@ Thank you to contributors for offering suggestions, identifying errors, and help
 17. Zonglun Li
 18. Santanu Poddar
 19. Robert Bridges
-
 
 ## Citation
 
