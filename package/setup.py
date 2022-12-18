@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
     name="dmol-book",
-    version="1.3.0",
+    version="1.3.1",
     description="Style and Imports for dmol Book",
     author="Andrew D White",
     author_email="andrew.white@rochester.edu",
@@ -39,6 +39,7 @@ setup(
         "e3nn",
         "torch==1.12",  # note - if you want to change this, change the github action too
         "simpletransformers==0.63.9",
+        "linkify-it-py",
     ],
     test_suite="tests",
     long_description="""
