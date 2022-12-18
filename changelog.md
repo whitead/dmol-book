@@ -1,5 +1,10 @@
 # Changelog
 
+## Version 1.3.1 (2022-12-17)
+
+* Added `linkify` to dependencies
+* Fixed Issues #221, #202, #191, #215, #174, #201, #220, #211, #197, #198, #204
+
 ## Version 1.3.0 (2022-12-05)
 
 * Fixed sklean pip install name
