@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
     name="dmol-book",
-    version="1.3.1",
+    version="1.3.2",
     description="Style and Imports for dmol Book",
     author="Andrew D White",
     author_email="andrew.white@rochester.edu",
@@ -15,6 +15,7 @@ setup(
         "jupyter-book==0.13.1",
         "matplotlib",
         "numpy",
+        "ipython!=8.7.0"
         "jax",
         "jaxlib",
         "pandas",
