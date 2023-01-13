@@ -100,6 +100,7 @@ Thank you to contributors for offering suggestions, identifying errors, and help
 17. Zonglun Li
 18. Santanu Poddar
 19. Robert Bridges
+20. Raul Pelaez([@RaulPPelaez](https://github.com/RaulPPelaez))
 
 ## Citation
 
