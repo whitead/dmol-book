@@ -15,8 +15,7 @@ setup(
         "jupyter-book==0.13.1",
         "matplotlib",
         "numpy",
-        "ipython!=8.7.0"
-        "jax",
+        "ipython!=8.7.0" "jax",
         "jaxlib",
         "pandas",
         "tensorflow>=2.7",
