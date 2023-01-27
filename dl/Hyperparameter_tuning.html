@@ -1,0 +1,1382 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="Deep Learning for Molecules &amp; Materials Book" lang="en" name="description" xml:lang="en" />
+<meta content="en_US" property="og:locale" />
+<meta content="summary" name="twitter:card" />
+<meta content="Deep Learning for Molecules &amp; Materials Book" name="twitter:description" />
+<meta content="dmol.pub 📖" name="twitter:title" />
+<meta content="https://dmol.pub/_static/logo.png" name="twitter:image" />
+<meta content="&#64;andrewwhite01" name="twitter:site" />
+
+    <title>18. Hyperparameter Tuning &#8212; deep learning for molecules &amp; materials</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/a11y.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/custom.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="canonical" href="https://dmol.pub/dl/Hyperparameter_tuning.html" />
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="19. Equivariant Neural Network for Predicting Trajectories" href="../applied/e3nn_traj.html" />
+    <link rel="prev" title="17. Generative RNN in Browser" href="../applied/MolGenerator.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">deep learning for molecules & materials</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Overview
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  A. Math Review
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../math/tensors-and-shapes.html">
+   1. Tensors and Shapes
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  B. Machine Learning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ml/introduction.html">
+   2. Introduction to Machine Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ml/regression.html">
+   3. Regression &amp; Model Assessment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ml/classification.html">
+   4. Classification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ml/kernel.html">
+   5. Kernel Learning
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  C. Deep Learning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="introduction.html">
+   6. Deep Learning Overview
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="layers.html">
+   7. Standard Layers
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="gnn.html">
+   8. Graph Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="data.html">
+   9. Input Data &amp; Equivariances
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Equivariant.html">
+   10. Equivariant Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="xai.html">
+   11. Explaining Predictions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="attention.html">
+   12. Attention Layers
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="NLP.html">
+   13. Deep Learning on Sequences
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="VAE.html">
+   14. Variational Autoencoder
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="flows.html">
+   15. Normalizing Flows
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  D. Applications
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../applied/QM9.html">
+   16. Predicting DFT Energies with GNNs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../applied/MolGenerator.html">
+   17. Generative RNN in Browser
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  E. Contributed Chapters
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   18. Hyperparameter Tuning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../applied/e3nn_traj.html">
+   19. Equivariant Neural Network for Predicting Trajectories
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="pretraining.html">
+   20. Pretraining
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  F. Appendix
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../style.html">
+   21. Style Guide
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../changelog.html">
+   22. Changelog
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  G. In Progress
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="molnets.html">
+   23. Modern Molecular NNs
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            <script async defer src="https://api.dmol.pub/latest.js"></script><noscript><img src="https://api.dmol.pub/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript> By <a href="https://twitter.com/andrewwhite01">Andrew White</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://colab.research.google.com/github/whitead/dmol-book/blob/master/dl/Hyperparameter_tuning.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/whitead/dmol-book"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/whitead/dmol-book/issues/new?title=Issue%20on%20page%20%2Fdl/Hyperparameter_tuning.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/dl/Hyperparameter_tuning.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#training-hyperparameters">
+   18.1. Training Hyperparameters
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#learning-rate">
+     18.1.1. Learning rate
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#momentum">
+     18.1.2. Momentum
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#batch-size">
+     18.1.3. Batch Size
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model-design-related-hyperparameters">
+   18.2. Model Design-Related Hyperparameters
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#number-of-hidden-layers">
+     18.2.1. Number of hidden layers
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#number-of-nodes-in-each-hidden-layer">
+     18.2.2. Number of nodes in each hidden layer
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#regularization">
+     18.2.3. Regularization
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hyperparameter-optimization">
+   18.3. Hyperparameter Optimization
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#search-algorithms">
+     18.3.1. Search Algorithms
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#grid-search">
+       18.3.1.1. Grid Search
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#random-search">
+       18.3.1.2. Random Search
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#bayesian-optimization">
+       18.3.1.3. Bayesian Optimization
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#trial-schedulers">
+     18.3.2. Trial Schedulers
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#median-stopping">
+       18.3.2.1. Median Stopping
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#curve-fitting">
+       18.3.2.2. Curve Fitting
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#successive-halving">
+       18.3.2.3. Successive Halving
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#hyperband">
+       18.3.2.4. HyperBand
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#running-this-notebook">
+   18.4. Running This Notebook
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id10">
+   18.5. Hyperparameter Tuning
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#baseline-model">
+     18.5.1. Baseline Model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#early-stopping">
+     18.5.2. Early Stopping
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#reduced-learning-rate-on-plateau-and-dropout">
+     18.5.3. Reduced Learning Rate on Plateau and Dropout
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#discussion">
+   18.6. Discussion
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cited-references">
+   18.7. Cited References
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Hyperparameter Tuning</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#training-hyperparameters">
+   18.1. Training Hyperparameters
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#learning-rate">
+     18.1.1. Learning rate
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#momentum">
+     18.1.2. Momentum
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#batch-size">
+     18.1.3. Batch Size
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model-design-related-hyperparameters">
+   18.2. Model Design-Related Hyperparameters
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#number-of-hidden-layers">
+     18.2.1. Number of hidden layers
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#number-of-nodes-in-each-hidden-layer">
+     18.2.2. Number of nodes in each hidden layer
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#regularization">
+     18.2.3. Regularization
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hyperparameter-optimization">
+   18.3. Hyperparameter Optimization
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#search-algorithms">
+     18.3.1. Search Algorithms
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#grid-search">
+       18.3.1.1. Grid Search
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#random-search">
+       18.3.1.2. Random Search
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#bayesian-optimization">
+       18.3.1.3. Bayesian Optimization
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#trial-schedulers">
+     18.3.2. Trial Schedulers
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#median-stopping">
+       18.3.2.1. Median Stopping
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#curve-fitting">
+       18.3.2.2. Curve Fitting
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#successive-halving">
+       18.3.2.3. Successive Halving
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#hyperband">
+       18.3.2.4. HyperBand
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#running-this-notebook">
+   18.4. Running This Notebook
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id10">
+   18.5. Hyperparameter Tuning
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#baseline-model">
+     18.5.1. Baseline Model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#early-stopping">
+     18.5.2. Early Stopping
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#reduced-learning-rate-on-plateau-and-dropout">
+     18.5.3. Reduced Learning Rate on Plateau and Dropout
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#discussion">
+   18.6. Discussion
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cited-references">
+   18.7. Cited References
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="hyperparameter-tuning">
+<h1><span class="section-number">18. </span>Hyperparameter Tuning<a class="headerlink" href="#hyperparameter-tuning" title="Permalink to this headline">#</a></h1>
+<div class="admonition-authors admonition">
+<p class="admonition-title">Authors:</p>
+<p><a class="reference external" href="https://github.com/mehradans92">Mehrad Ansari</a></p>
+</div>
+<p>As you have learned so far, there are number of optimization algorithms to train deep learning models. Training a complex deep learning model can take hours, days or even weeks. Therefore, random guesses for model’s hyperparameters might not be very practical and some deeper knowledge is required. These hyperparameters include but are not limited to learning rate, number of hidden layers, dropout rate, batch size and number of epochs to train for. Notably, not all these hyperparameters contribute in the same way to the model’s performance, which makes finding the best configurations of these variables in such high dimensional space a nontrivial challenge (searching is expensive!). In this chapter, we look at different strategies to tackle this searching problem.</p>
+<div class="admonition-audience-objectives admonition">
+<p class="admonition-title">Audience &amp; Objectives</p>
+<p>This chapter builds on <a class="reference internal" href="layers.html"><span class="doc">Standard Layers</span></a> and <a class="reference internal" href="../ml/classification.html"><span class="doc">Classification</span></a>. After completing this chapter, you should be able to</p>
+<ul class="simple">
+<li><p>Distinguish between training and model design-related hyperparameters</p></li>
+<li><p>Understand the importance of validation data in hyperparameter tuning</p></li>
+<li><p>Understand how each hyperparameter can affect a model’s performance</p></li>
+</ul>
+</div>
+<p>Hyperparameters can be categorized into two groups: those used for training and those related to model structure and design.</p>
+<section id="training-hyperparameters">
+<h2><span class="section-number">18.1. </span>Training Hyperparameters<a class="headerlink" href="#training-hyperparameters" title="Permalink to this headline">#</a></h2>
+<section id="learning-rate">
+<h3><span class="section-number">18.1.1. </span>Learning rate<a class="headerlink" href="#learning-rate" title="Permalink to this headline">#</a></h3>
+<p>Gradient descent algorithms multiply the gradient by a scalar known as learning rate to determine the next point in the weights’ space. Learning rate is a hyperparameter that controls the step size to move in the direction of lower loss function, with the goal of minimizing it. In most cases, learning rate is manually adjusted during model training. Large learning rates (<span class="math notranslate nohighlight">\(\alpha\)</span>) make the model learn faster but at the same time it may cause us to miss the minimum loss function and only reach the surrounding of it. In cases where the learning rate is too large, the optimizer overshoots the minimum and the loss updates will lead to divergent behaviours. On the other hand, choosing lower <span class="math notranslate nohighlight">\(\alpha\)</span> values gives a better chance of finding the local minima with the trade-off of needing larger number of epochs and more time.</p>
+<figure class="align-default" id="loss-lr">
+<a class="reference internal image-reference" href="../_images/loss-lr.gif"><img alt="Effect of learning rate on loss." src="../_images/loss-lr.gif" style="width: 1000px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 18.1 </span><span class="caption-text">Effect of learning rate on loss.</span><a class="headerlink" href="#loss-lr" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Note that we can almost never plot the loss as a function of weight’s space (as shown in <a class="reference internal" href="#loss-lr"><span class="std std-numref">Fig. 18.1</span></a>), and this makes finding the reasonable <span class="math notranslate nohighlight">\(\alpha\)</span> tricky.  With a proper constant <span class="math notranslate nohighlight">\(\alpha\)</span>, the model can be trained to a passable yet still unsatisfactory accuracy, because the constant <span class="math notranslate nohighlight">\(\alpha\)</span> can be overlarge, especially in the last few epochs. Alternatively, <span class="math notranslate nohighlight">\(\alpha\)</span> can be adaptively adjusted in response to the performance of the model. This is also known as learning rate decay schedule. Some commonly applied decay schedules include linear (step), exponential, polynomial and cyclic. By starting at a larger learning rate, we achieve the rarely discussed benefit of allowing our model to escape the local minima that overfits, and find a broader minimum as learning rate decreases over the number of epochs. If you are using <a class="reference external" href="https://keras.io/"><code class="docutils literal notranslate"><span class="pre">Keras</span></code></a>, you can either define your own scheduler or use any from <a class="reference external" href="https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/schedules"><a class="reference external" href="https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/schedules" title="(in TensorFlow v2.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tf.keras.optimizers.schedules</span></code></a></a> and add it as a callback when you train your model. Some other adaptive learning rate schedulers that might help with reducing tuning efforts can be found in <span id="id1">[<a class="reference internal" href="#id214" title="Alireza Khodamoradi, Kristof Denolf, Kees Vissers, and Ryan C Kastner. Aslr: an adaptive scheduler for learning rate. In 2021 International Joint Conference on Neural Networks (IJCNN), 1–8. IEEE, 2021.">KDVK21</a>, <a class="reference internal" href="#id215" title="Haixu Yang, Jihong Liu, Hongwei Sun, and Henggui Zhang. Pacl: piecewise arc cotangent decay learning rate for deep neural network training. IEEE Access, 8:112805–112813, 2020.">YLSZ20</a>, <a class="reference internal" href="#id216" title="D Vidyabharathi, V Mohanraj, J Senthil Kumar, and Y Suresh. Achieving generalization of deep learning models in a quick way by adapting t-htr learning rate scheduler. Personal and Ubiquitous Computing, pages 1–19, 2021.">VMKS21</a>]</span>.</p>
+<figure class="align-default" id="decay-lr">
+<a class="reference internal image-reference" href="../_images/decay.gif"><img alt="Decay schedules effect on training" src="../_images/decay.gif" style="width: 750px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 18.2 </span><span class="caption-text">Decay schedules on learning rate can possibly help escaping the local minima.</span><a class="headerlink" href="#decay-lr" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="momentum">
+<h3><span class="section-number">18.1.2. </span>Momentum<a class="headerlink" href="#momentum" title="Permalink to this headline">#</a></h3>
+<p>Another tweak that can help escaping the local minima is the addition of the history to the weight update. “The momentum algorithm accumulates an exponentially decaying moving average of past gradients and continues to move in their direction” <span id="id2">[<a class="reference internal" href="#id217" title="Ian Goodfellow, Yoshua Bengio, and Aaron Courville. Deep learning (adaptive computation and machine learning series). Cambridge Massachusetts, pages 321–359, 2017.">GBC17</a>]</span>. Simply speaking, this means that rather than using only the gradient of the current step to guide the search in the weights’ space, momentum also accumulates the gradient of the past steps to determine which direction to go to. Momentum has the effect of smoothing the optimization process, allowing for slower updates to continue in the previous directions instead of oscillating or getting stuck. Momentum has a value greater than zero and less than one, but common values used in practice range between 0.9 and 0.99. Note that momentum is rarely changed in deep learning as a hyperparameter, as it does not really help with configuring the proper learning rate. Instead, it can increase the speed of the optimization process by increasing the likelihood of obtaining a better set of weights in fewer training epochs.</p>
+</section>
+<section id="batch-size">
+<h3><span class="section-number">18.1.3. </span>Batch Size<a class="headerlink" href="#batch-size" title="Permalink to this headline">#</a></h3>
+<p>The batch size is always a trade-off between computational efficiency and accuracy. By reducing the batch size, you are essentially reducing the number of samples based on which loss is calculated at each training iteration. Considering model evaluation metrics, smaller batch sizes generalize well on the unobserved data in validation and test set. But why do large batch sizes result a poorer generalization? <a class="reference external" href="https://stats.stackexchange.com/questions/164876/what-is-the-trade-off-between-batch-size-and-number-of-iterations-to-train-a-neu">This thread</a> on Stack Exchange has some great hypotheses:</p>
+<ul class="simple">
+<li><p>Gradient descent-based optimization makes linear approximation of the loss function, and this approximation will not be the best for highly nonlinear loss functions, thus, having a smaller batch size helps.</p></li>
+<li><p>Large-batch training methods are shown to converge to sharp minimizers of the training and testing functions, and that sharp minima results poorer generalization <span id="id3">[<a class="reference internal" href="#id219" title="Nitish Shirish Keskar, Dheevatsa Mudigere, Jorge Nocedal, Mikhail Smelyanskiy, and Ping Tak Peter Tang. On large-batch training for deep learning: generalization gap and sharp minima. arXiv preprint arXiv:1609.04836, 2016.">KMN+16</a>, <a class="reference internal" href="#id218" title="Elad Hoffer, Itay Hubara, and Daniel Soudry. Train longer, generalize better: closing the generalization gap in large batch training of neural networks. Advances in neural information processing systems, 2017.">HHS17</a>, <a class="reference internal" href="#id220" title="Tao Lin, Lingjing Kong, Sebastian Stich, and Martin Jaggi. Extrapolation for large-batch training in deep learning. In International Conference on Machine Learning, 6094–6104. PMLR, 2020.">LKSJ20</a>]</span>.</p></li>
+<li><p>Since smaller samples can have more variations from one another, they can add more noise to convergence. Thus, by keeping the batch size small, we are more likely to escape the local minima and find a more broader one.</p></li>
+</ul>
+<p>As mentioned in the previous section, decaying the learning rate is a common practice in training ML frameworks. But, it has actually been shown that we can obtain the same benefits and learning curve by scaling up the batch size during training instead <span id="id4">[<a class="reference internal" href="#id184" title="Samuel L Smith, Pieter-Jan Kindermans, Chris Ying, and Quoc V Le. Don't decay the learning rate, increase the batch size. arXiv preprint arXiv:1711.00489, 2017.">SKYL17</a>]</span>.</p>
+</section>
+</section>
+<section id="model-design-related-hyperparameters">
+<h2><span class="section-number">18.2. </span>Model Design-Related Hyperparameters<a class="headerlink" href="#model-design-related-hyperparameters" title="Permalink to this headline">#</a></h2>
+<section id="number-of-hidden-layers">
+<h3><span class="section-number">18.2.1. </span>Number of hidden layers<a class="headerlink" href="#number-of-hidden-layers" title="Permalink to this headline">#</a></h3>
+<p>The overall structure of neural networks are determined based on the number of hidden layers (<span class="math notranslate nohighlight">\(d\)</span>). Before describing this, let us talk about the traditional disagreement on how the total number of layers are counted. This disagreement centers around whether or not the input layer is counted. There is an argument that suggests it should not be counted since inputs are not active. We go by this convention, which is also recommended in <span id="id5">[<a class="reference internal" href="#id188" title="Russell Reed and Robert J MarksII. Neural smithing: supervised learning in feedforward artificial neural networks. Mit Press, 1999.">RM99</a>]</span>. A single-layer can only be used to represent linearly separable functions, in very simple problems. On the other hand, deep learning models with more layers are more likely to capture more complex features are obtain a relative higher accuracy. As a common sense, you can keep adding layers until the test error does not improve anymore.</p>
+</section>
+<section id="number-of-nodes-in-each-hidden-layer">
+<h3><span class="section-number">18.2.2. </span>Number of nodes in each hidden layer<a class="headerlink" href="#number-of-nodes-in-each-hidden-layer" title="Permalink to this headline">#</a></h3>
+<p>The number of nodes (<span class="math notranslate nohighlight">\(w\)</span>) in each layer should be carefully considered to avoid overfitting and underfitting. Small (<span class="math notranslate nohighlight">\(w\)</span>) may result underfitting as the model lacks complexity. On the other hand, too many nodes (large <span class="math notranslate nohighlight">\(w\)</span>) can cause overfitting and increase training time. Here are some <a class="reference external" href="https://www.heatonresearch.com/2017/06/01/hidden-layers.html">rules-of-thumb</a> that can be a good start for tuning the number of nodes:</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(w_{input}\)</span> <span class="math notranslate nohighlight">\(&lt;\)</span> <span class="math notranslate nohighlight">\(w\)</span> <span class="math notranslate nohighlight">\(&lt;\)</span> <span class="math notranslate nohighlight">\(w_{output}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(w = \frac{2}{3}w_{input}\)</span> <span class="math notranslate nohighlight">\(+\)</span> <span class="math notranslate nohighlight">\(w_{output}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(w &lt; 2 w_{output}\)</span></p></li>
+</ol>
+</section>
+<section id="regularization">
+<h3><span class="section-number">18.2.3. </span>Regularization<a class="headerlink" href="#regularization" title="Permalink to this headline">#</a></h3>
+<p>Regularization is applied to counteract the additional model complexity that comes as a result of adding more nodes in deep neural networks. The most common regularization methods (<span class="math notranslate nohighlight">\(L_1\)</span> and <span class="math notranslate nohighlight">\(L_2\)</span>) are explained in <a class="reference internal" href="../ml/regression.html"><span class="doc">Regression &amp; Model Assessment</span></a>. Hyperparameter <span class="math notranslate nohighlight">\(\lambda\)</span> determines the magnitude of the regularization term in the loss function. Too large <span class="math notranslate nohighlight">\(\lambda\)</span> pushes the weights closer to zero and oversimplifies the structure of the deep learning model, where as undersized <span class="math notranslate nohighlight">\(\lambda\)</span> is not strong enough to reduce the weights. Thanks to its computational efficiency <span class="math notranslate nohighlight">\(L_2\)</span> regularization is more widely used, however, <span class="math notranslate nohighlight">\(L_1\)</span> regularization prevails over <span class="math notranslate nohighlight">\(L_2\)</span> on sparse properties. A brief comparison between <span class="math notranslate nohighlight">\(L_1\)</span> and  <span class="math notranslate nohighlight">\(L_2\)</span> are presented in the table below.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:center head"><p><span class="math notranslate nohighlight">\(L_1\)</span></p></th>
+<th class="text-align:center head"><p><span class="math notranslate nohighlight">\(L_2\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:center"><p>Penalizes the sum of the absolute value of weights</p></td>
+<td class="text-align:center"><p>Penalizes the sum of square weights</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p>Unable to learn complex patterns</p></td>
+<td class="text-align:center"><p>Able to learn complex data patterns</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p>Robust to outliers</p></td>
+<td class="text-align:center"><p>Not robust to outliers</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p>Built-in feature selection</p></td>
+<td class="text-align:center"><p>No feature selection</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p>Multiple solution</p></td>
+<td class="text-align:center"><p>One solution</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p>Sparse solution</p></td>
+<td class="text-align:center"><p>Nonsparse solution</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="hyperparameter-optimization">
+<h2><span class="section-number">18.3. </span>Hyperparameter Optimization<a class="headerlink" href="#hyperparameter-optimization" title="Permalink to this headline">#</a></h2>
+<p>Mathematically, hyperparameter optimization (HPO) is the process of finding the set of hyperparamters to either achieve minimum loss or maximum accuracy of the objective model. The general philosophy is the same for all HPO algorithms: determine which hyperparameters to tune and their corresponding search space, adjust them from coarse to fine and obtain the optimal combination.</p>
+<p>The state-of-the-art HPO algorithms are classified into two categories: search algorithms and trial schedulers. In general, search algorithms are applied for sampling and trial schedulers deal with the early stopping methods for model evaluation.</p>
+<section id="search-algorithms">
+<h3><span class="section-number">18.3.1. </span>Search Algorithms<a class="headerlink" href="#search-algorithms" title="Permalink to this headline">#</a></h3>
+<section id="grid-search">
+<h4><span class="section-number">18.3.1.1. </span>Grid Search<a class="headerlink" href="#grid-search" title="Permalink to this headline">#</a></h4>
+<p>As long as you have sufficient computational resources, grid search is a straightforward method for HPO. It performs an exhaustive search on the hyperparameters sets defined by the user. Grid search is applicable for cases where we have limited number of hyperparameters with limited search space.</p>
+</section>
+<section id="random-search">
+<h4><span class="section-number">18.3.1.2. </span>Random Search<a class="headerlink" href="#random-search" title="Permalink to this headline">#</a></h4>
+<p>Random search is a more effective version of grid search but still computationally exhaustive. It performs a randomized search over hyperparameters from certain distributions over possible parameter values. The searching process continues until the desired accuracy is reached or unitl the predetermined computational budget is exhausted. Random search works better than grid search considering two benefits: First, a budget can be assigned independently based on the distribution of the search space, whereas in grid search the budget for each hyperparameter set is a fixed value. This makes random search perform better than grid search, especially in search patterns where some hyperparameters are not uniformly distributed. Secondly, a larger time consumption of random search quite certainly will lead to a larger probability finding the best hyperparameter set (this is known as Monte Carlo techniques).</p>
+</section>
+<section id="bayesian-optimization">
+<h4><span class="section-number">18.3.1.3. </span>Bayesian Optimization<a class="headerlink" href="#bayesian-optimization" title="Permalink to this headline">#</a></h4>
+<p>Bayesian optimization (BO) is a sequential model-based optimization that aims at becoming less wrong with more data by finding the global optimum by balancing exploration and exploitation that minimizes the number of trials. BO outperforms random and grid search in two aspects: 1. There is no need to have some preliminary knowledge of the distribution of hyperparameters. 2. Unlike random and grid search, the posterior probability is obtained based of a relevant search space, meaning that the algorithm discards the hyperparameter ranges that will most likely not deliver promising solutions according to the previous trials. 3. Another remarkable advantage is that BO is applicable to different settings, where the derivative of the objective function is unknown or expensive to calculate, whether it is stochastic or discrete, or convex or non-convex.</p>
+<p>BO consists of two key ingredients: 1. A Bayesian probability surrogate model to model the expensive objective function. A <strong>surrogate</strong> mother is a women who agrees to bear a child for another person, so in context, a surrogate function is a less expensive approximation of the objective function. A popular surrogate model for BO are Gaussian processes (GPs).
+2. An acquisition function that acts as a metric function to determine the next optimal sampling point. This is where BO provides a balanced trade-off between exploitation and exploration. Exploitation means sampling where the surrogate model predicts a high objective,  given the current available solutions. Exploration means sampling at locations where the prediction uncertainty is high. These both correspond to high acquisition function values, and the goal is to determine the next sampling point by maximizing the acquisition function.</p>
+</section>
+</section>
+<section id="trial-schedulers">
+<h3><span class="section-number">18.3.2. </span>Trial Schedulers<a class="headerlink" href="#trial-schedulers" title="Permalink to this headline">#</a></h3>
+<p>HPO is a time-consuming process and in realistic scenarios, it is necessary to obtain the best hyperparameter with limited available resources. When it comes to training the hyperparameters by hand, by experience we can narrow the search space down, evaluate the model during training and decide whether to stop the training or keep going. An early stopping strategy tries to mimic this behavior and maximize the computational resource budget for promising hyperparameter sets.</p>
+<section id="median-stopping">
+<h4><span class="section-number">18.3.2.1. </span>Median Stopping<a class="headerlink" href="#median-stopping" title="Permalink to this headline">#</a></h4>
+<p>Median stopping is a straightforward early termination policy that makes the stopping decision based on the average primary metrics, such as accuracy or loss reported by previous runs. A trial <span class="math notranslate nohighlight">\(X\)</span> is halted at step <span class="math notranslate nohighlight">\(S\)</span> if the best objective value by step <span class="math notranslate nohighlight">\(S\)</span> is strictly worse than the median value of the running average of all completed trials objective values reported at step <span class="math notranslate nohighlight">\(S\)</span> <span id="id6">[<a class="reference internal" href="#id185" title="Daniel Golovin, Benjamin Solnik, Subhodeep Moitra, Greg Kochanski, John Karro, and David Sculley. Google vizier: a service for black-box optimization. In Proceedings of the 23rd ACM SIGKDD international conference on knowledge discovery and data mining, 1487–1495. 2017.">GSM+17</a>]</span>.</p>
+</section>
+<section id="curve-fitting">
+<h4><span class="section-number">18.3.2.2. </span>Curve Fitting<a class="headerlink" href="#curve-fitting" title="Permalink to this headline">#</a></h4>
+<p>Curve Fitting is another early stopping algorithm rule that predicts the final accuracy or loss using a performance curve regressed from a set of completed or partially completed trials <span id="id7">[<a class="reference internal" href="#id186" title="Tobias Domhan, Jost Tobias Springenberg, and Frank Hutter. Speeding up automatic hyperparameter optimization of deep neural networks by extrapolation of learning curves. In Twenty-fourth international joint conference on artificial intelligence. 2015.">DSH15</a>]</span>. A trial <span class="math notranslate nohighlight">\(X\)</span> will be stopped at step <span class="math notranslate nohighlight">\(S\)</span> if the extrapolation of the learning curves is worse than the tolerant value of the optimal in the trial history. Unlike median stopping, where we don’t have any hyperparameters, curve fitting is a model with parameters and it also requires a training process.</p>
+</section>
+<section id="successive-halving">
+<h4><span class="section-number">18.3.2.3. </span>Successive Halving<a class="headerlink" href="#successive-halving" title="Permalink to this headline">#</a></h4>
+<p>Successive Halving (SHA) converts the hyperparameter optimization problem into a non-stochastic best-arm identification and tries to allocate more resources only to those hyperparameter sets that are more promising <span id="id8">[<a class="reference internal" href="#id187" title="Kevin Jamieson and Ameet Talwalkar. Non-stochastic best arm identification and hyperparameter optimization. In Artificial intelligence and statistics, 240–248. PMLR, 2016.">JT16</a>]</span>. In SHA, user defines and fixed budget (<span class="math notranslate nohighlight">\(B\)</span>) and a fixed number of trials (<span class="math notranslate nohighlight">\(n\)</span>). The hyperparameter sets are uniformly queried for a portion of the intial budget and the corresponding model performances are evaluated for all trials. The worst promising half is dropped while the budget is doubled for the other half and this is done successively until one trial remains. One drawback of SHA is how resources are allocated. There is a trade-off between the total budget (<span class="math notranslate nohighlight">\(B\)</span>) and number of trials (<span class="math notranslate nohighlight">\(n\)</span>). If <span class="math notranslate nohighlight">\(n\)</span> is too large, each trial may result in premature termination, whereas too small <span class="math notranslate nohighlight">\(n\)</span> would not provide enough optional choices.</p>
+<p>Compared with Bayesian optimization, SHA is easier to understand and it is more computationally efficient as it evaluate the intermediate model results and determines whether to terminate it or not.</p>
+</section>
+<section id="hyperband">
+<h4><span class="section-number">18.3.2.4. </span>HyperBand<a class="headerlink" href="#hyperband" title="Permalink to this headline">#</a></h4>
+<p>HyperBand is an extension of SHA that tries to solve the resource allocation problem by considering several possible <span class="math notranslate nohighlight">\(n\)</span> values and fixing <span class="math notranslate nohighlight">\(B\)</span> <span id="id9">[<a class="reference internal" href="layers.html#id47" title="Lisha Li, Kevin Jamieson, Giulia DeSalvo, Afshin Rostamizadeh, and Ameet Talwalkar. Hyperband: a novel bandit-based approach to hyperparameter optimization. Journal of Machine Learning Research, 18(185):1–52, 2018. URL: http://jmlr.org/papers/v18/16-558.html.">LJD+18</a>]</span>.</p>
+</section>
+</section>
+</section>
+<section id="running-this-notebook">
+<h2><span class="section-number">18.4. </span>Running This Notebook<a class="headerlink" href="#running-this-notebook" title="Permalink to this headline">#</a></h2>
+<p>Click the  <i aria-label="Launch interactive content" class="fas fa-rocket"></i>  above to launch this page as an interactive Google Colab. See details below on installing packages, either on your own environment or on Google Colab</p>
+<div class="dropdown admonition tip">
+<p class="admonition-title">Tip</p>
+<p>To install packages, execute this code in a new cell</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!pip install dmol-book
+</pre></div>
+</div>
+</div>
+</section>
+<section id="id10">
+<h2><span class="section-number">18.5. </span>Hyperparameter Tuning<a class="headerlink" href="#id10" title="Permalink to this headline">#</a></h2>
+<p>Now that we know more about different HPO techniques, we develop a deep learning model to predict hemolysis in peptides and tune its hyperparameters. Hemolysis is defined as the disruption of erythrocyte membranes that decrease the life span of red blood cells and causes the release of Hemoglobin. Identifying hemolytic antimicrobial is critical to their applications as non-toxic and safe measurements against bacterial infections. However, distinguishing between hemolytic and non-hemolytic peptides is complicated, as they primarily exert their activity at the charged surface of the bacterial plasma membrane. Timmons and Hewage <span id="id11">[<a class="reference internal" href="#id213" title="P. Brendan Timmons and Chandralal M. Hewage. Happenn is a novel tool for hemolytic activity prediction for therapeutic peptides which employs neural networks. Scientific reports, 10(1):1–18, 2020.">TH20</a>]</span> differentiate between the two whether they are active at the zwitterionic eukaryotic membrane, as well as the anionic prokaryotic membrane. The model for hemolytic prediction is trained using data from the Database of Antimicrobial Activity and Structure of Peptides (DBAASP v3 <span id="id12">[<a class="reference internal" href="#id196" title="Malak Pirtskhalava, Anthony A Amstrong, Maia Grigolava, Mindia Chubinidze, Evgenia Alimbarashvili, Boris Vishnepolsky, Andrei Gabrielian, Alex Rosenthal, Darrell E Hurt, and Michael Tartakovsky. Dbaasp v3: database of antimicrobial/cytotoxic activity and structure of peptides as a resource for development of new therapeutics. Nucleic acids research, 49(D1):D288–D297, 2021.">PAG+21</a>]</span>). The activity is defined by extrapolating a measurement assuming a dose response curves to the point at which 50% of red blood cells (RBC) are lysed. If the activity is below <span class="math notranslate nohighlight">\(100\frac{\mu g}{ml}\)</span>, it is considered hemolytic. Each measurement is treated independently, so sequences can appear multiple times. The training data contains 9,316 positive and negative sequences of only L- and canonical amino acids.</p>
+<div class="cell tag_hide-cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">import</span> <span class="nn">urllib</span>
+<span class="kn">import</span> <span class="nn">dmol</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span>
+    <span class="s2">&quot;https://github.com/ur-whitelab/peptide-dashboard/raw/master/ml/data/hemo-positive.npz&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;positive.npz&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span>
+    <span class="s2">&quot;https://github.com/ur-whitelab/peptide-dashboard/raw/master/ml/data/hemo-negative.npz&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;negative.npz&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;positive.npz&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">r</span><span class="p">:</span>
+    <span class="n">pos_data</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">]]</span>
+<span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;negative.npz&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">r</span><span class="p">:</span>
+    <span class="n">neg_data</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">]]</span>
+
+<span class="c1"># create labels and stich it all into one</span>
+<span class="c1"># tensor</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span>
+    <span class="p">(</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">pos_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">pos_data</span><span class="o">.</span><span class="n">dtype</span><span class="p">),</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">neg_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">pos_data</span><span class="o">.</span><span class="n">dtype</span><span class="p">),</span>
+    <span class="p">),</span>
+    <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">features</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">pos_data</span><span class="p">,</span> <span class="n">neg_data</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="c1"># we now need to shuffle before creating TF dataset</span>
+<span class="c1"># so that our train/test/val splits are random</span>
+<span class="n">i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">))</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span class="n">features</span> <span class="o">=</span> <span class="n">features</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span class="n">full_data</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">from_tensor_slices</span><span class="p">((</span><span class="n">features</span><span class="p">,</span> <span class="n">labels</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">build_model</span><span class="p">(</span><span class="n">reg</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">add_dropout</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Sequential</span><span class="p">()</span>
+    <span class="c1"># make embedding and indicate that 0 should be treated specially</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+        <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span>
+            <span class="n">input_dim</span><span class="o">=</span><span class="mi">21</span><span class="p">,</span> <span class="n">output_dim</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">mask_zero</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">input_length</span><span class="o">=</span><span class="n">pos_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="c1"># now we move to convolutions and pooling</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Conv1D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">))</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">MaxPooling1D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
+
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+        <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Conv1D</span><span class="p">(</span>
+            <span class="n">filters</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>
+            <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+            <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">MaxPooling1D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Conv1D</span><span class="p">(</span><span class="n">filters</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">))</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">MaxPooling1D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+
+    <span class="c1"># now we flatten to move to hidden dense layers.</span>
+    <span class="c1"># Flattening just removes all axes except 1 (and implicit batch is still in there as always!)</span>
+
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Flatten</span><span class="p">())</span>
+    <span class="k">if</span> <span class="n">add_dropout</span><span class="p">:</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.3</span><span class="p">))</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+        <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span>
+            <span class="mi">256</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">,</span> <span class="n">kernel_regularizer</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">regularizers</span><span class="o">.</span><span class="n">l2</span><span class="p">(</span><span class="n">reg</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="n">add_dropout</span><span class="p">:</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.3</span><span class="p">))</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+        <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span>
+            <span class="mi">64</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;tanh&quot;</span><span class="p">,</span> <span class="n">kernel_regularizer</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">regularizers</span><span class="o">.</span><span class="n">l2</span><span class="p">(</span><span class="n">reg</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="n">add_dropout</span><span class="p">:</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.3</span><span class="p">))</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;sigmoid&quot;</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">model</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">build_model</span><span class="p">(</span><span class="n">reg</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">add_dropout</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="c1"># now split into val, test, train</span>
+<span class="n">N</span> <span class="o">=</span> <span class="n">pos_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">neg_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="s2">&quot;examples&quot;</span><span class="p">)</span>
+<span class="n">split</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">0.1</span> <span class="o">*</span> <span class="n">N</span><span class="p">)</span>
+<span class="n">test_data</span> <span class="o">=</span> <span class="n">full_data</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="n">split</span><span class="p">)</span><span class="o">.</span><span class="n">batch</span><span class="p">(</span><span class="mi">64</span><span class="p">)</span>
+<span class="n">nontest</span> <span class="o">=</span> <span class="n">full_data</span><span class="o">.</span><span class="n">skip</span><span class="p">(</span><span class="n">split</span><span class="p">)</span>
+<span class="n">val_data</span><span class="p">,</span> <span class="n">train_data</span> <span class="o">=</span> <span class="n">nontest</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="n">split</span><span class="p">)</span><span class="o">.</span><span class="n">batch</span><span class="p">(</span><span class="mi">64</span><span class="p">),</span> <span class="n">nontest</span><span class="o">.</span><span class="n">skip</span><span class="p">(</span><span class="n">split</span><span class="p">)</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span>
+    <span class="mi">1000</span>
+<span class="p">)</span><span class="o">.</span><span class="n">batch</span><span class="p">(</span><span class="mi">64</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9316 examples
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">train_model</span><span class="p">(</span>
+    <span class="n">model</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">Reduced_LR</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">Early_stop</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">20</span>
+<span class="p">):</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">clear_session</span><span class="p">()</span>
+    <span class="n">callbacks</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">if</span> <span class="n">Early_stop</span><span class="p">:</span>
+        <span class="n">early_stopping</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">callbacks</span><span class="o">.</span><span class="n">EarlyStopping</span><span class="p">(</span>
+            <span class="n">monitor</span><span class="o">=</span><span class="s2">&quot;val_auc&quot;</span><span class="p">,</span>
+            <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;max&quot;</span><span class="p">,</span>
+            <span class="n">patience</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+            <span class="n">min_delta</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span>
+            <span class="n">restore_best_weights</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">callbacks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">early_stopping</span><span class="p">)</span>
+    <span class="n">opt</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">lr</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">Reduced_LR</span><span class="p">:</span>
+        <span class="c1"># decay learning rate on plateau</span>
+        <span class="n">reduce_lr</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">callbacks</span><span class="o">.</span><span class="n">ReduceLROnPlateau</span><span class="p">(</span>
+            <span class="n">monitor</span><span class="o">=</span><span class="s2">&quot;val_loss&quot;</span><span class="p">,</span> <span class="n">factor</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">patience</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">min_lr</span><span class="o">=</span><span class="mf">1e-5</span>
+        <span class="p">)</span>
+        <span class="c1"># add a callback to print lr at the begining of every epoch</span>
+        <span class="n">callbacks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">reduce_lr</span><span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+        <span class="n">opt</span><span class="p">,</span>
+        <span class="n">loss</span><span class="o">=</span><span class="s2">&quot;binary_crossentropy&quot;</span><span class="p">,</span>
+        <span class="n">metrics</span><span class="o">=</span><span class="p">[</span>
+            <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">AUC</span><span class="p">(</span><span class="n">from_logits</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+            <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">BinaryAccuracy</span><span class="p">(</span><span class="n">threshold</span><span class="o">=</span><span class="mf">0.5</span><span class="p">),</span>
+        <span class="p">],</span>
+    <span class="p">)</span>
+    <span class="n">history</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+        <span class="n">train_data</span><span class="p">,</span>
+        <span class="n">validation_data</span><span class="o">=</span><span class="n">val_data</span><span class="p">,</span>
+        <span class="n">epochs</span><span class="o">=</span><span class="n">epochs</span><span class="p">,</span>
+        <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+        <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">callbacks</span><span class="o">=</span><span class="n">callbacks</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="c1">#     print(</span>
+    <span class="c1">#         f&quot;Train Loss: {history.history[&#39;loss&#39;][-1]:.3f}, Test Loss: {history.history[&#39;val_loss&#39;][-1]:.3f}&quot;</span>
+    <span class="c1">#     )</span>
+    <span class="k">return</span> <span class="n">history</span>
+
+
+<span class="k">def</span> <span class="nf">plot_losses</span><span class="p">(</span><span class="n">history</span><span class="p">,</span> <span class="n">test_data</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s2">&quot;loss&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;training&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s2">&quot;val_loss&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;validation&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Epoch&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Loss&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">test_data</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; Test AUC: </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">  Test Accuracy: </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>So if you take a look at the <code class="docutils literal notranslate"><span class="pre">train_model</span></code> function defined above, we are using the validation data <strong>exclusively</strong> for the hyperparameter search. The test data is only used in <code class="docutils literal notranslate"><span class="pre">plot_losses</span></code> and gives us an estimation on model’s generalization error.</p>
+<section id="baseline-model">
+<h3><span class="section-number">18.5.1. </span>Baseline Model<a class="headerlink" href="#baseline-model" title="Permalink to this headline">#</a></h3>
+<p>We first start off with a baseline model with similar structure to the model used in <a class="reference internal" href="layers.html"><span class="doc">Standard Layers</span></a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">history</span> <span class="o">=</span> <span class="n">train_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">Reduced_LR</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plot_losses</span><span class="p">(</span><span class="n">history</span><span class="p">,</span> <span class="n">test_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Hyperparameter_tuning_19_0.png" src="../_images/Hyperparameter_tuning_19_0.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Test AUC: 0.790  Test Accuracy: 0.817
+</pre></div>
+</div>
+</div>
+</div>
+<p>So with the default hyperparameters, the <strong>baseline</strong> model above is clearly ovefitting to the training data. We first try adding l2 regularization:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">build_model</span><span class="p">(</span><span class="n">reg</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">add_dropout</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">history</span> <span class="o">=</span> <span class="n">train_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">Reduced_LR</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">Early_stop</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plot_losses</span><span class="p">(</span><span class="n">history</span><span class="p">,</span> <span class="n">test_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Hyperparameter_tuning_21_0.png" src="../_images/Hyperparameter_tuning_21_0.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Test AUC: 0.798  Test Accuracy: 0.827
+</pre></div>
+</div>
+</div>
+</div>
+<p>Great! Now We have a lower test loss and better AUC.</p>
+</section>
+<section id="early-stopping">
+<h3><span class="section-number">18.5.2. </span>Early Stopping<a class="headerlink" href="#early-stopping" title="Permalink to this headline">#</a></h3>
+<p>We can use early stopping regularization and return best weights based on maximum obtained AUC value for the <strong>validation data</strong>. This is done by adding the early stopping callback, when compiling the model:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">early_stopping</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">callbacks</span><span class="o">.</span><span class="n">EarlyStopping</span><span class="p">(</span>
+    <span class="n">monitor</span><span class="o">=</span><span class="s2">&quot;val_auc&quot;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;max&quot;</span><span class="p">,</span> <span class="n">patience</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">min_delta</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="n">restore_best_weights</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s see how the model performs with early stopping:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">build_model</span><span class="p">(</span><span class="n">reg</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">add_dropout</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">history</span> <span class="o">=</span> <span class="n">train_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">Reduced_LR</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">Early_stop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plot_losses</span><span class="p">(</span><span class="n">history</span><span class="p">,</span> <span class="n">test_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Hyperparameter_tuning_26_0.png" src="../_images/Hyperparameter_tuning_26_0.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Test AUC: 0.769  Test Accuracy: 0.827
+</pre></div>
+</div>
+</div>
+</div>
+<p>We have almost the same performance but in <strong>fewer</strong> number of epochs. Note that for learning purposes, we have limited the number of epochs to <span class="math notranslate nohighlight">\(20\)</span> in this example. Early stopping regularization becomes more relevant when we typically have a large number of epochs, as it halts the training and saves computational budget, unless there is gain in more training.</p>
+</section>
+<section id="reduced-learning-rate-on-plateau-and-dropout">
+<h3><span class="section-number">18.5.3. </span>Reduced Learning Rate on Plateau and Dropout<a class="headerlink" href="#reduced-learning-rate-on-plateau-and-dropout" title="Permalink to this headline">#</a></h3>
+<p>Now let’s try reducing the learning rate and dropout. Since the training epochs is already limited to <span class="math notranslate nohighlight">\(20\)</span>, we don’t use early stopping here:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">build_model</span><span class="p">(</span><span class="n">reg</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">add_dropout</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">history</span> <span class="o">=</span> <span class="n">train_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">Reduced_LR</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">Early_stop</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plot_losses</span><span class="p">(</span><span class="n">history</span><span class="p">,</span> <span class="n">test_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Hyperparameter_tuning_29_0.png" src="../_images/Hyperparameter_tuning_29_0.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Test AUC: 0.786  Test Accuracy: 0.798
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="discussion">
+<h2><span class="section-number">18.6. </span>Discussion<a class="headerlink" href="#discussion" title="Permalink to this headline">#</a></h2>
+<p>In this chapter, we explored means of reducing overfitting and enhancing feature selection in deep learning models. Techniques suggested can give you a good head start on tuning your model’s hyperparameters. What is important is that, you need to experiment to find a good set of hyperparameters. This can be time-consuming, so use your own judgment and intuition to come up with a smart search strategy. Before you start hypertuning, make sure you obtain a baseline model and slowly add more pieces to the puzzle, based on training and validation loss, AUC or other metrics.</p>
+<p>There are also some toolkits for hyperparameter optimization that might be handy:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.heatonresearch.com/2017/06/01/hidden-layers.html">Ray Tune for PyTorch</a> <span id="id13">[<a class="reference internal" href="#id197" title="Richard Liaw, Eric Liang, Robert Nishihara, Philipp Moritz, Joseph E Gonzalez, and Ion Stoica. Tune: a research platform for distributed model selection and training. arXiv preprint arXiv:1807.05118, 2018.">LLN+18</a>]</span></p></li>
+<li><p><a class="reference external" href="https://keras.io/keras_tuner/">Keras-Tuner for Keras</a> <span id="id14">[<a class="reference internal" href="#id233" title="Tom O’Malley, Elie Bursztein, James Long, François Chollet, Haifeng Jin, Luca Invernizzi, and others. Keras tuner. Retrieved May, 21:2020, 2019.">OMalleyBL+19</a>]</span></p></li>
+<li><p><a class="reference external" href="https://optuna.org/">Optuna</a> <span id="id15">[<a class="reference internal" href="#id198" title="Takuya Akiba, Shotaro Sano, Toshihiko Yanase, Takeru Ohta, and Masanori Koyama. Optuna: a next-generation hyperparameter optimization framework. In Proceedings of the 25rd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining. 2019.">ASY+19</a>]</span></p></li>
+<li><p><a class="reference external" href="https://github.com/hyperopt/hyperopt">Hyperopt</a> <span id="id16">[<a class="reference internal" href="#id199" title="James Bergstra, Daniel Yamins, and David Cox. Making a science of model search: hyperparameter optimization in hundreds of dimensions for vision architectures. In International conference on machine learning, 115–123. PMLR, 2013.">BYC13</a>]</span></p></li>
+<li><p><a class="reference external" href="https://scikit-optimize.github.io/stable/auto_examples/hyperparameter-optimization.html">Scikit-Optimize</a> <span id="id17">[<a class="reference internal" href="#id200" title="Gilles Louppe. Bayesian optimisation with scikit-optimize. In PyData Amsterdam. 2017.">Lou17</a>]</span></p></li>
+<li><p><a class="reference external" href="https://github.com/Microsoft/nni">Microsoft’s Neural Network Intelligence</a></p></li>
+<li><p><a class="reference external" href="https://cloud.google.com/ai-platform/optimizer/docs/overview">Google’s Vizer</a> <span id="id18">[<a class="reference internal" href="#id185" title="Daniel Golovin, Benjamin Solnik, Subhodeep Moitra, Greg Kochanski, John Karro, and David Sculley. Google vizier: a service for black-box optimization. In Proceedings of the 23rd ACM SIGKDD international conference on knowledge discovery and data mining, 1487–1495. 2017.">GSM+17</a>]</span></p></li>
+</ul>
+</section>
+<section id="cited-references">
+<h2><span class="section-number">18.7. </span>Cited References<a class="headerlink" href="#cited-references" title="Permalink to this headline">#</a></h2>
+<div class="docutils container" id="id19">
+<dl class="citation">
+<dt class="label" id="id49"><span class="brackets"><a class="fn-backref" href="#id9">LJD+18</a></span></dt>
+<dd><p>Lisha Li, Kevin Jamieson, Giulia DeSalvo, Afshin Rostamizadeh, and Ameet Talwalkar. Hyperband: a novel bandit-based approach to hyperparameter optimization. <em>Journal of Machine Learning Research</em>, 18(185):1–52, 2018. URL: <a class="reference external" href="http://jmlr.org/papers/v18/16-558.html">http://jmlr.org/papers/v18/16-558.html</a>.</p>
+</dd>
+<dt class="label" id="id214"><span class="brackets"><a class="fn-backref" href="#id1">KDVK21</a></span></dt>
+<dd><p>Alireza Khodamoradi, Kristof Denolf, Kees Vissers, and Ryan C Kastner. Aslr: an adaptive scheduler for learning rate. In <em>2021 International Joint Conference on Neural Networks (IJCNN)</em>, 1–8. IEEE, 2021.</p>
+</dd>
+<dt class="label" id="id215"><span class="brackets"><a class="fn-backref" href="#id1">YLSZ20</a></span></dt>
+<dd><p>Haixu Yang, Jihong Liu, Hongwei Sun, and Henggui Zhang. Pacl: piecewise arc cotangent decay learning rate for deep neural network training. <em>IEEE Access</em>, 8:112805–112813, 2020.</p>
+</dd>
+<dt class="label" id="id216"><span class="brackets"><a class="fn-backref" href="#id1">VMKS21</a></span></dt>
+<dd><p>D Vidyabharathi, V Mohanraj, J Senthil Kumar, and Y Suresh. Achieving generalization of deep learning models in a quick way by adapting t-htr learning rate scheduler. <em>Personal and Ubiquitous Computing</em>, pages 1–19, 2021.</p>
+</dd>
+<dt class="label" id="id217"><span class="brackets"><a class="fn-backref" href="#id2">GBC17</a></span></dt>
+<dd><p>Ian Goodfellow, Yoshua Bengio, and Aaron Courville. Deep learning (adaptive computation and machine learning series). <em>Cambridge Massachusetts</em>, pages 321–359, 2017.</p>
+</dd>
+<dt class="label" id="id219"><span class="brackets"><a class="fn-backref" href="#id3">KMN+16</a></span></dt>
+<dd><p>Nitish Shirish Keskar, Dheevatsa Mudigere, Jorge Nocedal, Mikhail Smelyanskiy, and Ping Tak Peter Tang. On large-batch training for deep learning: generalization gap and sharp minima. <em>arXiv preprint arXiv:1609.04836</em>, 2016.</p>
+</dd>
+<dt class="label" id="id218"><span class="brackets"><a class="fn-backref" href="#id3">HHS17</a></span></dt>
+<dd><p>Elad Hoffer, Itay Hubara, and Daniel Soudry. Train longer, generalize better: closing the generalization gap in large batch training of neural networks. <em>Advances in neural information processing systems</em>, 2017.</p>
+</dd>
+<dt class="label" id="id220"><span class="brackets"><a class="fn-backref" href="#id3">LKSJ20</a></span></dt>
+<dd><p>Tao Lin, Lingjing Kong, Sebastian Stich, and Martin Jaggi. Extrapolation for large-batch training in deep learning. In <em>International Conference on Machine Learning</em>, 6094–6104. PMLR, 2020.</p>
+</dd>
+<dt class="label" id="id184"><span class="brackets"><a class="fn-backref" href="#id4">SKYL17</a></span></dt>
+<dd><p>Samuel L Smith, Pieter-Jan Kindermans, Chris Ying, and Quoc V Le. Don't decay the learning rate, increase the batch size. <em>arXiv preprint arXiv:1711.00489</em>, 2017.</p>
+</dd>
+<dt class="label" id="id188"><span class="brackets"><a class="fn-backref" href="#id5">RM99</a></span></dt>
+<dd><p>Russell Reed and Robert J MarksII. <em>Neural smithing: supervised learning in feedforward artificial neural networks</em>. Mit Press, 1999.</p>
+</dd>
+<dt class="label" id="id185"><span class="brackets">GSM+17</span><span class="fn-backref">(<a href="#id6">1</a>,<a href="#id18">2</a>)</span></dt>
+<dd><p>Daniel Golovin, Benjamin Solnik, Subhodeep Moitra, Greg Kochanski, John Karro, and David Sculley. Google vizier: a service for black-box optimization. In <em>Proceedings of the 23rd ACM SIGKDD international conference on knowledge discovery and data mining</em>, 1487–1495. 2017.</p>
+</dd>
+<dt class="label" id="id186"><span class="brackets"><a class="fn-backref" href="#id7">DSH15</a></span></dt>
+<dd><p>Tobias Domhan, Jost Tobias Springenberg, and Frank Hutter. Speeding up automatic hyperparameter optimization of deep neural networks by extrapolation of learning curves. In <em>Twenty-fourth international joint conference on artificial intelligence</em>. 2015.</p>
+</dd>
+<dt class="label" id="id187"><span class="brackets"><a class="fn-backref" href="#id8">JT16</a></span></dt>
+<dd><p>Kevin Jamieson and Ameet Talwalkar. Non-stochastic best arm identification and hyperparameter optimization. In <em>Artificial intelligence and statistics</em>, 240–248. PMLR, 2016.</p>
+</dd>
+<dt class="label" id="id213"><span class="brackets"><a class="fn-backref" href="#id11">TH20</a></span></dt>
+<dd><p>P. Brendan Timmons and Chandralal M. Hewage. Happenn is a novel tool for hemolytic activity prediction for therapeutic peptides which employs neural networks. <em>Scientific reports</em>, 10(1):1–18, 2020.</p>
+</dd>
+<dt class="label" id="id196"><span class="brackets"><a class="fn-backref" href="#id12">PAG+21</a></span></dt>
+<dd><p>Malak Pirtskhalava, Anthony A Amstrong, Maia Grigolava, Mindia Chubinidze, Evgenia Alimbarashvili, Boris Vishnepolsky, Andrei Gabrielian, Alex Rosenthal, Darrell E Hurt, and Michael Tartakovsky. Dbaasp v3: database of antimicrobial/cytotoxic activity and structure of peptides as a resource for development of new therapeutics. <em>Nucleic acids research</em>, 49(D1):D288–D297, 2021.</p>
+</dd>
+<dt class="label" id="id197"><span class="brackets"><a class="fn-backref" href="#id13">LLN+18</a></span></dt>
+<dd><p>Richard Liaw, Eric Liang, Robert Nishihara, Philipp Moritz, Joseph E Gonzalez, and Ion Stoica. Tune: a research platform for distributed model selection and training. <em>arXiv preprint arXiv:1807.05118</em>, 2018.</p>
+</dd>
+<dt class="label" id="id233"><span class="brackets"><a class="fn-backref" href="#id14">OMalleyBL+19</a></span></dt>
+<dd><p>Tom O’Malley, Elie Bursztein, James Long, François Chollet, Haifeng Jin, Luca Invernizzi, and others. Keras tuner. <em>Retrieved May</em>, 21:2020, 2019.</p>
+</dd>
+<dt class="label" id="id198"><span class="brackets"><a class="fn-backref" href="#id15">ASY+19</a></span></dt>
+<dd><p>Takuya Akiba, Shotaro Sano, Toshihiko Yanase, Takeru Ohta, and Masanori Koyama. Optuna: a next-generation hyperparameter optimization framework. In <em>Proceedings of the 25rd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining</em>. 2019.</p>
+</dd>
+<dt class="label" id="id199"><span class="brackets"><a class="fn-backref" href="#id16">BYC13</a></span></dt>
+<dd><p>James Bergstra, Daniel Yamins, and David Cox. Making a science of model search: hyperparameter optimization in hundreds of dimensions for vision architectures. In <em>International conference on machine learning</em>, 115–123. PMLR, 2013.</p>
+</dd>
+<dt class="label" id="id200"><span class="brackets"><a class="fn-backref" href="#id17">Lou17</a></span></dt>
+<dd><p>Gilles Louppe. Bayesian optimisation with scikit-optimize. In <em>PyData Amsterdam</em>. 2017.</p>
+</dd>
+</dl>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./dl"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="../applied/MolGenerator.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">17. </span>Generative RNN in Browser</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../applied/e3nn_traj.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">19. </span>Equivariant Neural Network for Predicting Trajectories</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Andrew D. White<br/>
+  
+      &copy; Copyright 2022.<br/>
+    <div class="extra_footer">
+      <a href="http://thewhitelab.org">thewhitelab.org</a> <div id="wh-modal"> <button class="wh-venti-button" aria-label="close modal" id="wh-modal-close">✕</button> <img id="wh-modal-img"> </div>
+    </div>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

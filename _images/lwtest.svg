@@ -1,0 +1,130 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ns2="http://creativecommons.org/ns#" xmlns:ns4="http://www.w3.org/1999/xlink" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" width="324pt" height="249.230769pt" viewBox="0 0 324 249.230769" version="1.1">
+ <metadata>
+  <rdf:RDF>
+   <ns2:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+    <dc:date>2023-01-27T09:23:34.886129</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <ns2:Agent>
+      <dc:title>Matplotlib v3.6.3, https://matplotlib.org/</dc:title>
+     </ns2:Agent>
+    </dc:creator>
+   </ns2:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 249.230769  L 324 249.230769  L 324 0  L 0 0  z " style="fill: #ffffff" />
+  </g>
+  <g id="axes_1">
+   <g id="m1">
+    <svg version="1.1" baseProfile="full" xml:space="preserve" width="114.13636399999999" height="191.907693" viewBox="0 0 200 200" x="40.5" y="29.907692">
+
+<rect style="opacity:1.0;fill:#FFFFFF;stroke:none" width="200.0" height="200.0" x="0.0" y="0.0"> </rect>
+<path class="bond-0 atom-0 atom-1" d="M 9.1,126.2 L 9.1,73.8" style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+<path class="bond-1 atom-1 atom-2" d="M 9.1,73.8 L 54.5,47.5" style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+<path class="bond-2 atom-2 atom-3" d="M 54.5,47.5 L 100.0,73.8" style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+<path class="bond-3 atom-3 atom-4" d="M 100.0,73.8 L 145.5,47.5" style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+<path class="bond-4 atom-4 atom-5" d="M 145.5,47.5 L 190.9,73.8" style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+<path class="bond-5 atom-5 atom-6" d="M 190.9,73.8 L 190.9,126.2" style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+<path class="bond-6 atom-6 atom-7" d="M 190.9,126.2 L 145.5,152.5" style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+<path class="bond-7 atom-7 atom-8" d="M 145.5,152.5 L 100.0,126.2" style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+<path class="bond-8 atom-8 atom-9" d="M 100.0,126.2 L 54.5,152.5" style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+<path class="bond-9 atom-9 atom-0" d="M 54.5,152.5 L 9.1,126.2" style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+<path class="bond-10 atom-8 atom-3" d="M 100.0,126.2 L 100.0,73.8" style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+<path d="M 9.1,123.6 L 9.1,126.2 L 11.4,127.6" style="fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;" />
+<path d="M 9.1,76.4 L 9.1,73.8 L 11.4,72.4" style="fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;" />
+<path d="M 52.3,48.8 L 54.5,47.5 L 56.8,48.8" style="fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;" />
+<path d="M 143.2,48.8 L 145.5,47.5 L 147.7,48.8" style="fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;" />
+<path d="M 188.6,72.4 L 190.9,73.8 L 190.9,76.4" style="fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;" />
+<path d="M 190.9,123.6 L 190.9,126.2 L 188.6,127.6" style="fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;" />
+<path d="M 147.7,151.2 L 145.5,152.5 L 143.2,151.2" style="fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;" />
+<path d="M 56.8,151.2 L 54.5,152.5 L 52.3,151.2" style="fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;" />
+</svg></g>
+   <g id="text_1">
+    
+    <g transform="translate(57.269182 23.907692) scale(0.168 -0.168)">
+     <defs>
+      <path id="CourierPrime-Regular-64" d="M 3009 4100  Q 3116 4100 3161 4051  Q 3206 4003 3206 3888  L 3206 425  L 3463 425  Q 3569 425 3614 376  Q 3659 328 3659 213  Q 3659 97 3614 48  Q 3569 0 3463 0  L 2966 0  Q 2859 0 2814 48  Q 2769 97 2769 213  L 2769 463  Q 2572 206 2312 68  Q 2053 -69 1747 -69  Q 1359 -69 1053 114  Q 747 297 572 639  Q 397 981 397 1444  Q 397 1906 572 2248  Q 747 2591 1053 2773  Q 1359 2956 1747 2956  Q 2334 2956 2738 2441  L 2738 3675  L 2231 3675  Q 2125 3675 2079 3723  Q 2034 3772 2034 3888  Q 2034 4003 2079 4051  Q 2125 4100 2231 4100  L 3009 4100  z M 1778 2494  Q 1500 2494 1300 2361  Q 1100 2228 995 1990  Q 891 1753 891 1444  Q 891 1134 995 896  Q 1100 659 1300 526  Q 1500 394 1778 394  Q 2056 394 2273 519  Q 2491 644 2614 881  Q 2738 1119 2738 1444  Q 2738 1769 2614 2006  Q 2491 2244 2273 2369  Q 2056 2494 1778 2494  z " transform="scale(0.015625)" />
+      <path id="CourierPrime-Regular-65" d="M 1947 2956  Q 2400 2956 2720 2773  Q 3041 2591 3212 2267  Q 3384 1944 3409 1522  Q 3409 1416 3364 1372  Q 3319 1328 3213 1328  L 950 1328  Q 972 863 1226 623  Q 1481 384 1947 384  Q 2234 384 2515 457  Q 2797 531 3009 653  Q 3063 681 3106 681  Q 3216 681 3284 516  Q 3313 450 3313 397  Q 3313 272 3175 203  Q 2934 81 2606 6  Q 2278 -69 1947 -69  Q 1475 -69 1140 112  Q 806 294 631 634  Q 456 975 456 1444  Q 456 1891 647 2234  Q 838 2578 1175 2767  Q 1513 2956 1947 2956  z M 1947 2503  Q 1563 2503 1311 2308  Q 1059 2113 981 1766  L 2891 1766  Q 2825 2125 2589 2314  Q 2353 2503 1947 2503  z " transform="scale(0.015625)" />
+      <path id="CourierPrime-Regular-63" d="M 3044 2956  Q 3172 2956 3225 2909  Q 3278 2863 3278 2753  L 3278 1847  Q 3278 1738 3225 1691  Q 3172 1644 3044 1644  Q 2916 1644 2862 1691  Q 2809 1738 2809 1847  Q 2809 2038 2709 2184  Q 2609 2331 2411 2412  Q 2213 2494 1934 2494  Q 1634 2494 1396 2359  Q 1159 2225 1025 1984  Q 891 1744 891 1444  Q 891 1141 1017 902  Q 1144 663 1373 528  Q 1603 394 1903 394  Q 2191 394 2461 483  Q 2731 572 2953 741  Q 3019 791 3075 791  Q 3166 791 3244 663  Q 3291 584 3291 513  Q 3291 403 3191 331  Q 2941 144 2600 37  Q 2259 -69 1903 -69  Q 1456 -69 1114 128  Q 772 325 584 669  Q 397 1013 397 1444  Q 397 1875 587 2219  Q 778 2563 1120 2759  Q 1463 2956 1903 2956  Q 2181 2956 2414 2854  Q 2647 2753 2809 2566  L 2809 2753  Q 2809 2863 2862 2909  Q 2916 2956 3044 2956  z " transform="scale(0.015625)" />
+      <path id="CourierPrime-Regular-61" d="M 1931 2956  Q 2519 2956 2812 2693  Q 3106 2431 3106 1916  L 3106 672  Q 3106 425 3313 425  L 3422 425  Q 3528 425 3573 376  Q 3619 328 3619 213  Q 3619 97 3573 48  Q 3528 0 3422 0  L 3222 0  Q 3019 0 2873 101  Q 2728 203 2684 400  Q 2428 175 2129 53  Q 1831 -69 1497 -69  Q 1181 -69 939 39  Q 697 147 559 353  Q 422 559 422 844  Q 422 1338 775 1573  Q 1128 1809 1688 1809  Q 2184 1809 2638 1650  L 2638 1916  Q 2638 2219 2467 2361  Q 2297 2503 1919 2503  Q 1684 2503 1431 2437  Q 1178 2372 950 2256  Q 897 2228 853 2228  Q 750 2228 681 2378  Q 647 2453 647 2503  Q 647 2613 763 2672  Q 1025 2809 1326 2882  Q 1628 2956 1931 2956  z M 1691 1369  Q 1331 1369 1123 1245  Q 916 1122 916 853  Q 916 625 1073 498  Q 1231 372 1516 372  Q 2138 372 2638 888  L 2638 1228  Q 2425 1297 2181 1333  Q 1938 1369 1691 1369  z " transform="scale(0.015625)" />
+      <path id="CourierPrime-Regular-6c" d="M 2000 4100  Q 2106 4100 2151 4051  Q 2197 4003 2197 3888  L 2197 425  L 3200 425  Q 3306 425 3351 376  Q 3397 328 3397 213  Q 3397 97 3351 48  Q 3306 0 3200 0  L 750 0  Q 644 0 598 48  Q 553 97 553 213  Q 553 328 598 376  Q 644 425 750 425  L 1728 425  L 1728 3675  L 875 3675  Q 769 3675 723 3723  Q 678 3772 678 3888  Q 678 4003 723 4051  Q 769 4100 875 4100  L 2000 4100  z " transform="scale(0.015625)" />
+      <path id="CourierPrime-Regular-69" d="M 2031 2888  Q 2138 2888 2183 2839  Q 2228 2791 2228 2675  L 2228 425  L 3231 425  Q 3338 425 3383 376  Q 3428 328 3428 213  Q 3428 97 3383 48  Q 3338 0 3231 0  L 781 0  Q 675 0 629 48  Q 584 97 584 213  Q 584 328 629 376  Q 675 425 781 425  L 1759 425  L 1759 2463  L 969 2463  Q 863 2463 817 2511  Q 772 2559 772 2675  Q 772 2791 817 2839  Q 863 2888 969 2888  L 2031 2888  z M 1931 4259  Q 2103 4259 2165 4214  Q 2228 4169 2228 4056  L 2228 3650  Q 2228 3538 2165 3492  Q 2103 3447 1931 3447  Q 1759 3447 1696 3492  Q 1634 3538 1634 3650  L 1634 4056  Q 1634 4169 1696 4214  Q 1759 4259 1931 4259  z " transform="scale(0.015625)" />
+      <path id="CourierPrime-Regular-6e" d="M 2272 2956  Q 2556 2956 2765 2832  Q 2975 2709 3087 2478  Q 3200 2247 3200 1938  L 3200 425  L 3456 425  Q 3563 425 3608 376  Q 3653 328 3653 213  Q 3653 97 3608 48  Q 3563 0 3456 0  L 2444 0  Q 2338 0 2292 48  Q 2247 97 2247 213  Q 2247 328 2292 376  Q 2338 425 2444 425  L 2731 425  L 2731 1891  Q 2731 2169 2603 2331  Q 2475 2494 2225 2494  Q 1959 2494 1729 2341  Q 1500 2188 1362 1919  Q 1225 1650 1225 1319  L 1225 425  L 1513 425  Q 1619 425 1664 376  Q 1709 328 1709 213  Q 1709 97 1664 48  Q 1619 0 1513 0  L 500 0  Q 394 0 348 48  Q 303 97 303 213  Q 303 328 348 376  Q 394 425 500 425  L 756 425  L 756 2463  L 438 2463  Q 331 2463 286 2511  Q 241 2559 241 2675  Q 241 2791 286 2839  Q 331 2888 438 2888  L 997 2888  Q 1103 2888 1148 2839  Q 1194 2791 1194 2675  L 1194 2300  Q 1400 2619 1676 2787  Q 1953 2956 2272 2956  z " transform="scale(0.015625)" />
+     </defs>
+     <use ns4:href="#CourierPrime-Regular-64" />
+     <use ns4:href="#CourierPrime-Regular-65" x="59.960938" />
+     <use ns4:href="#CourierPrime-Regular-63" x="119.921875" />
+     <use ns4:href="#CourierPrime-Regular-61" x="179.882812" />
+     <use ns4:href="#CourierPrime-Regular-6c" x="239.84375" />
+     <use ns4:href="#CourierPrime-Regular-69" x="299.804688" />
+     <use ns4:href="#CourierPrime-Regular-6e" x="359.765625" />
+     <use ns4:href="#CourierPrime-Regular-65" x="419.726562" />
+    </g>
+   </g>
+  </g>
+  <g id="axes_2">
+   <g id="m2">
+    <svg version="1.1" baseProfile="full" xml:space="preserve" width="114.13636400000001" height="191.907693" viewBox="0 0 200 200" x="177.463636" y="29.907692">
+
+<rect style="opacity:1.0;fill:#FFFFFF;stroke:none" width="200.0" height="200.0" x="0.0" y="0.0"> </rect>
+<path class="bond-0 atom-0 atom-1" d="M 190.9,122.3 L 190.9,77.7" style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+<path class="bond-1 atom-1 atom-2" d="M 190.9,77.7 L 148.5,63.9" style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+<path class="bond-2 atom-2 atom-3" d="M 148.5,63.9 L 122.3,100.0" style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+<path class="bond-3 atom-3 atom-4" d="M 122.3,100.0 L 148.5,136.1" style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+<path class="bond-4 atom-3 atom-5" d="M 122.3,100.0 L 77.7,100.0" style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+<path class="bond-5 atom-5 atom-6" d="M 77.7,100.0 L 51.5,136.1" style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+<path class="bond-6 atom-6 atom-7" d="M 51.5,136.1 L 9.1,122.3" style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+<path class="bond-7 atom-7 atom-8" d="M 9.1,122.3 L 9.1,77.7" style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+<path class="bond-8 atom-8 atom-9" d="M 9.1,77.7 L 51.5,63.9" style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+<path class="bond-9 atom-4 atom-0" d="M 148.5,136.1 L 190.9,122.3" style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+<path class="bond-10 atom-9 atom-5" d="M 51.5,63.9 L 77.7,100.0" style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+<path d="M 190.9,120.1 L 190.9,122.3 L 188.8,123.0" style="fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;" />
+<path d="M 190.9,79.9 L 190.9,77.7 L 188.8,77.0" style="fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;" />
+<path d="M 150.6,64.6 L 148.5,63.9 L 147.2,65.7" style="fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;" />
+<path d="M 147.2,134.3 L 148.5,136.1 L 150.6,135.4" style="fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;" />
+<path d="M 52.8,134.3 L 51.5,136.1 L 49.4,135.4" style="fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;" />
+<path d="M 11.2,123.0 L 9.1,122.3 L 9.1,120.1" style="fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;" />
+<path d="M 9.1,79.9 L 9.1,77.7 L 11.2,77.0" style="fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;" />
+<path d="M 49.4,64.6 L 51.5,63.9 L 52.8,65.7" style="fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;" />
+</svg></g>
+   <g id="text_2">
+    
+    <g transform="translate(174.083318 23.907692) scale(0.168 -0.168)">
+     <defs>
+      <path id="CourierPrime-Regular-62" d="M 903 4100  Q 1009 4100 1054 4051  Q 1100 4003 1100 3888  L 1100 2441  Q 1503 2956 2091 2956  Q 2478 2956 2784 2773  Q 3091 2591 3266 2248  Q 3441 1906 3441 1444  Q 3441 981 3266 639  Q 3091 297 2784 114  Q 2478 -69 2091 -69  Q 1784 -69 1525 68  Q 1266 206 1069 463  L 1069 213  Q 1069 97 1023 48  Q 978 0 872 0  L 375 0  Q 269 0 223 48  Q 178 97 178 213  Q 178 328 223 376  Q 269 425 375 425  L 631 425  L 631 3675  L 313 3675  Q 206 3675 161 3723  Q 116 3772 116 3888  Q 116 4003 161 4051  Q 206 4100 313 4100  L 903 4100  z M 2059 2494  Q 1781 2494 1564 2369  Q 1347 2244 1223 2006  Q 1100 1769 1100 1444  Q 1100 1119 1223 881  Q 1347 644 1564 519  Q 1781 394 2059 394  Q 2338 394 2538 526  Q 2738 659 2842 896  Q 2947 1134 2947 1444  Q 2947 1753 2842 1990  Q 2738 2228 2538 2361  Q 2338 2494 2059 2494  z " transform="scale(0.015625)" />
+      <path id="CourierPrime-Regular-79" d="M 3484 2888  Q 3591 2888 3636 2839  Q 3681 2791 3681 2675  Q 3681 2559 3636 2511  Q 3591 2463 3484 2463  L 3291 2463  L 2013 -156  Q 1809 -572 1615 -809  Q 1422 -1047 1180 -1158  Q 938 -1269 591 -1281  Q 481 -1284 422 -1226  Q 363 -1169 363 -1022  Q 363 -819 528 -809  Q 828 -794 1004 -709  Q 1181 -625 1329 -420  Q 1478 -216 1694 219  L 550 2463  L 353 2463  Q 247 2463 201 2511  Q 156 2559 156 2675  Q 156 2791 201 2839  Q 247 2888 353 2888  L 1459 2888  Q 1566 2888 1611 2839  Q 1656 2791 1656 2675  Q 1656 2559 1611 2511  Q 1566 2463 1459 2463  L 1059 2463  L 1941 706  L 2781 2463  L 2503 2463  Q 2397 2463 2351 2511  Q 2306 2559 2306 2675  Q 2306 2791 2351 2839  Q 2397 2888 2503 2888  L 3484 2888  z " transform="scale(0.015625)" />
+      <path id="CourierPrime-Regular-6f" d="M 1919 2956  Q 2347 2956 2690 2762  Q 3034 2569 3229 2223  Q 3425 1878 3425 1444  Q 3425 1009 3229 664  Q 3034 319 2690 125  Q 2347 -69 1919 -69  Q 1491 -69 1147 125  Q 803 319 608 664  Q 413 1009 413 1444  Q 413 1878 608 2223  Q 803 2569 1147 2762  Q 1491 2956 1919 2956  z M 1919 2494  Q 1616 2494 1386 2361  Q 1156 2228 1031 1989  Q 906 1750 906 1444  Q 906 1138 1031 898  Q 1156 659 1386 526  Q 1616 394 1919 394  Q 2222 394 2451 526  Q 2681 659 2806 898  Q 2931 1138 2931 1444  Q 2931 1750 2806 1989  Q 2681 2228 2451 2361  Q 2222 2494 1919 2494  z " transform="scale(0.015625)" />
+      <path id="CourierPrime-Regular-70" d="M 2091 2956  Q 2478 2956 2784 2773  Q 3091 2591 3266 2248  Q 3441 1906 3441 1444  Q 3441 981 3266 639  Q 3091 297 2784 114  Q 2478 -69 2091 -69  Q 1503 -69 1100 447  L 1100 -788  L 1638 -788  Q 1744 -788 1789 -836  Q 1834 -884 1834 -1000  Q 1834 -1116 1789 -1164  Q 1744 -1213 1638 -1213  L 313 -1213  Q 206 -1213 161 -1164  Q 116 -1116 116 -1000  Q 116 -884 161 -836  Q 206 -788 313 -788  L 631 -788  L 631 2463  L 375 2463  Q 269 2463 223 2511  Q 178 2559 178 2675  Q 178 2791 223 2839  Q 269 2888 375 2888  L 872 2888  Q 978 2888 1023 2839  Q 1069 2791 1069 2675  L 1069 2425  Q 1266 2681 1525 2818  Q 1784 2956 2091 2956  z M 2059 2494  Q 1781 2494 1564 2369  Q 1347 2244 1223 2006  Q 1100 1769 1100 1444  Q 1100 1119 1223 881  Q 1347 644 1564 519  Q 1781 394 2059 394  Q 2338 394 2538 526  Q 2738 659 2842 896  Q 2947 1134 2947 1444  Q 2947 1753 2842 1990  Q 2738 2228 2538 2361  Q 2338 2494 2059 2494  z " transform="scale(0.015625)" />
+      <path id="CourierPrime-Regular-74" d="M 1431 3778  Q 1559 3778 1612 3731  Q 1666 3684 1666 3575  L 1666 2638  L 2950 2638  Q 3056 2638 3101 2589  Q 3147 2541 3147 2425  Q 3147 2309 3101 2261  Q 3056 2213 2950 2213  L 1666 2213  L 1666 1075  Q 1666 719 1789 553  Q 1913 388 2219 388  Q 2428 388 2659 472  Q 2891 556 3106 697  Q 3150 728 3203 728  Q 3309 728 3384 584  Q 3425 503 3425 444  Q 3425 344 3322 281  Q 3078 128 2778 29  Q 2478 -69 2219 -69  Q 1688 -69 1442 207  Q 1197 484 1197 1034  L 1197 2213  L 563 2213  Q 456 2213 411 2261  Q 366 2309 366 2425  Q 366 2541 411 2589  Q 456 2638 563 2638  L 1197 2638  L 1197 3575  Q 1197 3684 1250 3731  Q 1303 3778 1431 3778  z " transform="scale(0.015625)" />
+     </defs>
+     <use ns4:href="#CourierPrime-Regular-62" />
+     <use ns4:href="#CourierPrime-Regular-69" x="59.960938" />
+     <use ns4:href="#CourierPrime-Regular-63" x="119.921875" />
+     <use ns4:href="#CourierPrime-Regular-79" x="179.882812" />
+     <use ns4:href="#CourierPrime-Regular-6c" x="239.84375" />
+     <use ns4:href="#CourierPrime-Regular-6f" x="299.804688" />
+     <use ns4:href="#CourierPrime-Regular-70" x="359.765625" />
+     <use ns4:href="#CourierPrime-Regular-65" x="419.726562" />
+     <use ns4:href="#CourierPrime-Regular-6e" x="479.6875" />
+     <use ns4:href="#CourierPrime-Regular-74" x="539.648438" />
+     <use ns4:href="#CourierPrime-Regular-79" x="599.609375" />
+     <use ns4:href="#CourierPrime-Regular-6c" x="659.570312" />
+    </g>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pa3b8c434b1">
+   <rect x="40.5" y="29.907692" width="114.136364" height="191.907692" />
+  </clipPath>
+  <clipPath id="pe61068cd4d">
+   <rect x="177.463636" y="29.907692" width="114.136364" height="191.907692" />
+  </clipPath>
+ </defs>
+</svg>

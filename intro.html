@@ -1,0 +1,807 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="Deep Learning for Molecules &amp; Materials Book" lang="en" name="description" xml:lang="en" />
+<meta content="en_US" property="og:locale" />
+<meta content="summary" name="twitter:card" />
+<meta content="Deep Learning for Molecules &amp; Materials Book" name="twitter:description" />
+<meta content="dmol.pub 📖" name="twitter:title" />
+<meta content="https://dmol.pub/_static/logo.png" name="twitter:image" />
+<meta content="&#64;andrewwhite01" name="twitter:site" />
+
+    <title>Overview &#8212; deep learning for molecules &amp; materials</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/a11y.css" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/custom.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <link rel="canonical" href="https://dmol.pub/intro.html" />
+    <link rel="shortcut icon" href="_static/favicon.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">deep learning for molecules & materials</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Overview
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  A. Math Review
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="math/tensors-and-shapes.html">
+   1. Tensors and Shapes
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  B. Machine Learning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="ml/introduction.html">
+   2. Introduction to Machine Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ml/regression.html">
+   3. Regression &amp; Model Assessment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ml/classification.html">
+   4. Classification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ml/kernel.html">
+   5. Kernel Learning
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  C. Deep Learning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="dl/introduction.html">
+   6. Deep Learning Overview
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="dl/layers.html">
+   7. Standard Layers
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="dl/gnn.html">
+   8. Graph Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="dl/data.html">
+   9. Input Data &amp; Equivariances
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="dl/Equivariant.html">
+   10. Equivariant Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="dl/xai.html">
+   11. Explaining Predictions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="dl/attention.html">
+   12. Attention Layers
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="dl/NLP.html">
+   13. Deep Learning on Sequences
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="dl/VAE.html">
+   14. Variational Autoencoder
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="dl/flows.html">
+   15. Normalizing Flows
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  D. Applications
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="applied/QM9.html">
+   16. Predicting DFT Energies with GNNs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="applied/MolGenerator.html">
+   17. Generative RNN in Browser
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  E. Contributed Chapters
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="dl/Hyperparameter_tuning.html">
+   18. Hyperparameter Tuning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="applied/e3nn_traj.html">
+   19. Equivariant Neural Network for Predicting Trajectories
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="dl/pretraining.html">
+   20. Pretraining
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  F. Appendix
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="style.html">
+   21. Style Guide
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="changelog.html">
+   22. Changelog
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  G. In Progress
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="dl/molnets.html">
+   23. Modern Molecular NNs
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            <script async defer src="https://api.dmol.pub/latest.js"></script><noscript><img src="https://api.dmol.pub/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript> By <a href="https://twitter.com/andrewwhite01">Andrew White</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/whitead/dmol-book"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/whitead/dmol-book/issues/new?title=Issue%20on%20page%20%2Fintro.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/intro.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#target-audience">
+   Target Audience
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#framework-choice">
+   Framework Choice
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interactivity">
+   Interactivity
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-models">
+   Example models
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#table-of-contents">
+   Table of Contents
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#contributors">
+   Contributors
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#contributed-chapter">
+     Contributed Chapter
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#contributed-content-to-chapter">
+     Contributed Content to Chapter
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#substantial-feedback-on-content">
+     Substantial Feedback on Content
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#code-fixes-math-fixes-language-fixes">
+     Code Fixes, Math Fixes, Language Fixes
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#citation">
+   Citation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#funding-support">
+   Funding Support
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#license-cc-by-nc-3-0">
+   License (CC BY-NC 3.0)
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Overview</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#target-audience">
+   Target Audience
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#framework-choice">
+   Framework Choice
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interactivity">
+   Interactivity
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-models">
+   Example models
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#table-of-contents">
+   Table of Contents
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#contributors">
+   Contributors
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#contributed-chapter">
+     Contributed Chapter
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#contributed-content-to-chapter">
+     Contributed Content to Chapter
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#substantial-feedback-on-content">
+     Substantial Feedback on Content
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#code-fixes-math-fixes-language-fixes">
+     Code Fixes, Math Fixes, Language Fixes
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#citation">
+   Citation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#funding-support">
+   Funding Support
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#license-cc-by-nc-3-0">
+   License (CC BY-NC 3.0)
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <p><img alt="Header image showing molecules plotted in two different ways" src="_images/header.png" /></p>
+<section class="tex2jax_ignore mathjax_ignore" id="overview">
+<h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">#</a></h1>
+<p>Deep learning is becoming a standard tool in chemistry and materials science. Deep learning is specifically about connecting some input data (features) and output data (labels) with a neural network function. Neural networks are differentiable and able to approximate any function. The classic example is connecting a molecule’s structure and function. A recent <a class="reference external" href="https://doi.org/10.1039/C6SC05720A">example</a> is dramatically accelerating quantum calculations to the point that you can achieve DFT level accuracy with a neural network. What makes deep learning especially relevant is that it’s a powerful tool for approximating previously intractable functions <strong>and</strong> its ability to generate new data.</p>
+<p>In this book, we will view deep learning as a set of tools that allows us to create models that were previously infeasible with classical machine learning. What sets deep learning apart from classic machine learning is feature engineering. Much of the data-driven work in the past required decisions about what features are important and how to compute them from molecules. These are called descriptors. Deep learning is typically trained end-to-end, meaning decisions about which features are important are no longer relevant and we can work directly with molecular structures.</p>
+<p>Another reason deep learning is a standard method is its mature tools. Previously, training and using models in machine learning was tedious because it required deriving and implementing new equations for each model. Deep learning has removed this need and model changes can be done nearly effortlessly. Deep learning is not a new paradigm of science or a replacement for a chemist. It’s a tool that is mature and now ready for application in molecules and materials.</p>
+<section id="target-audience">
+<h2>Target Audience<a class="headerlink" href="#target-audience" title="Permalink to this headline">#</a></h2>
+<p>The target audience of this book is students with a programming and chemistry background that are interested in building competency in deep learning. For example, PhD students or advanced undergraduates in chemistry or materials science with some Python programming skills will benefit from this book. Sections A and B provide a pedagogical introduction to the principles of machine learning, but only covering topics necessary for deep learning. For example, topics like decision trees and SVMs are not covered because they are not critical to understanding deep learning. Section C covers deep learning principles and details on specific architectures, like the important <a class="reference internal" href="dl/gnn.html"><span class="doc">Graph Neural Networks</span></a> and <a class="reference internal" href="dl/VAE.html"><span class="doc">Variational Autoencoder</span></a>. Other chapters, like <a class="reference internal" href="dl/NLP.html"><span class="doc">Deep Learning on Sequences</span></a>, give a survey-level overview of a much larger area targeted towards chemistry and materials science. Finally Section D gives more complex examples on authentic deep learning problems from chemistry and materials science. Each section states at the top the required background knowledge, but Python programming ability is assumed throughout. You can find a chemistry-specific introduction to Python at the Molecular Sciences Software Institute <a class="reference external" href="http://education.molssi.org/resources.html#programming">resources page</a>.</p>
+</section>
+<section id="framework-choice">
+<h2>Framework Choice<a class="headerlink" href="#framework-choice" title="Permalink to this headline">#</a></h2>
+<p>Deep learning is always a little tied up in the implementation details – it’s hard to grasp without seeing code. Thus, framework choice can be a part of the learning process. This book assumes familiarity with Python and <code class="docutils literal notranslate"><span class="pre">numpy</span></code> and we use exclusively Python. For the deep learning framework, we use <code class="docutils literal notranslate"><span class="pre">Jax</span></code>, <code class="docutils literal notranslate"><span class="pre">Tensorflow</span></code>, <code class="docutils literal notranslate"><span class="pre">Keras</span></code>, and <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> for different purposes. <code class="docutils literal notranslate"><span class="pre">Jax</span></code> is easy to learn because it’s essentially <code class="docutils literal notranslate"><span class="pre">numpy</span></code> with automatic differentiation and GPU/TPU-acceleration. In this book, we use <code class="docutils literal notranslate"><span class="pre">Jax</span></code> when it’s important to understand the implementation details and connect the equations to the code. <code class="docutils literal notranslate"><span class="pre">Keras</span></code> is a high-level framework that has many common deep learning features implemented. It is used when we would like to work with more complex models and I’m trying to show a more complete model. Of course, you can use <code class="docutils literal notranslate"><span class="pre">Jax</span></code> for complete models and show detailed implementations in <code class="docutils literal notranslate"><span class="pre">Keras</span></code>. This is just my reasoning for the choice of framework. <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> is an ML package and thus we’ll see in the early chapters on ML. Finally, <code class="docutils literal notranslate"><span class="pre">Tensorflow</span></code> is the underlying library of <code class="docutils literal notranslate"><span class="pre">Keras</span></code> so if we want to implement new layers in <code class="docutils literal notranslate"><span class="pre">Keras</span></code> we do it through <code class="docutils literal notranslate"><span class="pre">Tensorflow</span></code>. <code class="docutils literal notranslate"><span class="pre">TensorflowProbability</span></code> is an extension to <code class="docutils literal notranslate"><span class="pre">Tensorflow</span></code> that supports random variables and probability distributions used in our generative models. The most important framework left out of this book is <code class="docutils literal notranslate"><span class="pre">PyTorch</span></code>, which has recently taken the lead to be the most popular framework in deep learning research (not necessarily industry). Ultimately, this book presents the equations and implementation details so that you will learn concepts that are independent of the framework. You should thus be able to quickly pick up <code class="docutils literal notranslate"><span class="pre">PyTorch</span></code>, MXNet, or whatever the next new framework might be.</p>
+<p>One of the most common mistakes I see from students is that they try to learn deep learning via web searching questions and reading documentation. <em>This is a terrible way to learn deep learning.</em> There is quite a bit of information out there, but you will end up with a distorted and framework-specific understanding of deep learning. Remember, a high-ranking search result may be relevant and popular, but that doesn’t mean it will help you learn. More importantly, learning deep learning through blogs and Stack overflow makes it so hard to grasp the mathematics and intuition. Web searching and hacking together code is definitely a part of deep learning (for better or worse), but you should do this once you have a firm grasp of the math and details of the model you want to implement.</p>
+</section>
+<section id="interactivity">
+<h2>Interactivity<a class="headerlink" href="#interactivity" title="Permalink to this headline">#</a></h2>
+<p>On each chapter, you’ll see the  <i aria-label="Launch interactive content" class="fas fa-rocket"></i>  button on the top. This launches the chapter as an interactive Google Colab. Each chapter also includes notes on the packages that may need to be installed. If you have problems with install, the complete current list of packages for the textbook is available <a class="reference external" href="https://github.com/whitead/dmol-book/blob/main/package/setup.py#L14">here</a>.</p>
+<p>When using interactivity, many of the chapter will benefit from using a graphics processing unit (GPU). GPUs are what makes deep learning fast enough to be practical on large dataset. This is possible in Google Colab, but may require additional steps if running this locally. Check the documentation of the package you’re using (e.g., <code class="docutils literal notranslate"><span class="pre">Jax</span></code>, <code class="docutils literal notranslate"><span class="pre">PyTorch</span></code>, <code class="docutils literal notranslate"><span class="pre">Tensorflow</span></code>) to find out how to use a GPU locally. I have carefully constructed the examples to be small enough though to run on a normal CPU in a laptop though, so the GPU is optional.</p>
+</section>
+<section id="example-models">
+<h2>Example models<a class="headerlink" href="#example-models" title="Permalink to this headline">#</a></h2>
+<p>Here are the major models we will construct learn to implement in this book: <em>Sorry, but I’m unable to link directly to the examples, so you’ll need to scroll to them.</em></p>
+<ol class="simple">
+<li><p>We explore predicting solubility of molecules with <a class="reference internal" href="dl/gnn.html"><span class="doc">graph convolutional neural networks</span></a>, <a class="reference internal" href="dl/NLP.html"><span class="doc">recurrent neural networks</span></a>, <a class="reference internal" href="dl/xai.html"><span class="doc">dense neural networks</span></a>, and <a class="reference internal" href="ml/kernel.html"><span class="doc">kernel learning</span></a>.</p></li>
+<li><p>We implement a SchNet model to <a class="reference internal" href="dl/gnn.html"><span class="doc">predict what space group a structure belongs to</span></a>.</p></li>
+<li><p>We implement a Recurrent Neural Network to <a class="reference internal" href="dl/layers.html"><span class="doc">predict the solubility of proteins/peptides</span></a> and <a class="reference internal" href="dl/xai.html"><span class="doc">predict if a peptide will lyse red blood cells</span></a>.</p></li>
+<li><p>We predict the DFT single-point energy of molecules <a class="reference internal" href="applied/QM9.html"><span class="doc">with a graph convolutional neural network</span></a>.</p></li>
+<li><p>We propose new molecules with a generative <a class="reference internal" href="applied/MolGenerator.html"><span class="doc">recurrent neural network</span></a>.</p></li>
+<li><p>We learn to align and embed polymer trajectories with <a class="reference internal" href="dl/VAE.html"><span class="doc">variational autoencoders</span></a> and <a class="reference internal" href="dl/data.html"><span class="doc">equivariant data representations</span></a>.</p></li>
+<li><p>We classify if molecules are likely to be toxic with <a class="reference internal" href="ml/classification.html"><span class="doc">logistic regression</span></a>.</p></li>
+</ol>
+<p>and there are many smaller examples throughout the book.</p>
+</section>
+<section id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="contributors">
+<h2>Contributors<a class="headerlink" href="#contributors" title="Permalink to this headline">#</a></h2>
+<p>Thank you to contributors for offering suggestions, identifying errors, and helping improve this book! Twitter handles, if available</p>
+<section id="contributed-chapter">
+<h3>Contributed Chapter<a class="headerlink" href="#contributed-chapter" title="Permalink to this headline">#</a></h3>
+<ol class="simple">
+<li><p>Mehrad Ansari (&#64;MehradAnsari)</p></li>
+<li><p>Sam Cox (&#64;SamCox822)</p></li>
+<li><p>Heta Gandhi (&#64;gandhi_heta)</p></li>
+<li><p>Josh Rackers (&#64;JoshRackers)</p></li>
+</ol>
+</section>
+<section id="contributed-content-to-chapter">
+<h3>Contributed Content to Chapter<a class="headerlink" href="#contributed-content-to-chapter" title="Permalink to this headline">#</a></h3>
+<ol class="simple">
+<li><p>Geemi Wellawatte (&#64;GWellawatte)</p></li>
+</ol>
+</section>
+<section id="substantial-feedback-on-content">
+<h3>Substantial Feedback on Content<a class="headerlink" href="#substantial-feedback-on-content" title="Permalink to this headline">#</a></h3>
+<ol class="simple">
+<li><p>Lily Wang (&#64;lilyminium)</p></li>
+<li><p>Marc Finzi (&#64;m_finzi)</p></li>
+<li><p>Kevin Jablonka (&#64;kmjablonka)</p></li>
+<li><p>Elana Simon</p></li>
+<li><p>Cathrine Bergh (&#64;cathrinebergh)</p></li>
+<li><p>Sam Cox (&#64;SamCox822)</p></li>
+<li><p>Erik Thiede (&#64;erik_der_elch)</p></li>
+</ol>
+</section>
+<section id="code-fixes-math-fixes-language-fixes">
+<h3>Code Fixes, Math Fixes, Language Fixes<a class="headerlink" href="#code-fixes-math-fixes-language-fixes" title="Permalink to this headline">#</a></h3>
+<ol class="simple">
+<li><p>Oion Akif</p></li>
+<li><p>Heta Gandhi (&#64;gandhi_heta)</p></li>
+<li><p>Mattias Hartveit</p></li>
+<li><p>Andreas Krämer</p></li>
+<li><p>Mehrad Ansari (&#64;MehradAnsari)</p></li>
+<li><p>Ritsuya Niwayama</p></li>
+<li><p>Varsha Jain</p></li>
+<li><p>Simon Duerr</p></li>
+<li><p>Julia Westermayr (&#64;JWestermayr)</p></li>
+<li><p>Ernest Awoonor-Williams</p></li>
+<li><p>Joshua Schrier (&#64;joshuaschrier)</p></li>
+<li><p>Marin Bukov</p></li>
+<li><p>Arun Pa Thiagarajan (&#64;arunppsg)</p></li>
+<li><p>Ankur Parmar</p></li>
+<li><p>Killian Sheriff(&#64;KillianSheriff)</p></li>
+<li><p>Parsa Pourghasem</p></li>
+<li><p>Zonglun Li</p></li>
+<li><p>Santanu Poddar</p></li>
+<li><p>Robert Bridges</p></li>
+</ol>
+</section>
+</section>
+<section id="citation">
+<h2>Citation<a class="headerlink" href="#citation" title="Permalink to this headline">#</a></h2>
+<p>Please cite the <a class="reference external" href="https://doi.org/10.33011/livecoms.3.1.1499">livecommsj overview article</a>:</p>
+<div class="highlight-bibtex notranslate"><div class="highlight"><pre><span></span><span class="nc">@article</span><span class="p">{</span><span class="nl">white2021deep</span><span class="p">,</span>
+<span class="w">  </span><span class="na">title</span><span class="p">=</span><span class="s">{Deep Learning for Molecules and Materials}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">journal</span><span class="p">=</span><span class="s">{Living Journal of Computational Molecular Science}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">author</span><span class="p">=</span><span class="s">{White, Andrew D}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">url</span><span class="p">=</span><span class="s">{https://dmol.pub}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">year</span><span class="p">=</span><span class="s">{2021}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">volume</span><span class="p">=</span><span class="s">{3}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">number</span><span class="p">=</span><span class="s">{1}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">pages</span><span class="p">=</span><span class="s">{1499}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">doi</span><span class="p">=</span><span class="s">{10.33011/livecoms.3.1.1499}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="funding-support">
+<h2>Funding Support<a class="headerlink" href="#funding-support" title="Permalink to this headline">#</a></h2>
+<p>Research reported in this work was supported by the National Institute of General Medical Sciences of the National Institutes of Health under award number R35GM137966. This material is based upon work supported by the National Science Foundation under Grant No. 1764415.</p>
+</section>
+<section id="license-cc-by-nc-3-0">
+<h2>License (CC BY-NC 3.0)<a class="headerlink" href="#license-cc-by-nc-3-0" title="Permalink to this headline">#</a></h2>
+<p>Creative Commons Legal Code</p>
+<p>Attribution-NonCommercial 3.0 Unported</p>
+<p>See complete description of license at <a class="reference external" href="https://creativecommons.org/licenses/by-nc/3.0/">https://creativecommons.org/licenses/by-nc/3.0/</a> or at repo <a class="reference external" href="https://github.com/whitead/dmol-book">https://github.com/whitead/dmol-book</a></p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Andrew D. White<br/>
+  
+      &copy; Copyright 2022.<br/>
+    <div class="extra_footer">
+      <a href="http://thewhitelab.org">thewhitelab.org</a> <div id="wh-modal"> <button class="wh-venti-button" aria-label="close modal" id="wh-modal-close">✕</button> <img id="wh-modal-img"> </div>
+    </div>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

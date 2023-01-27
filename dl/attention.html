@@ -1,0 +1,1258 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="Deep Learning for Molecules &amp; Materials Book" lang="en" name="description" xml:lang="en" />
+<meta content="en_US" property="og:locale" />
+<meta content="summary" name="twitter:card" />
+<meta content="Deep Learning for Molecules &amp; Materials Book" name="twitter:description" />
+<meta content="dmol.pub 📖" name="twitter:title" />
+<meta content="https://dmol.pub/_static/logo.png" name="twitter:image" />
+<meta content="&#64;andrewwhite01" name="twitter:site" />
+
+    <title>12. Attention Layers &#8212; deep learning for molecules &amp; materials</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/a11y.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/custom.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="canonical" href="https://dmol.pub/dl/attention.html" />
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="13. Deep Learning on Sequences" href="NLP.html" />
+    <link rel="prev" title="11. Explaining Predictions" href="xai.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">deep learning for molecules & materials</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Overview
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  A. Math Review
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../math/tensors-and-shapes.html">
+   1. Tensors and Shapes
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  B. Machine Learning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ml/introduction.html">
+   2. Introduction to Machine Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ml/regression.html">
+   3. Regression &amp; Model Assessment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ml/classification.html">
+   4. Classification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ml/kernel.html">
+   5. Kernel Learning
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  C. Deep Learning
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="introduction.html">
+   6. Deep Learning Overview
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="layers.html">
+   7. Standard Layers
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="gnn.html">
+   8. Graph Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="data.html">
+   9. Input Data &amp; Equivariances
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Equivariant.html">
+   10. Equivariant Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="xai.html">
+   11. Explaining Predictions
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   12. Attention Layers
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="NLP.html">
+   13. Deep Learning on Sequences
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="VAE.html">
+   14. Variational Autoencoder
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="flows.html">
+   15. Normalizing Flows
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  D. Applications
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../applied/QM9.html">
+   16. Predicting DFT Energies with GNNs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../applied/MolGenerator.html">
+   17. Generative RNN in Browser
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  E. Contributed Chapters
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Hyperparameter_tuning.html">
+   18. Hyperparameter Tuning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../applied/e3nn_traj.html">
+   19. Equivariant Neural Network for Predicting Trajectories
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="pretraining.html">
+   20. Pretraining
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  F. Appendix
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../style.html">
+   21. Style Guide
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../changelog.html">
+   22. Changelog
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  G. In Progress
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="molnets.html">
+   23. Modern Molecular NNs
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            <script async defer src="https://api.dmol.pub/latest.js"></script><noscript><img src="https://api.dmol.pub/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript> By <a href="https://twitter.com/andrewwhite01">Andrew White</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://colab.research.google.com/github/whitead/dmol-book/blob/master/dl/attention.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/whitead/dmol-book"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/whitead/dmol-book/issues/new?title=Issue%20on%20page%20%2Fdl/attention.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/dl/attention.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example">
+   12.1. Example
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#attention-mechanism-equation">
+   12.2. Attention Mechanism Equation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#attention-reduction">
+   12.3. Attention Reduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tensor-dot">
+   12.4. Tensor-Dot
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#soft-hard-and-temperature-attention">
+   12.5. Soft, Hard, and Temperature Attention
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#self-attention">
+   12.6. Self-Attention
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#trainable-attention">
+   12.7. Trainable Attention
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#multi-head-attention-block">
+   12.8. Multi-head Attention Block
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#running-this-notebook">
+   12.9. Running This Notebook
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#code-examples">
+   12.10. Code Examples
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#tensor-dot-mechanism">
+     12.10.1. Tensor-Dot Mechanism
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#general-attention">
+     12.10.2. General Attention
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id7">
+     12.10.3. Self-attention
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#adding-trainable-parameters">
+     12.10.4. Adding Trainable Parameters
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#multi-head">
+     12.10.5. Multi-head
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#attention-in-graph-neural-networks">
+   12.11. Attention in Graph Neural Networks
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#chapter-summary">
+   12.12. Chapter Summary
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cited-references">
+   12.13. Cited References
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Attention Layers</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example">
+   12.1. Example
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#attention-mechanism-equation">
+   12.2. Attention Mechanism Equation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#attention-reduction">
+   12.3. Attention Reduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tensor-dot">
+   12.4. Tensor-Dot
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#soft-hard-and-temperature-attention">
+   12.5. Soft, Hard, and Temperature Attention
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#self-attention">
+   12.6. Self-Attention
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#trainable-attention">
+   12.7. Trainable Attention
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#multi-head-attention-block">
+   12.8. Multi-head Attention Block
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#running-this-notebook">
+   12.9. Running This Notebook
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#code-examples">
+   12.10. Code Examples
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#tensor-dot-mechanism">
+     12.10.1. Tensor-Dot Mechanism
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#general-attention">
+     12.10.2. General Attention
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id7">
+     12.10.3. Self-attention
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#adding-trainable-parameters">
+     12.10.4. Adding Trainable Parameters
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#multi-head">
+     12.10.5. Multi-head
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#attention-in-graph-neural-networks">
+   12.11. Attention in Graph Neural Networks
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#chapter-summary">
+   12.12. Chapter Summary
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cited-references">
+   12.13. Cited References
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="attention-layers">
+<h1><span class="section-number">12. </span>Attention Layers<a class="headerlink" href="#attention-layers" title="Permalink to this headline">#</a></h1>
+<p>Attention is a concept in machine learning and AI that goes back many years, especially in computer vision<span id="id1">[<a class="reference internal" href="#id59" title="Shumeet Baluja and Dean A. Pomerleau. Expectation-based selective attention for visual monitoring and control of a robot vehicle. Robotics and Autonomous Systems, 22(3):329–344, 1997. Robot Learning: The New Wave. URL: http://www.sciencedirect.com/science/article/pii/S0921889097000468, doi:https://doi.org/10.1016/S0921-8890(97)00046-8.">BP97</a>]</span>. Like the word “neural network”, attention was inspired by the idea of attention in how human brains deal with the massive amount of visual and audio input<span id="id2">[<a class="reference internal" href="#id58" title="Anne M Treisman and Garry Gelade. A feature-integration theory of attention. Cognitive psychology, 12(1):97–136, 1980.">TG80</a>]</span>. <strong>Attention layers</strong> are deep learning layers that evoke the idea of attention. You can read more about attention in deep learning in Luong et al. <span id="id3">[<a class="reference internal" href="#id56" title="Minh-Thang Luong, Hieu Pham, and Christopher D Manning. Effective approaches to attention-based neural machine translation. arXiv preprint arXiv:1508.04025, 2015.">LPM15</a>]</span> and get a practical <a class="reference external" href="http://d2l.ai/chapter_attention-mechanisms/index.html">overview here</a>. Attention layers have been empirically shown to be so effective in modeling sequences, like language, that they have become indispensable<span id="id4">[<a class="reference internal" href="#id55" title="Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Łukasz Kaiser, and Illia Polosukhin. Attention is all you need. In Advances in neural information processing systems, 5998–6008. 2017.">VSP+17</a>]</span>. The most common place you’ll see attention layers is in <a class="reference external" href="http://d2l.ai/chapter_attention-mechanisms/transformer.html"><strong>transformer</strong></a> neural networks that model sequences. We’ll also sometimes see attention in graph neural networks.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>Attention can be confusing because of the three inputs. We’ll see later though that these inputs are actually often identical. The query is one key and the keys and values are equal. Then if you batch the queries together (one for each key), then you’ll see the query, keys, and values are equal. This is self-attention.</p>
+</aside>
+<div class="admonition-audience-objectives admonition">
+<p class="admonition-title">Audience &amp; Objectives</p>
+<p>This chapter builds on <a class="reference internal" href="layers.html"><span class="doc">Standard Layers</span></a> and <a class="reference internal" href="../math/tensors-and-shapes.html"><span class="doc">Tensors and Shapes</span></a>. You should be comfortable with broadcasting, matrices, and tensor shapes. After completing this chapter, you should be able to</p>
+<ul class="simple">
+<li><p>Correctly specify shapes and input/output of attention layers</p></li>
+<li><p>Implement attention layers</p></li>
+<li><p>Understand how attention can be put into other layer types</p></li>
+</ul>
+</div>
+<p>Attention layers are fundamentally a weighted mean reduction. It is just computing a mean, where you somehow weight each element contributing to the mean. Since it is a mean, attention decreases the rank of an input tensor. Attention is unusual among layers because it takes three inputs, whereas most layers in deep learning take just one or perhaps two. These inputs are called the <strong>query</strong>, the <strong>values</strong>, and the <strong>keys</strong>. The reduction occurs over the values; so if the values are rank 3, the output will be rank 2. The query should be one less rank than
+the keys. The keys should be the same rank as the values. The keys and query determine how to weight the values according the <strong>attention mechanism</strong> – a fancy word for equation.</p>
+<p>The table below summarizes these three input arguments. Note that often the query is batched, so that its rank will be 2 if batched. If the input query is batched, then the output’s rank will be batched as well and be 2 instead of 1.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:left head"><p></p></th>
+<th class="head"><p>Rank</p></th>
+<th class="head"><p>Axes</p></th>
+<th class="head"><p>Purpose</p></th>
+<th class="text-align:right head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:left"><p>Query</p></td>
+<td><p>1</p></td>
+<td><p>(# of attn features)</p></td>
+<td><p>input for checking against keys</p></td>
+<td class="text-align:right"><p>One word represented as feature vector</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>Keys</p></td>
+<td><p>2</p></td>
+<td><p>(sequence length, # of attn features)</p></td>
+<td><p>used to compute attention against query</p></td>
+<td class="text-align:right"><p>All words in a sentence represented as matrix of feature vectors</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>Values</p></td>
+<td><p>2</p></td>
+<td><p>(sequence length, # of value features)</p></td>
+<td><p>used to compute value of output</p></td>
+<td class="text-align:right"><p>A vector of numbers for each word in a sentence</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>Output</p></td>
+<td><p>1</p></td>
+<td><p>(# of value features)</p></td>
+<td><p>attention-weighted mean over values</p></td>
+<td class="text-align:right"><p>single vector</p></td>
+</tr>
+</tbody>
+</table>
+<section id="example">
+<h2><span class="section-number">12.1. </span>Example<a class="headerlink" href="#example" title="Permalink to this headline">#</a></h2>
+<p>Attention is best conceptualized as operating on a sequence. Let’s use a sentence like “The sleepy child reads a book”. The words in the sentence correspond to the keys. If we represent our words as embeddings, our keys will be rank 2. For example, the word “sleepy” might be represented by an embedding vector of length 2: <span class="math notranslate nohighlight">\([2,0,1]\)</span>, where these embedding values are trained or taken from a standard language embedding. By convention, the zeroth axis of keys will be the position in the sequence and the first axis contains these vectors. The query is often an element from the keys, like the word “book.” The point of attention is to see what parts of the sentence the query should be influenced by. “Book” should have strong attention on “child” and “reads,” but probably not to “sleepy.” You’ll see soon that we will actually compute this as a vector, called the attention vector <span class="math notranslate nohighlight">\(\vec{b}\)</span>. The output from the attention layer will be a reduction over the values where each element of values is weighted by the attention between the query and the key. Thus there should be one key and one value for each element in our sentence. The values could be identical to the keys, which is common.</p>
+<p>Let’s see how this looks mathematically. The attention layer consists of two steps: (1) computing the attention vector <span class="math notranslate nohighlight">\(\vec{b}\)</span> using the <strong>attention mechanism</strong> and (2) the reduction over the values using the attention vector <span class="math notranslate nohighlight">\(\vec{b}\)</span>. Attention mechanism is a fancy word for the attention equation. Consider our example above. We’ll use a 3-dimensional embedding for our words</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>Keys and queries as one-hot encodings will not work as inputs to attention layers because the dot product will give zeros, unless the key and query are equal.</p>
+</aside>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:left head"><p>Index</p></th>
+<th class="text-align:center head"><p>Embedding</p></th>
+<th class="text-align:right head"><p>Word</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:left"><p>0</p></td>
+<td class="text-align:center"><p>0,0,0</p></td>
+<td class="text-align:right"><p>The</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>1</p></td>
+<td class="text-align:center"><p>2,0,1</p></td>
+<td class="text-align:right"><p>Sleepy</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>2</p></td>
+<td class="text-align:center"><p>1,-1,-2</p></td>
+<td class="text-align:right"><p>Child</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>3</p></td>
+<td class="text-align:center"><p>2,3,1</p></td>
+<td class="text-align:right"><p>Reads</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>4</p></td>
+<td class="text-align:center"><p>-2,0,0</p></td>
+<td class="text-align:right"><p>A</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>5</p></td>
+<td class="text-align:center"><p>0,2,1</p></td>
+<td class="text-align:right"><p>Book</p></td>
+</tr>
+</tbody>
+</table>
+<p>The keys will be a rank 2 tensor (matrix) putting all these together. Note that these are only integers to make this example clearer, typically words are represented with floating point numbers when embedded.</p>
+<div class="amsmath math notranslate nohighlight" id="equation-45c51dc5-12d6-4f22-aa72-8832c661e49e">
+<span class="eqno">(12.1)<a class="headerlink" href="#equation-45c51dc5-12d6-4f22-aa72-8832c661e49e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\mathbf{K} = \left[
+\begin{array}{lccccr}
+0 &amp; 2 &amp; 1 &amp; 2 &amp; -2 &amp; 0\\
+0 &amp; 0 &amp; -1 &amp; 3 &amp; 0 &amp; 2\\
+0 &amp; 1 &amp; -2 &amp; 1 &amp; 0 &amp; 1\\
+\end{array}\right]
+\end{equation}\]</div>
+<p>They keys are shape <span class="math notranslate nohighlight">\((6, 3)\)</span> because our sentence has 6 words and each word is represented with a 3 dimensional embedding vector. Let’s make our values simple, we’ll have one for each word. These values are what determine our output. Perhaps they could be the sentiment of the word: is it a positive word (“happy”) or a negative word (“angry”).</p>
+<div class="amsmath math notranslate nohighlight" id="equation-6b25090a-5c26-4500-8848-2cbb3af55a8a">
+<span class="eqno">(12.2)<a class="headerlink" href="#equation-6b25090a-5c26-4500-8848-2cbb3af55a8a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\mathbf{V} = \left[ 0, -0.2, 0.3, 0.4, 0, 0.1\right]
+\end{equation}\]</div>
+<p>Note that the values <span class="math notranslate nohighlight">\(\mathbf{V}\)</span> should be the same rank as the keys, so its shape is interpreted as <span class="math notranslate nohighlight">\((6, 1)\)</span>. Finally, the query which should be one rank less than the keys. Our query is the word “book:”</p>
+<div class="amsmath math notranslate nohighlight" id="equation-a0db4ef4-a9f7-4a38-927a-cdbc5bcb3a96">
+<span class="eqno">(12.3)<a class="headerlink" href="#equation-a0db4ef4-a9f7-4a38-927a-cdbc5bcb3a96" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\vec{q} = \left[0, 2, 1\right]
+\end{equation}\]</div>
+</section>
+<section id="attention-mechanism-equation">
+<h2><span class="section-number">12.2. </span>Attention Mechanism Equation<a class="headerlink" href="#attention-mechanism-equation" title="Permalink to this headline">#</a></h2>
+<p>The attention mechanism equation uses query and keys arguments only. It outputs a tensor one rank less than the keys, giving a scalar for each key corresponding to the attention the query should have for the key. This attention vector should be normalized. The most common attention mechanism is a dot product and softmax:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-79008026-e641-49ad-a142-f5580374d83a">
+<span class="eqno">(12.4)<a class="headerlink" href="#equation-79008026-e641-49ad-a142-f5580374d83a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\vec{b} = \mathrm{softmax}\left(\vec{q}\cdot \mathbf{K}\right) = \mathrm{softmax}\left(\sum_j q_j k_{ij}\right)
+\end{equation}\]</div>
+<p>where index <span class="math notranslate nohighlight">\(i\)</span> is the position in the sequence and <span class="math notranslate nohighlight">\(j\)</span> is the index of the feature. Softmax is defined as</p>
+<div class="math notranslate nohighlight" id="equation-softmax">
+<span class="eqno">(12.5)<a class="headerlink" href="#equation-softmax" title="Permalink to this equation">#</a></span>\[\mathrm{softmax}\left(\vec{x}\right) = \frac{e^\vec{x}}{\sum_i e^ x_i}\]</div>
+<p>and ensures that <span class="math notranslate nohighlight">\(\vec{b}\)</span> is normalized. Substituting our values from the example above:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-a5a915bc-738d-45ce-81a1-c0873588b104">
+<span class="eqno">(12.6)<a class="headerlink" href="#equation-a5a915bc-738d-45ce-81a1-c0873588b104" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\vec{b} = \mathrm{softmax}\left(\left[0, 2, 1\right] \times
+\left[
+\begin{array}{lccccr}
+0 &amp; 2 &amp; 1 &amp; 2 &amp; -2 &amp; 0\\
+0 &amp; 0 &amp; -1 &amp; 3 &amp; 0 &amp; 2\\
+0 &amp; 1 &amp; -2 &amp; 1 &amp; 0 &amp; 1\\
+\end{array}\right]\right) = \mathrm{softmax}\left( \left[0, 1, -4, 7, 0, 5\right]\right)
+\end{equation}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-457dffd2-a352-4479-b1cf-73dd4763cb91">
+<span class="eqno">(12.7)<a class="headerlink" href="#equation-457dffd2-a352-4479-b1cf-73dd4763cb91" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\vec{b}  = \left[0, 0, 0, 0.88, 0, 0.12\right]
+\end{equation}\]</div>
+<p>I’ve rounded the numbers here, but essentially the attention vector only gives weight to the word itself (book) and the verb “read”. I made this up, remember, but it gives you an idea of how attention gives you a way to connect words. It may even remind you of our graph neural network’s idea of neighbors.</p>
+</section>
+<section id="attention-reduction">
+<h2><span class="section-number">12.3. </span>Attention Reduction<a class="headerlink" href="#attention-reduction" title="Permalink to this headline">#</a></h2>
+<p>After computing the attention vector <span class="math notranslate nohighlight">\(\vec{b}\)</span>, this is used to compute a weighted mean over the values:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-acf511c0-0a28-4f6c-bc8e-6444d4eb184b">
+<span class="eqno">(12.8)<a class="headerlink" href="#equation-acf511c0-0a28-4f6c-bc8e-6444d4eb184b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+ \mathbf{V}\vec{b} = \left[0, 0, 0, 0.88, 0, 0.12\right]^ T \left[ 0, -0.2, 0.3, 0.4, 0, 0.1\right] = 0.36
+\end{equation}\]</div>
+<p>Conceptually, our example computed the attention-weighted sentiment of the query word “book” in our sentence. You can see that attention layers do two things: compute an attention vector with the attention mechanism and then use it to take the attention-weighted average over the values.</p>
+</section>
+<section id="tensor-dot">
+<h2><span class="section-number">12.4. </span>Tensor-Dot<a class="headerlink" href="#tensor-dot" title="Permalink to this headline">#</a></h2>
+<p>This dot product, softmax, and reduction is called a tensor-dot and is the most common attention layer<span id="id5">[<a class="reference internal" href="#id56" title="Minh-Thang Luong, Hieu Pham, and Christopher D Manning. Effective approaches to attention-based neural machine translation. arXiv preprint arXiv:1508.04025, 2015.">LPM15</a>]</span>. One common modification is to divide by the dimension of the keys (last axis dimension). Remember the keys are not normalized. If they are random numbers, the magnitude of the output from the dot product scales with the square root of the dimension of the keys due to the central limit theorem. This can make the soft-max behave poorly, since you’re taking <span class="math notranslate nohighlight">\(e^{\vec{q} \cdot \mathbf{K}}\)</span>. Putting this all together, the equation is:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-a60bae62-c32d-4398-bdb9-9126a52aa163">
+<span class="eqno">(12.9)<a class="headerlink" href="#equation-a60bae62-c32d-4398-bdb9-9126a52aa163" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \vec{b} = \mathrm{softmax}\left(\frac{1}{\sqrt{d}}\vec{q}\cdot \mathbf{K}\right)
+\end{equation}\]</div>
+<p>where <span class="math notranslate nohighlight">\(d\)</span> is the dimension of the query vector.</p>
+</section>
+<section id="soft-hard-and-temperature-attention">
+<h2><span class="section-number">12.5. </span>Soft, Hard, and Temperature Attention<a class="headerlink" href="#soft-hard-and-temperature-attention" title="Permalink to this headline">#</a></h2>
+<p>One possible change to attention is to replace the <span class="math notranslate nohighlight">\(\mathrm{softmax}\)</span> with a one at the position of highest attention and zero at all others. This is called <strong>hard attention</strong>. The equation for hard attention is to replace softmax with a “hardmax”, defined as</p>
+<div class="amsmath math notranslate nohighlight" id="equation-db7347cb-13b2-4052-8d44-127e755edbea">
+<span class="eqno">(12.10)<a class="headerlink" href="#equation-db7347cb-13b2-4052-8d44-127e755edbea" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\mathrm{hardmax}\left(\vec{x}\right) = \lim_{T\rightarrow0}\frac{e^\vec{x} / T}{\sum_i e^ {x_i / T}}
+\end{equation}\]</div>
+<p>which is a mathematical way to formulate putting <span class="math notranslate nohighlight">\(1\)</span> in the position of the largest element of <span class="math notranslate nohighlight">\(\vec{x}\)</span> and a <span class="math notranslate nohighlight">\(0\)</span> at all others. The choice of <span class="math notranslate nohighlight">\(T\)</span> is for the word temperature, because this equation is similar to Boltzmann’s distribution from statistical mechanics. You can see that limit <span class="math notranslate nohighlight">\(T = 0\)</span> is the hard attention, <span class="math notranslate nohighlight">\(T = 1\)</span> is the soft attention, and <span class="math notranslate nohighlight">\(T = \infty\)</span> means uniform attention. you could tune <span class="math notranslate nohighlight">\(T\)</span> to some intermediate values as well.</p>
+</section>
+<section id="self-attention">
+<h2><span class="section-number">12.6. </span>Self-Attention<a class="headerlink" href="#self-attention" title="Permalink to this headline">#</a></h2>
+<p>Remember how everything is batched in deep learning? The batched input to an attention layer is usually the query. So although in the above discussion it was a tensor of one rank less than the keys (typically a query <em>vector</em>), once it has been batched it will be the same rank as the keys. Almost always, the query is in fact equal to the keys. Like in our example, our query was the embedding vector for the word “book”, which is one of the keys. If you consider the query to be batched so that you consider every word in the sentence, the query becomes equal to the keys. A further special case is when the query, values and keys are equal. This is called <strong>self-attention</strong>. This just means our attention mechanism uses the values directly and there is no extra set of “keys” input to the layer.</p>
+</section>
+<section id="trainable-attention">
+<h2><span class="section-number">12.7. </span>Trainable Attention<a class="headerlink" href="#trainable-attention" title="Permalink to this headline">#</a></h2>
+<p>There are no trainable parameters in our definitions above. How can you do learning with attention? Typically, you don’t have trainable parameters in equations directly. Instead, you put the keys, values, and query through a dense layer (see <a class="reference internal" href="layers.html"><span class="doc">Standard Layers</span></a>) before the attention. So when viewed as a layer, attention has no trainable parameters. When viewed as a block with a dense layer and attention layer, it is trainable. We’ll see this now explicitly below.</p>
+</section>
+<section id="multi-head-attention-block">
+<h2><span class="section-number">12.8. </span>Multi-head Attention Block<a class="headerlink" href="#multi-head-attention-block" title="Permalink to this headline">#</a></h2>
+<p>Inspired by the idea of convolutions with multiple filters, there is a block (group of layers) that splits to multiple parallel attentions.  These are called “multi-head attention”. If your values are shape <span class="math notranslate nohighlight">\((L, V)\)</span>, you will get back a <span class="math notranslate nohighlight">\((H, V)\)</span> tensor, where <span class="math notranslate nohighlight">\(H\)</span> is the number of parallel attention layers (heads). If there are no trainable parameters in attention layers, what’s the point of this though? Well, you must introduce weights. These are <em>square</em> weight matrices because we need all shapes to remain constant among all the attention heads.</p>
+<p>Consider an attention layer to be defined by <span class="math notranslate nohighlight">\(A(\vec{q}, \mathbf{K}, \mathbf{V})\)</span>. The multi-head attention is</p>
+<div class="amsmath math notranslate nohighlight" id="equation-8e9789ae-9b58-481e-a7f1-5899ede3b875">
+<span class="eqno">(12.11)<a class="headerlink" href="#equation-8e9789ae-9b58-481e-a7f1-5899ede3b875" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\left[A(\mathbf{W}_q^0\vec{q}, \mathbf{W}_k^0\mathbf{K}, \mathbf{W}_v^0\mathbf{V}), A(\mathbf{W}_q^1\vec{q}, \mathbf{W}_k^1\mathbf{K}, \mathbf{W}_v^1\mathbf{V}), \ldots, A(\mathbf{W}_q^H\vec{q}, \mathbf{W}_k^H\mathbf{K}, \mathbf{W}_v^H\mathbf{V})\right]
+\end{equation}\]</div>
+<p>where each element of the output vector <span class="math notranslate nohighlight">\([\ldots]\)</span> is itself an output vector from an attention layer, making <span class="math notranslate nohighlight">\(H\)</span>  <span class="math notranslate nohighlight">\((L, V)\)</span> shaped tensors. So the whole output is an <span class="math notranslate nohighlight">\((H, L, V)\)</span> tensor. The most famous example of the multi-head attention block is in transformers<span id="id6">[<a class="reference internal" href="#id55" title="Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Łukasz Kaiser, and Illia Polosukhin. Attention is all you need. In Advances in neural information processing systems, 5998–6008. 2017.">VSP+17</a>]</span> where they use self-attention multi-head attention blocks.</p>
+<p>Typically we apply multiple sequential blocks of attention, so need the values input to the next block to be of rank 2 again (instead of the rank 3 <span class="math notranslate nohighlight">\((H, L, V)\)</span> tensor). Thus the output from the multi-head attention is often reduced by matrix multiplication with an <span class="math notranslate nohighlight">\((H, V, V)\)</span> weight tensor or a <span class="math notranslate nohighlight">\((H)\)</span> tensor of weights so that you get back to rank 2. If this seems confusing, see the example below.</p>
+</section>
+<section id="running-this-notebook">
+<h2><span class="section-number">12.9. </span>Running This Notebook<a class="headerlink" href="#running-this-notebook" title="Permalink to this headline">#</a></h2>
+<p>Click the  <i aria-label="Launch interactive content" class="fas fa-rocket"></i>  above to launch this page as an interactive Google Colab.</p>
+</section>
+<section id="code-examples">
+<h2><span class="section-number">12.10. </span>Code Examples<a class="headerlink" href="#code-examples" title="Permalink to this headline">#</a></h2>
+<p>Let’s see how attention can be implemented in code. I will use random variables here for the different quantities but I will indicate which variables should be trained with <code class="docutils literal notranslate"><span class="pre">w_</span></code> and which should be inputs with <code class="docutils literal notranslate"><span class="pre">i_</span></code>.</p>
+<section id="tensor-dot-mechanism">
+<h3><span class="section-number">12.10.1. </span>Tensor-Dot Mechanism<a class="headerlink" href="#tensor-dot-mechanism" title="Permalink to this headline">#</a></h3>
+<p>We’ll begin with implementing the tensor-dot attention mechanism first. As an example, we’ll use a sequence length of 11 and a keys feature length of 4 and a values feature dimension of 2. Remember the keys and query must share feature dimension size.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+
+<span class="k">def</span> <span class="nf">softmax</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">tensor_dot</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">softmax</span><span class="p">((</span><span class="n">k</span> <span class="o">@</span> <span class="n">q</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+    <span class="k">return</span> <span class="n">b</span>
+
+
+<span class="n">i_query</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,))</span>
+<span class="n">i_keys</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="n">tensor_dot</span><span class="p">(</span><span class="n">i_query</span><span class="p">,</span> <span class="n">i_keys</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;b = &quot;</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>b =  [0.10708407 0.2159088  0.18910064 0.02449849 0.09297742 0.04962959
+ 0.02203747 0.06559855 0.11954705 0.04353657 0.07008136]
+</pre></div>
+</div>
+</div>
+</div>
+<p>As expected, we get out a vector <span class="math notranslate nohighlight">\(\vec{b}\)</span> whose sum is 1.</p>
+</section>
+<section id="general-attention">
+<h3><span class="section-number">12.10.2. </span>General Attention<a class="headerlink" href="#general-attention" title="Permalink to this headline">#</a></h3>
+<p>Now let’s put this attention mechanism into an attention layer.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">attention_layer</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">tensor_dot</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">b</span> <span class="o">@</span> <span class="n">v</span>
+
+
+<span class="n">i_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">attention_layer</span><span class="p">(</span><span class="n">i_query</span><span class="p">,</span> <span class="n">i_keys</span><span class="p">,</span> <span class="n">i_values</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.14328042, 0.0463141 ])
+</pre></div>
+</div>
+</div>
+</div>
+<p>We get two values, one for each feature dimension.</p>
+</section>
+<section id="id7">
+<h3><span class="section-number">12.10.3. </span>Self-attention<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h3>
+<p>The change in self-attention is that we make queries, keys, and values equal. We need to make a small change in that the queries are batched in this setting, so we should get a rank 2 output.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">batched_tensor_dot</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="c1"># a will be batch x seq x feature dim</span>
+    <span class="c1"># which is N x N x 4</span>
+    <span class="c1"># batched dot product in einstein notation</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;ij,kj-&gt;ik&quot;</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="c1"># now we softmax over sequence</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">softmax</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">b</span>
+
+
+<span class="k">def</span> <span class="nf">self_attention</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">batched_tensor_dot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">b</span> <span class="o">@</span> <span class="n">x</span>
+
+
+<span class="n">i_batched_query</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">self_attention</span><span class="p">(</span><span class="n">i_batched_query</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0.01832814,  0.0749668 , -0.04577256,  0.21776567],
+       [-0.28260916,  0.1767006 ,  0.43049974,  0.35189732],
+       [-1.12945171,  0.74194802,  0.26632622,  0.1826393 ],
+       [ 0.08365006,  0.08586253, -0.11776762,  0.23627548],
+       [ 0.02641636, -0.01291467,  0.3669651 ,  0.73047754],
+       [-0.12526439,  0.40507159,  0.20178456,  0.3394749 ],
+       [-0.08332396, -0.4524976 ,  0.67658427,  1.38369207],
+       [ 0.37910667,  0.32785657,  0.06896593,  0.7083815 ],
+       [-0.12169481, -0.16310902,  0.38171132,  0.58598476],
+       [ 0.03113162,  0.10217473, -0.01623162,  0.32127187],
+       [-0.08716809,  0.25544837,  0.28385506,  0.42890038]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>We are given as output an <span class="math notranslate nohighlight">\(11\times4\)</span> matrix, which is correct.</p>
+</section>
+<section id="adding-trainable-parameters">
+<h3><span class="section-number">12.10.4. </span>Adding Trainable Parameters<a class="headerlink" href="#adding-trainable-parameters" title="Permalink to this headline">#</a></h3>
+<p>You can add trainable parameters to these steps by adding a weight matrix. Let’s do this for the self-attention. Although keys, values, and query are equal in self-attention, I can multiply them by different weights. Just to demonstrate, I’ll have the values change to feature dimension 2.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># weights should be input feature_dim -&gt; desired output feature_dim</span>
+<span class="n">w_q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">w_k</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">w_v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">trainable_self_attention</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">w_q</span><span class="p">,</span> <span class="n">w_k</span><span class="p">,</span> <span class="n">w_v</span><span class="p">):</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="n">x</span> <span class="o">@</span> <span class="n">w_q</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="n">x</span> <span class="o">@</span> <span class="n">w_k</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">x</span> <span class="o">@</span> <span class="n">w_v</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">batched_tensor_dot</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">b</span> <span class="o">@</span> <span class="n">v</span>
+
+
+<span class="n">trainable_self_attention</span><span class="p">(</span><span class="n">i_batched_query</span><span class="p">,</span> <span class="n">w_q</span><span class="p">,</span> <span class="n">w_k</span><span class="p">,</span> <span class="n">w_v</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-0.12415358,  0.19886661],
+       [ 0.3107283 ,  0.62858142],
+       [-6.14330661, 10.38434859],
+       [-0.18217992,  0.2592068 ],
+       [ 1.25461404,  1.07323339],
+       [-0.2912892 ,  3.2461432 ],
+       [ 2.52707095,  1.62410927],
+       [ 0.57845772,  2.03749672],
+       [ 1.13981545,  0.60648038],
+       [-0.07851417,  0.55365682],
+       [ 0.20726197,  1.38793509]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Since we had our values change to feature dimension 2 with the weights, we get out an <span class="math notranslate nohighlight">\(11\times 2\)</span> output.</p>
+</section>
+<section id="multi-head">
+<h3><span class="section-number">12.10.5. </span>Multi-head<a class="headerlink" href="#multi-head" title="Permalink to this headline">#</a></h3>
+<p>The only change for multi-head attention is that we have one set of weights for each head and we agree on how to combine after running through the heads. I’ll just use a length <span class="math notranslate nohighlight">\(H\)</span> vector of trainable weights. Other strategies are to concatenate them or use a reduction (e.g., mean, max).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">w_q_h1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">w_k_h1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">w_v_h1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">w_q_h2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">w_k_h2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">w_v_h2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">w_h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">multihead_attention</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">w_q_h1</span><span class="p">,</span> <span class="n">w_k_h1</span><span class="p">,</span> <span class="n">w_v_h1</span><span class="p">,</span> <span class="n">w_q_h2</span><span class="p">,</span> <span class="n">w_k_h2</span><span class="p">,</span> <span class="n">w_v_h2</span><span class="p">):</span>
+    <span class="n">h1_out</span> <span class="o">=</span> <span class="n">trainable_self_attention</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">w_q_h1</span><span class="p">,</span> <span class="n">w_k_h1</span><span class="p">,</span> <span class="n">w_v_h1</span><span class="p">)</span>
+    <span class="n">h2_out</span> <span class="o">=</span> <span class="n">trainable_self_attention</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">w_q_h2</span><span class="p">,</span> <span class="n">w_k_h2</span><span class="p">,</span> <span class="n">w_v_h2</span><span class="p">)</span>
+    <span class="c1"># join along last axis so we can use dot.</span>
+    <span class="n">all_h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">((</span><span class="n">h1_out</span><span class="p">,</span> <span class="n">h2_out</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">all_h</span> <span class="o">@</span> <span class="n">w_h</span>
+
+
+<span class="n">multihead_attention</span><span class="p">(</span><span class="n">i_batched_query</span><span class="p">,</span> <span class="n">w_q_h1</span><span class="p">,</span> <span class="n">w_k_h1</span><span class="p">,</span> <span class="n">w_v_h1</span><span class="p">,</span> <span class="n">w_q_h2</span><span class="p">,</span> <span class="n">w_k_h2</span><span class="p">,</span> <span class="n">w_v_h2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 6.77177965e-01,  5.59331900e-02],
+       [ 2.27143381e+00,  3.78831009e-01],
+       [ 1.09948881e+03,  5.83190853e+02],
+       [ 1.35308286e+00,  3.07478796e-01],
+       [ 3.68488594e-01, -5.26710264e-01],
+       [ 1.36394854e+02, -9.30940659e+00],
+       [-2.35289075e+00, -9.72529355e-01],
+       [ 1.80170350e+01,  4.90282722e-02],
+       [-1.69200964e+00, -7.16240273e-01],
+       [ 1.67545404e+00,  5.52312680e-01],
+       [ 3.22989922e+01, -1.62346886e+00]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>As expected, we do get an <span class="math notranslate nohighlight">\(11\times2\)</span> rank 2 output.</p>
+</section>
+</section>
+<section id="attention-in-graph-neural-networks">
+<h2><span class="section-number">12.11. </span>Attention in Graph Neural Networks<a class="headerlink" href="#attention-in-graph-neural-networks" title="Permalink to this headline">#</a></h2>
+<p>Recall that the key attribute of a graph neural network is permutation equivariance. We used reductions like sum or mean over neighbors as the way to make the graph neural network layers be permutation equivariant. Attention layers are also permutation invariant (when not batched) and equivariant (when batched). This has made attention a popular choice for how to aggregate neighbor information. Attention layers are good at finding important neighbors and so are important with high-degree graphs (lots of neighbors). This is rare in molecules, but you can just define all atoms to be connected and then put distances as the edge attributes. Recall that graph convolution layers (GCN layer), and most GNN layers, only allow information to propagate one-bond per layer. Thus joining all atoms and using attention can give you long-range communication without so many layers. The disadvantage is that your network must now learn how to give attention to the correct bonds/atoms.</p>
+<p>Let’s see how attention fits into the Battaglia equations<span id="id8">[<a class="reference internal" href="gnn.html#id74" title="Peter W Battaglia, Jessica B Hamrick, Victor Bapst, Alvaro Sanchez-Gonzalez, Vinicius Zambaldi, Mateusz Malinowski, Andrea Tacchetti, David Raposo, Adam Santoro, Ryan Faulkner, and others. Relational inductive biases, deep learning, and graph networks. arXiv preprint arXiv:1806.01261, 2018.">BHB+18</a>]</span>. Recall that the Battaglia equations are general standard equations for defining a GNN. Attention can appear in multiple places, but as discussed above it appears when considering neighbors. Specifically, the query will be the <span class="math notranslate nohighlight">\(i\)</span>th node, and the keys/values will be some combination of neighboring node and edge features. There is no step in the Battaglia equations where this fits neatly, but we can split up the attention layer as follows. Most of the attention layer will fit into the edge update equation:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-7e34ff86-acd3-4494-ab68-a751dea4ee3d">
+<span class="eqno">(12.12)<a class="headerlink" href="#equation-7e34ff86-acd3-4494-ab68-a751dea4ee3d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\vec{e}^{'}_k = \phi^e\left( \vec{e}_k, \vec{v}_{rk}, \vec{v}_{sk}, \vec{u}\right)
+\end{equation}\]</div>
+<p>Recall that this is a general equation and our choice of <span class="math notranslate nohighlight">\(\phi^e()\)</span> defines the GNN. <span class="math notranslate nohighlight">\(\vec{e}_k\)</span> is the feature vector of edge <span class="math notranslate nohighlight">\(k\)</span>, <span class="math notranslate nohighlight">\(\vec{v}_{rk}\)</span> is the receiving node feature vector for edge <span class="math notranslate nohighlight">\(k\)</span>, <span class="math notranslate nohighlight">\(\vec{v}_{sk}\)</span> is the sending node feature vector for edge <span class="math notranslate nohighlight">\(k\)</span>, <span class="math notranslate nohighlight">\(\vec{u}\)</span> is the global graph feature vector. We will use this step for attention mechanism where the query is the receiving node <span class="math notranslate nohighlight">\(\vec{v}_{rk}\)</span> and the keys/values are composed of the senders and edges vectors. To be specific, we’ll use the approach from Zhang et al. <span id="id9">[<a class="reference internal" href="gnn.html#id80" title="Jiani Zhang, Xingjian Shi, Junyuan Xie, Hao Ma, Irwin King, and Dit-Yan Yeung. Gaan: gated attention networks for learning on large and spatiotemporal graphs. arXiv preprint arXiv:1803.07294, 2018.">ZSX+18</a>]</span> with a tensor-dot mechanism. They only considered node features and set the keys and values to be identical as the node features. However, they put trainable parameters at each layer that translated the node features in to the keys/query.</p>
+<div class="amsmath math notranslate nohighlight" id="equation-b2803897-0189-4b50-a7f9-58d96e9063bd">
+<span class="eqno">(12.13)<a class="headerlink" href="#equation-b2803897-0189-4b50-a7f9-58d96e9063bd" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\vec{q} = \mathbf{W}_q\vec{v}_{rk}
+\end{equation}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-65fcd96b-032a-4f44-ab43-6ac429a72126">
+<span class="eqno">(12.14)<a class="headerlink" href="#equation-65fcd96b-032a-4f44-ab43-6ac429a72126" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\mathbf{K} = \mathbf{W}_k\vec{v}_{sk}
+\end{equation}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-5c3f396c-ba29-417d-aace-1cf2287ad44a">
+<span class="eqno">(12.15)<a class="headerlink" href="#equation-5c3f396c-ba29-417d-aace-1cf2287ad44a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\mathbf{V} = \mathbf{W}_v\vec{v}_{sk}
+\end{equation}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-5b6472c0-dc41-43d3-b692-265c30c1638a">
+<span class="eqno">(12.16)<a class="headerlink" href="#equation-5b6472c0-dc41-43d3-b692-265c30c1638a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    \vec{b}_k = \mathrm{softmax}\left(\frac{1}{\sqrt{d}} \vec{q}\cdot \mathbf{K}\right)
+\end{equation}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-d3711e4b-3b14-41ac-8108-be4175b25962">
+<span class="eqno">(12.17)<a class="headerlink" href="#equation-d3711e4b-3b14-41ac-8108-be4175b25962" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\vec{e}^{'}_k = \vec{b} V
+\end{equation}\]</div>
+<p>Putting it compactly into one equation:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-d110b6d0-dd51-4b98-ac3c-f4990bee221d">
+<span class="eqno">(12.18)<a class="headerlink" href="#equation-d110b6d0-dd51-4b98-ac3c-f4990bee221d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\vec{e}^{'}_k = \mathrm{softmax}\left(\frac{1}{\sqrt{d}} \mathbf{W}_q\vec{v}_{rk}\cdot \mathbf{W}_k\vec{v}_{sk}\right)\mathbf{W}_v\vec{v}_{sk}
+\end{equation}\]</div>
+<p>Now we have weighted edge feature vectors from the attention. Finally, we sum over these edge features in the edge aggregation step.</p>
+<div class="amsmath math notranslate nohighlight" id="equation-79ed4dc8-b8e9-426f-9caf-68ec412cf8d8">
+<span class="eqno">(12.19)<a class="headerlink" href="#equation-79ed4dc8-b8e9-426f-9caf-68ec412cf8d8" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\bar{e}^{'}_i = \rho^{e\rightarrow v}\left( E_i^{'}\right) = \sum E_i^{'}
+\end{equation}\]</div>
+<p>In Zhang et al. <span id="id10">[<a class="reference internal" href="gnn.html#id80" title="Jiani Zhang, Xingjian Shi, Junyuan Xie, Hao Ma, Irwin King, and Dit-Yan Yeung. Gaan: gated attention networks for learning on large and spatiotemporal graphs. arXiv preprint arXiv:1803.07294, 2018.">ZSX+18</a>]</span>, they used multi-headed attention as well. How would multi-headed attention work? Your edge feature matrix <span class="math notranslate nohighlight">\( E_i^{'}\)</span> now becomes an edge feature tensor, where axis 0 is edge (<span class="math notranslate nohighlight">\(k\)</span>), axis 1 is feature, and axis 2 is the head. Recall that the “head” just means which set of <span class="math notranslate nohighlight">\(\mathbf{W}^h_q, \mathbf{W}^h_k, \mathbf{W}^h_v\)</span> we used. To reduce the tensor back to the expected matrix, we simply use another weight matrix that maps from the last two axes (feature, head) down to features only. I will write-out the indices explicitly to be more clear:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-5ff12150-b031-4f05-83d7-36754ec3d484">
+<span class="eqno">(12.20)<a class="headerlink" href="#equation-5ff12150-b031-4f05-83d7-36754ec3d484" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\bar{e}^{'}_{il} = \rho^{e\rightarrow v}\left( E_i^{'}\right) = \sum_k e_{ikjh}^{'}w_{jhl}
+\end{equation}\]</div>
+<p>where <span class="math notranslate nohighlight">\(j\)</span> is edge feature input index, <span class="math notranslate nohighlight">\(l\)</span> is our output edge feature matrix, and <span class="math notranslate nohighlight">\(k,h,i\)</span> are defined as before. <strong>Transformer</strong> is another name for a network built on multi-headed attention, so you’ll also see transformer graph neural networks <span id="id11">[<a class="reference internal" href="#id87" title="Łukasz Maziarka, Tomasz Danel, Sławomir Mucha, Krzysztof Rataj, Jacek Tabor, and Stanisław Jastrzębski. Molecule attention transformer. arXiv preprint arXiv:2002.08264, 2020.">MDM+20</a>]</span> building.</p>
+</section>
+<section id="chapter-summary">
+<h2><span class="section-number">12.12. </span>Chapter Summary<a class="headerlink" href="#chapter-summary" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Attention layers are inspired by human ideas of attention, but is fundamentally a weighted mean reduction.</p></li>
+<li><p>The attention layer takes in three inputs: the query, the values, and the keys. These inputs are often identical, where the query is one key and the keys and the values are equal.</p></li>
+<li><p>They are good at modeling sequences, such as language.</p></li>
+<li><p>The attention vector should be normalized, which can be achieved using a softmax activation function, but the attention mechanism equation is a hyperparameter.</p></li>
+<li><p>Attention layers compute an attention vector with the attention mechanism, and then reduce it by computing the attention-weighted average.</p></li>
+<li><p>Using hard attention (hardmax function) returns the maximum output from the attention mechanism.</p></li>
+<li><p>The tensor-dot followed by a softmax is the most common attention mechanism.</p></li>
+<li><p>Self-attention is achieved when the query, values, and the keys are equal.</p></li>
+<li><p>Attention layers by themselves are not trainable.</p></li>
+<li><p>Multi-head attention block is a group of layers that splits to multiple parallel attentions.</p></li>
+</ul>
+</section>
+<section id="cited-references">
+<h2><span class="section-number">12.13. </span>Cited References<a class="headerlink" href="#cited-references" title="Permalink to this headline">#</a></h2>
+<div class="docutils container" id="id12">
+<dl class="citation">
+<dt class="label" id="id51"><span class="brackets"><a class="fn-backref" href="#id8">BHB+18</a></span></dt>
+<dd><p>Peter W Battaglia, Jessica B Hamrick, Victor Bapst, Alvaro Sanchez-Gonzalez, Vinicius Zambaldi, Mateusz Malinowski, Andrea Tacchetti, David Raposo, Adam Santoro, Ryan Faulkner, and others. Relational inductive biases, deep learning, and graph networks. <em>arXiv preprint arXiv:1806.01261</em>, 2018.</p>
+</dd>
+<dt class="label" id="id57"><span class="brackets">ZSX+18</span><span class="fn-backref">(<a href="#id9">1</a>,<a href="#id10">2</a>)</span></dt>
+<dd><p>Jiani Zhang, Xingjian Shi, Junyuan Xie, Hao Ma, Irwin King, and Dit-Yan Yeung. Gaan: gated attention networks for learning on large and spatiotemporal graphs. <em>arXiv preprint arXiv:1803.07294</em>, 2018.</p>
+</dd>
+<dt class="label" id="id59"><span class="brackets"><a class="fn-backref" href="#id1">BP97</a></span></dt>
+<dd><p>Shumeet Baluja and Dean A. Pomerleau. Expectation-based selective attention for visual monitoring and control of a robot vehicle. <em>Robotics and Autonomous Systems</em>, 22(3):329–344, 1997. Robot Learning: The New Wave. URL: <a class="reference external" href="http://www.sciencedirect.com/science/article/pii/S0921889097000468">http://www.sciencedirect.com/science/article/pii/S0921889097000468</a>, <a class="reference external" href="https://doi.org/https://doi.org/10.1016/S0921-8890(97)00046-8">doi:https://doi.org/10.1016/S0921-8890(97)00046-8</a>.</p>
+</dd>
+<dt class="label" id="id58"><span class="brackets"><a class="fn-backref" href="#id2">TG80</a></span></dt>
+<dd><p>Anne M Treisman and Garry Gelade. A feature-integration theory of attention. <em>Cognitive psychology</em>, 12(1):97–136, 1980.</p>
+</dd>
+<dt class="label" id="id56"><span class="brackets">LPM15</span><span class="fn-backref">(<a href="#id3">1</a>,<a href="#id5">2</a>)</span></dt>
+<dd><p>Minh-Thang Luong, Hieu Pham, and Christopher D Manning. Effective approaches to attention-based neural machine translation. <em>arXiv preprint arXiv:1508.04025</em>, 2015.</p>
+</dd>
+<dt class="label" id="id55"><span class="brackets">VSP+17</span><span class="fn-backref">(<a href="#id4">1</a>,<a href="#id6">2</a>)</span></dt>
+<dd><p>Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Łukasz Kaiser, and Illia Polosukhin. Attention is all you need. In <em>Advances in neural information processing systems</em>, 5998–6008. 2017.</p>
+</dd>
+<dt class="label" id="id87"><span class="brackets"><a class="fn-backref" href="#id11">MDM+20</a></span></dt>
+<dd><p>Łukasz Maziarka, Tomasz Danel, Sławomir Mucha, Krzysztof Rataj, Jacek Tabor, and Stanisław Jastrzębski. Molecule attention transformer. <em>arXiv preprint arXiv:2002.08264</em>, 2020.</p>
+</dd>
+</dl>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./dl"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="xai.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">11. </span>Explaining Predictions</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="NLP.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">13. </span>Deep Learning on Sequences</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Andrew D. White<br/>
+  
+      &copy; Copyright 2022.<br/>
+    <div class="extra_footer">
+      <a href="http://thewhitelab.org">thewhitelab.org</a> <div id="wh-modal"> <button class="wh-venti-button" aria-label="close modal" id="wh-modal-close">✕</button> <img id="wh-modal-img"> </div>
+    </div>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

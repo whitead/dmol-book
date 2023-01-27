@@ -1,0 +1,1911 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="Deep Learning for Molecules &amp; Materials Book" lang="en" name="description" xml:lang="en" />
+<meta content="en_US" property="og:locale" />
+<meta content="summary" name="twitter:card" />
+<meta content="Deep Learning for Molecules &amp; Materials Book" name="twitter:description" />
+<meta content="dmol.pub 📖" name="twitter:title" />
+<meta content="https://dmol.pub/_static/logo.png" name="twitter:image" />
+<meta content="&#64;andrewwhite01" name="twitter:site" />
+
+    <title>4. Classification &#8212; deep learning for molecules &amp; materials</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/a11y.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/custom.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="canonical" href="https://dmol.pub/ml/classification.html" />
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="5. Kernel Learning" href="kernel.html" />
+    <link rel="prev" title="3. Regression &amp; Model Assessment" href="regression.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">deep learning for molecules & materials</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Overview
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  A. Math Review
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../math/tensors-and-shapes.html">
+   1. Tensors and Shapes
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  B. Machine Learning
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="introduction.html">
+   2. Introduction to Machine Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="regression.html">
+   3. Regression &amp; Model Assessment
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   4. Classification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="kernel.html">
+   5. Kernel Learning
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  C. Deep Learning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../dl/introduction.html">
+   6. Deep Learning Overview
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../dl/layers.html">
+   7. Standard Layers
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../dl/gnn.html">
+   8. Graph Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../dl/data.html">
+   9. Input Data &amp; Equivariances
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../dl/Equivariant.html">
+   10. Equivariant Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../dl/xai.html">
+   11. Explaining Predictions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../dl/attention.html">
+   12. Attention Layers
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../dl/NLP.html">
+   13. Deep Learning on Sequences
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../dl/VAE.html">
+   14. Variational Autoencoder
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../dl/flows.html">
+   15. Normalizing Flows
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  D. Applications
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../applied/QM9.html">
+   16. Predicting DFT Energies with GNNs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../applied/MolGenerator.html">
+   17. Generative RNN in Browser
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  E. Contributed Chapters
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../dl/Hyperparameter_tuning.html">
+   18. Hyperparameter Tuning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../applied/e3nn_traj.html">
+   19. Equivariant Neural Network for Predicting Trajectories
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../dl/pretraining.html">
+   20. Pretraining
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  F. Appendix
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../style.html">
+   21. Style Guide
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../changelog.html">
+   22. Changelog
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  G. In Progress
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../dl/molnets.html">
+   23. Modern Molecular NNs
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            <script async defer src="https://api.dmol.pub/latest.js"></script><noscript><img src="https://api.dmol.pub/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript> By <a href="https://twitter.com/andrewwhite01">Andrew White</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://colab.research.google.com/github/whitead/dmol-book/blob/master/ml/classification.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/whitead/dmol-book"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/whitead/dmol-book/issues/new?title=Issue%20on%20page%20%2Fml/classification.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/ml/classification.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data">
+   4.1. Data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#running-this-notebook">
+   4.2. Running This Notebook
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#molecular-descriptors">
+   4.3. Molecular Descriptors
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#classification-models">
+   4.4. Classification Models
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#linear-perceptron">
+     4.4.1. Linear Perceptron
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#classification-metrics">
+   4.5. Classification Metrics
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#error-types">
+     4.5.1. Error Types
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#receiver-operating-characteristic-curve">
+     4.5.2. Receiver-Operating Characteristic Curve
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#other-metrics">
+     4.5.3. Other metrics
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#confusion-matrix">
+       4.5.3.1. Confusion Matrix
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#class-imbalance">
+   4.6. Class Imbalance
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#screening-no-negative-examples">
+     4.6.1. Screening: no negative examples
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#overfitting">
+   4.7. Overfitting
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#chapter-summary">
+   4.8. Chapter Summary
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   4.9. Exercises
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id10">
+     4.9.1. Classification
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id11">
+     4.9.2. Data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#assessment">
+     4.9.3. Assessment
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#complete-model">
+     4.9.4. Complete Model
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cited-references">
+   4.10. Cited References
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Classification</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data">
+   4.1. Data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#running-this-notebook">
+   4.2. Running This Notebook
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#molecular-descriptors">
+   4.3. Molecular Descriptors
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#classification-models">
+   4.4. Classification Models
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#linear-perceptron">
+     4.4.1. Linear Perceptron
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#classification-metrics">
+   4.5. Classification Metrics
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#error-types">
+     4.5.1. Error Types
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#receiver-operating-characteristic-curve">
+     4.5.2. Receiver-Operating Characteristic Curve
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#other-metrics">
+     4.5.3. Other metrics
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#confusion-matrix">
+       4.5.3.1. Confusion Matrix
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#class-imbalance">
+   4.6. Class Imbalance
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#screening-no-negative-examples">
+     4.6.1. Screening: no negative examples
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#overfitting">
+   4.7. Overfitting
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#chapter-summary">
+   4.8. Chapter Summary
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   4.9. Exercises
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id10">
+     4.9.1. Classification
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id11">
+     4.9.2. Data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#assessment">
+     4.9.3. Assessment
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#complete-model">
+     4.9.4. Complete Model
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cited-references">
+   4.10. Cited References
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="classification">
+<h1><span class="section-number">4. </span>Classification<a class="headerlink" href="#classification" title="Permalink to this headline">#</a></h1>
+<p>Classification is supervised learning with categorical labels. You are given labeled data consisting of features and labels <span class="math notranslate nohighlight">\(\{\vec{x}_i, \vec{y}_i\}\)</span>, where <span class="math notranslate nohighlight">\(\vec{y}_i\)</span> is a vector of binary values indicating class membership. An example of <span class="math notranslate nohighlight">\(\vec{y}_i\)</span> that indicates membership of classes “soluble in THF”, “insoluble in water”, “soluble in chloroform” might be:</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:left head"><p>THF</p></th>
+<th class="text-align:center head"><p>water</p></th>
+<th class="text-align:right head"><p>chloroform</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:left"><p>1</p></td>
+<td class="text-align:center"><p>0</p></td>
+<td class="text-align:right"><p>1</p></td>
+</tr>
+</tbody>
+</table>
+<p>where we’ve indicated that the molecule in soluble in THF and chloroform but not water. As a vector, it is <span class="math notranslate nohighlight">\(\vec{y} = (1, 0, 1) \)</span>.  This is the general format of classification and can be called <strong>multi-label</strong> classification because we are attaching three labels: THF soluble, water insoluble, chloroform soluble. This can be restricted so that each data point belongs to only one class – called <strong>multi-class</strong> classification. This might be like assigning visible color. A molecule can only be red or green or orange, but not multiple colors. Finally, you can only have one class and a label can only belong to the single class or does not belong to the single class. This is called <strong>binary</strong> classification and is the most common classification type. If you’re doing multi-label or multi-class classification, the shape of <span class="math notranslate nohighlight">\(\vec{y}\)</span> will be a vector length <span class="math notranslate nohighlight">\(K\)</span> where <span class="math notranslate nohighlight">\(K\)</span> indicates number of classes. In the case of binary classification, the label is a binary value of 1 or 0 where 1 means it is a member of the class. You can view this as there being two classes: a <strong>positive</strong> class (<span class="math notranslate nohighlight">\(y = 1\)</span>) and <strong>negative</strong> class (<span class="math notranslate nohighlight">\(y = 0\)</span>). For example, you could be predicting if a molecule will kill cells. If the molecule is in the positive class, it kills cells. If it is the negative class, it is inert and does not kill cells. Depending on your choice of model type, when you predict the labels (<span class="math notranslate nohighlight">\(\hat{\vec{y}}\)</span>), your model could predict probabilities.</p>
+<div class="admonition-audience-objectives admonition">
+<p class="admonition-title">Audience &amp; Objectives</p>
+<p>This chapter builds on <a class="reference internal" href="regression.html"><span class="doc">Regression &amp; Model Assessment</span></a> and a basic knowledge of probability theory – specifically random variables, normalization, and the metrics section below touches on calibration (empirical agreement of model distribution with true distribution). You can read <a class="reference external" href="https://raw.githubusercontent.com/whitead/numerical_stats/master/unit_2/lectures/lecture_3.pdf">my notes</a> or any introductory probability text to learn these topics. After completing this chapter, you should be able to:</p>
+<ul class="simple">
+<li><p>Distinguish between types of classification</p></li>
+<li><p>Set-up and train a classifier with a cross-entropy loss function</p></li>
+<li><p>Characterize classifier performance</p></li>
+<li><p>Identify and address class imbalance</p></li>
+</ul>
+</div>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>Note that in multi-class and binary classification <span class="math notranslate nohighlight">\(\sum \hat{\vec{y}} = 1\)</span>, but
+in multi-label classification this is not the case. Multi-label classification is like doing <span class="math notranslate nohighlight">\(K\)</span> instances of binary classification.</p>
+</aside>
+<p>The goal of classification is to find a function that describes the relationship between features and class, <span class="math notranslate nohighlight">\(\hat{f}(\vec{x}) = \hat{y}\)</span>. We’ll see that this problem can be converted to regression by using probability or <em>distance from  a decision boundary</em>. This means much of what we learned previously can be applied to this classification.</p>
+<p>The classic application of classification in structure-activity relationship is in drug discovery, where we want to predict if a molecule will be active (positive class) as a function of structure. That dates back to the 1970s. Classification is widely used now in materials and chemistry. Many molecular design problems can be formulated as classification. For example, you can use it to design new organic photovoltaic materials <span id="id1">[<a class="reference internal" href="#id30" title="Wenbo Sun, Yujie Zheng, Ke Yang, Qi Zhang, Akeel A Shah, Zhou Wu, Yuyang Sun, Liang Feng, Dongyang Chen, Zeyun Xiao, and others. Machine learning–assisted molecular design and efficiency prediction for high-performance organic photovoltaic materials. Science advances, 5(11):eaay4275, 2019.">SZY+19</a>]</span> or antimicrobial peptides <span id="id2">[<a class="reference internal" href="#id20" title="Rainier Barrett, Shaoyi Jiang, and Andrew D White. Classifying antimicrobial and multifunctional peptides with bayesian network models. Peptide Science, 110(4):e24079, 2018.">BJW18</a>]</span>.</p>
+<section id="data">
+<h2><span class="section-number">4.1. </span>Data<a class="headerlink" href="#data" title="Permalink to this headline">#</a></h2>
+<p>The dataset for this lecture was prepared by the MoleculeNet group <span id="id3">[<a class="reference internal" href="#id32" title="Zhenqin Wu, Bharath Ramsundar, Evan N Feinberg, Joseph Gomes, Caleb Geniesse, Aneesh S Pappu, Karl Leswing, and Vijay Pande. Moleculenet: a benchmark for molecular machine learning. Chemical science, 9(2):513–530, 2018.">WRF+18</a>]</span>.  It is a collection of molecules that succeeded or failed in clinical trials. The development of a new drug can cost well over a $1 billion, so any way to predict if a molecule will fail during clinical trials is highly valuable. The reason molecules fail in clinical trials is often due to safety, so even though some of these drugs failed because they were not effective there may be something common to each of the failed ones that we can learn.</p>
+<p>The labels will be the FDA_Approved column which is a 1 or 0 indicating FDA approval status. This is an example of binary classification.</p>
+</section>
+<section id="running-this-notebook">
+<h2><span class="section-number">4.2. </span>Running This Notebook<a class="headerlink" href="#running-this-notebook" title="Permalink to this headline">#</a></h2>
+<p>Click the  <i aria-label="Launch interactive content" class="fas fa-rocket"></i>  above to launch this page as an interactive Google Colab. See details below on installing packages.</p>
+<div class="dropdown admonition tip">
+<p class="admonition-title">Tip</p>
+<p>To install packages, execute this code in a new cell.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!pip install dmol-book
+</pre></div>
+</div>
+<p>If you find install problems, you can get the latest working versions of packages used in <a class="reference external" href="https://github.com/whitead/dmol-book/blob/main/package/setup.py">this book here</a></p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">rdkit</span><span class="o">,</span> <span class="nn">rdkit.Chem</span><span class="o">,</span> <span class="nn">rdkit.Chem.Draw</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
+<span class="kn">import</span> <span class="nn">mordred</span><span class="o">,</span> <span class="nn">mordred.descriptors</span>
+<span class="kn">import</span> <span class="nn">jax</span>
+<span class="kn">import</span> <span class="nn">dmol</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we load the data. This is a little fancy because we’re extracting the data file from a zip archive on a website.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># from zipfile import ZipFile</span>
+<span class="c1"># from io import BytesIO</span>
+<span class="c1"># from urllib.request import urlopen</span>
+
+<span class="c1"># from web version</span>
+<span class="c1"># url = &#39;https://deepchemdata.s3-us-west-1.amazonaws.com/datasets/clintox.csv.gz&#39;</span>
+<span class="c1"># file = urlopen(url).read()</span>
+<span class="c1"># file = BytesIO(file)</span>
+<span class="c1"># document = ZipFile(file)</span>
+<span class="c1"># toxdata = pd.read_csv(document.open(&#39;clintox.csv&#39;))</span>
+
+<span class="c1"># local version</span>
+<span class="n">toxdata</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+    <span class="s2">&quot;https://github.com/whitead/dmol-book/raw/main/data/clintox.csv.gz&quot;</span>
+<span class="p">)</span>
+<span class="n">toxdata</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>smiles</th>
+      <th>FDA_APPROVED</th>
+      <th>CT_TOX</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>*C(=O)[C@H](CCCCNC(=O)OCCOC)NC(=O)OCCOC</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>[C@@H]1([C@@H]([C@@H]([C@H]([C@@H]([C@@H]1Cl)C...</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>[C@H]([C@@H]([C@@H](C(=O)[O-])O)O)([C@H](C(=O)...</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>[H]/[NH+]=C(/C1=CC(=O)/C(=C\C=c2ccc(=C([NH3+])...</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>[H]/[NH+]=C(\N)/c1ccc(cc1)OCCCCCOc2ccc(cc2)/C(...</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="molecular-descriptors">
+<h2><span class="section-number">4.3. </span>Molecular Descriptors<a class="headerlink" href="#molecular-descriptors" title="Permalink to this headline">#</a></h2>
+<p>This time, our data does not come with pre-computed descriptors. We only have the SMILES string, which is a way of writing a molecule using letters and numbers (a string). We can use rdkit to convert the SMILES string into a molecule, and then we can use a package called Mordred <span id="id4">[<a class="reference internal" href="#id25" title="Hirotomo Moriwaki, Yu-Shi Tian, Norihito Kawashita, and Tatsuya Takagi. Mordred: a molecular descriptor calculator. Journal of cheminformatics, 10(1):4, 2018.">MTKT18</a>]</span> to compute a set of descriptors for each molecule. This package will compute around 1500 descriptors for each molecule.</p>
+<p>We’ll start by converting our molecules into rdkit objects and building a calculator to compute the descriptors.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># make object that can compute descriptors</span>
+<span class="n">calc</span> <span class="o">=</span> <span class="n">mordred</span><span class="o">.</span><span class="n">Calculator</span><span class="p">(</span><span class="n">mordred</span><span class="o">.</span><span class="n">descriptors</span><span class="p">,</span> <span class="n">ignore_3D</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># make subsample from pandas df</span>
+<span class="n">molecules</span> <span class="o">=</span> <span class="p">[</span><span class="n">rdkit</span><span class="o">.</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="n">smi</span><span class="p">)</span> <span class="k">for</span> <span class="n">smi</span> <span class="ow">in</span> <span class="n">toxdata</span><span class="o">.</span><span class="n">smiles</span><span class="p">]</span>
+
+<span class="c1"># view one molecule to make sure things look good.</span>
+<span class="n">molecules</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><?xml version='1.0' encoding='iso-8859-1'?>
+<svg version='1.1' baseProfile='full'
+              xmlns='http://www.w3.org/2000/svg'
+                      xmlns:rdkit='http://www.rdkit.org/xml'
+                      xmlns:xlink='http://www.w3.org/1999/xlink'
+                  xml:space='preserve'
+width='450px' height='150px' viewBox='0 0 450 150'>
+<!-- END OF HEADER -->
+<rect style='opacity:1.0;fill:#FFFFFF;stroke:none' width='450.0' height='150.0' x='0.0' y='0.0'> </rect>
+<path class='bond-0 atom-0 atom-1' d='M 126.3,33.3 L 141.2,27.3' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-1 atom-1 atom-2' d='M 142.4,28.2 L 144.6,12.8' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-1 atom-1 atom-2' d='M 139.7,27.8 L 141.9,12.5' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-2 atom-1 atom-3' d='M 141.2,27.3 L 155.4,38.4' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-3 atom-3 atom-4' d='M 158.8,37.4 L 158.6,36.7' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-3 atom-3 atom-4' d='M 162.3,36.3 L 161.8,35.1' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-3 atom-3 atom-4' d='M 165.8,35.3 L 165.0,33.4' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-3 atom-3 atom-4' d='M 169.2,34.3 L 168.2,31.8' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-4 atom-4 atom-5' d='M 172.1,31.6 L 186.3,42.8' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-5 atom-5 atom-6' d='M 186.3,42.8 L 203.0,36.0' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-6 atom-6 atom-7' d='M 203.0,36.0 L 217.2,47.2' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-7 atom-7 atom-8' d='M 217.2,47.2 L 231.4,41.5' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-8 atom-8 atom-9' d='M 236.5,42.4 L 248.2,51.6' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-9 atom-9 atom-10' d='M 246.9,50.6 L 244.7,66.0' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-9 atom-9 atom-10' d='M 249.6,51.0 L 247.4,66.4' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-10 atom-9 atom-11' d='M 248.2,51.6 L 262.0,46.0' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-11 atom-11 atom-12' d='M 267.8,47.1 L 279.1,55.9' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-12 atom-12 atom-13' d='M 279.1,55.9 L 295.8,49.2' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-13 atom-13 atom-14' d='M 295.8,49.2 L 307.1,58.0' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-14 atom-14 atom-15' d='M 313.0,59.2 L 326.8,53.6' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-15 atom-3 atom-16' d='M 155.4,38.4 L 153.3,53.1' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-16 atom-16 atom-17' d='M 155.4,58.2 L 167.0,67.4' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-17 atom-17 atom-18' d='M 166.8,68.9 L 181.3,63.1' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-17 atom-17 atom-18' d='M 165.8,66.4 L 180.3,60.6' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-18 atom-17 atom-19' d='M 167.0,67.4 L 165.0,82.0' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-19 atom-19 atom-20' d='M 167.4,87.5 L 178.7,96.3' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-20 atom-20 atom-21' d='M 178.7,96.3 L 176.2,114.2' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-21 atom-21 atom-22' d='M 176.2,114.2 L 187.4,123.0' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-22 atom-22 atom-23' d='M 189.9,128.6 L 187.8,143.2' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path d='M 140.4,27.6 L 141.2,27.3 L 141.9,27.8' style='fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;' />
+<path d='M 154.7,37.8 L 155.4,38.4 L 155.3,39.1' style='fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;' />
+<path d='M 185.6,42.2 L 186.3,42.8 L 187.1,42.4' style='fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;' />
+<path d='M 202.2,36.4 L 203.0,36.0 L 203.8,36.6' style='fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;' />
+<path d='M 216.5,46.6 L 217.2,47.2 L 217.9,46.9' style='fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;' />
+<path d='M 247.6,51.1 L 248.2,51.6 L 248.9,51.3' style='fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;' />
+<path d='M 278.5,55.5 L 279.1,55.9 L 279.9,55.6' style='fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;' />
+<path d='M 295.0,49.6 L 295.8,49.2 L 296.4,49.7' style='fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;' />
+<path d='M 166.5,66.9 L 167.0,67.4 L 166.9,68.1' style='fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;' />
+<path d='M 178.1,95.9 L 178.7,96.3 L 178.6,97.2' style='fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;' />
+<path d='M 176.3,113.3 L 176.2,114.2 L 176.7,114.6' style='fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;' />
+<path class='atom-0' d='M 123.5 33.4
+L 124.2 32.7
+L 123.2 32.5
+L 123.4 31.9
+L 124.3 32.4
+L 124.2 31.4
+L 124.7 31.4
+L 124.6 32.4
+L 125.5 32.0
+L 125.7 32.5
+L 124.6 32.6
+L 125.4 33.4
+L 124.9 33.7
+L 124.4 32.8
+L 123.9 33.7
+L 123.5 33.4
+' fill='#000000'/>
+<path class='atom-2' d='M 141.4 9.4
+Q 141.4 8.2, 142.0 7.5
+Q 142.6 6.8, 143.7 6.8
+Q 144.9 6.8, 145.5 7.5
+Q 146.1 8.2, 146.1 9.4
+Q 146.1 10.7, 145.5 11.4
+Q 144.8 12.1, 143.7 12.1
+Q 142.6 12.1, 142.0 11.4
+Q 141.4 10.7, 141.4 9.4
+M 143.7 11.5
+Q 144.5 11.5, 144.9 11.0
+Q 145.3 10.4, 145.3 9.4
+Q 145.3 8.4, 144.9 7.9
+Q 144.5 7.4, 143.7 7.4
+Q 142.9 7.4, 142.5 7.9
+Q 142.1 8.4, 142.1 9.4
+Q 142.1 10.4, 142.5 11.0
+Q 142.9 11.5, 143.7 11.5
+' fill='#000000'/>
+<path class='atom-8' d='M 232.8 37.9
+L 234.5 40.6
+Q 234.7 40.9, 234.9 41.3
+Q 235.2 41.8, 235.2 41.8
+L 235.2 37.9
+L 235.9 37.9
+L 235.9 43.0
+L 235.2 43.0
+L 233.4 40.0
+Q 233.2 39.7, 233.0 39.3
+Q 232.8 38.9, 232.7 38.8
+L 232.7 43.0
+L 232.0 43.0
+L 232.0 37.9
+L 232.8 37.9
+' fill='#000000'/>
+<path class='atom-8' d='M 232.0 32.3
+L 232.7 32.3
+L 232.7 34.4
+L 235.3 34.4
+L 235.3 32.3
+L 236.0 32.3
+L 236.0 37.4
+L 235.3 37.4
+L 235.3 35.0
+L 232.7 35.0
+L 232.7 37.4
+L 232.0 37.4
+L 232.0 32.3
+' fill='#000000'/>
+<path class='atom-10' d='M 243.3 69.4
+Q 243.3 68.2, 243.9 67.5
+Q 244.5 66.8, 245.6 66.8
+Q 246.8 66.8, 247.4 67.5
+Q 248.0 68.2, 248.0 69.4
+Q 248.0 70.7, 247.4 71.4
+Q 246.8 72.1, 245.6 72.1
+Q 244.5 72.1, 243.9 71.4
+Q 243.3 70.7, 243.3 69.4
+M 245.6 71.5
+Q 246.4 71.5, 246.8 71.0
+Q 247.3 70.5, 247.3 69.4
+Q 247.3 68.4, 246.8 67.9
+Q 246.4 67.4, 245.6 67.4
+Q 244.9 67.4, 244.4 67.9
+Q 244.0 68.4, 244.0 69.4
+Q 244.0 70.5, 244.4 71.0
+Q 244.9 71.5, 245.6 71.5
+' fill='#000000'/>
+<path class='atom-11' d='M 262.6 44.8
+Q 262.6 43.6, 263.2 42.9
+Q 263.8 42.2, 264.9 42.2
+Q 266.0 42.2, 266.6 42.9
+Q 267.2 43.6, 267.2 44.8
+Q 267.2 46.1, 266.6 46.8
+Q 266.0 47.5, 264.9 47.5
+Q 263.8 47.5, 263.2 46.8
+Q 262.6 46.1, 262.6 44.8
+M 264.9 46.9
+Q 265.7 46.9, 266.1 46.4
+Q 266.5 45.9, 266.5 44.8
+Q 266.5 43.8, 266.1 43.3
+Q 265.7 42.8, 264.9 42.8
+Q 264.1 42.8, 263.7 43.3
+Q 263.3 43.8, 263.3 44.8
+Q 263.3 45.9, 263.7 46.4
+Q 264.1 46.9, 264.9 46.9
+' fill='#000000'/>
+<path class='atom-14' d='M 307.7 60.4
+Q 307.7 59.1, 308.3 58.4
+Q 308.9 57.8, 310.0 57.8
+Q 311.2 57.8, 311.8 58.4
+Q 312.4 59.1, 312.4 60.4
+Q 312.4 61.6, 311.8 62.3
+Q 311.1 63.0, 310.0 63.0
+Q 308.9 63.0, 308.3 62.3
+Q 307.7 61.6, 307.7 60.4
+M 310.0 62.4
+Q 310.8 62.4, 311.2 61.9
+Q 311.6 61.4, 311.6 60.4
+Q 311.6 59.4, 311.2 58.8
+Q 310.8 58.3, 310.0 58.3
+Q 309.2 58.3, 308.8 58.8
+Q 308.4 59.3, 308.4 60.4
+Q 308.4 61.4, 308.8 61.9
+Q 309.2 62.4, 310.0 62.4
+' fill='#000000'/>
+<path class='atom-16' d='M 145.9 53.7
+L 146.6 53.7
+L 146.6 55.9
+L 149.2 55.9
+L 149.2 53.7
+L 149.9 53.7
+L 149.9 58.8
+L 149.2 58.8
+L 149.2 56.4
+L 146.6 56.4
+L 146.6 58.8
+L 145.9 58.8
+L 145.9 53.7
+' fill='#000000'/>
+<path class='atom-16' d='M 151.7 53.7
+L 153.4 56.4
+Q 153.6 56.7, 153.8 57.1
+Q 154.1 57.6, 154.1 57.7
+L 154.1 53.7
+L 154.8 53.7
+L 154.8 58.8
+L 154.1 58.8
+L 152.3 55.8
+Q 152.1 55.5, 151.9 55.1
+Q 151.6 54.7, 151.6 54.6
+L 151.6 58.8
+L 150.9 58.8
+L 150.9 53.7
+L 151.7 53.7
+' fill='#000000'/>
+<path class='atom-18' d='M 181.4 60.6
+Q 181.4 59.4, 182.0 58.7
+Q 182.6 58.0, 183.8 58.0
+Q 184.9 58.0, 185.5 58.7
+Q 186.1 59.4, 186.1 60.6
+Q 186.1 61.9, 185.5 62.6
+Q 184.9 63.3, 183.8 63.3
+Q 182.6 63.3, 182.0 62.6
+Q 181.4 61.9, 181.4 60.6
+M 183.8 62.7
+Q 184.6 62.7, 185.0 62.2
+Q 185.4 61.7, 185.4 60.6
+Q 185.4 59.6, 185.0 59.1
+Q 184.6 58.6, 183.8 58.6
+Q 183.0 58.6, 182.6 59.1
+Q 182.2 59.6, 182.2 60.6
+Q 182.2 61.7, 182.6 62.2
+Q 183.0 62.7, 183.8 62.7
+' fill='#000000'/>
+<path class='atom-19' d='M 162.2 85.2
+Q 162.2 84.0, 162.8 83.3
+Q 163.4 82.6, 164.5 82.6
+Q 165.6 82.6, 166.2 83.3
+Q 166.9 84.0, 166.9 85.2
+Q 166.9 86.5, 166.2 87.2
+Q 165.6 87.9, 164.5 87.9
+Q 163.4 87.9, 162.8 87.2
+Q 162.2 86.5, 162.2 85.2
+M 164.5 87.3
+Q 165.3 87.3, 165.7 86.8
+Q 166.1 86.3, 166.1 85.2
+Q 166.1 84.2, 165.7 83.7
+Q 165.3 83.2, 164.5 83.2
+Q 163.7 83.2, 163.3 83.7
+Q 162.9 84.2, 162.9 85.2
+Q 162.9 86.3, 163.3 86.8
+Q 163.7 87.3, 164.5 87.3
+' fill='#000000'/>
+<path class='atom-22' d='M 188.0 125.3
+Q 188.0 124.1, 188.6 123.4
+Q 189.2 122.7, 190.4 122.7
+Q 191.5 122.7, 192.1 123.4
+Q 192.7 124.1, 192.7 125.3
+Q 192.7 126.6, 192.1 127.3
+Q 191.5 128.0, 190.4 128.0
+Q 189.2 128.0, 188.6 127.3
+Q 188.0 126.6, 188.0 125.3
+M 190.4 127.4
+Q 191.1 127.4, 191.6 126.9
+Q 192.0 126.4, 192.0 125.3
+Q 192.0 124.3, 191.6 123.8
+Q 191.1 123.3, 190.4 123.3
+Q 189.6 123.3, 189.2 123.8
+Q 188.7 124.3, 188.7 125.3
+Q 188.7 126.4, 189.2 126.9
+Q 189.6 127.4, 190.4 127.4
+' fill='#000000'/>
+</svg>
+</div></div>
+</div>
+<p>Some of our molecules failed to be converted. We’ll have to remove them. We need to remember which ones were deleted too, since we need to remove the failed molecules from the labels.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># the invalid molecules were None, so we&#39;ll just</span>
+<span class="c1"># use the fact the None is False in Python</span>
+<span class="n">valid_mol_idx</span> <span class="o">=</span> <span class="p">[</span><span class="nb">bool</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">molecules</span><span class="p">]</span>
+<span class="n">valid_mols</span> <span class="o">=</span> <span class="p">[</span><span class="n">m</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">molecules</span> <span class="k">if</span> <span class="n">m</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span> <span class="o">=</span> <span class="n">calc</span><span class="o">.</span><span class="n">pandas</span><span class="p">(</span><span class="n">valid_mols</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we just need to stich everything back together so that our labels are consistent and standardize our features.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">labels</span> <span class="o">=</span> <span class="n">toxdata</span><span class="p">[</span><span class="n">valid_mol_idx</span><span class="p">]</span><span class="o">.</span><span class="n">FDA_APPROVED</span>
+<span class="n">features</span> <span class="o">-=</span> <span class="n">features</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">features</span> <span class="o">/=</span> <span class="n">features</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+
+<span class="c1"># we have some nans in features, likely because std was 0</span>
+<span class="n">features</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;We have </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">features</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="si">}</span><span class="s2"> features per molecule&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>We have 481 features per molecule
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="classification-models">
+<h2><span class="section-number">4.4. </span>Classification Models<a class="headerlink" href="#classification-models" title="Permalink to this headline">#</a></h2>
+<section id="linear-perceptron">
+<h3><span class="section-number">4.4.1. </span>Linear Perceptron<a class="headerlink" href="#linear-perceptron" title="Permalink to this headline">#</a></h3>
+<p>We are able to predict single values from regression. How can we go from a predicted value to a class? The simplest answer is to use the same linear regression equation from chapter <a class="reference internal" href="regression.html"><span class="doc">Regression &amp; Model Assessment</span></a> <span class="math notranslate nohighlight">\(\hat{f}(\vec{x})\)</span> and assign <span class="math notranslate nohighlight">\(\hat{y} = 1\)</span> when <span class="math notranslate nohighlight">\(\hat{f}(\vec{x}) &gt; 0\)</span>,  <span class="math notranslate nohighlight">\(\hat{y} = 0\)</span> otherwise. Our model equation is then:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-af508398-4f97-4ff7-a94e-97b5ae0d943c">
+<span class="eqno">(4.1)<a class="headerlink" href="#equation-af508398-4f97-4ff7-a94e-97b5ae0d943c" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\hat{f}(\vec{x}) = \begin{cases} 
+      1 &amp; \vec{w}\cdot \vec{x} + b &gt; 0 \\
+      0 &amp; \textrm{otherwise}\\
+   \end{cases}
+\end{equation}\]</div>
+<p>The term <span class="math notranslate nohighlight">\(\vec{w}\cdot \vec{x} + b\)</span> is called <strong>distance from the decision boundary</strong> where the decision boundary is at <span class="math notranslate nohighlight">\(\vec{w}\cdot \vec{x} + b = 0\)</span>. If it is large, we are far away from classifying it as <span class="math notranslate nohighlight">\(0\)</span>. If it is small, we are close to classifying it as <span class="math notranslate nohighlight">\(0\)</span>. It can be loosely thought of as “confidence”.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">perceptron</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">v</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">v</span><span class="p">),</span> <span class="n">y</span><span class="o">=</span><span class="n">jnp</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">y</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This particular model is called a <strong>perceptron</strong> and is the first neural network for classification. It was invented in 1958 by Frank Rosenblatt, a psychologist at Cornell University. It was not the first neural network, but is often the first one that students learn. The perceptron is an example of a <strong>hard</strong> classifier; it does not predict probability of the class and instead predicts exactly one class.</p>
+<p>Now that we have a model, we must choose a loss function. We haven’t learned about many loss functions yet. We’ve only seen mean squared error. Let us begin with a related loss called mean absolute error (MAE). MAE measures disagreement between our class and the predicted class. This is like an accuracy – what percentage of the time we’re correct.</p>
+<div class="amsmath math notranslate nohighlight" id="equation-068afe36-d890-40c7-94d3-eede7649f5ce">
+<span class="eqno">(4.2)<a class="headerlink" href="#equation-068afe36-d890-40c7-94d3-eede7649f5ce" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    L = \frac{1}{N} \sum_i  \left|y_i - \hat{y}_i\right|
+\end{equation}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">loss</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">yhat</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">yhat</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">loss_wrapper</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">yhat</span> <span class="o">=</span> <span class="n">perceptron</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">loss</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">yhat</span><span class="p">)</span>
+
+
+<span class="n">loss_grad</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">loss_wrapper</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">batch_size</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="n">train_N</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.8</span><span class="p">)</span>
+
+
+<span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+<span class="n">batch_idx</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">train_N</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">)</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">features</span><span class="o">.</span><span class="n">columns</span><span class="p">))</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+<span class="n">loss_grad</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">loss_wrapper</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+
+<span class="n">test_x</span> <span class="o">=</span> <span class="n">features</span><span class="p">[</span><span class="n">train_N</span><span class="p">:]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">test_y</span> <span class="o">=</span> <span class="n">labels</span><span class="p">[</span><span class="n">train_N</span><span class="p">:]</span><span class="o">.</span><span class="n">values</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s now try out our gradient to make sure it works</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loss_grad</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">test_x</span><span class="p">,</span> <span class="n">test_y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(Array([0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0., 0., 0., 0., 0.], dtype=float32),
+ Array(0., dtype=float32, weak_type=True))
+</pre></div>
+</div>
+</div>
+</div>
+<p>It’s all zeros! Why is that? It’s because our <a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.where.html#jax.numpy.where" title="(in JAX)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">jnp.where</span></code></a> statement above is not differentiable, nor are any inequalities where the result is a constant (<code class="docutils literal notranslate"><span class="pre">1</span></code> or <code class="docutils literal notranslate"><span class="pre">0</span></code> in our case). The perceptron actually has a special training procedure that is not related to its derivatives. One of the motivating reasons that deep learning is popular is that we do not need to construct a special training process for each model we construct – like the training procedure for the perceptron.</p>
+<p>Rather than teach and discuss the special perceptron training procedure, we’ll move to a more modern related classifier called a softmax binary classifier. This is a tiny change, the softmax binary classifier is:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-6b0c758d-fbbe-4eab-a779-4acd7a24606a">
+<span class="eqno">(4.3)<a class="headerlink" href="#equation-6b0c758d-fbbe-4eab-a779-4acd7a24606a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\hat{f}(\vec{x}) = \sigma\left(\vec{w}\cdot \vec{x} + b\right)
+\end{equation}\]</div>
+<figure class="align-default" id="simgoid">
+<div class="cell_output docutils container">
+<img alt="../_images/classification_20_0.png" src="../_images/classification_20_0.png" />
+</div>
+<figcaption>
+<p><span class="caption-number">Fig. 4.1 </span><span class="caption-text">The sigmoid function. Input is any real number and the output is a probability. Positive numbers map to probabilities greater than 0.5 and negative numbers to probabilities less than 0.5.</span><a class="headerlink" href="#simgoid" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>Softmax is the generalization of sigmoid to multiple classes. Although we call our binary classifier a softmax classifier, it doesn’t use the softmax function.</p>
+</aside>
+<p>where <span class="math notranslate nohighlight">\(\sigma\)</span> is the <strong>sigmoid</strong> function. The sigmoid has a domain of <span class="math notranslate nohighlight">\((-\infty, \infty)\)</span> and outputs a probability <span class="math notranslate nohighlight">\((0, 1)\)</span>. The input to the sigmoid can be viewed as log-odds, called <strong>logits</strong> for short. Odds are ratios of probability – odds of 1 means the probability of the class 1 is 0.5 and class 0 is 0.5. Odds of 2 means the probability of class 1 is 0.67 and class 0 is 0.33. Log-odds is the natural logarithm of that, so that log-odds of 0 means the odds are 1 and the output probability should be 0.5. One definition of the sigmoid is</p>
+<div class="amsmath math notranslate nohighlight" id="equation-91fa8268-3242-4e6e-8d65-62bd9cbcac99">
+<span class="eqno">(4.4)<a class="headerlink" href="#equation-91fa8268-3242-4e6e-8d65-62bd9cbcac99" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\sigma(x) = \frac{1}{1 + e^{-x}}
+\end{equation}\]</div>
+<p>however in practice there are some complexities to implementing sigmoids to make sure they’re numerically stable. This type of binary classifier is sometimes called <strong>logistic regression</strong> because we’re regressing logits.</p>
+<p>In essence, all we’ve done is replacing the inequality of the perceptron with a smooth differentiable version. Just like previously, a positive number indicated class 1 (FDA approved) but now it’s a continuum of numbers from 0.5 to 1.0. This is <strong>soft</strong> classification – we give probabilities of class membership instead of hard assignment. However, our loss function now needs to be modified as well.</p>
+<p>There is a different loss function that works better with classification called <strong>cross-entropy</strong>. You can experiment with mean absolute error or mean squared error with classification, but you’ll find they are almost always worse than cross-entropy.</p>
+<p>Cross-entropy is a loss function that describes distance between two probability distributions. When minimized, the two probability distributions are identical. Cross-entropy is a simplification of the <a class="reference external" href="https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence">Kullback–Leibler divergence</a> which is a way to measure distance between two probability distributions. Technically it is not a distance since it’s not symmetric with respect to its arguments. But in practice it is close enough to a distance that we treat it as one.</p>
+<p>How is comparing predicted values <span class="math notranslate nohighlight">\(\hat{y}\)</span> and <span class="math notranslate nohighlight">\(y\)</span> like comparing two probability distributions? Even though these are both 1s and 0s in the case of hard classification, they do sum to 1, and so we consider them probability distributions. Cross-entropy is defined as:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-3da6a8c1-aa8b-4c0d-8250-b951ced477a6">
+<span class="eqno">(4.5)<a class="headerlink" href="#equation-3da6a8c1-aa8b-4c0d-8250-b951ced477a6" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    L = -\sum_c^K y_c \log \hat{y_c}
+\end{equation}\]</div>
+<p>where <span class="math notranslate nohighlight">\(c\)</span> indicates which class of the <span class="math notranslate nohighlight">\(K\)</span> we’re considering, and it’s assumed that <span class="math notranslate nohighlight">\(\sum_c^K y_c = 1\)</span> and <span class="math notranslate nohighlight">\(\sum_c^K \hat{y}_c = 1\)</span> like probabilities (and they are positive). In the case of binary classification (only two classes), this becomes:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-1699d7ef-c41e-41cf-9e43-4f9e6143cc32">
+<span class="eqno">(4.6)<a class="headerlink" href="#equation-1699d7ef-c41e-41cf-9e43-4f9e6143cc32" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    L = -\left[ y_0 \log \hat{y_0} + y_1 \log \hat{y_1} \right]
+\end{equation}\]</div>
+<p>where <span class="math notranslate nohighlight">\(y_0\)</span> is for the first class and <span class="math notranslate nohighlight">\(y_1\)</span> is for the second class. However, we also know that because these are probabilities that <span class="math notranslate nohighlight">\(y_1 = 1 - y_0\)</span>. We can rewrite to:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-c007c6b3-b0ab-48e5-beaa-a4de61e26c2c">
+<span class="eqno">(4.7)<a class="headerlink" href="#equation-c007c6b3-b0ab-48e5-beaa-a4de61e26c2c" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    L = -\left[ y_0 \log \hat{y_0} + (1 - y_0) \log ( 1- \hat{y_0}) \right]
+\end{equation}\]</div>
+<p>Finally, we can drop the indication of the class:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-52e3541d-c2b0-4b83-b0f7-cb797ff096ef">
+<span class="eqno">(4.8)<a class="headerlink" href="#equation-52e3541d-c2b0-4b83-b0f7-cb797ff096ef" title="Permalink to this equation">#</a></span>\[\begin{equation}
+    L = -\left[ y \log \hat{y} + (1 - y) \log ( 1- \hat{y}) \right]
+\end{equation}\]</div>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>The correct way to avoid numerical instability in cross-entropy sigmoid classification is to have your model output the logits and you use a loss function that works on logits instead of probability. For example, <a class="reference external" href="https://www.tensorflow.org/api_docs/python/tf/nn/sigmoid_cross_entropy_with_logits" title="(in TensorFlow v2.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tf.nn.sigmoid_cross_entropy_with_logits</span></code></a>.</p>
+</aside>
+<p>and this matches our data, where we have a single value for each label indicating if it is a class member. Now we have features, labels, loss, and a model. Let’s create a batched gradient descent algorithm to train our classifier. Note, one change we need to do is use the built-in jax <a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.nn.sigmoid.html#jax.nn.sigmoid" title="(in JAX)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">jax.nn.sigmoid</span></code></a> function to avoid numerical instabilities and also add a small number to all logs to avoid numerical instabilities.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">bin_classifier</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">y</span>
+
+
+<span class="k">def</span> <span class="nf">cross_ent</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">yhat</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">y</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">yhat</span> <span class="o">+</span> <span class="mf">1e-10</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">yhat</span> <span class="o">+</span> <span class="mf">1e-10</span><span class="p">)))</span>
+
+
+<span class="k">def</span> <span class="nf">loss_wrapper</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">yhat</span> <span class="o">=</span> <span class="n">bin_classifier</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">cross_ent</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">yhat</span><span class="p">)</span>
+
+
+<span class="n">loss_grad</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">loss_wrapper</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">features</span><span class="o">.</span><span class="n">columns</span><span class="p">))</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mf">1.0</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loss_progress</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">test_loss_progress</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">eta</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">batch_idx</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">features</span><span class="p">[</span><span class="n">batch_idx</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">:</span> <span class="n">batch_idx</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">labels</span><span class="p">[</span><span class="n">batch_idx</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">:</span> <span class="n">batch_idx</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span>
+        <span class="n">grad</span> <span class="o">=</span> <span class="n">loss_grad</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="n">w</span> <span class="o">-=</span> <span class="n">eta</span> <span class="o">*</span> <span class="n">grad</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">b</span> <span class="o">-=</span> <span class="n">eta</span> <span class="o">*</span> <span class="n">grad</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">loss_progress</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss_wrapper</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+        <span class="n">test_loss_progress</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss_wrapper</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">test_x</span><span class="p">,</span> <span class="n">test_y</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">loss_progress</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Training Loss&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">test_loss_progress</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Testing Loss&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Step&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Loss&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/classification_24_0.png" src="../_images/classification_24_0.png" />
+</div>
+</div>
+<p>We are making good progress with our classifier, as judged from testing loss. You can run the code longer, but I’ll leave it at that. We have a reasonably well-trained model.</p>
+</section>
+</section>
+<section id="classification-metrics">
+<h2><span class="section-number">4.5. </span>Classification Metrics<a class="headerlink" href="#classification-metrics" title="Permalink to this headline">#</a></h2>
+<p>In regression, we assessed model performance with a parity plot, correlation coefficient, or mean squared error. In classification, we use slightly different metrics. The first metric is <strong>accuracy</strong>. Accuracy is the percentage of time that the predicted label matches the true label. We do not have a hard classifier, so we have to choose how to turn probability into a specific class. For now, we will choose the class with the highest probability. Let’s see how this looks</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">accuracy</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">yhat</span><span class="p">):</span>
+    <span class="c1"># convert from prob to hard class</span>
+    <span class="n">hard_yhat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">yhat</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">yhat</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">yhat</span><span class="p">))</span>
+    <span class="n">disagree</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">yhat</span><span class="p">))</span>
+    <span class="k">return</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">disagree</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+
+<span class="n">accuracy</span><span class="p">(</span><span class="n">test_y</span><span class="p">,</span> <span class="n">bin_classifier</span><span class="p">(</span><span class="n">test_x</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.826403927158665
+</pre></div>
+</div>
+</div>
+</div>
+<p>An accuracy of <span class="pasted-text">0.83</span> seems quite reasonable! However, consider this model:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">alt_classifier</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+
+
+<span class="n">accuracy</span><span class="p">(</span><span class="n">test_y</span><span class="p">,</span> <span class="n">alt_classifier</span><span class="p">(</span><span class="n">test_x</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9087837837837838
+</pre></div>
+</div>
+</div>
+</div>
+<p>This model, which always returns 1, has better accuracy than our model. How is this possible?</p>
+<div class="tip dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p>If you examine the data, you’ll see the majority of the molecules passed FDA clinical trials (<span class="math notranslate nohighlight">\(y = 1\)</span>), so that just guessing <span class="math notranslate nohighlight">\(1\)</span> is a good strategy.</p>
+</div>
+<section id="error-types">
+<h3><span class="section-number">4.5.1. </span>Error Types<a class="headerlink" href="#error-types" title="Permalink to this headline">#</a></h3>
+<p>Let’s recall what we’re trying to do. We’re trying to predict if a molecule will make it through FDA clinical trials. Our model can be incorrect in two ways: it predicts a molecule will pass through clinical trials, but it actually fails. This is called a false positive. The other error is if we predict our drug will not make it through clinical trials, but it actually does. This is false negative.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>False positive are sometimes known as Type I (pronounced type one) and false negatives as Type II false negatives</p>
+</aside>
+<p>Our <code class="docutils literal notranslate"><span class="pre">alt_classifier</span></code> model, which simply reports everything as positive, has no false negative errors. It has many false positive errors. These two types of errors can be quantified. We’re going to add one complexity – <strong>threshold</strong>. Our model provides probabilities which we’re converting into hard class memberships – 1s and 0s. We have been choosing to just take the most probable class. However, we will now instead choose a threshold for when we report a positive (class 1). The rationale is that although we train our model to minimize cross-entropy, we may want to be more conservative or aggressive in our classification with the trained model. If we want to minimize false negatives, we can lower the threshold and report even predictions that have a probability of 30% as positive. Or, if we want to minimize false positives we may set our threshold so that our model must predict above 90% before we predict a positive.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">error_types</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">yhat</span><span class="p">,</span> <span class="n">threshold</span><span class="p">):</span>
+    <span class="n">hard_yhat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">yhat</span> <span class="o">&gt;=</span> <span class="n">threshold</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">yhat</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">yhat</span><span class="p">))</span>
+    <span class="c1"># predicted 1, actually was 0 -&gt; 1 (bool to remove predicted 0, actually was 1)</span>
+    <span class="n">fp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">hard_yhat</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="c1"># predicted 0, actually was 1 -&gt; 1 (bool to remove predicted 1, actually was 0)</span>
+    <span class="n">fn</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">y</span> <span class="o">-</span> <span class="n">hard_yhat</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fp</span><span class="p">,</span> <span class="n">fn</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Alt Classifier&quot;</span><span class="p">,</span> <span class="n">error_types</span><span class="p">(</span><span class="n">test_y</span><span class="p">,</span> <span class="n">alt_classifier</span><span class="p">(</span><span class="n">test_x</span><span class="p">),</span> <span class="mf">0.5</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Trained Classifier&quot;</span><span class="p">,</span> <span class="n">error_types</span><span class="p">(</span><span class="n">test_y</span><span class="p">,</span> <span class="n">bin_classifier</span><span class="p">(</span><span class="n">test_x</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="mf">0.5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Alt Classifier (27, 0)
+Trained Classifier (20, 21)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we have a better sense of how our model does in comparison. The number of errors is indeed larger for our trained model, but it has a bit of balance between the two errors. What is more important? In our case, I would argue doing clinical trials that fail is worse than mistakenly not starting them. That is, false positives are worse than false negatives. Let’s see if we can tune our threshold value to minimize false positives.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Threshold 0.7&quot;</span><span class="p">,</span> <span class="n">error_types</span><span class="p">(</span><span class="n">test_y</span><span class="p">,</span> <span class="n">bin_classifier</span><span class="p">(</span><span class="n">test_x</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="mf">0.7</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Threshold 0.9&quot;</span><span class="p">,</span> <span class="n">error_types</span><span class="p">(</span><span class="n">test_y</span><span class="p">,</span> <span class="n">bin_classifier</span><span class="p">(</span><span class="n">test_x</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="mf">0.9</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Threshold 0.95&quot;</span><span class="p">,</span> <span class="n">error_types</span><span class="p">(</span><span class="n">test_y</span><span class="p">,</span> <span class="n">bin_classifier</span><span class="p">(</span><span class="n">test_x</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="mf">0.95</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Threshold 0.99&quot;</span><span class="p">,</span> <span class="n">error_types</span><span class="p">(</span><span class="n">test_y</span><span class="p">,</span> <span class="n">bin_classifier</span><span class="p">(</span><span class="n">test_x</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="mf">0.99</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Threshold 0.7 (18, 26)
+Threshold 0.9 (8, 79)
+Threshold 0.95 (6, 119)
+Threshold 0.99 (0, 219)
+</pre></div>
+</div>
+</div>
+</div>
+<p>By adjusting the threshold, we can achieve a balance of error more like what we desire for our model. We’re able to have 1 false positives in fact, at the cost of missing 218 of the molecules. Now are we still predicting positives? Are we actually going to get some <strong>true positives?</strong> We can measure that as well</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">total_pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">test_y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="s2">&quot;Total positives:&quot;</span><span class="p">,</span>
+    <span class="n">total_pos</span><span class="p">,</span>
+    <span class="s2">&quot;Predicted Positives:&quot;</span><span class="p">,</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">bin_classifier</span><span class="p">(</span><span class="n">test_x</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">0.99</span><span class="p">),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total positives: 269 Predicted Positives: 50
+</pre></div>
+</div>
+</div>
+</div>
+<p>Yes, our model is actually capable of predicting if molecules will pass FDA clinical trials with as few false positives as possible (1). A model that is capable of this tuning is an example of a good model. Our other model, that predicts 1s, has good accuracy but we cannot adjust it or try to better balance type I and type II errors.</p>
+</section>
+<section id="receiver-operating-characteristic-curve">
+<h3><span class="section-number">4.5.2. </span>Receiver-Operating Characteristic Curve<a class="headerlink" href="#receiver-operating-characteristic-curve" title="Permalink to this headline">#</a></h3>
+<p>We can plot threshold, false positive rate, and true positive rate all together on one plot to capture model accuracy and balance between error type in a Receiver-Operating Characteristic Curve (ROC curve). The x-axis of ROC curve is false positive rate and the y-axis is true positive rate. Each point on the plot is our model with different thresholds. How do we choose which thresholds to use? It is the set of unique class probabilities we saw (namely, <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.unique.html#numpy.unique" title="(in NumPy v1.24)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">np.unique</span></code></a>). We do need to add two extremes to this set though: all positive (threshold of 0.0) and all negative (1.0). Recall our alternate/baseline model of always predicting positive: it can only have a few points on the the ROC curve because it’s unique set of probabilities is just 1.0. Let’s make one and discuss what we’re seeing.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">unique_threshes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">bin_classifier</span><span class="p">(</span><span class="n">test_x</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>
+<span class="n">fp</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">tp</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">total_pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">test_y</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">ut</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">unique_threshes</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">1.01</span><span class="p">]:</span>
+    <span class="n">errors</span> <span class="o">=</span> <span class="n">error_types</span><span class="p">(</span><span class="n">test_y</span><span class="p">,</span> <span class="n">bin_classifier</span><span class="p">(</span><span class="n">test_x</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="n">ut</span><span class="p">)</span>
+    <span class="n">fp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">errors</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">tp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">total_pos</span> <span class="o">-</span> <span class="n">errors</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="c1"># sort them so can plot as a line</span>
+<span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+<span class="n">fpr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">fp</span><span class="p">)[</span><span class="n">idx</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">test_y</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">test_y</span><span class="p">))</span>
+<span class="n">tpr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">tp</span><span class="p">)[</span><span class="n">idx</span><span class="p">]</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">test_y</span><span class="p">)</span>
+
+<span class="c1"># now remove duplicate x-values</span>
+<span class="n">fpr_nd</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">tpr_nd</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">last</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="k">for</span> <span class="n">f</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">last</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">f</span> <span class="o">!=</span> <span class="n">last</span><span class="p">:</span>
+        <span class="n">last</span> <span class="o">=</span> <span class="n">f</span>
+        <span class="n">fpr_nd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="n">tpr_nd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fpr_nd</span><span class="p">,</span> <span class="n">tpr_nd</span><span class="p">,</span> <span class="s2">&quot;-o&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Trained Model&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Naive Classifier&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;True Positive Rate&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;False Positive Rate&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/classification_41_0.png" src="../_images/classification_41_0.png" />
+</div>
+</div>
+<p>This plot nicely shows how our trained model is actually sensitive to threshold, so that we could choose to more carefully screen for false negative or false positives. The best curves fall to the top-left of this plot. Our naive classifier is where we return a fixed percentage of examples randomly as positive or negative. You can plot the area under this curve with an integration and this is a good way to measure classifier performance and correctly capture the effect of both false negatives and false positives. The area under the ROC curve is known as the <strong>ROC AUC score</strong> and is preferred to accuracy because it captures the balance of Type I and II errors.</p>
+</section>
+<section id="other-metrics">
+<h3><span class="section-number">4.5.3. </span>Other metrics<a class="headerlink" href="#other-metrics" title="Permalink to this headline">#</a></h3>
+<p>I will just mention that there are other ways to assess how your model balances the two error types. One major type is called <strong>precision</strong> and <strong>recall</strong>. Precision measures correctness of predicted positives and recall measures number of predicted positives. This can be a good viewpoint when doing molecular screening – you may want to be very precise in that your proposed molecules are accurate while sacrificing recall. Recall here meaning you do not return very many molecules. Models on the left of an ROC curve are precise. Models at the top have good recall.  There are also F1 scores, likelihoods, Matthew’s correlation coefficients, Jaccard index, Brier score, and balanced accuracy which all try to report one number which balances precision and recall. We will rarely explore these other measures but you should know they exist.</p>
+<section id="confusion-matrix">
+<h4><span class="section-number">4.5.3.1. </span>Confusion Matrix<a class="headerlink" href="#confusion-matrix" title="Permalink to this headline">#</a></h4>
+<p>A confusion matrix is a table of counts indicating true and predicted classes. They are one of many methods for binary classification, but really stand-out as good visual assessment for multiclass classification. For example, consider we are categorizing molecules into three classes: insoluble, weakly soluble, and soluble. We can represent a classifier’s performance in a table:</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:left head"><p>true👇\predicted👉</p></th>
+<th class="text-align:center head"><p>insoluble</p></th>
+<th class="text-align:center head"><p>weakly soluble</p></th>
+<th class="text-align:right head"><p>soluble</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:left"><p>insoluble</p></td>
+<td class="text-align:center"><p>121</p></td>
+<td class="text-align:center"><p>8</p></td>
+<td class="text-align:right"><p>1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>weakly soluble</p></td>
+<td class="text-align:center"><p>7</p></td>
+<td class="text-align:center"><p>45</p></td>
+<td class="text-align:right"><p>18</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>soluble</p></td>
+<td class="text-align:center"><p>11</p></td>
+<td class="text-align:center"><p>4</p></td>
+<td class="text-align:right"><p>56</p></td>
+</tr>
+</tbody>
+</table>
+<p>The diagonal elements show when the predicted and true labels agree. For example, 121 molecules were actually insoluble and predicted to be insoluble. We can also read how the classifier failed. One molecule was predicted to be soluble, but was actually insoluble. 4 molecules were predicted to be weakly soluble, but were actually soluble. This can help us understand <em>how</em> the classifier is failing.</p>
+</section>
+</section>
+</section>
+<section id="class-imbalance">
+<h2><span class="section-number">4.6. </span>Class Imbalance<a class="headerlink" href="#class-imbalance" title="Permalink to this headline">#</a></h2>
+<p>The reason for this uneven amount of false positives and false negatives is that we have very few negative examples – molecules which failed FDA clinical trials. This also explains why just predicting success has a high accuracy. How can we address this problem?</p>
+<p>The first answer is do nothing. Is this imbalance a problem at all? Perhaps a drug in general will succeed at clinical trials and thus the imbalance in training data reflects what we expect to see in testing. This is clearly not the case, judging from the difficult and large expense of creating new drug molecules. However, this should be the first thing you ask yourself. If you’re creating a classifier to detect lung cancer from X-ray images, probably you will have imbalanced training data and at test time, when evaluating patients, you’ll also not have 50% of patients having lung cancer. This comes back to the discussion in the <a class="reference internal" href="regression.html"><span class="doc">Regression &amp; Model Assessment</span></a> about training data distribution. If your testing data is within your training data distribution, then the class imbalance does not need to be explicitly addressed.</p>
+<p>The second solution is to somehow weight your training data to appear more like your testing data when you think you do have <strong>label shift</strong>. There are two ways to accomplish this. You could “augment” your training data by repeating the minority class until the ratio of minority to majority examples matches the assumed testing data. There are research papers written on this topic, with intuitive results<span id="id5">[<a class="reference internal" href="#id22" title="Nitesh V Chawla, Kevin W Bowyer, Lawrence O Hall, and W Philip Kegelmeyer. Smote: synthetic minority over-sampling technique. Journal of artificial intelligence research, 16:321–357, 2002.">CBHK02</a>]</span>. You can over-sample minority class but that can lead to a large dataset, so you can also under-sample the majority class. This is a robust approach that is independent to how you train. It also is typically as good as more sophisticated methods <span id="id6">[<a class="reference internal" href="#id39" title="Badr Youbi Idrissi, Martin Arjovsky, Mohammad Pezeshki, and David Lopez-Paz. Simple data balancing achieves competitive worst-group-accuracy. arXiv e-prints, pages arXiv–2110, 2021.">YIAPLP21</a>]</span>.</p>
+<p>Another method of weighing data is to modify your loss function to increase the gradient updates applied to minority examples. This is equivalent to saying there is a difference in loss between a false positive vs a false negative. In our case, false positive are rarer and also more important in reality. We would rather skip a clinical trial (false negative) rather than start one and have it fail (false positive). We already tried minimizing false positives by changing the threshold on a trained model but let’s see how this works during training. We’ll create a weight vector that is high for negative labels so that if they are misclassified (false positive), there will be a bigger update.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">bin_classifier</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">y</span>
+
+
+<span class="k">def</span> <span class="nf">weighted_cross_ent</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">yhat</span><span class="p">,</span> <span class="n">yw</span><span class="p">):</span>
+    <span class="c1"># weights may not be normalized</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">yw</span><span class="p">)</span>
+    <span class="c1"># use weighted sum instead</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">jnp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span>
+            <span class="o">-</span><span class="p">(</span><span class="n">yw</span> <span class="o">*</span> <span class="n">y</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">yhat</span> <span class="o">+</span> <span class="mf">1e-10</span><span class="p">)</span> <span class="o">+</span> <span class="n">yw</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="o">*</span> <span class="n">jnp</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">yhat</span> <span class="o">+</span> <span class="mf">1e-10</span><span class="p">))</span>
+        <span class="p">)</span>
+        <span class="o">/</span> <span class="n">N</span>
+    <span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">loss_wrapper</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">yw</span><span class="p">):</span>
+    <span class="n">yhat</span> <span class="o">=</span> <span class="n">bin_classifier</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">weighted_cross_ent</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">yhat</span><span class="p">,</span> <span class="n">yw</span><span class="p">)</span>
+
+
+<span class="n">loss_grad</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">loss_wrapper</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">w2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">features</span><span class="o">.</span><span class="n">columns</span><span class="p">))</span>
+<span class="n">b2</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+<span class="c1"># make the labels = 0 values be much larger</span>
+<span class="n">weights</span><span class="p">[</span><span class="n">labels</span><span class="o">.</span><span class="n">values</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="o">*=</span> <span class="mi">1000</span>
+<span class="c1"># now make weights be on average 1</span>
+<span class="c1"># to keep our learning rate/avg update consistent</span>
+<span class="n">weights</span> <span class="o">=</span> <span class="n">weights</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
+
+<span class="n">loss_progress</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">test_loss_progress</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">eta</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="c1"># make epochs larger since this has</span>
+<span class="c1"># very large steps that converge poorly</span>
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">batch_idx</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">features</span><span class="p">[</span><span class="n">batch_idx</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">:</span> <span class="n">batch_idx</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">labels</span><span class="p">[</span><span class="n">batch_idx</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">:</span> <span class="n">batch_idx</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span>
+        <span class="n">yw</span> <span class="o">=</span> <span class="n">weights</span><span class="p">[</span><span class="n">batch_idx</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">:</span> <span class="n">batch_idx</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]]</span>
+        <span class="n">grad</span> <span class="o">=</span> <span class="n">loss_grad</span><span class="p">(</span><span class="n">w2</span><span class="p">,</span> <span class="n">b2</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">yw</span><span class="p">)</span>
+        <span class="n">w2</span> <span class="o">-=</span> <span class="n">eta</span> <span class="o">*</span> <span class="n">grad</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">b2</span> <span class="o">-=</span> <span class="n">eta</span> <span class="o">*</span> <span class="n">grad</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">loss_progress</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss_wrapper</span><span class="p">(</span><span class="n">w2</span><span class="p">,</span> <span class="n">b2</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">yw</span><span class="p">))</span>
+        <span class="n">test_loss_progress</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="n">loss_wrapper</span><span class="p">(</span><span class="n">w2</span><span class="p">,</span> <span class="n">b2</span><span class="p">,</span> <span class="n">test_x</span><span class="p">,</span> <span class="n">test_y</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">test_y</span><span class="p">))</span>
+        <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">loss_progress</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Training Loss&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">test_loss_progress</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Testing Loss&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Step&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Loss&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Normal Classifier&quot;</span><span class="p">,</span> <span class="n">error_types</span><span class="p">(</span><span class="n">test_y</span><span class="p">,</span> <span class="n">bin_classifier</span><span class="p">(</span><span class="n">test_x</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="mf">0.5</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Weighted Classifier&quot;</span><span class="p">,</span> <span class="n">error_types</span><span class="p">(</span><span class="n">test_y</span><span class="p">,</span> <span class="n">bin_classifier</span><span class="p">(</span><span class="n">test_x</span><span class="p">,</span> <span class="n">w2</span><span class="p">,</span> <span class="n">b2</span><span class="p">),</span> <span class="mf">0.5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/classification_45_0.png" src="../_images/classification_45_0.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Normal Classifier (20, 21)
+Weighted Classifier (6, 123)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The spikes in loss occur when we see a rare negative example, which are weighted heavily. Compared to the normal classifier trained above, we have fewer false positives at a threshold of 0.5. However, we also have more false negatives. We saw above that we could tweak this by changing our threshold. Let’s see how our model looks on an ROC curve to compare our model trained with weighting with the previous model at all thresholds.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">unique_threshes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">bin_classifier</span><span class="p">(</span><span class="n">test_x</span><span class="p">,</span> <span class="n">w2</span><span class="p">,</span> <span class="n">b2</span><span class="p">))</span>
+<span class="n">fp</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">tp</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">total_pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">test_y</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">ut</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">unique_threshes</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">1.01</span><span class="p">]:</span>
+    <span class="n">errors</span> <span class="o">=</span> <span class="n">error_types</span><span class="p">(</span><span class="n">test_y</span><span class="p">,</span> <span class="n">bin_classifier</span><span class="p">(</span><span class="n">test_x</span><span class="p">,</span> <span class="n">w2</span><span class="p">,</span> <span class="n">b2</span><span class="p">),</span> <span class="n">ut</span><span class="p">)</span>
+    <span class="n">fp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">errors</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">tp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">total_pos</span> <span class="o">-</span> <span class="n">errors</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="c1"># sort them so can plot as a line</span>
+<span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+<span class="n">fpr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">fp</span><span class="p">)[</span><span class="n">idx</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">test_y</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">test_y</span><span class="p">))</span>
+<span class="n">tpr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">tp</span><span class="p">)[</span><span class="n">idx</span><span class="p">]</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">test_y</span><span class="p">)</span>
+
+<span class="c1"># now remove duplicate x-values</span>
+<span class="n">fpr_nd2</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">tpr_nd2</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">last</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="k">for</span> <span class="n">f</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">last</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">f</span> <span class="o">!=</span> <span class="n">last</span><span class="p">:</span>
+        <span class="n">last</span> <span class="o">=</span> <span class="n">f</span>
+        <span class="n">fpr_nd2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="n">tpr_nd2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fpr_nd</span><span class="p">,</span> <span class="n">tpr_nd</span><span class="p">,</span> <span class="s2">&quot;-o&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Normal Model&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fpr_nd2</span><span class="p">,</span> <span class="n">tpr_nd2</span><span class="p">,</span> <span class="s2">&quot;-o&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Weighted Model&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Naive Classifier&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;True Positive Rate&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;False Positive Rate&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/classification_47_0.png" src="../_images/classification_47_0.png" />
+</div>
+</div>
+<p>It appears our weighted training actually did not improve model performance, except in a small range between 0.25-0.4 false positive rate. It is even worse in the low false positive rate, which is where we would like to operate. In conclusion, we can modify the balance of false positive and false negative through modifications to training. However, we can also modify this after training by affecting the threshold for classification. This post-training procedure gives similar or even slightly better performance in our example.</p>
+<p>This may not always be the case. An overview of methods are available in <span id="id7">[<a class="reference internal" href="#id38" title="Haibo He and Edwardo A Garcia. Learning from imbalanced data. IEEE Transactions on knowledge and data engineering, 21(9):1263–1284, 2009.">HG09</a>]</span> and you can find a more recent discussion of the effects of reweighting, including when combined with regularization, in Bryrd and Lipton <span id="id8">[<a class="reference internal" href="#id34" title="Jonathon Byrd and Zachary Lipton. What is the effect of importance weighting in deep learning? In International Conference on Machine Learning, 872–881. PMLR, 2019.">BL19</a>]</span>. Byrd and Lipton show that reweighting has little effect unless combined with L2 regularization and batch normalization, perhaps accounting for the small effect we observed.</p>
+<section id="screening-no-negative-examples">
+<h3><span class="section-number">4.6.1. </span>Screening: no negative examples<a class="headerlink" href="#screening-no-negative-examples" title="Permalink to this headline">#</a></h3>
+<p>Class imbalance is common in peptide and drug discovery where screening is used to generate data. Screening typically only contains positive examples, meaning you have literally zero negative examples. This is an active topic of research in a field of <strong>positive-unlabeled learning</strong> <span id="id9">[<a class="reference internal" href="#id35" title="Hyebin Song, Bennett J Bremer, Emily C Hinds, Garvesh Raskutti, and Philip A Romero. Inferring protein sequence-function relationships with large-scale positive-unlabeled learning. Cell Systems, 12(1):92–101, 2021.">SBH+21</a>]</span></p>
+</section>
+</section>
+<section id="overfitting">
+<h2><span class="section-number">4.7. </span>Overfitting<a class="headerlink" href="#overfitting" title="Permalink to this headline">#</a></h2>
+<p>The goal of this chapter is to introduce classification. For simplicity, we did not use any of the techniques from the last chapter, except training/testing splitting. You can and should use techniques like Jacknife+ and cross-validation to assess overfitting. Also, our descriptor number was very high, a few hundred, and regularization could be helpful for these models.</p>
+</section>
+<section id="chapter-summary">
+<h2><span class="section-number">4.8. </span>Chapter Summary<a class="headerlink" href="#chapter-summary" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>We introduced classification, which is supervised learning with categorical labels. The labels can be single binary values - representing 2 classes which is binary classification.</p></li>
+<li><p>We can compute descriptors for molecules using Python packages and do not require them to be part of our dataset</p></li>
+<li><p>Cross-entropy loss should be used for classification tasks</p></li>
+<li><p>Classification models (called classifiers) can output distance from decision boundary or, more commonly, probability of class</p></li>
+<li><p>The Perceptron is an early example of a neural network classifier that has a special training procedure</p></li>
+<li><p>The sigmoid and soft-max functions convert real numbers into probabilities</p></li>
+<li><p>Binary classification error can be false positives or false negatives</p></li>
+<li><p>Accuracy does not distinguish these two errors, so receive-operator characteristic (ROC) curves can be used to assess model performance. Precision and recall are other commonly used measures.</p></li>
+<li><p>An imbalance of classes in training data is not necessarily a problem and can be addressed by weighting training examples</p></li>
+</ul>
+</section>
+<section id="exercises">
+<h2><span class="section-number">4.9. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h2>
+<section id="id10">
+<h3><span class="section-number">4.9.1. </span>Classification<a class="headerlink" href="#id10" title="Permalink to this headline">#</a></h3>
+<ol class="simple">
+<li><p>Design your own examples of labels for binary, multi-class, and multi-label classification. For example, “A multi-class label is the country a person lives in. A label for this is a 225 element vector with one non-zero element indicating the country the person lives in.”</p></li>
+<li><p>Write out the equations for cross-entropy in multi-class and multi-label settings.</p></li>
+</ol>
+</section>
+<section id="id11">
+<h3><span class="section-number">4.9.2. </span>Data<a class="headerlink" href="#id11" title="Permalink to this headline">#</a></h3>
+<ol class="simple">
+<li><p>Use the dimensional reduction methods from our <a class="reference internal" href="introduction.html"><span class="doc std std-doc">first chapter</span></a> to plot the molecules here in 2D. Color the points based on their labels. Do you see any patterns?</p></li>
+<li><p>Now, use clustering to color the molecules. Use an elbow plot to choose your cluster number.</p></li>
+</ol>
+</section>
+<section id="assessment">
+<h3><span class="section-number">4.9.3. </span>Assessment<a class="headerlink" href="#assessment" title="Permalink to this headline">#</a></h3>
+<ol class="simple">
+<li><p>Repeat the model fitting with L1 and L2 regularization and plot them on a ROC curve. What effect does regularization have on these? Choose a strength of 0.1.</p></li>
+<li><p>Could you use leave-one-class-out cross-validation in binary classification? Why or why not?</p></li>
+<li><p>We said that class imbalance alone has little effect on model training, as long as the testing distribution matches the training distribution. However, can you make an argument using the bias-variance decomposition about why this may not be true with small dataset size?</p></li>
+<li><p>Compute the area under the curve of an ROC curve using numerical trapezoidal integration.</p></li>
+</ol>
+</section>
+<section id="complete-model">
+<h3><span class="section-number">4.9.4. </span>Complete Model<a class="headerlink" href="#complete-model" title="Permalink to this headline">#</a></h3>
+<p>Do your best to create a binary-classifier for this dataset with regularization and any other methods we learned from this chapter the previous ones. What is the best area under the curve you can achieve?</p>
+</section>
+</section>
+<section id="cited-references">
+<h2><span class="section-number">4.10. </span>Cited References<a class="headerlink" href="#cited-references" title="Permalink to this headline">#</a></h2>
+<div class="docutils container" id="id12">
+<dl class="citation">
+<dt class="label" id="id30"><span class="brackets"><a class="fn-backref" href="#id1">SZY+19</a></span></dt>
+<dd><p>Wenbo Sun, Yujie Zheng, Ke Yang, Qi Zhang, Akeel A Shah, Zhou Wu, Yuyang Sun, Liang Feng, Dongyang Chen, Zeyun Xiao, and others. Machine learning–assisted molecular design and efficiency prediction for high-performance organic photovoltaic materials. <em>Science advances</em>, 5(11):eaay4275, 2019.</p>
+</dd>
+<dt class="label" id="id20"><span class="brackets"><a class="fn-backref" href="#id2">BJW18</a></span></dt>
+<dd><p>Rainier Barrett, Shaoyi Jiang, and Andrew D White. Classifying antimicrobial and multifunctional peptides with bayesian network models. <em>Peptide Science</em>, 110(4):e24079, 2018.</p>
+</dd>
+<dt class="label" id="id32"><span class="brackets"><a class="fn-backref" href="#id3">WRF+18</a></span></dt>
+<dd><p>Zhenqin Wu, Bharath Ramsundar, Evan N Feinberg, Joseph Gomes, Caleb Geniesse, Aneesh S Pappu, Karl Leswing, and Vijay Pande. Moleculenet: a benchmark for molecular machine learning. <em>Chemical science</em>, 9(2):513–530, 2018.</p>
+</dd>
+<dt class="label" id="id25"><span class="brackets"><a class="fn-backref" href="#id4">MTKT18</a></span></dt>
+<dd><p>Hirotomo Moriwaki, Yu-Shi Tian, Norihito Kawashita, and Tatsuya Takagi. Mordred: a molecular descriptor calculator. <em>Journal of cheminformatics</em>, 10(1):4, 2018.</p>
+</dd>
+<dt class="label" id="id22"><span class="brackets"><a class="fn-backref" href="#id5">CBHK02</a></span></dt>
+<dd><p>Nitesh V Chawla, Kevin W Bowyer, Lawrence O Hall, and W Philip Kegelmeyer. Smote: synthetic minority over-sampling technique. <em>Journal of artificial intelligence research</em>, 16:321–357, 2002.</p>
+</dd>
+<dt class="label" id="id39"><span class="brackets"><a class="fn-backref" href="#id6">YIAPLP21</a></span></dt>
+<dd><p>Badr Youbi Idrissi, Martin Arjovsky, Mohammad Pezeshki, and David Lopez-Paz. Simple data balancing achieves competitive worst-group-accuracy. <em>arXiv e-prints</em>, pages arXiv–2110, 2021.</p>
+</dd>
+<dt class="label" id="id38"><span class="brackets"><a class="fn-backref" href="#id7">HG09</a></span></dt>
+<dd><p>Haibo He and Edwardo A Garcia. Learning from imbalanced data. <em>IEEE Transactions on knowledge and data engineering</em>, 21(9):1263–1284, 2009.</p>
+</dd>
+<dt class="label" id="id34"><span class="brackets"><a class="fn-backref" href="#id8">BL19</a></span></dt>
+<dd><p>Jonathon Byrd and Zachary Lipton. What is the effect of importance weighting in deep learning? In <em>International Conference on Machine Learning</em>, 872–881. PMLR, 2019.</p>
+</dd>
+<dt class="label" id="id35"><span class="brackets"><a class="fn-backref" href="#id9">SBH+21</a></span></dt>
+<dd><p>Hyebin Song, Bennett J Bremer, Emily C Hinds, Garvesh Raskutti, and Philip A Romero. Inferring protein sequence-function relationships with large-scale positive-unlabeled learning. <em>Cell Systems</em>, 12(1):92–101, 2021.</p>
+</dd>
+</dl>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./ml"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="regression.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">3. </span>Regression &amp; Model Assessment</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="kernel.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">5. </span>Kernel Learning</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Andrew D. White<br/>
+  
+      &copy; Copyright 2022.<br/>
+    <div class="extra_footer">
+      <a href="http://thewhitelab.org">thewhitelab.org</a> <div id="wh-modal"> <button class="wh-venti-button" aria-label="close modal" id="wh-modal-close">✕</button> <img id="wh-modal-img"> </div>
+    </div>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
