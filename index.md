@@ -63,6 +63,7 @@ Thank you to contributors for offering suggestions, identifying errors, and help
 1. Mehrad Ansari (@MehradAnsari)
 2. Sam Cox (@SamCox822)
 3. Heta Gandhi (@gandhi_heta)
+4. Josh Rackers (@JoshRackers)
 
 ### Contributed Content to Chapter
 
