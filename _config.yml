@@ -2,7 +2,7 @@
 title: deep learning for molecules & materials
 author: Andrew D. White
 logo: _static/images/logo.png
-copyright: "2022"
+copyright: "2025"
 
 latex:
   latex_documents:
@@ -53,12 +53,11 @@ sphinx:
       "twitter:image": "https://dmol.pub/_static/logo.png"
       "twitter:site": "@andrewwhite01"
 
+only_build_toc_files        : true
+exclude_patterns          : ['livecomj/*', 'dl/*', 'applied/*', 'ml/*', 'data/*', 'package/*', '_buid', '*.ipynb_checkpoints', ]
 execute:
-  #exclude_patterns          : ['livecomj/*', 'dl/pretraining.ipynb', 'applied/*', 'ml/*', 'dl/xai.ipynb', 'NLP.ipynb', 'flows.ipynb',
-  #'dl/Equivariant.ipynb', 'dl/gnn.ipynb', 'dl/data.ipynb', 'VAE.ipynb', 'dl/introduction.ipynb', 'dl/Hyperparameter_tuning.ipynb', 'attention.ipynb', 'layers.ipynb']
   timeout: -1
-
-#jupyter_execute_notebooks: force
+  execute_notebooks: force
 
 parse:
   myst_enable_extensions:
