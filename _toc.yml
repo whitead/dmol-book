@@ -5,13 +5,13 @@ parts:
   numbered: true
   chapters:
   - file: math/tensors-and-shapes
-# - caption: B. Machine Learning
-#   numbered: true
-#   chapters:
-#   - file: ml/introduction
-#   - file: ml/regression
-#   - file: ml/classification
-#   - file: ml/kernel
+- caption: B. Machine Learning
+  numbered: true
+  chapters:
+  - file: ml/introduction
+  - file: ml/regression
+  - file: ml/classification
+  - file: ml/kernel
 # - caption: C. Deep Learning
 #   numbered: true
 #   chapters:
