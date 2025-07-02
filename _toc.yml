@@ -12,10 +12,10 @@ parts:
   - file: ml/regression
   - file: ml/classification
   - file: ml/kernel
-# - caption: C. Deep Learning
-#   numbered: true
-#   chapters:
-#   - file: dl/introduction
+- caption: C. Deep Learning
+  numbered: true
+  chapters:
+  - file: dl/introduction
 #   - file: dl/layers
 #   - file: dl/gnn
 #   - file: dl/data
