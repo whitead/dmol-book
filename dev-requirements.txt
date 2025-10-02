@@ -1,2 +1,2 @@
 pre-commit
-moviepy
+moviepy<2
