@@ -16,8 +16,8 @@ parts:
   numbered: true
   chapters:
   - file: dl/introduction
-#   - file: dl/layers
-#   - file: dl/gnn
+  - file: dl/layers
+  - file: dl/gnn
 #   - file: dl/data
 #   - file: dl/Equivariant
 #   - file: dl/xai
