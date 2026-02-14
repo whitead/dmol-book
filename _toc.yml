@@ -25,10 +25,10 @@ parts:
   - file: dl/NLP
 #   - file: dl/VAE
   - file: dl/flows
-# - caption: D. Applications
-#   numbered: true
-#   chapters:
-#   - file: applied/QM9
+- caption: D. Applications
+  numbered: true
+  chapters:
+  - file: applied/QM9
 #   - file: applied/MolGenerator
 # - caption: E. Contributed Chapters
 #   numbered: true
