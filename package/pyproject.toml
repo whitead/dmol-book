@@ -37,7 +37,7 @@ dependencies = [
     "pydot",
     "pillow",
     "mordredcommunity[full]",
-    "moviepy",
+    "moviepy>=2.0",
     "networkx",
     "MDAnalysis",
     "emlp",
@@ -47,6 +47,8 @@ dependencies = [
     "sympy",
     "e3nn",
     "torch",  # if you want to change this, change the github action too
+    "torch_geometric",
+    "transformers",
     "normflows",
     "linkify-it-py",
 ]
