@@ -47,6 +47,7 @@ dependencies = [
     "sympy",
     "e3nn",
     "torch",  # if you want to change this, change the github action too
+    "normflows",
     "linkify-it-py",
 ]
 

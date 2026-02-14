@@ -24,7 +24,7 @@ parts:
 #   - file: dl/attention
   - file: dl/NLP
 #   - file: dl/VAE
-#   - file: dl/flows
+  - file: dl/flows
 # - caption: D. Applications
 #   numbered: true
 #   chapters:
