@@ -4,21 +4,45 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is the **Deep Learning for Molecules and Materials Book** (dmol.pub), a Jupyter Book-based educational resource covering deep learning applications in chemistry and materials science. The book uses Python with Jax, Keras, TensorFlow, and scikit-learn, teaching concepts through interactive Jupyter notebooks.
+This is the **Deep Learning for Molecules and Materials Book** (dmol.pub), a Jupyter Book-based educational resource covering deep learning applications in chemistry and materials science. The book uses Python with JAX, PyTorch, and scikit-learn, teaching concepts through interactive Jupyter notebooks.
 
 ## Project Status
 
-We are working on version two in a branch. The goal right now is to update all examples to replace tensorflow with pytroch.
+We are porting version two from TensorFlow/Keras to PyTorch on the `v2` branch.
 
-We are working with the following strategy:
+### Strategy
 
-* work down the `_toc.yml` file one by one by uncommenting
-* build the book, observe errors in the most recently uncommented chapter
-* fix the errors, trying to keep the examples as close to text/tensorflow examples
-* commit as each cell is passing
-* ensure the text is consistent with the modifications
+* Work down the `_toc.yml` file one by one by uncommenting chapters
+* Build the book, observe errors in the most recently uncommented chapter
+* Fix the errors, keeping the narrative close to the original text
+* Commit as each cell is passing
+* Ensure the text is consistent with the code modifications
+* Update pseudocode snippets in markdown cells to use PyTorch syntax
 
-The style of the code is to be "self-documenting," so avoid excessive comments in the code and strive for simplicity and idiomatic code (i.e., focus on normal examples of pytorch rather than exact ports of tensorflow code).
+### Porting Progress
+
+**Completed (in `_toc.yml`, building):**
+- `math/tensors-and-shapes` — no TF code, already fine
+- `ml/introduction`, `ml/regression`, `ml/classification`, `ml/kernel` — no TF code, already fine
+- `dl/introduction` — ported to PyTorch
+- `dl/layers` — ported to PyTorch
+- `dl/gnn` — ported to PyTorch (has 4 TF refs remaining in markdown pseudocode snippets that should be updated)
+
+**Next up (commented out in `_toc.yml`, need porting):**
+- `dl/data` — no TF code; needs uncommenting and testing
+- `dl/Equivariant` — no TF code; needs uncommenting and testing
+- `dl/xai` — 10 TF refs in code, needs porting
+- `dl/attention` — no TF code; needs uncommenting and testing
+- `dl/NLP` — 10 TF refs in code, needs porting
+- `dl/VAE` — no TF code; needs uncommenting and testing
+- `dl/flows` — 8 TF refs (uses tensorflow_probability), needs porting
+- `applied/QM9` — 1 TF ref, needs porting
+- `applied/MolGenerator` — 17 TF refs, needs porting
+- `dl/Hyperparameter_tuning` — 26 TF refs, needs porting
+- `applied/e3nn_traj` — already uses PyTorch/e3nn, just needs uncommenting
+- `dl/pretraining` — no TF code; needs uncommenting and testing
+
+The style of the code is to be "self-documenting," so avoid excessive comments and strive for simplicity and idiomatic PyTorch (not exact ports of TensorFlow code).
 
 ## Repository Structure
 
@@ -74,7 +98,7 @@ All instructional content is in Jupyter notebooks (`.ipynb` files). When working
 - The `dmol` package is imported at the start of most notebooks to set up plotting styles and configurations
 - Notebooks execute with force execution (`execute_notebooks: force` in `_config.yml`)
 - Output is stripped by nbstripout before committing
-- Book configuration excludes certain directories from build (`dl/*`, `applied/*`, `data/*` currently excluded in `_config.yml`)
+- Chapters are enabled by uncommenting them in `_toc.yml` and removing them from `exclude_patterns` in `_config.yml`
 - Some notebooks contain cells marked "YOU CAN SKIP IT" that generate figures/animations for the book (e.g., using moviepy). These cells are for book building only - students working through notebooks do not need to run them. However, moviepy must be installed for the book build to succeed.
 
 ### Style Guidelines (from style.md)
@@ -100,7 +124,6 @@ When committing:
   - Build artifacts (_build/*)
   - Generated images unless they're part of the source content
 
-
 ## Key Architecture Notes
 
 ### The dmol Package
@@ -116,8 +139,8 @@ Located in `package/dmol/__init__.py`, this package:
 - Uses Jupyter Book 1.0.4
 - Executes notebooks with unlimited timeout (`timeout: -1`)
 - Configured for interactive launch via Google Colab
-- Includes intersphinx mappings for external documentation (TensorFlow, JAX, NumPy, etc.)
-- TODO: Remove Tensorflow at end, and start linking to PyTorch
+- Includes intersphinx mappings for external documentation
+- TODO: Replace TensorFlow intersphinx mapping with PyTorch when migration is complete
 - MyST extensions enabled: amsmath, colon_fence, dollarmath, linkify, substitution
 
 ## Dependencies
@@ -127,6 +150,6 @@ Core dependencies (see `package/pyproject.toml`):
 - pandas, seaborn, scikit-learn
 - rdkit, e3nn, torch, selfies, exmol
 - MDAnalysis, networkx, mordredcommunity
-- torch (may be required to add)
+- moviepy (for book-building animations)
 
 Requires Python >= 3.12
