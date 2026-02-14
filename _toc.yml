@@ -20,7 +20,7 @@ parts:
   - file: dl/gnn
   - file: dl/data
 #   - file: dl/Equivariant
-#   - file: dl/xai
+  - file: dl/xai
 #   - file: dl/attention
 #   - file: dl/NLP
 #   - file: dl/VAE

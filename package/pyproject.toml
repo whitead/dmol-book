@@ -29,6 +29,7 @@ dependencies = [
     "ipython",
     "jax",
     "jaxlib",
+    "flax",
     "pandas",
     "seaborn",
     "tabulate",
