@@ -1,2 +1,4 @@
 pre-commit
 moviepy<2
+tensorflow
+tensorflowjs

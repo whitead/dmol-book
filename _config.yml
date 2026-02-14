@@ -54,7 +54,7 @@ sphinx:
       "twitter:site": "@andrewwhite01"
 
 only_build_toc_files        : true
-exclude_patterns          : ['livecomj/*', 'dl/Equivariant.ipynb', 'dl/attention.ipynb', 'dl/VAE.ipynb', 'dl/Hyperparameter_tuning.ipynb', 'dl/pretraining.ipynb', 'dl/molnets.ipynb', 'applied/MolGenerator.ipynb', 'applied/e3nn_traj.ipynb', 'data/*', 'package/*', '_buid', '*.ipynb_checkpoints', '.venv', '.venv/*' ]
+exclude_patterns          : ['livecomj/*', 'dl/Hyperparameter_tuning.ipynb', 'dl/molnets.ipynb', 'data/*', 'package/*', '_buid', '*.ipynb_checkpoints', '.venv', '.venv/*' ]
 execute:
   timeout: -1
   execute_notebooks: force

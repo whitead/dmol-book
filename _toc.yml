@@ -19,29 +19,24 @@ parts:
   - file: dl/layers
   - file: dl/gnn
   - file: dl/data
-#   - file: dl/Equivariant
+  - file: dl/Equivariant
   - file: dl/xai
-#   - file: dl/attention
+  - file: dl/attention
   - file: dl/NLP
-#   - file: dl/VAE
+  - file: dl/VAE
   - file: dl/flows
 - caption: D. Applications
   numbered: true
   chapters:
   - file: applied/QM9
-#   - file: applied/MolGenerator
-# - caption: E. Contributed Chapters
-#   numbered: true
-#   chapters:
-#   - file: dl/Hyperparameter_tuning
-#   - file: applied/e3nn_traj
-#   - file: dl/pretraining
-# - caption: F. Appendix
-#   numbered: true
-#   chapters:
-#   - file: style
-#   - file: changelog
-# - caption: G. In Progress
-#   numbered: true
-#   chapters:
-#    - file: dl/molnets
+  - file: applied/MolGenerator
+- caption: E. Contributed Chapters
+  numbered: true
+  chapters:
+  - file: applied/e3nn_traj
+  - file: dl/pretraining
+- caption: F. Appendix
+  numbered: true
+  chapters:
+  - file: style
+  - file: changelog
