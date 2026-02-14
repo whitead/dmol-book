@@ -26,12 +26,12 @@ We are porting version two from TensorFlow/Keras to PyTorch on the `v2` branch.
 - `ml/introduction`, `ml/regression`, `ml/classification`, `ml/kernel` — no TF code, already fine
 - `dl/introduction` — ported to PyTorch
 - `dl/layers` — ported to PyTorch
-- `dl/gnn` — ported to PyTorch (has 4 TF refs remaining in markdown pseudocode snippets that should be updated)
+- `dl/gnn` — ported to PyTorch
+- `dl/data` — no TF code, fixed moviepy compat
+- `dl/xai` — replaced Haiku with Flax Linen, ported Keras model to PyTorch, removed TF
 
 **Next up (commented out in `_toc.yml`, need porting):**
-- `dl/data` — no TF code; needs uncommenting and testing
 - `dl/Equivariant` — no TF code; needs uncommenting and testing
-- `dl/xai` — 10 TF refs in code, needs porting
 - `dl/attention` — no TF code; needs uncommenting and testing
 - `dl/NLP` — 10 TF refs in code, needs porting
 - `dl/VAE` — no TF code; needs uncommenting and testing
