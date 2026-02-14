@@ -22,7 +22,7 @@ parts:
 #   - file: dl/Equivariant
   - file: dl/xai
 #   - file: dl/attention
-#   - file: dl/NLP
+  - file: dl/NLP
 #   - file: dl/VAE
 #   - file: dl/flows
 # - caption: D. Applications
