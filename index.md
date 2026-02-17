@@ -1,12 +1,13 @@
 ---
-html_meta:
-  "description lang=en": "Deep Learning for Molecules & Materials Book"
-  "property=og:locale": "en_US"
-  "twitter:card": "summary"
-  "twitter:description": "Deep Learning for Molecules & Materials Book"
-  "twitter:title": "dmol.pub 📖"
-  "twitter:image": "https://dmol.pub/_static/robot-chem.png"
-  "twitter:site": "@andrewwhite01"
+myst:
+  html_meta:
+    "description lang=en": "Deep Learning for Molecules & Materials Book"
+    "property=og:locale": "en_US"
+    "twitter:card": "summary"
+    "twitter:description": "Deep Learning for Molecules & Materials Book"
+    "twitter:title": "dmol.pub 📖"
+    "twitter:image": "https://dmol.pub/_static/robot-chem.png"
+    "twitter:site": "@andrewwhite01"
 ---
 ![Header image showing molecules plotted in two different ways](_static/images/header.png)
 

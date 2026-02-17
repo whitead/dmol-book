@@ -49,6 +49,7 @@ dependencies = [
     "torch",  # if you want to change this, change the github action too
     "torch_geometric",
     "transformers",
+    "accelerate>=1.1.0",
     "normflows",
     "linkify-it-py",
 ]

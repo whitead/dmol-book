@@ -25,6 +25,7 @@ parts:
   - file: dl/NLP
   - file: dl/VAE
   - file: dl/flows
+  - file: dl/molnets
 - caption: D. Applications
   numbered: true
   chapters:
