@@ -21,7 +21,7 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update && sudo apt-get install -y graphviz libgraphviz-dev
-        pip install pygraphviz
+        pip install pygraphviz tensorflow
         pip install -e package/
 
     - name: Build the book
