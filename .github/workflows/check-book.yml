@@ -2,35 +2,40 @@ name: check-book
 
 on:
   push:
-    branches: [ main ]
+    branches: [main, v2]
   pull_request:
-    branches: [ main ]
+    branches: [main, v2]
 
 jobs:
   check-build-book:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: s-weigand/setup-conda@v1
+    - uses: actions/checkout@v4
+
+    - uses: actions/setup-python@v5
       with:
-        python-version: 3.8
+        python-version: "3.13"
+
     - name: Install dependencies
       run: |
-        conda install -c conda-forge pygraphviz
-        cd package && python -m pip  --no-cache-dir install .
-        pip install torch-scatter torch-sparse torch-cluster torch-spline-conv torch-geometric -f https://data.pyg.org/whl/torch-1.12.0+cpu.html
+        sudo apt-get update && sudo apt-get install -y graphviz libgraphviz-dev
+        pip install pygraphviz
+        pip install -e package/
+
     - name: Check pre-commit
       run: |
         pip install pre-commit
         pre-commit run --all-files || ( git status --short ; git diff ; exit 1 )
-    - name: Build the book
-      run: env TF_CPP_MIN_LOG_LEVEL=3 jupyter-book build -n .
+
+    - name: Build the book (structure check, no execution)
+      run: jupyter-book build -n .
+
     - name: Link Checker
-      uses: lycheeverse/lychee-action@v1.2.0
+      uses: lycheeverse/lychee-action@v2
       continue-on-error: true
       id: lc
       env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-          args: --verbose --exclude rdkit.org/xml --max-redirects 100 --no-progress  _build/html/dl/**/*.html _build/html/ml/**/*.html _build/html/applied/**/*.html _build/html/*.html
-          fail: true
+        args: --verbose --exclude rdkit.org/xml --max-redirects 100 --no-progress _build/html/dl/**/*.html _build/html/ml/**/*.html _build/html/applied/**/*.html _build/html/*.html
+        fail: true

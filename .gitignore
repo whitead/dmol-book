@@ -131,3 +131,6 @@ dmypy.json
 # Jupyter book
 _build/
 plots/
+
+.DS_Store
+**/.DS_Store

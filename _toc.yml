@@ -25,6 +25,7 @@ parts:
   - file: dl/NLP
   - file: dl/VAE
   - file: dl/flows
+  - file: dl/molnets
 - caption: D. Applications
   numbered: true
   chapters:
@@ -33,7 +34,6 @@ parts:
 - caption: E. Contributed Chapters
   numbered: true
   chapters:
-  - file: dl/Hyperparameter_tuning
   - file: applied/e3nn_traj
   - file: dl/pretraining
 - caption: F. Appendix
@@ -41,7 +41,3 @@ parts:
   chapters:
   - file: style
   - file: changelog
-- caption: G. In Progress
-  numbered: true
-  chapters:
-   - file: dl/molnets
