@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "dmol-book"
-version = "2.0.0-pre1"
+version = "2.0.0"
 description = "Style and Imports for dmol Book"
 readme = "README.md"
 authors = [
