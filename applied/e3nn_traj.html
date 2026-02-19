@@ -518,7 +518,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.13.12/x64/lib/python3.13/site-packages/tqdm/auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.13.11/x64/lib/python3.13/site-packages/tqdm/auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
   from .autonotebook import tqdm as notebook_tqdm
 </pre></div>
 </div>
@@ -1031,7 +1031,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/53250a05bed157a15c9b015ddc5b56e575ab65be15998a69d2d1fe20adf0951d.png" src="../_images/53250a05bed157a15c9b015ddc5b56e575ab65be15998a69d2d1fe20adf0951d.png" />
+<img alt="../_images/08e294c39ace16bfd5c599d4f75e5d6bdac44fa2145602cce6ae5c3622fb7bb9.png" src="../_images/08e294c39ace16bfd5c599d4f75e5d6bdac44fa2145602cce6ae5c3622fb7bb9.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1041,7 +1041,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>final loss value:  tensor(4.2052e-05)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>final loss value:  tensor(3.8809e-05)
 </pre></div>
 </div>
 </div>
@@ -1080,7 +1080,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/e4f32de6a5094e0de12d5aa805349f1c19d38f1ad5ce29e08a07d1a5902ab6e9.png" src="../_images/e4f32de6a5094e0de12d5aa805349f1c19d38f1ad5ce29e08a07d1a5902ab6e9.png" />
+<img alt="../_images/e1d9ac8af83f3f0fcefcca2cf97c4091ed0fd5c3401377f44824aa5d5bbada67.png" src="../_images/e1d9ac8af83f3f0fcefcca2cf97c4091ed0fd5c3401377f44824aa5d5bbada67.png" />
 </div>
 </div>
 <p>Wow! Clearly these parity plots look better than for the baseline model. Let’s again look at the trajectory versus the trajectory predictions, to see visually how they compare. We will look at the training and the validation data together, just note that because the colors represent time, we can look at the purple section to see just the validation data.</p>
@@ -1109,7 +1109,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/a873a857acc86de79b3b5f512521ff5db405cb242144522f79b73d9c25724cb2.png" src="../_images/a873a857acc86de79b3b5f512521ff5db405cb242144522f79b73d9c25724cb2.png" />
+<img alt="../_images/04b5e97fbe3ef2313385745784fd6b6c82319f4ea9daace91764fbc5ff977b09.png" src="../_images/04b5e97fbe3ef2313385745784fd6b6c82319f4ea9daace91764fbc5ff977b09.png" />
 </div>
 </div>
 <p>This looks pretty good!
@@ -1164,7 +1164,7 @@ Let’s run each model on the last frame to get an extrapolated frame. Remember 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/7ff25f1afa1d6db1fdc4b28933d9972b8cdefb394fcf9e66d8c16d6062cd8464.png" src="../_images/7ff25f1afa1d6db1fdc4b28933d9972b8cdefb394fcf9e66d8c16d6062cd8464.png" />
+<img alt="../_images/4f2eabefd9f9ab94cffc90326ca1158f8564d637b8f428f27652163349c162ac.png" src="../_images/4f2eabefd9f9ab94cffc90326ca1158f8564d637b8f428f27652163349c162ac.png" />
 </div>
 </div>
 <p>We can clearly see that the e3nn model predicts trajectories much closer to our data. Again, the baseline model has predicted poorly.</p>
@@ -1241,10 +1241,10 @@ Let’s run each model on the last frame to get an extrapolated frame. Remember 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">difference: </span> [0.00000000000000001314]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">difference: </span> [0.00000000000000009884]
 </pre></div>
 </div>
-<img alt="../_images/0fb9001d764714873b8b2b2bc0943de56c7ef713d0a3595e2573853817d2423a.png" src="../_images/0fb9001d764714873b8b2b2bc0943de56c7ef713d0a3595e2573853817d2423a.png" />
+<img alt="../_images/ecd1bbc2c4d25d18d660252f21b7d65ea008378e97292ee51fb89690d97ed5b4.png" src="../_images/ecd1bbc2c4d25d18d660252f21b7d65ea008378e97292ee51fb89690d97ed5b4.png" />
 </div>
 </div>
 <p>Great! Our random array, when rotated first, gives the same results as when we rotated last! Now we know we have rotational equivariances. I won’t go further to test translational equivariances; I will leave that as an exercise. The E3NN model outperforms the baseline significantly, and it is E(3)-equivariant, unlike our baseline model!</p>
@@ -1360,7 +1360,7 @@ By Andrew D. White
 
   <p class="copyright">
     
-      © Copyright 2025.
+      © Copyright 2026.
       <br/>
     
   </p>

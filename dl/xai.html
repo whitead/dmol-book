@@ -537,14 +537,14 @@ your annual income had been $45,000, you would have been offered a loan.</p>
 <h2><span class="section-number">11.2. </span>Feature Importance<a class="headerlink" href="#feature-importance" title="Link to this heading">#</a></h2>
 <p>Feature importance is the most straightforward and common method of interpreting a machine learning model. The output of feature importance is a ranking or numerical values for each feature, typically for a single prediction. If you are trying to understand the feature importance across the whole model, this is called <strong>global</strong> feature importance and <strong>local</strong> for a single prediction. Global feature importance and global interpretability is relatively rare because accurate deep learning models change which features are important in different regions of feature space.</p>
 <p>Let’s start with a linear model to see feature importance:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8a749aad-4bb5-4ecd-a502-b9889fb9ab1a">
-<span class="eqno">(11.1)<a class="headerlink" href="#equation-8a749aad-4bb5-4ecd-a502-b9889fb9ab1a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-961ed198-de5c-43f2-8204-94c92b63d513">
+<span class="eqno">(11.1)<a class="headerlink" href="#equation-961ed198-de5c-43f2-8204-94c92b63d513" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \hat{y} = \vec{w}\vec{x} + b 
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\vec{x}\)</span> is our feature vector. A simple way to assess feature importance is to simply look at the weight value <span class="math notranslate nohighlight">\(w_i\)</span> for a particular feature <span class="math notranslate nohighlight">\(x_i\)</span>. The weight <span class="math notranslate nohighlight">\(w_i\)</span> shows how much <span class="math notranslate nohighlight">\(\hat{y}\)</span> would change if <span class="math notranslate nohighlight">\(x_i\)</span> is increased by 1, while all other features are constant. If the magnitude of our features are comparable, then this would be a reasonable way to rank features. However, if our features have units, this approach is sensitive to unit choices and relative magnitude of features. For example if our temperature was changed from Celsius to Fahrenheit, a 1 degree increase will have a smaller effect.</p>
 <p>To remove the effect of feature magnitude and units, a slightly better way to assess feature importance is to divide <span class="math notranslate nohighlight">\(w_i\)</span> by the <strong>standard error</strong>  in the feature values. Recall that standard error is just the ratio of sum of squared error in predicted value divided by the total deviation in the feature. Standard error is a ratio of prediction accuracy to feature variance. <span class="math notranslate nohighlight">\(w_i\)</span> divided by standard error is called the <span class="math notranslate nohighlight">\(t\)</span>-statistic because it can be compared with the <span class="math notranslate nohighlight">\(t\)</span>-distribution for assessing feature importance.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-6461d548-5876-4741-a8ab-b3ea797bf7b3">
-<span class="eqno">(11.2)<a class="headerlink" href="#equation-6461d548-5876-4741-a8ab-b3ea797bf7b3" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-8ae918f9-f320-43b0-8ad5-98f992dce93c">
+<span class="eqno">(11.2)<a class="headerlink" href="#equation-8ae918f9-f320-43b0-8ad5-98f992dce93c" title="Permalink to this equation">#</a></span>\[\begin{equation}
 t_i = \frac{w_i}{S_{w_i}},\; S^2_{w_i} = \frac{1}{N - D}\sum_j \frac{\left(\hat{y}_j - y_j\right)^2}{\left(x_{ij} - \bar{x}_i\right)^2}
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(N\)</span> is the number of examples,  <span class="math notranslate nohighlight">\(D\)</span> is the number of features, and <span class="math notranslate nohighlight">\(\bar{x}_i\)</span> is the average value of the <span class="math notranslate nohighlight">\(i\)</span>th feature. The <span class="math notranslate nohighlight">\(t_i\)</span> value can be used to rank features and it can be used for a hypothesis test: if <span class="math notranslate nohighlight">\(P(t &gt; t_i) &lt; 0.05\)</span> then that feature is significant, where <span class="math notranslate nohighlight">\(P(t)\)</span> is Student’s <span class="math notranslate nohighlight">\(t\)</span>-distribution. Note that a feature’s significance is sensitive to which features are present in a model; if you add new features some may become redundant.</p>
@@ -554,13 +554,13 @@ t_i = \frac{w_i}{S_{w_i}},\; S^2_{w_i} = \frac{1}{N - D}\sum_j \frac{\left(\hat{
 \frac{\Delta \hat{f}(\vec{x})}{\Delta x_i} \approx \frac{\partial  \hat{f}(\vec{x})}{\partial x_i}
 \]</div>
 <p>so a change by 1 is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2e6c20ca-11cd-4dfd-ad1e-62bc6285e132">
-<span class="eqno">(11.3)<a class="headerlink" href="#equation-2e6c20ca-11cd-4dfd-ad1e-62bc6285e132" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b9a1a9f6-138b-415c-adb7-c2a792f3e245">
+<span class="eqno">(11.3)<a class="headerlink" href="#equation-b9a1a9f6-138b-415c-adb7-c2a792f3e245" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \Delta \hat{f}(\vec{x}) \approx \frac{\partial  \hat{f}(\vec{x})}{\partial x_i}.
 \end{equation}\]</div>
 <p>In practice, we make a slight variation on this equation – instead of a Taylor series centered at 0 approximating this change, we center at some other root (point where the function is 0). This “grounds” the series at the decision boundary (a root) and then you can view the partials as “pushing” the predicted class away or towards the decision boundary. Another way to think about this is that we use the first-order terms of the Taylor series to build a linear model. Then we just apply what we did above to that linear model and use the coefficients as the “importance” of features. Specifically, we use this surrogate function for <span class="math notranslate nohighlight">\(\hat{f}(\vec{x})\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8f8ae445-11c1-4d8b-bf53-250988ec9bf6">
-<span class="eqno">(11.4)<a class="headerlink" href="#equation-8f8ae445-11c1-4d8b-bf53-250988ec9bf6" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-042c383e-5e37-4e28-9c26-1bae26b31152">
+<span class="eqno">(11.4)<a class="headerlink" href="#equation-042c383e-5e37-4e28-9c26-1bae26b31152" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \require{cancel}
 \hat{f}(\vec{x}) \approx \cancelto{0}{f(\vec{x}')} +  \nabla\hat{f}(\vec{x}')\cdot\left(\vec{x} - \vec{x}'\right)
 \end{equation}\]</div>
@@ -569,15 +569,15 @@ t_i = \frac{w_i}{S_{w_i}},\; S^2_{w_i} = \frac{1}{N - D}\sum_j \frac{\left(\hat{
 <h3><span class="section-number">11.2.1. </span>Neural Network Feature Importance<a class="headerlink" href="#neural-network-feature-importance" title="Link to this heading">#</a></h3>
 <p>In neural networks, the partial derivatives are a poor approximation of the real changes to the output. Small changes to the input can have discontinuous changes (because of nonlinearities like ReLU), making the terms above have little explanatory power. This is called the <strong>shattered gradients</strong> problem <span id="id19">[<a class="reference internal" href="#id191" title="David Balduzzi, Marcus Frean, Lennox Leary, J. P. Lewis, Kurt Wan-Duo Ma, and Brian McWilliams. The shattered gradients problem: if resnets are the answer, then what is the question? In Doina Precup and Yee Whye Teh, editors, Proceedings of the 34th International Conference on Machine Learning, volume 70 of Proceedings of Machine Learning Research, 342–350. PMLR, 06–11 Aug 2017. URL: http://proceedings.mlr.press/v70/balduzzi17b.html.">BFL+17</a>]</span>. Breaking down each feature separately also misses correlations between features – which don’t exist in a linear model. Thus the derivative approximation works satisfactorily in locally linear models, but not deep neural networks.</p>
 <p>There are a variety of techniques that get around the issue of shattered gradients in neural networks. Two popular methods are integrated gradients <span id="id20">[<a class="reference internal" href="#id193" title="Mukund Sundararajan, Ankur Taly, and Qiqi Yan. Axiomatic attribution for deep networks. In International Conference on Machine Learning, 3319–3328. PMLR, 2017.">STY17</a>]</span> and SmoothGrad<span id="id21">[<a class="reference internal" href="#id194" title="Daniel Smilkov, Nikhil Thorat, Been Kim, Fernanda Viégas, and Martin Wattenberg. Smoothgrad: removing noise by adding noise. arXiv preprint arXiv:1706.03825, 2017.">STK+17</a>]</span>. Integrated gradients creates a path from <span class="math notranslate nohighlight">\(\vec{x}'\)</span> to <span class="math notranslate nohighlight">\(\vec{x}\)</span> and integrates Equation 4 along that path:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-afb89c57-b9c0-493a-b1b3-ad2f7c1fa07c">
-<span class="eqno">(11.5)<a class="headerlink" href="#equation-afb89c57-b9c0-493a-b1b3-ad2f7c1fa07c" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a53014e8-dee7-48b9-b319-cb69432ec0c0">
+<span class="eqno">(11.5)<a class="headerlink" href="#equation-a53014e8-dee7-48b9-b319-cb69432ec0c0" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \textrm{IG}_i = \left(\vec{x} - \vec{x}'\right) \int_0^1\left[\nabla\hat{f}\left(\vec{x}' + t\left(\vec{x} - \vec{x}'\right)\right)\right]_i\,dt
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(t\)</span> is some increment along the path such that <span class="math notranslate nohighlight">\(\vec{x}' + t\left(\vec{x} - \vec{x}'\right) = \vec{x}'\)</span> when <span class="math notranslate nohighlight">\(t = 0\)</span> and <span class="math notranslate nohighlight">\(\vec{x}' + t\left(\vec{x} - \vec{x}'\right) = \vec{x}\)</span> when <span class="math notranslate nohighlight">\(t = 1\)</span>. This gives us the integrated gradient for each feature <span class="math notranslate nohighlight">\(i\)</span>. The integrated gradients are the importance of each feature, but without the complexity of shattered gradients. There are some nice properties too, like <span class="math notranslate nohighlight">\(\sum_i \textrm{IG}_i = f(\vec{x}) - f(\vec{x}')\)</span> so that the integrated gradients provide a complete partition of the change from the baseline to the prediction<span id="id22">[<a class="reference internal" href="#id193" title="Mukund Sundararajan, Ankur Taly, and Qiqi Yan. Axiomatic attribution for deep networks. In International Conference on Machine Learning, 3319–3328. PMLR, 2017.">STY17</a>]</span>.</p>
 <p>Implementing integrated gradients is actually relatively simple. You approximate the path integral with a Riemann sum by breaking the path into a set of discrete inputs between the input features <span class="math notranslate nohighlight">\(\vec{x}\)</span> and the baseline <span class="math notranslate nohighlight">\(\vec{x}'\)</span>. You compute the gradient of these inputs with the neural network. Then you multiply that by the change in features above baseline: <span class="math notranslate nohighlight">\(\left(\vec{x} - \vec{x}'\right)\)</span>.</p>
 <p>SmoothGrad is a similar idea to the integrated gradients. Rather than summing up the gradients along a path though, we sum gradients from random points nearby our prediction. The equation is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-100602fe-17cc-475a-b8a3-b4be6b1a2a5e">
-<span class="eqno">(11.6)<a class="headerlink" href="#equation-100602fe-17cc-475a-b8a3-b4be6b1a2a5e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a92c4d94-8131-4704-a3e6-923b7621c5ae">
+<span class="eqno">(11.6)<a class="headerlink" href="#equation-a92c4d94-8131-4704-a3e6-923b7621c5ae" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \textrm{SG}_i = \sum_j^M\left[\nabla\hat{f}\left(\vec{x}' + \vec{\epsilon}\right)\right]_i
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(M\)</span> is a choice of sample number and <span class="math notranslate nohighlight">\(\vec{\epsilon}\)</span> is sampled from <span class="math notranslate nohighlight">\(D\)</span> zero-mean Guassians <span id="id23">[<a class="reference internal" href="#id194" title="Daniel Smilkov, Nikhil Thorat, Been Kim, Fernanda Viégas, and Martin Wattenberg. Smoothgrad: removing noise by adding noise. arXiv preprint arXiv:1706.03825, 2017.">STK+17</a>]</span>. The only change in implementation here is to replace the path with a series of random perturbations.</p>
@@ -587,8 +587,8 @@ t_i = \frac{w_i}{S_{w_i}},\; S^2_{w_i} = \frac{1}{N - D}\sum_j \frac{\left(\hat{
 <h3><span class="section-number">11.2.2. </span>Shapley Values<a class="headerlink" href="#shapley-values" title="Link to this heading">#</a></h3>
 <p>A model agnostic way to treat feature importance is with <strong>Shapley values.</strong> Shapley values come from game theory and are a solution to how to pay a coalition of cooperating players according to their contributions. Imagine each feature is a player and we would like to “pay” them according to their contribution to the predicted value. A Shapley value <span class="math notranslate nohighlight">\(\phi_i(x)\)</span> is the pay to feature <span class="math notranslate nohighlight">\(i\)</span> at instance <span class="math notranslate nohighlight">\(x\)</span>. We break-up the predicted function value <span class="math notranslate nohighlight">\(\hat{f}(x)\)</span> into the Shapley values so that the sum of the pay is the function value: <span class="math notranslate nohighlight">\(\sum_i \phi_i(x) = \hat{f}(x)\)</span>. This means you can interpret the Shapley value of a feature as its numerical contribution to the prediction. Shapley values are powerful because their calculation is agnostic to the model, they partition the predicted value among each feature, and they have other attributes that we would desire in an explanation of a prediction (symmetry, linearity, permutation invariant, etc.). Their disadvantage are that exact computation is combinatorial with respect to feature number and they have no sparsity, making them less helpful as feature number grows. Most methods we discuss here also have no sparsity. You can always force your model to be sparse to achieve sparse explanations, like with L1 regularization (see <a class="reference internal" href="layers.html"><span class="doc">Standard Layers</span></a>).</p>
 <p>Shapley values are computed as</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e771cf95-e546-40e9-9a5b-d82a69b8b420">
-<span class="eqno">(11.7)<a class="headerlink" href="#equation-e771cf95-e546-40e9-9a5b-d82a69b8b420" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-5dcd43bb-1fa5-44d7-b9a9-a7a08e1691a5">
+<span class="eqno">(11.7)<a class="headerlink" href="#equation-5dcd43bb-1fa5-44d7-b9a9-a7a08e1691a5" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \phi_i(x) = \frac{1}{Z}\sum_{S \in N \backslash x_i}v(S\cup x_i) - v(S)
 \end{equation}\]</div>
 <div class="math notranslate nohighlight">
@@ -597,24 +597,24 @@ Z = \frac{|S|!\left(N - |S| - 1\right)!}{N!}
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(S \in N \backslash x_i\)</span> means all sets of features that exclude feature <span class="math notranslate nohighlight">\(x_i\)</span>, <span class="math notranslate nohighlight">\(S\cup x_i\)</span> means putting back feature <span class="math notranslate nohighlight">\(x_i\)</span> into the set, and <span class="math notranslate nohighlight">\(v(S)\)</span> is the value of <span class="math notranslate nohighlight">\(\hat{f}(x)\)</span> using only the features included in <span class="math notranslate nohighlight">\(S\)</span>, and <span class="math notranslate nohighlight">\(Z\)</span> is a normalization value. The formula can be interpreted as the mean of all possible differences in <span class="math notranslate nohighlight">\(\hat{f}\)</span> formed by adding/removing feature <span class="math notranslate nohighlight">\(i\)</span>.</p>
 <p>One immediate concern though is how can we “remove” feature <span class="math notranslate nohighlight">\(i\)</span> from a model equation? We marginalize out feature <span class="math notranslate nohighlight">\(i\)</span>. Recall a marginal is a way to integrate out a random variable <span class="math notranslate nohighlight">\(P(x) = \int\, P(x,y)\,dy\)</span>. That integrates over all possible <span class="math notranslate nohighlight">\(x\)</span> values. Marginalization can be used on functions of random variables, which obviously are also random variables, by taking an expectation: <span class="math notranslate nohighlight">\(E_y[f | X = x] = \int\,f(X=x,y)P(X=x,y)\, dy\)</span>. I’ve emphasized that the random variable <span class="math notranslate nohighlight">\(X\)</span> is fixed in the integral and thus <span class="math notranslate nohighlight">\(E_y[f]\)</span> is a function of <span class="math notranslate nohighlight">\(x\)</span>. <span class="math notranslate nohighlight">\(y\)</span> is removed by computing the expected value of <span class="math notranslate nohighlight">\(f(x,y)\)</span> where <span class="math notranslate nohighlight">\(x\)</span> is fixed (the function argument). We’re essentially replacing <span class="math notranslate nohighlight">\(f(x,y)\)</span> with a new function <span class="math notranslate nohighlight">\(E_y[f]\)</span> that is the average of all possible <span class="math notranslate nohighlight">\(y\)</span> values. I’m over-explaining this though, it’s quite intuitive once you see the code below. The other detail is that <em>value</em> is the change relative to the average of <span class="math notranslate nohighlight">\(\hat{f}\)</span>. You can typically ignore this extra term - it cancels, but I include it for completeness. Thus the value equation becomes <span id="id25">[<a class="reference internal" href="#id197" title="Erik Štrumbelj and Igor Kononenko. Explaining prediction models and individual predictions with feature contributions. Knowledge and information systems, 41(3):647–665, 2014.">vStrumbeljK14</a>]</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-99800fce-7e93-4432-898f-be14a73a3e11">
-<span class="eqno">(11.8)<a class="headerlink" href="#equation-99800fce-7e93-4432-898f-be14a73a3e11" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-7fa1c62b-2500-4b61-8c45-9d4013c7c624">
+<span class="eqno">(11.8)<a class="headerlink" href="#equation-7fa1c62b-2500-4b61-8c45-9d4013c7c624" title="Permalink to this equation">#</a></span>\[\begin{equation}
 v(x_i) = \int\,f(x_0, x_1, \ldots, x_i,\ldots, x_N)P(x_0, x_1, \ldots, x_i,\ldots, x_N)\, dx_i - E\left[\hat{f}(\vec{x})\right]
 \end{equation}\]</div>
 <p>How do we compute the marginal <span class="math notranslate nohighlight">\(\int\,f(x_0, x_1, \ldots, x_i,\ldots, x_N)P(x_0, x_1, \ldots, x_i,\ldots, x_N)\, dx_i\)</span>? We do not have a known probability distribution <span class="math notranslate nohighlight">\(P(\vec{x})\)</span>. We can sample from <span class="math notranslate nohighlight">\(P(\vec{x})\)</span> by considering our data as an <strong>empirical distribution</strong>. That is, we can sample from <span class="math notranslate nohighlight">\(P(\vec{x})\)</span> by sampling data points. There is a little bit of complexity here because we need to sample the <span class="math notranslate nohighlight">\(\vec{x}\)</span>’s jointly, we cannot just mix together individual features randomly because there are correlations between features that will be removed.</p>
 <p>Strumbelj et al. <span id="id26">[<a class="reference internal" href="#id197" title="Erik Štrumbelj and Igor Kononenko. Explaining prediction models and individual predictions with feature contributions. Knowledge and information systems, 41(3):647–665, 2014.">vStrumbeljK14</a>]</span> showed that we can directly estimate the <span class="math notranslate nohighlight">\(i\)</span>th Shapley value with:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-89f5f9a0-6d15-49d6-b789-1ca69033754e">
-<span class="eqno">(11.9)<a class="headerlink" href="#equation-89f5f9a0-6d15-49d6-b789-1ca69033754e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-46eb5f6b-4700-4b67-aab1-c4193a0f2906">
+<span class="eqno">(11.9)<a class="headerlink" href="#equation-46eb5f6b-4700-4b67-aab1-c4193a0f2906" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \phi_i(\vec{x}) = \frac{1}{M}\sum^M \hat{f}\left(\vec{z}_{+i}\right) - \hat{f}\left(\vec{z}_{-i}\right)
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\vec{z}\)</span> is a “chimera” example constructed from the real example <span class="math notranslate nohighlight">\(\vec{x}\)</span> and a randomly drawn example <span class="math notranslate nohighlight">\(\vec{x}'\)</span>. We randomly select from <span class="math notranslate nohighlight">\(\vec{x}\)</span> and <span class="math notranslate nohighlight">\(\vec{x}'\)</span> to construct <span class="math notranslate nohighlight">\(\vec{z}\)</span>, except <span class="math notranslate nohighlight">\(\vec{z}_{+i}\)</span> specifically has the <span class="math notranslate nohighlight">\(i\)</span>th feature from the example <span class="math notranslate nohighlight">\(\vec{x}\)</span> and <span class="math notranslate nohighlight">\(\vec{z}_{-i}\)</span> has the <span class="math notranslate nohighlight">\(i\)</span>th feature from the random example <span class="math notranslate nohighlight">\(\vec{x}'\)</span>. <span class="math notranslate nohighlight">\(M\)</span> is chosen large enough to get a good sample for this value. <span id="id27">[<a class="reference internal" href="#id197" title="Erik Štrumbelj and Igor Kononenko. Explaining prediction models and individual predictions with feature contributions. Knowledge and information systems, 41(3):647–665, 2014.">vStrumbeljK14</a>]</span> gives guidance on choosing <span class="math notranslate nohighlight">\(M\)</span>, but basically as large <span class="math notranslate nohighlight">\(M\)</span> as computationally feasible reasonable. One change in this approximation though is that we end-up with an explicit term for the expectation (sometimes denoted <span class="math notranslate nohighlight">\(\phi_0\)</span>) so that our “completeness” equation is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-81fd6317-fe07-49d4-a21b-8fa9189d0824">
-<span class="eqno">(11.10)<a class="headerlink" href="#equation-81fd6317-fe07-49d4-a21b-8fa9189d0824" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e7f13435-8fd1-4b3f-8129-d09a2e8ec287">
+<span class="eqno">(11.10)<a class="headerlink" href="#equation-e7f13435-8fd1-4b3f-8129-d09a2e8ec287" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \sum_i \phi_i(\vec{x}) = \hat{f}(\vec{x}) - E[\hat{f}(\vec{x})]
 \end{equation}\]</div>
 <p>Or if you explicitly include expectation as <span class="math notranslate nohighlight">\(\phi_0\)</span>, which is independent of <span class="math notranslate nohighlight">\(\vec{x}\)</span></p>
-<div class="amsmath math notranslate nohighlight" id="equation-e8b5b7af-612e-4735-85d3-d8e047d2a135">
-<span class="eqno">(11.11)<a class="headerlink" href="#equation-e8b5b7af-612e-4735-85d3-d8e047d2a135" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-5bc04564-fb3d-442d-943a-de642fa45d61">
+<span class="eqno">(11.11)<a class="headerlink" href="#equation-5bc04564-fb3d-442d-943a-de642fa45d61" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \phi_0 + \sum_{i=1} \phi_i(\vec{x}) = \hat{f}(\vec{x})
 \end{equation}\]</div>
 <aside class="margin sidebar">
@@ -1172,8 +1172,8 @@ Probability GGGGG of being hemolytic 0.98
 <section id="training-data-importance">
 <h2><span class="section-number">11.6. </span>Training Data Importance<a class="headerlink" href="#training-data-importance" title="Link to this heading">#</a></h2>
 <p>Another kind of explanation or interpretation we might desire is <em>which</em> training data points contribute most to a prediction. This is a more literal answer to the question: “Why did my model predict this?” – neural networks are a result of training data and thus the answer to why a prediction is made can be traced to training data. Ranking training data for a given prediction helps us understand which training examples are causing the neural network to predict a value. This is like an influence function, <span class="math notranslate nohighlight">\(\mathcal{I}(x_i, x)\)</span>, which gives a score of influence for training point <span class="math notranslate nohighlight">\(i\)</span> and input <span class="math notranslate nohighlight">\(x\)</span>. The most straightforward way to compute the influence would be to train the neural network with (i.e., <span class="math notranslate nohighlight">\(\hat{f}(x)\)</span>) and without <span class="math notranslate nohighlight">\(x_i\)</span> (i.e., <span class="math notranslate nohighlight">\(\hat{f}_{-x_i}(x)\)</span>) and define the influence as</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2c5e3932-f1e0-4cfe-91ed-1e233729ef1b">
-<span class="eqno">(11.12)<a class="headerlink" href="#equation-2c5e3932-f1e0-4cfe-91ed-1e233729ef1b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-947ca131-b842-427e-b801-9db860984d0d">
+<span class="eqno">(11.12)<a class="headerlink" href="#equation-947ca131-b842-427e-b801-9db860984d0d" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathcal{I}(x_i, x) = \hat{f}_{-x_i}(x) - \hat{f}(x)
 \end{equation}\]</div>
 <p>For example, if a prediction is higher after removing the training point <span class="math notranslate nohighlight">\(x_i\)</span> from training, we would say that point has a positive influence. Computing this influence function requires training the model as many times as you have points – typically computationally unfeasible. <span id="id34">[<a class="reference internal" href="#id183" title="Pang Wei Koh and Percy Liang. Understanding black-box predictions via influence functions. In International Conference on Machine Learning, 1885–1894. PMLR, 2017.">KL17</a>]</span> show a way to approximate this by looking at infinitesimal changes to the <em>weights</em> of each training point. Computing these influence functions does require computing a Hessian with respect to the loss function and thus are not commonly used. If you’re using JAX though, this is simple to do.</p>
@@ -1187,8 +1187,8 @@ Probability GGGGG of being hemolytic 0.98
 <h2><span class="section-number">11.7. </span>Surrogate Models<a class="headerlink" href="#surrogate-models" title="Link to this heading">#</a></h2>
 <p>One of the more general ideas in interpretability is to fit an interpretable model to a black box model <em>in the neighborhood of a specific example</em>. We assume that an interpretable model cannot be fit globally to a black box model – otherwise we could just use the interpretable model and throw away the black box model. However, if we fit the interpretable model to just a small region around an example of interest, we can provide an explanation through the locally correct interpretable model. We call the interpretable model a <strong>local surrogate model</strong>. Examples of local surrogate models that are inherently interpretable include decision trees, linear models, sparse linear models (for succinct explanations), a Naive Bayes Classifier, etc.</p>
 <p>A popular algorithm for this process of fitting a local surrogate model is called Local Interpretable Model-Agnostic Explanations (LIME) <span id="id35">[<a class="reference internal" href="#id181" title="Marco Tulio Ribeiro, Sameer Singh, and Carlos Guestrin. &quot; why should i trust you?&quot; explaining the predictions of any classifier. In Proceedings of the 22nd ACM SIGKDD international conference on knowledge discovery and data mining, 1135–1144. 2016.">RSG16a</a>]</span>. LIME fits the local surrogate model in the neighborhood of the example of interest utilizing the loss function that trained the original black box model. The loss function for the local surrogate model is weighted so that we value points closer to the example of interest as we regress the surrogate model. The LIME paper includes sparsifying the surrogate model in its notation, but we’ll omit that from the loss equation since that is more of an attribute of the local surrogate model. Thus, our definition for the local surrogate model loss is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a6abeb35-a184-41d4-b4e2-63462359ef7e">
-<span class="eqno">(11.13)<a class="headerlink" href="#equation-a6abeb35-a184-41d4-b4e2-63462359ef7e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-f170d8d3-5d31-423a-a59b-e16d26e2b95e">
+<span class="eqno">(11.13)<a class="headerlink" href="#equation-f170d8d3-5d31-423a-a59b-e16d26e2b95e" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathcal{l^s}\left(x'\right) = w(x', x)\mathcal{l}\left(\hat{f}_s(x'), \hat{f}(x')\right)
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(w(x', x)\)</span> is a weight kernel function that weights points near example of interest <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(\mathcal{l}(\cdot,\cdot)\)</span> is the original black box model loss, <span class="math notranslate nohighlight">\(\hat{f}(\cdot)\)</span> is the black box model, and <span class="math notranslate nohighlight">\(\hat{f}_s(\cdot)\)</span> is the local surrogate model.</p>
@@ -1682,7 +1682,7 @@ Q 189.9 126.9, 190.7 126.9
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model accuracy: 92.91%
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model accuracy: 93.92%
 </pre></div>
 </div>
 </div>
@@ -1724,13 +1724,7 @@ Q 189.9 126.9, 190.7 126.9
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">IndexError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">32</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">exps</span> <span class="o">=</span> <span class="n">exmol</span><span class="o">.</span><span class="n">cf_explain</span><span class="p">(</span><span class="n">space</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">exps</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-
-<span class="ne">IndexError</span>: list index out of range
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Example(smiles=&#39;CC1=CCCN1C&#39;, selfies=&#39;[C][C][=C][C][C][Branch2][=N][Branch2][N][Branch1][C][C][=Ring1][Branch1][C][=Ring1][=Branch2][N][C][C][C][C][=Branch1][C][=O][N][C][Ring1][#Branch1][=O][=O]&#39;, similarity=0.07462686567164178, yhat=array(0., dtype=float32), index=2021, position=array([4.34553559, 0.31696381]), is_origin=False, cluster=np.int64(-1), label=&#39;Counterfactual 2&#39;, descriptors=None)
 </pre></div>
 </div>
 </div>
@@ -1742,6 +1736,9 @@ Q 189.9 126.9, 190.7 126.9
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/56a9312916e22018ee76de8e7732ce0af23d2661965d05b26c97fbb01930bdec.png" src="../_images/56a9312916e22018ee76de8e7732ce0af23d2661965d05b26c97fbb01930bdec.png" />
+</div>
 </div>
 <p>The base molecule which we selected here is NOT FDA approved. By looking at the generated counterfactuals we can conclude that, the heterocyclic group has an impact on the toxicity of the base. Therefore, by altering the heterocylic group, the base molecule might be made non-toxic according to our model. This also shows why counterfactual explanations give actionable insight into how modifications can be made.</p>
 <p>We can also visualize the generated chemical space!</p>
@@ -1750,6 +1747,9 @@ Q 189.9 126.9, 190.7 126.9
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">exmol</span><span class="o">.</span><span class="n">plot_space</span><span class="p">(</span><span class="n">space</span><span class="p">,</span> <span class="n">exps</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/92a6879c2e94e19b13c55391f3bf4801a19ed5186d88436c4fb59cb4e34d7546.png" src="../_images/92a6879c2e94e19b13c55391f3bf4801a19ed5186d88436c4fb59cb4e34d7546.png" />
 </div>
 </div>
 </section>
@@ -2059,7 +2059,7 @@ By Andrew D. White
 
   <p class="copyright">
     
-      © Copyright 2025.
+      © Copyright 2026.
       <br/>
     
   </p>

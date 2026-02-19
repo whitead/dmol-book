@@ -986,8 +986,8 @@ L 210.7 45.6
 that can compute analytical gradients with respect to two variables in a program.</p>
 </aside>
 <p>Our model will be defined by this equation:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-77713fc0-6e0f-432b-9273-5bb710549cba">
-<span class="eqno">(2.1)<a class="headerlink" href="#equation-77713fc0-6e0f-432b-9273-5bb710549cba" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-f232a74e-c232-417f-831e-01ef4c2f76fb">
+<span class="eqno">(2.1)<a class="headerlink" href="#equation-f232a74e-c232-417f-831e-01ef4c2f76fb" title="Permalink to this equation">#</a></span>\[\begin{equation}
     y = \vec{w} \cdot \vec{x} + b
 \end{equation}\]</div>
 <p>which is defined for a single data point. The shape of a single feature vector,  <span class="math notranslate nohighlight">\(\vec{x}\)</span>, is 17 in our case (for the 17 features). <span class="math notranslate nohighlight">\(\vec{w}\)</span> is a vector of adjustable parameters of length 17 and <span class="math notranslate nohighlight">\(b\)</span> is an adjustable scalar (called <strong>bias</strong>).</p>
@@ -1056,8 +1056,8 @@ Our goal is to minimize loss.</p>
 <section id="gradient-descent">
 <h3><span class="section-number">2.3.5. </span>Gradient Descent<a class="headerlink" href="#gradient-descent" title="Link to this heading">#</a></h3>
 <p>We will now try to reduce loss by using information about how it changes with respect to the adjustable parameters. If we write our loss as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3662fad7-4c51-4c7c-ae31-b7f5288da3ed">
-<span class="eqno">(2.2)<a class="headerlink" href="#equation-3662fad7-4c51-4c7c-ae31-b7f5288da3ed" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-580e979c-bc21-4516-826b-ca9beac970b6">
+<span class="eqno">(2.2)<a class="headerlink" href="#equation-580e979c-bc21-4516-826b-ca9beac970b6" title="Permalink to this equation">#</a></span>\[\begin{equation}
     L = \frac{1}{N}\sum_i^N \left[y_i - f(\vec{x}_i, \vec{w}, b)\right]^2
 \end{equation}\]</div>
 <p>This loss is called <strong>mean squared error</strong>, often abbreviated MSE. We can compute our loss gradients with respect to the adjustable parameters:</p>
@@ -1069,13 +1069,13 @@ take the derivative of. For example, consider <code class="docutils literal notr
 gives <span class="math notranslate nohighlight">\(\frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}\)</span>. Note too that
 <span class="math notranslate nohighlight">\(x\)</span> may be a tensor.</p>
 </aside>
-<div class="amsmath math notranslate nohighlight" id="equation-513c9ee4-a8e4-4666-8762-368e4958a0bc">
-<span class="eqno">(2.3)<a class="headerlink" href="#equation-513c9ee4-a8e4-4666-8762-368e4958a0bc" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-fac147e5-c4e4-4e82-bb2a-fe86e580534d">
+<span class="eqno">(2.3)<a class="headerlink" href="#equation-fac147e5-c4e4-4e82-bb2a-fe86e580534d" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \frac{\partial L}{\partial w_i}, \frac{\partial L}{\partial b}
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(w_i\)</span> is the <span class="math notranslate nohighlight">\(i\)</span>th element of the weight vector <span class="math notranslate nohighlight">\(\vec{w}\)</span>. We can reduce the loss by taking a step in the direction of its negative gradient:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b692f83c-0136-46b4-b8c7-bd052ca413f2">
-<span class="eqno">(2.4)<a class="headerlink" href="#equation-b692f83c-0136-46b4-b8c7-bd052ca413f2" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ec1b6ddf-eae3-4a8c-aa4b-b37a43e85f2c">
+<span class="eqno">(2.4)<a class="headerlink" href="#equation-ec1b6ddf-eae3-4a8c-aa4b-b37a43e85f2c" title="Permalink to this equation">#</a></span>\[\begin{equation}
     (w_i, b') = \left(w_i - \eta \frac{\partial L}{\partial w_i}, b - \eta\frac{\partial L}{\partial b}\right)
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\eta\)</span> is <strong>learning rate</strong>, which an adjustable but not trained parameter (an example of a <strong>hyperparameter</strong>) which we just guess to be <span class="math notranslate nohighlight">\(1\times10^{-6}\)</span> in this example. Typically, it’s chosen to be some power of 10 that is at most 0.1. Values higher than that cause stability problems. Let’s try this procedure, which is called <strong>gradient descent</strong>.</p>
@@ -1202,8 +1202,8 @@ Having random batches of data is how gradient descent becomes stochastic gradien
 <section id="standardize-features">
 <h3><span class="section-number">2.3.8. </span>Standardize features<a class="headerlink" href="#standardize-features" title="Link to this heading">#</a></h3>
 <p>It seems we cannot get past a certain loss. If you examine the gradients you’ll see some of them are very large and some are very small. Each of the features have different magnitudes. For example, molecular weights are large numbers. The number of rings in a molecule is a small number. Each of these must use the same learning rate, <span class="math notranslate nohighlight">\(\eta\)</span>, and that is ok for some but too small for others. If we increase <span class="math notranslate nohighlight">\(\eta\)</span>, our training procedure will explode because of these larger feature gradients. A standard trick we can do is make all the features have the same magnitude, using the equation for standardization you might see in your statistics textbook:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c5798fce-ff0d-4d1b-9ee4-bfd8de2dac3b">
-<span class="eqno">(2.5)<a class="headerlink" href="#equation-c5798fce-ff0d-4d1b-9ee4-bfd8de2dac3b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-bffcaf54-0619-419f-b549-b58f8833cb6d">
+<span class="eqno">(2.5)<a class="headerlink" href="#equation-bffcaf54-0619-419f-b549-b58f8833cb6d" title="Permalink to this equation">#</a></span>\[\begin{equation}
     x_{ij} = \frac{x_{ij} - \bar{x_j}}{\sigma_{x_j}}
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\bar{x_j}\)</span> is column mean and <span class="math notranslate nohighlight">\(\sigma_{x_j}\)</span> is column standard deviation. To be careful about contaminating training data with test data – leaking information between train and test data – we should only use training data in computing the mean and standard deviation. We want our test data to approximate how we’ll use our model on unseen data, so we cannot know what these unseen features means/standard deviations might be and thus cannot use them at training time for standardization.</p>
@@ -1681,7 +1681,7 @@ By Andrew D. White
 
   <p class="copyright">
     
-      © Copyright 2025.
+      © Copyright 2026.
       <br/>
     
   </p>

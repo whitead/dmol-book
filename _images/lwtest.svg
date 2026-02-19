@@ -3,7 +3,7 @@
   <rdf:RDF>
    <ns2:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-    <dc:date>2026-02-19T17:52:35.533143</dc:date>
+    <dc:date>2026-02-19T20:40:44.533011</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <ns2:Agent>
@@ -120,10 +120,10 @@
   </g>
  </g>
  <defs>
-  <clipPath id="p42b5488d30">
+  <clipPath id="p5af305a0d5">
    <rect x="40.5" y="29.907692" width="114.136364" height="191.907692" />
   </clipPath>
-  <clipPath id="pdab389d7b8">
+  <clipPath id="p101322113c">
    <rect x="177.463636" y="29.907692" width="114.136364" height="191.907692" />
   </clipPath>
  </defs>

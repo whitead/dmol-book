@@ -523,16 +523,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">7</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="ne">----&gt; </span><span class="mi">7</span> <span class="kn">import</span><span class="w"> </span><span class="nn">tensorflow</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tf</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="kn">import</span><span class="w"> </span><span class="nn">rdkit</span><span class="o">,</span><span class="w"> </span><span class="nn">rdkit.Chem</span><span class="o">,</span><span class="w"> </span><span class="nn">rdkit.Chem.Draw</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;tensorflow&#39;
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2026-02-19 19:14:29.100348: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
 </pre></div>
 </div>
 </div>
@@ -542,6 +534,11 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_url</span> <span class="o">=</span> <span class="s2">&quot;https://github.com/aspuru-guzik-group/selfies/raw/16a489afa70882428bc194b2b24a2d33573f1651/examples/vae_example/datasets/dataJ_250k_rndm_zinc_drugs_clean.txt&quot;</span>
 <span class="n">pd_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_url</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total data size&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">pd_data</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total data size 249455
 </pre></div>
 </div>
 </div>
@@ -558,6 +555,11 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">selfies_list</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[C][C@@H1][C][C][Branch2][Ring1][Ring2][N][C][=C][N][=C][C][Branch1][=Branch2][C][=N][N][=C][N][Ring1][Branch1][C][=C][Ring1][N][C][C@@H1][Branch1][C][C][C][Ring2][Ring1][Ring2]
 </pre></div>
 </div>
 </div>
@@ -583,6 +585,20 @@ document.write(`
 <span class="n">sorted_token_counts</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">selfies_symbol_counts</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="o">-</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
 <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">sorted_token_counts</span><span class="p">[:</span><span class="mi">10</span><span class="p">]:</span>
     <span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[C] 3533632
+[=C] 1124758
+[Ring1] 858765
+[Branch1] 621080
+[=Branch1] 523631
+[N] 508933
+[=O] 318168
+[O] 279513
+[Branch2] 202232
+[Ring2] 177924
 </pre></div>
 </div>
 </div>
@@ -616,6 +632,13 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>selfies: [C][C@@H1][C][C][Branch2][Ring1][Ring2][N][C][=C][N][=C][C][Branch1][=Branch2][C][=N][N][=C][N][Ring1][Branch1][C][=C][Ring1][N][C][C@@H1][Branch1][C][C][C][Ring2][Ring1][Ring2]
+selfies2ints: [1, 2, 1, 1, 3, 4, 5, 6, 1, 7, 6, 7, 1, 8, 9, 1, 10, 6, 7, 6, 4, 8, 1, 7, 4, 6, 1, 2, 8, 1, 1, 1, 5, 4, 5]
+ints2selfes: [C][C@@H1][C][C][Branch2][Ring1][Ring2][N][C][=C][N][=C][C][Branch1][=Branch2][C][=N][N][=C][N][Ring1][Branch1][C][=C][Ring1][N][C][C@@H1][Branch1][C][C][C][Ring2][Ring1][Ring2]
+</pre></div>
+</div>
+</div>
 </div>
 <p>Now we’ll try sampling directly from the tokens. I’m not very good at inferring if a SELFIES string is a reasonable molecule, so we’ll render a few using rdkit.</p>
 <div class="cell docutils container">
@@ -646,6 +669,9 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/ea44b1ad2af6bfaa41765b04953d0e580f9b18493182206035b1ff1afc989c21.svg" src="../_images/ea44b1ad2af6bfaa41765b04953d0e580f9b18493182206035b1ff1afc989c21.svg" />
+</div>
 </div>
 <p>As you can see, these molecules are a bit extreme – we see bizarre valences and highly unusual combinations of elements. We can try to sample now according to the frequency of tokens we saw in the corpus (ZINC smiles).</p>
 <div class="cell docutils container">
@@ -672,6 +698,9 @@ document.write(`
 <span class="n">draw_examples</span><span class="p">(</span><span class="n">model2</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/02eacb28db580010414b974ba9c11f4fe5b1ed353bf53ebfd0bfeea27107c1f0.svg" src="../_images/02eacb28db580010414b974ba9c11f4fe5b1ed353bf53ebfd0bfeea27107c1f0.svg" />
 </div>
 </div>
 <p>These are much better! Still, they are very exotic – if they could even be synthesized they would probably explode if you sneezed on them. The advantage of SELFIES over SMILES is that none of these were invalid. Just a bit unreasonable.</p>
@@ -728,6 +757,11 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2026-02-19 19:15:44.690236: E external/local_xla/xla/stream_executor/cuda/cuda_platform.cc:51] failed call to cuInit: INTERNAL: CUDA error: Failed call to cuInit: UNKNOWN ERROR (303)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -774,6 +808,34 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">Model: "functional"</span>
+</pre>
+</div><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┏━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┓
+┃<span style="font-weight: bold"> Layer (type)        </span>┃<span style="font-weight: bold"> Output Shape      </span>┃<span style="font-weight: bold">    Param # </span>┃<span style="font-weight: bold"> Connected to      </span>┃
+┡━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━┩
+│ input_layer         │ (<span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>, <span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>)      │          <span style="color: #00af00; text-decoration-color: #00af00">0</span> │ -                 │
+│ (<span style="color: #0087ff; text-decoration-color: #0087ff">InputLayer</span>)        │                   │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ embedding           │ (<span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>, <span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>, <span style="color: #00af00; text-decoration-color: #00af00">256</span>) │     <span style="color: #00af00; text-decoration-color: #00af00">27,648</span> │ input_layer[<span style="color: #00af00; text-decoration-color: #00af00">0</span>][<span style="color: #00af00; text-decoration-color: #00af00">0</span>] │
+│ (<span style="color: #0087ff; text-decoration-color: #0087ff">Embedding</span>)         │                   │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ not_equal           │ (<span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>, <span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>)      │          <span style="color: #00af00; text-decoration-color: #00af00">0</span> │ input_layer[<span style="color: #00af00; text-decoration-color: #00af00">0</span>][<span style="color: #00af00; text-decoration-color: #00af00">0</span>] │
+│ (<span style="color: #0087ff; text-decoration-color: #0087ff">NotEqual</span>)          │                   │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ gru (<span style="color: #0087ff; text-decoration-color: #0087ff">GRU</span>)           │ (<span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>, <span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>, <span style="color: #00af00; text-decoration-color: #00af00">128</span>) │    <span style="color: #00af00; text-decoration-color: #00af00">147,840</span> │ embedding[<span style="color: #00af00; text-decoration-color: #00af00">0</span>][<span style="color: #00af00; text-decoration-color: #00af00">0</span>],  │
+│                     │                   │            │ not_equal[<span style="color: #00af00; text-decoration-color: #00af00">0</span>][<span style="color: #00af00; text-decoration-color: #00af00">0</span>]   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ dense (<span style="color: #0087ff; text-decoration-color: #0087ff">Dense</span>)       │ (<span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>, <span style="color: #00d7ff; text-decoration-color: #00d7ff">None</span>, <span style="color: #00af00; text-decoration-color: #00af00">108</span>) │     <span style="color: #00af00; text-decoration-color: #00af00">13,932</span> │ gru[<span style="color: #00af00; text-decoration-color: #00af00">0</span>][<span style="color: #00af00; text-decoration-color: #00af00">0</span>]         │
+└─────────────────────┴───────────────────┴────────────┴───────────────────┘
+</pre>
+</div><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold"> Total params: </span><span style="color: #00af00; text-decoration-color: #00af00">189,420</span> (739.92 KB)
+</pre>
+</div><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold"> Trainable params: </span><span style="color: #00af00; text-decoration-color: #00af00">189,420</span> (739.92 KB)
+</pre>
+</div><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold"> Non-trainable params: </span><span style="color: #00af00; text-decoration-color: #00af00">0</span> (0.00 B)
+</pre>
+</div></div>
 </div>
 </section>
 <section id="training">
@@ -824,6 +886,9 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/4194d1d4315f8779f683796e47beafa36454c24907e5307b230a1deaf26bf3b5.png" src="../_images/4194d1d4315f8779f683796e47beafa36454c24907e5307b230a1deaf26bf3b5.png" />
+</div>
 </div>
 <p>This is the logit probability for each token. We need to sample from this to get our prediction for the first token. We’ll sample it with an adjustable parameter called <strong>temperature</strong>. Temperature controls how close we are to sampling the maximum. <span class="math notranslate nohighlight">\(T = 0\)</span> means we sampling the max only, <span class="math notranslate nohighlight">\(T = 1\)</span> means we sample according to the logits, and <span class="math notranslate nohighlight">\(T = \infty\)</span> means we sample randomly.</p>
 <div class="cell docutils container">
@@ -834,6 +899,11 @@ document.write(`
 
 <span class="n">t</span> <span class="o">=</span> <span class="n">sample_token</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tf.Tensor([[53]], shape=(1, 1), dtype=int64)
 </pre></div>
 </div>
 </div>
@@ -865,6 +935,9 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/c8a485ee604bf98ad441a3f68dd696f63c4fd103fd591ee502cf3d22da37b24f.svg" src="../_images/c8a485ee604bf98ad441a3f68dd696f63c4fd103fd591ee502cf3d22da37b24f.svg" />
+</div>
 </div>
 <p>These are better still! Now we can try adjusting the temperature to see more unusual or more common molecules</p>
 <p><span class="math notranslate nohighlight">\(T = 0.5\)</span></p>
@@ -874,6 +947,9 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/9f895a22805946afca71614a657d51460d329dca79273c58b9cf73a71409d8f4.svg" src="../_images/9f895a22805946afca71614a657d51460d329dca79273c58b9cf73a71409d8f4.svg" />
+</div>
 </div>
 <p><span class="math notranslate nohighlight">\(T = 100\)</span></p>
 <div class="cell docutils container">
@@ -881,6 +957,9 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">draw_examples</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">sample_model</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="mi">100</span><span class="p">))</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/4a6864c52b4e72a2435169fa209fd0ac07c29fa3185be01a20e21cf69fb65b30.svg" src="../_images/4a6864c52b4e72a2435169fa209fd0ac07c29fa3185be01a20e21cf69fb65b30.svg" />
 </div>
 </div>
 <p>You can see that the <span class="math notranslate nohighlight">\(T = 0.5\)</span> case seems to works the best of the three.</p>
@@ -897,6 +976,11 @@ document.write(`
     <span class="n">tfjs</span><span class="o">.</span><span class="n">converters</span><span class="o">.</span><span class="n">save_keras_model</span><span class="p">(</span><span class="n">inference_model</span><span class="p">,</span> <span class="s2">&quot;tfjs_model&quot;</span><span class="p">)</span>
 <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;tensorflowjs not available, skipping export&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensorflowjs not available, skipping export
 </pre></div>
 </div>
 </div>
@@ -1089,7 +1173,7 @@ By Andrew D. White
 
   <p class="copyright">
     
-      © Copyright 2025.
+      © Copyright 2026.
       <br/>
     
   </p>

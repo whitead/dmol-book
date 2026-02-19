@@ -813,23 +813,23 @@ Label: -40.475117
 <h2><span class="section-number">17.5. </span>Example GNN Model<a class="headerlink" href="#example-gnn-model" title="Link to this heading">#</a></h2>
 <p>We now can work with this data to build a model. Let’s build a simple model that can model energy and obeys the invariances required of the problem. We will use a graph neural network (GNN) because it obeys permutation invariance. We will create a <em>graph</em> from the coordinates/element vector by joining all atoms to all other atoms and using their inverse pairwise distance as the edge weight. The choice of pairwise distance gives us translation and rotation invariance. The choice of inverse distance means that atoms which are far away naturally have low edge weights.</p>
 <p>I will now define our model using the Battaglia equations <span id="id2">[<a class="reference internal" href="../dl/gnn.html#id74" title="Peter W Battaglia, Jessica B Hamrick, Victor Bapst, Alvaro Sanchez-Gonzalez, Vinicius Zambaldi, Mateusz Malinowski, Andrea Tacchetti, David Raposo, Adam Santoro, Ryan Faulkner, and others. Relational inductive biases, deep learning, and graph networks. arXiv preprint arXiv:1806.01261, 2018.">BHB+18</a>]</span>. As opposed to most examples we’ve seen in class, I will use the graph level feature vector <span class="math notranslate nohighlight">\(\vec{u}\)</span> which will ultimately be our estimate of energy. The edge update will only consider the sender and the edge weight with trainable parameters:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2452c0f1-b01f-4916-ac28-2367327901dd">
-<span class="eqno">(17.1)<a class="headerlink" href="#equation-2452c0f1-b01f-4916-ac28-2367327901dd" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-afa1b32b-0920-43eb-878d-32e8b670c3c9">
+<span class="eqno">(17.1)<a class="headerlink" href="#equation-afa1b32b-0920-43eb-878d-32e8b670c3c9" title="Permalink to this equation">#</a></span>\[\begin{equation}
       \vec{e}^{'}_k = \phi^e\left( \vec{e}_k, \vec{v}_{rk}, \vec{v}_{sk}, \vec{u}\right) = \sigma\left(\vec{v}_{sk}\vec{w}_ee_k + \vec{b}_e\right)
 \end{equation}\]</div>
 <p>where the input edge <span class="math notranslate nohighlight">\(e_k\)</span> will be a single number (inverse pairwise distance) and <span class="math notranslate nohighlight">\(\vec{b}_e\)</span> is a trainable bias vector. We will use a sum aggregation for edges (not shown). <span class="math notranslate nohighlight">\(\sigma\)</span> is a leaky ReLU. The leaky just prevents vanishing gradients, which I found empirically to reduce performance here. The node update will be</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1e457968-366b-4f7c-a732-8e78248eb5b4">
-<span class="eqno">(17.2)<a class="headerlink" href="#equation-1e457968-366b-4f7c-a732-8e78248eb5b4" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-59f69848-afff-447c-b62b-a63c39fde6e7">
+<span class="eqno">(17.2)<a class="headerlink" href="#equation-59f69848-afff-447c-b62b-a63c39fde6e7" title="Permalink to this equation">#</a></span>\[\begin{equation}
    \vec{v}^{'}_i = \phi^v\left( \bar{e}^{'}_i, \vec{v}_i, \vec{u}\right) = \sigma\left(\mathbf{W}_v \bar{e}^{'}_i\right) + \vec{v}_i
 \end{equation}\]</div>
 <p>The global node aggregation will also be a sum. Finally, we have our graph feature vector update:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f5138277-466b-46c2-aca2-da2f6c8f5946">
-<span class="eqno">(17.3)<a class="headerlink" href="#equation-f5138277-466b-46c2-aca2-da2f6c8f5946" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-158cb266-5e95-417b-b834-d2f62130d656">
+<span class="eqno">(17.3)<a class="headerlink" href="#equation-158cb266-5e95-417b-b834-d2f62130d656" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \vec{u}^{'} = \phi^u\left( \bar{e}^{'},\bar{v}^{'}, \vec{u}\right) = \sigma\left(\mathbf{W}_u\bar{v}^{'}\right) + \vec{u}
 \end{equation}\]</div>
 <p>To compute the final energy, we’ll use our regression equation:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-cc3a1be2-c1a9-46b5-8d38-934ca599a7e8">
-<span class="eqno">(17.4)<a class="headerlink" href="#equation-cc3a1be2-c1a9-46b5-8d38-934ca599a7e8" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-0fa7071e-baab-4270-b3d6-87686a883b62">
+<span class="eqno">(17.4)<a class="headerlink" href="#equation-0fa7071e-baab-4270-b3d6-87686a883b62" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \hat{E} = \vec{w}\cdot \vec{u} + b
 \end{equation}\]</div>
 <p>One final detail is that we will pass on <span class="math notranslate nohighlight">\(\vec{u}\)</span> and the nodes, but we will keep the edges the same at each GNN layer. Remember this is an example model: there are many changes that could be made to the above. Also, it is not kernel learning which is the favorite for this domain. Let’s implement it though and see if it works.</p>
@@ -1128,7 +1128,7 @@ By Andrew D. White
 
   <p class="copyright">
     
-      © Copyright 2025.
+      © Copyright 2026.
       <br/>
     
   </p>

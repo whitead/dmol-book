@@ -512,13 +512,13 @@ document.write(`
 \[
 \vec{x} = \textrm{flatten}(\textbf{X})
 \]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-bf52b4d8-e654-4a87-9af1-dce496ff5d26">
-<span class="eqno">(9.1)<a class="headerlink" href="#equation-bf52b4d8-e654-4a87-9af1-dce496ff5d26" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e8da527f-7b66-41b2-8831-535f45167bef">
+<span class="eqno">(9.1)<a class="headerlink" href="#equation-e8da527f-7b66-41b2-8831-535f45167bef" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \hat{E} = \vec{x}\cdot\vec{w} + b
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\textbf{X}\)</span> is <span class="math notranslate nohighlight">\(N\)</span> (14 atoms) <span class="math notranslate nohighlight">\(\times\)</span> <span class="math notranslate nohighlight">\(3\)</span> (xyz coordinates) matrix containing positions, <span class="math notranslate nohighlight">\(\vec{x}\)</span> is a flattened length <span class="math notranslate nohighlight">\(3N\)</span> vector, <span class="math notranslate nohighlight">\(\vec{w}\)</span> is a trainable <span class="math notranslate nohighlight">\(3N\)</span> length vector, and <span class="math notranslate nohighlight">\(b\)</span> is a trainable constant. So far, this is all superficially reasonable – <strong>but do not actually use this model, it is wrong in a few ways</strong>. Now what if I translate each <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span>, <span class="math notranslate nohighlight">\(z\)</span> coordinate by -10:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2e94943e-fb8f-4abb-afd3-7b14fea55260">
-<span class="eqno">(9.2)<a class="headerlink" href="#equation-2e94943e-fb8f-4abb-afd3-7b14fea55260" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ec0a2dc2-1bbe-4fa0-bfcf-c53bb3a86534">
+<span class="eqno">(9.2)<a class="headerlink" href="#equation-ec0a2dc2-1bbe-4fa0-bfcf-c53bb3a86534" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \left(\vec{x} - 10\cdot\vec{1}\right)\cdot\vec{w} + b =  \vec{x}\cdot\vec{w} + b - 10\sum\vec{w} = \hat{E} - 10 \sum \vec{w}
 \end{equation}\]</div>
 <p>We know the energy should not change if we translate all the coordinates equally – the molecule is not changing conformations. However, our linear regression will change by <span class="math notranslate nohighlight">\( - 10 \sum \vec{w}\)</span>. We have accidentally made our model sensitive to the origin of our coordinate system, which is not physical. This is <strong>translational variance</strong> – our model changes when we translate the coordinates. I made this word up by the way, no one says that; but it’s just easier to type out than “not translational invariant.” We want our models to be insensitive to this — <strong>translationally invariant.</strong></p>
@@ -539,14 +539,14 @@ document.write(`
 <section id="equivariances">
 <h2><span class="section-number">9.1. </span>Equivariances<a class="headerlink" href="#equivariances" title="Link to this heading">#</a></h2>
 <p>Models that work with molecules should be permutation equivariant if they are outputting a per-atom or per-bond quantity. Permutation equivariant means that if you rearrange the order of atoms, the output changes in the same way. For example, if you’re predicting partial charge per atom <span class="math notranslate nohighlight">\(\vec{y} = f(\textbf{X})\)</span> where <span class="math notranslate nohighlight">\( f(\textbf{X})\)</span> is our model function. If you rearrange <span class="math notranslate nohighlight">\(\textbf{X}\)</span>, you expect the <span class="math notranslate nohighlight">\(\vec{y}\)</span> to rearrange to match that. Let’s try to state this with an equation. Consider <span class="math notranslate nohighlight">\(\mathcal{P}_{34}\)</span> to be the <em>permutation operator</em>. It swaps indices 3 and 4 in axis 0 of a tensor. Then a permutation equivariant model equation should have:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-06e51586-cf8d-4ef2-b709-8dee54abfa68">
-<span class="eqno">(9.3)<a class="headerlink" href="#equation-06e51586-cf8d-4ef2-b709-8dee54abfa68" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-3e01a1bd-7d70-449e-be45-8f82ac71b396">
+<span class="eqno">(9.3)<a class="headerlink" href="#equation-3e01a1bd-7d70-449e-be45-8f82ac71b396" title="Permalink to this equation">#</a></span>\[\begin{equation}
     f\left(\mathcal{P}_{ij}\left[\textbf{X}\right]\right) = \mathcal{P}_{ij}\left[\vec{y}\right], \quad \forall i,j
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(i,j\)</span> are indices of <span class="math notranslate nohighlight">\(\textbf{X}\)</span> (atom indices). For example, consider <span class="math notranslate nohighlight">\(f(\textbf{X})\)</span> to predict partial charge given a molecule. If the input is water, our input atoms could be arranged HOH and <span class="math notranslate nohighlight">\(f(\textbf{X}) = (0.3, -0.6, 0.3)\)</span>. Now if we swap atoms 0 and 1, our input is arranged OHH. If our function is permutation equivariant, then it should output <span class="math notranslate nohighlight">\(f\left(\mathcal{P}_{01}\left[\textbf{X}\right]\right) =  \mathcal{P}_{01}\left[\vec{y}\right] = (-0.6, 0.3, 0.3)\)</span>.</p>
 <p>You can find a more general form of permutation equivariance in <span id="id1">[<a class="reference internal" href="#id64" title="Nathaniel Thomas, Tess Smidt, Steven Kearnes, Lusann Yang, Li Li, Kai Kohlhoff, and Patrick Riley. Tensor field networks: rotation-and translation-equivariant neural networks for 3d point clouds. arXiv preprint arXiv:1802.08219, 2018.">TSK+18</a>]</span>. Now what happens if we output a scalar like energy? Then our permutation operator does nothing:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-42b7498f-bca5-4a15-a7c6-8085a3ce6cee">
-<span class="eqno">(9.4)<a class="headerlink" href="#equation-42b7498f-bca5-4a15-a7c6-8085a3ce6cee" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-f0dc793c-b8f2-4e62-847f-3bacff2ecfa3">
+<span class="eqno">(9.4)<a class="headerlink" href="#equation-f0dc793c-b8f2-4e62-847f-3bacff2ecfa3" title="Permalink to this equation">#</a></span>\[\begin{equation}
     f\left(\mathcal{P}_{ij}\left[\textbf{X}\right]\right) = \mathcal{P}_{ij}\left[\hat{E}\right] = \hat{E}
 \end{equation}\]</div>
 <p>we call this case a <strong>permutation invariance</strong>.</p>
@@ -562,24 +562,24 @@ document.write(`
 <section id="equivariances-of-coordinates">
 <h2><span class="section-number">9.2. </span>Equivariances of Coordinates<a class="headerlink" href="#equivariances-of-coordinates" title="Link to this heading">#</a></h2>
 <p>When we work with molecular coordinates as features we need to be a bit more careful in distinguishing between the “features” that might be element identity and those which specify the location in space. This kind of data is referred to as <strong>point clouds</strong> in computer science. Let’s break our features into <span class="math notranslate nohighlight">\((\vec{r}, \vec{x})\)</span> where <span class="math notranslate nohighlight">\(\vec{r}\)</span> is the location of the atom/point and <span class="math notranslate nohighlight">\(\vec{x}\)</span> are its features (e.g., element, charge, spin, etc.). Similarly, we may have labels at each point so that we write our labels as <span class="math notranslate nohighlight">\((\vec{r}', \vec{y})\)</span>. The label might be direction <span class="math notranslate nohighlight">\(\vec{r}'\)</span> and force magnitude <span class="math notranslate nohighlight">\(y\)</span> or perhaps a field at <span class="math notranslate nohighlight">\(\vec{r}'\)</span> with vectors <span class="math notranslate nohighlight">\(\vec{y}\)</span>. You may not have <span class="math notranslate nohighlight">\(\vec{r}'\)</span> like if you’re predicting energy. It may be that <span class="math notranslate nohighlight">\(\vec{r} = \vec{r}'\)</span>. With this notation, we can write out <strong>translation equivariance</strong> as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-28a4016e-b539-4ea4-bf11-8e85c41dd066">
-<span class="eqno">(9.5)<a class="headerlink" href="#equation-28a4016e-b539-4ea4-bf11-8e85c41dd066" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-208ff8b3-55d7-4ef2-a770-10bacac580af">
+<span class="eqno">(9.5)<a class="headerlink" href="#equation-208ff8b3-55d7-4ef2-a770-10bacac580af" title="Permalink to this equation">#</a></span>\[\begin{equation}
     f\left(\vec{r} + \vec{t}, \vec{x}\right) = (\vec{r}' + \vec{t}, \vec{y}), \quad  \forall\vec{t}
 \end{equation}\]</div>
 <p>You can also write this out if you have a matrix of atom positions (like a molecule):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3dc18a27-b4f6-4288-b22c-ca2ecbf627b5">
-<span class="eqno">(9.6)<a class="headerlink" href="#equation-3dc18a27-b4f6-4288-b22c-ca2ecbf627b5" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-73e21418-440a-42ee-b0a3-4fe7b99576ab">
+<span class="eqno">(9.6)<a class="headerlink" href="#equation-73e21418-440a-42ee-b0a3-4fe7b99576ab" title="Permalink to this equation">#</a></span>\[\begin{equation}
     f\left(\textbf{R} + \vec{t}, \textbf{X}\right) = (\textbf{R}' + \vec{t}, \vec{y}_i), \quad  \forall\vec{t}
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\textbf{R}\)</span> is the matrix of all position vectors <span class="math notranslate nohighlight">\(\vec{r}_i\)</span>. In the case that you do not have output coordinates <span class="math notranslate nohighlight">\(\vec{r}'\)</span>, then it becomes:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7d24b397-0eed-4725-bfe4-d970effbb4b3">
-<span class="eqno">(9.7)<a class="headerlink" href="#equation-7d24b397-0eed-4725-bfe4-d970effbb4b3" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-13423394-4dfe-4720-9e42-d6b7efc21d61">
+<span class="eqno">(9.7)<a class="headerlink" href="#equation-13423394-4dfe-4720-9e42-d6b7efc21d61" title="Permalink to this equation">#</a></span>\[\begin{equation}
     f\left(\textbf{R} + \vec{t}, \textbf{X}\right) = \vec{y}_i, \quad  \forall\vec{t}
 \end{equation}\]</div>
 <p>which we call <strong>translation invariance.</strong> It’s important to note that these equations do not apply to some specific <span class="math notranslate nohighlight">\(\vec{t}\)</span>, but any <span class="math notranslate nohighlight">\(\vec{t}\)</span>.</p>
 <p><strong>Rotational equivariance</strong> can be similarly defined. Consider <span class="math notranslate nohighlight">\(\mathcal{R}\)</span> to be a rotation operator (e.g., a quaternion). Then our rotation equivariance equation is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0ab58660-75b3-4eee-abd1-09a11dfb8080">
-<span class="eqno">(9.8)<a class="headerlink" href="#equation-0ab58660-75b3-4eee-abd1-09a11dfb8080" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-fa52cefe-5624-4d46-a279-304003ec3ff4">
+<span class="eqno">(9.8)<a class="headerlink" href="#equation-fa52cefe-5624-4d46-a279-304003ec3ff4" title="Permalink to this equation">#</a></span>\[\begin{equation}
     f\left(\mathcal{R}\left[\textbf{R}\right], \textbf{X}\right) = (\mathcal{R}\left[\textbf{R}'\right], \vec{y}_i), \quad  \forall\mathcal{R}
 \end{equation}\]</div>
 <p>an example might be again that <span class="math notranslate nohighlight">\((\textbf{R}', \vec{y}_i)\)</span> defines some field and our equivariance says that if we rotate our input points, our output points will obey the same rotation. Again, we can also have <strong>rotation invariance</strong> if our model does not output <span class="math notranslate nohighlight">\(\textbf{R}'\)</span>.</p>
@@ -774,7 +774,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(-8.136422559605114)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(-4.244639070396694)
 </pre></div>
 </div>
 </div>
@@ -787,7 +787,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(-3.8625060182810547)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(-4.878294753955222)
 </pre></div>
 </div>
 </div>
@@ -806,8 +806,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>No rotation -8.136422559605114
-Rotated -8.708703810256177
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>No rotation -4.244639070396694
+Rotated -1.132857557825747
 </pre></div>
 </div>
 </div>
@@ -826,8 +826,8 @@ Rotated -8.708703810256177
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original -8.136422559605114
-permuted -10.433652964320718
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original -4.244639070396694
+permuted -1.8535983647789038
 </pre></div>
 </div>
 </div>
@@ -868,8 +868,8 @@ permuted -10.433652964320718
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original -10.619828528887027
-permuted -10.619828528887027
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original 14.61732288860628
+permuted 14.61732288860628
 </pre></div>
 </div>
 </div>
@@ -908,10 +908,10 @@ permuted -10.619828528887027
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original -143.41816143466133
-permuted -143.4181614346613
-translated -143.41816143466133
-rotated -143.02509967607455
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original 170.9949280097218
+permuted 170.99492800972183
+translated 170.99492800972175
+rotated 181.63129552624966
 </pre></div>
 </div>
 </div>
@@ -959,10 +959,10 @@ rotated -143.02509967607455
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original 1049.256280462965
-permuted 1049.256280462965
-translated 1049.256280462965
-rotated 1049.256280462965
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original -1408.934109501082
+permuted -1408.934109501082
+translated -1408.934109501082
+rotated -1408.934109501082
 </pre></div>
 </div>
 </div>
@@ -977,7 +977,7 @@ rotated 1049.256280462965
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>changed 1088.5982800369843
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>changed -1290.9093308357471
 </pre></div>
 </div>
 </div>
@@ -1282,8 +1282,8 @@ rotated 1049.256280462965
 <section id="radial-basis-functions">
 <h3><span class="section-number">9.7.3. </span>Radial Basis Functions<a class="headerlink" href="#radial-basis-functions" title="Link to this heading">#</a></h3>
 <p>Radial basis functions are a commonly used procedure for converting a scalar into a fixed number of features and were first used in interpolation<span id="id14">[<a class="reference internal" href="#id176" title="Michael James David Powell. Restart procedures for the conjugate gradient method. Mathematical programming, 12(1):241–254, 1977.">Pow77</a>]</span>. Radial basis functions use the following equation:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7b19e9a5-bbad-477b-bd0a-6e4a75f100b7">
-<span class="eqno">(9.9)<a class="headerlink" href="#equation-7b19e9a5-bbad-477b-bd0a-6e4a75f100b7" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-cf164af3-c02f-4d1e-9337-4bca6bea47d8">
+<span class="eqno">(9.9)<a class="headerlink" href="#equation-cf164af3-c02f-4d1e-9337-4bca6bea47d8" title="Permalink to this equation">#</a></span>\[\begin{equation}
     e_i = \exp\left[{-\left(r - d_i\right)^2 / w}\right]
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(d_i\)</span> is an equally spaced vector of distances (e.g., <span class="math notranslate nohighlight">\([1.5, 3.0, 4.5, 6.0]\)</span>) and <span class="math notranslate nohighlight">\(w\)</span> is a trainable (or hyper) parameter. This computes a Gaussian kernel between <span class="math notranslate nohighlight">\(r\)</span> and all distances <span class="math notranslate nohighlight">\(d_i\)</span>. What is nice about this expression is the smooth well-behaved derivatives with respect to <span class="math notranslate nohighlight">\(r\)</span> and lack of trainable parameters. You can (almost) represent this with a dense layer and a softmax activation.</p>
@@ -1495,7 +1495,7 @@ By Andrew D. White
 
   <p class="copyright">
     
-      © Copyright 2025.
+      © Copyright 2026.
       <br/>
     
   </p>
