@@ -34,3 +34,8 @@ jobs:
         publish_dir: _build/html
         force_orphan: false
         cname: dmol.pub
+
+    - name: Trigger Pages build
+      run: gh api -X POST repos/${{ github.repository }}/pages/builds
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
