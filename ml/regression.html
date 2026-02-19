@@ -1,10 +1,12 @@
 
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="../" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta content="Deep Learning for Molecules &amp; Materials Book" lang="en" name="description" xml:lang="en" />
 <meta content="en_US" property="og:locale" />
 <meta content="summary" name="twitter:card" />
@@ -14,113 +16,175 @@
 <meta content="&#64;andrewwhite01" name="twitter:site" />
 
     <title>3. Regression &amp; Model Assessment &#8212; deep learning for molecules &amp; materials</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/a11y.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=cb1cce99" />
+    <link rel="stylesheet" type="text/css" href="../_static/a11y.css?v=ffeaf963" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
-    <script src="../_static/custom.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <script src="../_static/togglebutton.js?v=1ae7504c"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'ml/regression';</script>
+    <script src="../_static/custom.js?v=3f5092eb"></script>
     <link rel="canonical" href="https://dmol.pub/ml/regression.html" />
-    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <link rel="icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="4. Classification" href="classification.html" />
     <link rel="prev" title="2. Introduction to Machine Learning" href="introduction.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
-    
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../_static/logo.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">deep learning for molecules & materials</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="deep learning for molecules & materials - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="deep learning for molecules & materials - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -129,660 +193,320 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  A. Math Review
- </span>
-</p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">A. Math Review</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../math/tensors-and-shapes.html">
-   1. Tensors and Shapes
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../math/tensors-and-shapes.html">1. Tensors and Shapes</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  B. Machine Learning
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">B. Machine Learning</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="introduction.html">
-   2. Introduction to Machine Learning
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   3. Regression &amp; Model Assessment
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="classification.html">
-   4. Classification
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="kernel.html">
-   5. Kernel Learning
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">2. Introduction to Machine Learning</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">3. Regression &amp; Model Assessment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classification.html">4. Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="kernel.html">5. Kernel Learning</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  C. Deep Learning
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">C. Deep Learning</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/introduction.html">
-   6. Deep Learning Overview
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/layers.html">
-   7. Standard Layers
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/gnn.html">
-   8. Graph Neural Networks
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/data.html">
-   9. Input Data &amp; Equivariances
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/Equivariant.html">
-   10. Equivariant Neural Networks
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/xai.html">
-   11. Explaining Predictions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/attention.html">
-   12. Attention Layers
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/NLP.html">
-   13. Deep Learning on Sequences
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/VAE.html">
-   14. Variational Autoencoder
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/flows.html">
-   15. Normalizing Flows
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/introduction.html">6. Deep Learning Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/layers.html">7. Standard Layers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/gnn.html">8. Graph Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/data.html">9. Input Data &amp; Equivariances</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/Equivariant.html">10. Equivariant Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/xai.html">11. Explaining Predictions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/attention.html">12. Attention Layers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/NLP.html">13. Deep Learning on Sequences</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/VAE.html">14. Variational Autoencoder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/flows.html">15. Normalizing Flows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/molnets.html">16. Modern Molecular NNs</a></li>
+
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  D. Applications
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">D. Applications</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../applied/QM9.html">
-   16. Predicting DFT Energies with GNNs
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../applied/MolGenerator.html">
-   17. Generative RNN in Browser
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../applied/QM9.html">17. Predicting DFT Energies with GNNs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../applied/MolGenerator.html">18. Generative RNN in Browser</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  E. Contributed Chapters
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">E. Contributed Chapters</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/Hyperparameter_tuning.html">
-   18. Hyperparameter Tuning
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../applied/e3nn_traj.html">
-   19. Equivariant Neural Network for Predicting Trajectories
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/pretraining.html">
-   20. Pretraining
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../applied/e3nn_traj.html">19. Equivariant Neural Network for Predicting Trajectories</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/pretraining.html">20. Pretraining</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  F. Appendix
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">F. Appendix</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../style.html">
-   21. Style Guide
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../changelog.html">
-   22. Changelog
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  G. In Progress
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/molnets.html">
-   23. Modern Molecular NNs
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../style.html">21. Style Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">22. Changelog</a></li>
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            <script async defer src="https://api.dmol.pub/latest.js"></script><noscript><img src="https://api.dmol.pub/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript> By <a href="https://twitter.com/andrewwhite01">Andrew White</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
-</div>
-
-
-          
-
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
   
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://colab.research.google.com/github/whitead/dmol-book/blob/master/ml/regression.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Colab"
->
   
-
-<span class="headerbtn__icon-container">
-  
-    <img src="../_static/images/logo_colab.png">
-  </span>
-<span class="headerbtn__text-container">Colab</span>
-</a>
-
-      </li>
-      
-    </ul>
+  <div class="sidebar-primary-items__end sidebar-primary__section">
   </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/whitead/dmol-book/blob/master/ml/regression.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
 </div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/whitead/dmol-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/whitead/dmol-book/issues/new?title=Issue%20on%20page%20%2Fml/regression.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/ml/regression.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
 
 <button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/whitead/dmol-book"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
+`);
+</script>
 
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
 
-      </li>
-      
-      <li>
-        <a href="https://github.com/whitead/dmol-book/issues/new?title=Issue%20on%20page%20%2Fml/regression.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../_sources/ml/regression.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.ipynb</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
 </button>
-
-      </li>
+</div></div>
       
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
+    </div>
   
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
-
-    </div>
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#running-this-notebook">
-   3.1. Running This Notebook
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#overfitting">
-   3.2. Overfitting
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#overfitting-with-synthetic-data">
-     3.2.1. Overfitting with Synthetic Data
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#overfitting-conclusion">
-     3.2.2. Overfitting Conclusion
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#exploring-effect-of-feature-number">
-   3.3. Exploring Effect of Feature Number
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#bias-variance-decomposition">
-   3.4. Bias Variance Decomposition
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#regularization">
-   3.5. Regularization
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#l2-regularization">
-     3.5.1. L2 Regularization
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#l1-regularization">
-     3.5.2. L1 Regularization
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#strategies-to-assess-models">
-   3.6. Strategies to Assess Models
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#k-fold-cross-validation">
-     3.6.1. k-Fold Cross-Validation
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#leave-one-out-cv">
-     3.6.2. Leave-one-out CV
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#computing-other-measures">
-   3.7. Computing Other Measures
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#bootstrap-resampling">
-     3.7.1. Bootstrap Resampling
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#jacknife">
-     3.7.2. Jacknife+
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#training-data-distribution">
-   3.8. Training Data Distribution
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#leave-one-class-out-cross-validation">
-     3.8.1. Leave One Class Out Cross-Validation
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#chapter-summary">
-   3.9. Chapter Summary
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#exercises">
-   3.10. Exercises
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id7">
-     3.10.1. Overfitting
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id8">
-     3.10.2. Regularization
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#model-assessment">
-     3.10.3. Model Assessment
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#cited-references">
-   3.11. Cited References
-  </a>
- </li>
-</ul>
-
-    </nav>
 </div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Regression & Model Assessment</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#running-this-notebook">
-   3.1. Running This Notebook
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#overfitting">
-   3.2. Overfitting
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#overfitting-with-synthetic-data">
-     3.2.1. Overfitting with Synthetic Data
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#overfitting-conclusion">
-     3.2.2. Overfitting Conclusion
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#exploring-effect-of-feature-number">
-   3.3. Exploring Effect of Feature Number
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#bias-variance-decomposition">
-   3.4. Bias Variance Decomposition
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#regularization">
-   3.5. Regularization
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#l2-regularization">
-     3.5.1. L2 Regularization
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#l1-regularization">
-     3.5.2. L1 Regularization
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#strategies-to-assess-models">
-   3.6. Strategies to Assess Models
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#k-fold-cross-validation">
-     3.6.1. k-Fold Cross-Validation
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#leave-one-out-cv">
-     3.6.2. Leave-one-out CV
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#computing-other-measures">
-   3.7. Computing Other Measures
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#bootstrap-resampling">
-     3.7.1. Bootstrap Resampling
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#jacknife">
-     3.7.2. Jacknife+
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#training-data-distribution">
-   3.8. Training Data Distribution
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#leave-one-class-out-cross-validation">
-     3.8.1. Leave One Class Out Cross-Validation
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#chapter-summary">
-   3.9. Chapter Summary
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#exercises">
-   3.10. Exercises
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id7">
-     3.10.1. Overfitting
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id8">
-     3.10.2. Regularization
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#model-assessment">
-     3.10.3. Model Assessment
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#cited-references">
-   3.11. Cited References
-  </a>
- </li>
-</ul>
+              
+              
 
-                        </nav>
-                    </div>
-                </div>
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Regression & Model Assessment</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
             </div>
-            <main id="main-content" role="main">
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-this-notebook">3.1. Running This Notebook</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting">3.2. Overfitting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting-with-synthetic-data">3.2.1. Overfitting with Synthetic Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting-conclusion">3.2.2. Overfitting Conclusion</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploring-effect-of-feature-number">3.3. Exploring Effect of Feature Number</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bias-variance-decomposition">3.4. Bias Variance Decomposition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regularization">3.5. Regularization</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#l2-regularization">3.5.1. L2 Regularization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#l1-regularization">3.5.2. L1 Regularization</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#strategies-to-assess-models">3.6. Strategies to Assess Models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#k-fold-cross-validation">3.6.1. k-Fold Cross-Validation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#leave-one-out-cv">3.6.2. Leave-one-out CV</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-other-measures">3.7. Computing Other Measures</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bootstrap-resampling">3.7.1. Bootstrap Resampling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jacknife">3.7.2. Jacknife+</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-data-distribution">3.8. Training Data Distribution</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#leave-one-class-out-cross-validation">3.8.1. Leave One Class Out Cross-Validation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-summary">3.9. Chapter Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">3.10. Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">3.10.1. Overfitting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">3.10.2. Regularization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-assessment">3.10.3. Model Assessment</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cited-references">3.11. Cited References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
                 
-              <div>
-                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
   <section class="tex2jax_ignore mathjax_ignore" id="regression-model-assessment">
-<h1><span class="section-number">3. </span>Regression &amp; Model Assessment<a class="headerlink" href="#regression-model-assessment" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">3. </span>Regression &amp; Model Assessment<a class="headerlink" href="#regression-model-assessment" title="Link to this heading">#</a></h1>
 <p>Regression is supervised learning with continuous (or sometimes discrete) labels. You are given labeled data consisting of features and labels <span class="math notranslate nohighlight">\(\{\vec{x}_i, y_i\}\)</span>. The goal is to find a function that describes their relationship, <span class="math notranslate nohighlight">\(\hat{f}(\vec{x}) = \hat{y}\)</span>. A more formal discussion of the concepts discussed here can be found in Chapter 3 of Bishop’s Pattern Recognition and Machine Learning<span id="id1">[<a class="reference internal" href="#id18" title="Christopher M Bishop. Pattern recognition and machine learning. springer, 2006.">Bis06</a>]</span>.</p>
 <div class="admonition-audience-objectives admonition">
 <p class="admonition-title">Audience &amp; Objectives</p>
@@ -796,7 +520,7 @@ title="Print to PDF"
 </ul>
 </div>
 <section id="running-this-notebook">
-<h2><span class="section-number">3.1. </span>Running This Notebook<a class="headerlink" href="#running-this-notebook" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">3.1. </span>Running This Notebook<a class="headerlink" href="#running-this-notebook" title="Link to this heading">#</a></h2>
 <p>Click the  <i aria-label="Launch interactive content" class="fas fa-rocket"></i>  above to launch this page as an interactive Google Colab. See details below on installing packages.</p>
 <div class="dropdown admonition tip">
 <p class="admonition-title">Tip</p>
@@ -809,13 +533,13 @@ title="Print to PDF"
 <p>As usual, the code below sets-up our imports.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
-<span class="kn">from</span> <span class="nn">jax.example_libraries</span> <span class="kn">import</span> <span class="n">optimizers</span>
-<span class="kn">import</span> <span class="nn">jax</span>
-<span class="kn">import</span> <span class="nn">dmol</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jax.numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">jnp</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">jax.example_libraries</span><span class="w"> </span><span class="kn">import</span> <span class="n">optimizers</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jax</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">dmol</span>
 </pre></div>
 </div>
 </div>
@@ -834,7 +558,7 @@ title="Print to PDF"
 </div>
 </section>
 <section id="overfitting">
-<h2><span class="section-number">3.2. </span>Overfitting<a class="headerlink" href="#overfitting" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">3.2. </span>Overfitting<a class="headerlink" href="#overfitting" title="Link to this heading">#</a></h2>
 <p>We’ll be working again with the AqSolDB<span id="id2">[<a class="reference internal" href="#id26" title="Murat Cihan Sorkun, Abhishek Khetan, and Süleyman Er. AqSolDB, a curated reference set of aqueous solubility and 2D descriptors for a diverse set of compounds. Sci. Data, 6(1):143, 2019. doi:10.1038/s41597-019-0151-1.">SKE19</a>]</span> dataset. It has about 10,000 unique compounds with measured solubility in water (label) and 17 molecular descriptors (features). We need to create a better assessment of our supervised ML models. The goal of our ML model is to predict solubility of new unseen molecules. Therefore, to assess we should test on unseen molecules. We will split our data into two subsets: <strong>training data</strong> and <strong>testing data</strong>. Typically this is done with an 80%/20%, so that you train on 80% of your data and test on the remaining 20%. In our case, we’ll just do 50%/50% because we have plenty of data and thus do not need to take 80% for training. We’ll be using a subset, 50 molecules chosen randomly, rather than the whole dataset. So we’ll have 25 training molecules and 25 testing molecules.</p>
 <p>Let’s begin by seeing what effect the split of train/test has on our linear model introduced in the previous chapter.</p>
 <div class="cell docutils container">
@@ -870,7 +594,7 @@ it in parallel, and timing its execution.</p>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define our loss function</span>
 <span class="nd">@jax</span><span class="o">.</span><span class="n">jit</span>
-<span class="k">def</span> <span class="nf">loss</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">loss</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">y</span> <span class="o">-</span> <span class="n">jnp</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
 
 
@@ -882,14 +606,11 @@ it in parallel, and timing its execution.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
-</pre></div>
-</div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(Array([-2.8831835 ,  1.3794075 , -3.0262635 , -3.1956701 , -4.007525  ,
         -0.83476734, -3.0994835 , -4.0455275 , -3.675129  ,  2.5466921 ,
         -3.11543   , -4.171584  , -1.5834932 , -3.3554041 , -3.1797354 ,
          0.86207145, -2.0010393 ], dtype=float32),
- Array(5.7721677, dtype=float32, weak_type=True))
+ Array(5.772167, dtype=float32, weak_type=True))
 </pre></div>
 </div>
 </div>
@@ -918,10 +639,15 @@ it in parallel, and timing its execution.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/regression_10_0.png" src="../_images/regression_10_0.png" />
+<img alt="../_images/ab3b3595c9c52f1774136336f0fceafe6629d06c36c1af8589471b8a3d16e770.png" src="../_images/ab3b3595c9c52f1774136336f0fceafe6629d06c36c1af8589471b8a3d16e770.png" />
 </div>
 </div>
 <div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">yhat</span> <span class="o">=</span> <span class="n">x</span> <span class="o">@</span> <span class="n">w</span> <span class="o">+</span> <span class="n">b</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
@@ -935,11 +661,17 @@ it in parallel, and timing its execution.</p>
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
-<img alt="../_images/regression_11_0.png" src="../_images/regression_11_0.png" />
+<img alt="../_images/4745153d6ba9f7dc978298d7201386d166322a3cb4119b1315f837d13589f68b.png" src="../_images/4745153d6ba9f7dc978298d7201386d166322a3cb4119b1315f837d13589f68b.png" />
 </div>
 </div>
 <div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">yhat</span> <span class="o">=</span> <span class="n">test_x</span> <span class="o">@</span> <span class="n">w</span> <span class="o">+</span> <span class="n">b</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">test_y</span><span class="p">,</span> <span class="n">test_y</span><span class="p">,</span> <span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
@@ -961,29 +693,30 @@ it in parallel, and timing its execution.</p>
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
-<img alt="../_images/regression_12_0.png" src="../_images/regression_12_0.png" />
+<img alt="../_images/88703617cacbc286e720e211e11786ad423ee8670c934bcb4614d2d123f46d4b.png" src="../_images/88703617cacbc286e720e211e11786ad423ee8670c934bcb4614d2d123f46d4b.png" />
 </div>
 </div>
 <p>We’ve plotted above the loss on our training data and testing data. The loss on training goes down after each step, as we would expect for gradient descent. However, the testing loss goes down and then starts to go back up. This is called <strong>overfitting</strong>. This is one of the key challenges in ML and we’ll often be discussing it.</p>
 <p>Overfitting is a result of training for too many steps or with too many parameters, resulting in our model learning the <strong>noise</strong> in the training data. The noise is specific for the training data and when computing loss on the test data there is poor performance.</p>
 <p>To understand this, let’s first define noise. Assume that there is a “perfect” function <span class="math notranslate nohighlight">\(f(\vec{x})\)</span> that can compute labels from features. Our model is an estimate <span class="math notranslate nohighlight">\(\hat{f}(\vec{x})\)</span> of that function. Even <span class="math notranslate nohighlight">\(f(\vec{x})\)</span> will not reproduce the data exactly because our features do not capture everything that goes into solubility and/or there is error in the solubility measurements themselves. Mathematically,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-da7f9cdd-d53f-4811-bb3f-82c59caa7160">
-<span class="eqno">(3.1)<a class="headerlink" href="#equation-da7f9cdd-d53f-4811-bb3f-82c59caa7160" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-50d3c4b4-5104-4f48-b34b-65e6a4a7709c">
+<span class="eqno">(3.1)<a class="headerlink" href="#equation-50d3c4b4-5104-4f48-b34b-65e6a4a7709c" title="Permalink to this equation">#</a></span>\[\begin{equation}
     y = f(\vec{x}) + \epsilon
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\epsilon\)</span> is a random number with mean 0 and unknown standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span>. <span class="math notranslate nohighlight">\(\epsilon\)</span> is the noise. When fitting our function, <span class="math notranslate nohighlight">\(\hat{f}(\vec{x})\)</span>, the noise is fixed because our labels <span class="math notranslate nohighlight">\(y\)</span> are fixed. That means we can accidentally learn to approximate the sum of <span class="math notranslate nohighlight">\(f(\vec{x})\)</span> and the noise <span class="math notranslate nohighlight">\({\epsilon_i}\)</span> instead of only capturing <span class="math notranslate nohighlight">\(f(\vec{x})\)</span>. The noise is random and uncorrelated with solubility. When we move to our testing dataset, this noise changes because we have new data and our model’s effort to reproduce noise is useless because the new data has new noise. This leads to worse performance.</p>
 <p>Overfitting arises when three things happen: you have noise, you have extra features or some part of your features are not correlated with the labels, and your training has converged (your model fit is at the global minimum). This last one is what we saw above. Our model wasn’t overfit after about 100 steps (the training and testing loss were both decreasing), but then they starting going in opposite directions. Let’s see how these things interplay to lead to overfitting in an example where we can exactly control the features and noise.</p>
 <section id="overfitting-with-synthetic-data">
-<h3><span class="section-number">3.2.1. </span>Overfitting with Synthetic Data<a class="headerlink" href="#overfitting-with-synthetic-data" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">3.2.1. </span>Overfitting with Synthetic Data<a class="headerlink" href="#overfitting-with-synthetic-data" title="Link to this heading">#</a></h3>
 <p>We’ll explore overfitting in a synthetic example. Our real function we’re trying to learn will be:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1c3cacdc-93a6-4d0a-a2f1-21e2ca17e0dd">
-<span class="eqno">(3.2)<a class="headerlink" href="#equation-1c3cacdc-93a6-4d0a-a2f1-21e2ca17e0dd" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-f920028f-f1e2-4e23-af15-c26fe76b6a8b">
+<span class="eqno">(3.2)<a class="headerlink" href="#equation-f920028f-f1e2-4e23-af15-c26fe76b6a8b" title="Permalink to this equation">#</a></span>\[\begin{equation}
  f(x) = x^3 - x^2 + x - 1
 \end{equation}\]</div>
 <p>which we can rewrite as a linear model:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c3bcf91c-22df-48a6-9f42-aab465679660">
-<span class="eqno">(3.3)<a class="headerlink" href="#equation-c3bcf91c-22df-48a6-9f42-aab465679660" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-74d828d6-2c4b-4d49-a753-fc015e0370e6">
+<span class="eqno">(3.3)<a class="headerlink" href="#equation-74d828d6-2c4b-4d49-a753-fc015e0370e6" title="Permalink to this equation">#</a></span>\[\begin{equation}
   f(\vec{x}) = \vec{w}\cdot\vec{x} = [1, -1, 1, -1]\cdot[x^3, x^2, x, 1]
 \end{equation}\]</div>
 <p>where our features are <span class="math notranslate nohighlight">\([x^3, x^2, x, 1]\)</span>. To do our split, we’ll take the positive points as training data and the negative as testing data. To avoid the issue of convergence, we will use least squares to fit these models instead of gradient descent.</p>
@@ -1002,6 +735,11 @@ it in parallel, and timing its execution.</p>
 </div>
 </div>
 <div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># split data into train/test</span>
 <span class="n">indices</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">N</span> <span class="o">//</span> <span class="mi">4</span><span class="p">))</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="n">N</span> <span class="o">//</span> <span class="mi">4</span><span class="p">,</span> <span class="n">N</span><span class="p">))</span>
@@ -1028,8 +766,9 @@ it in parallel, and timing its execution.</p>
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
-<img alt="../_images/regression_17_0.png" src="../_images/regression_17_0.png" />
+<img alt="../_images/290d271e298fb4471e99f0a11ca6e722e96ea5becab5347d5ec5d64d60df7d0b.png" src="../_images/290d271e298fb4471e99f0a11ca6e722e96ea5becab5347d5ec5d64d60df7d0b.png" />
 </div>
 </div>
 <p>There is no overfitting and the regression is quite accurate without noise. Now we’ll add noise to both the training labels.</p>
@@ -1041,6 +780,11 @@ it in parallel, and timing its execution.</p>
 </div>
 </div>
 <div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">w</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">train_x</span><span class="p">,</span> <span class="n">train_y</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">syn_x</span><span class="p">[</span><span class="n">indices</span><span class="p">],</span> <span class="n">train_y</span><span class="p">,</span> <span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Training labels&quot;</span><span class="p">)</span>
@@ -1056,8 +800,9 @@ it in parallel, and timing its execution.</p>
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
-<img alt="../_images/regression_20_0.png" src="../_images/regression_20_0.png" />
+<img alt="../_images/ee8e9029cf2331323f45d055dcce72a1820677ec4fcf3fd0fcd3ca296d38572b.png" src="../_images/ee8e9029cf2331323f45d055dcce72a1820677ec4fcf3fd0fcd3ca296d38572b.png" />
 </div>
 </div>
 <p>Adding noise reduces the accuracy on the training data. The testing labels have no noise and the model is not overfit, so the accuracy is good for the testing loss.</p>
@@ -1070,6 +815,11 @@ it in parallel, and timing its execution.</p>
 </div>
 </div>
 <div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_x</span> <span class="o">=</span> <span class="n">syn_features</span><span class="p">[</span><span class="n">indices</span><span class="p">]</span>
 <span class="n">test_x</span> <span class="o">=</span> <span class="n">syn_features</span><span class="p">[</span><span class="n">test_indices</span><span class="p">]</span>
@@ -1089,8 +839,9 @@ it in parallel, and timing its execution.</p>
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
-<img alt="../_images/regression_23_0.png" src="../_images/regression_23_0.png" />
+<img alt="../_images/11d683346200411be68d1993183673ed2f628d85641b608a3315f9661621a630.png" src="../_images/11d683346200411be68d1993183673ed2f628d85641b608a3315f9661621a630.png" />
 </div>
 </div>
 <p>This is an overfit model. The training loss went down (note the noise was the same in the previous two examples), but at the expense of a large increase in testing loss. This wasn’t possible in the previous example because over-fitting to noise wasn’t feasible when each feature was necessary to capture the correlation with the labels.</p>
@@ -1105,6 +856,11 @@ it in parallel, and timing its execution.</p>
 </div>
 </div>
 <div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_x</span> <span class="o">=</span> <span class="n">syn_features</span><span class="p">[</span><span class="n">indices</span><span class="p">]</span>
 <span class="n">test_x</span> <span class="o">=</span> <span class="n">syn_features</span><span class="p">[</span><span class="n">test_indices</span><span class="p">]</span>
@@ -1123,8 +879,9 @@ it in parallel, and timing its execution.</p>
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
-<img alt="../_images/regression_26_0.png" src="../_images/regression_26_0.png" />
+<img alt="../_images/7ef2d264533a5401e184f447373a7cc5d585baffbbe3d4345bdfc7dff671b3db.png" src="../_images/7ef2d264533a5401e184f447373a7cc5d585baffbbe3d4345bdfc7dff671b3db.png" />
 </div>
 </div>
 <p>It’s arguable if this is overfitting. Yes, the testing loss is high but it could be argued it’s more to do with the poor feature choice. In any case, even though our parameter number is less than the clear cut case above, there is still left over variance in our features which can be devoted to fitting noise.</p>
@@ -1135,7 +892,7 @@ it in parallel, and timing its execution.</p>
 </div>
 </section>
 <section id="overfitting-conclusion">
-<h3><span class="section-number">3.2.2. </span>Overfitting Conclusion<a class="headerlink" href="#overfitting-conclusion" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">3.2.2. </span>Overfitting Conclusion<a class="headerlink" href="#overfitting-conclusion" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Overfitting is inevitable in real data because we cannot avoid noise and rarely have the perfect features.</p></li>
 <li><p>Overfitting can be assessed by splitting our data into a train and test split, which mimics how we would use the model (i.e., on unseen data).</p></li>
@@ -1145,7 +902,7 @@ it in parallel, and timing its execution.</p>
 </section>
 </section>
 <section id="exploring-effect-of-feature-number">
-<h2><span class="section-number">3.3. </span>Exploring Effect of Feature Number<a class="headerlink" href="#exploring-effect-of-feature-number" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">3.3. </span>Exploring Effect of Feature Number<a class="headerlink" href="#exploring-effect-of-feature-number" title="Link to this heading">#</a></h2>
 <p>We’ve seen that overfitting is sensitive to the number and choice of features. Feature selection is a critical decision in supervised learning. We’ll return to the solubility dataset to discuss this. It has 17 molecular descriptors, but these are just a small fraction of the possible molecular descriptors that can be used. For example, there is a software called <a class="reference external" href="https://chm.kode-solutions.net/products_dragon.php">Dragon</a> that can compute over 5,000 descriptors. You can also create linear combinations of descriptors and pass them through functions. Then there is the possibility of experimental data, data from molecular simulations, and from quantum calculations. There is essentially an unlimited number of possible molecular descriptors. We’ll start this chapter by exploring what effect of number of features (dimension of features) has on the data.</p>
 <aside class="margin sidebar">
 <p class="sidebar-title"></p>
@@ -1153,20 +910,16 @@ it in parallel, and timing its execution.</p>
 </aside>
 <p>We are now working with a real dataset, which means there is randomness from which features we choose, which training data we choose, and randomness in the labels themselves. In the results below, they are averaged over possible features and possible training data splits to deal with this. Thus the code is complex. You can see it on <a class="reference external" href="https://github.com/whitead/dmol-book/blob/main/ml/regression.ipynb">the Github repository</a>, but I’ve omitted it here for simplicity.</p>
 <figure class="align-default" id="small-feature-number">
-<div class="cell_output docutils container">
-<img alt="../_images/regression_37_0.png" src="../_images/regression_37_0.png" />
-</div>
+<img alt="../_images/b87a19e28316efc6d2f4ceb2c4c915843e58c7c70acd94769bf7a3e42140e53c.png" src="../_images/b87a19e28316efc6d2f4ceb2c4c915843e58c7c70acd94769bf7a3e42140e53c.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 3.1 </span><span class="caption-text">Effect of feature number on 25 training data points averaged over 10 data samples/feature choices combinations. Notice there is not a significant change when the number of features crosses the number of data points.</span><a class="headerlink" href="#small-feature-number" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 3.1 </span><span class="caption-text">Effect of feature number on 25 training data points averaged over 10 data samples/feature choices combinations. Notice there is not a significant change when the number of features crosses the number of data points.</span><a class="headerlink" href="#small-feature-number" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p><a class="reference internal" href="#small-feature-number"><span class="std std-numref">Fig. 3.1</span></a> shows the effect of choosing different features on both the loss on training data and the loss on test data. There are three regimes in this plot. At 1-3 features, we are <strong>underfit</strong> meaning both the training and testing losses could be improved with more features or more training. In this case, it is because there are too few features. Until about 10 features, we see that adding new features slightly improves training data but doesn’t help test data meaning we’re probably slightly overfitting. Then at 10, there is a large increase as we move to the overfit regime. Finally at about 30 features, our model is no longer converging and training loss rises because it is too difficult to train the increasingly complex model. “Difficult” here is a relative term; you can easily train for more time on this simple model but this is meant as an example.</p>
 <figure class="align-default" id="large-feature-number">
-<div class="cell_output docutils container">
-<img alt="../_images/regression_39_0.png" src="../_images/regression_39_0.png" />
-</div>
+<img alt="../_images/ce2b2aac8f8c0dc00960e0c994d67331652bbcbbbc5cd2ff7d02c28460f34abd.png" src="../_images/ce2b2aac8f8c0dc00960e0c994d67331652bbcbbbc5cd2ff7d02c28460f34abd.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 3.2 </span><span class="caption-text">Effect of feature number on 250 training data points averaged over 10 data samples/feature choices combinations.</span><a class="headerlink" href="#large-feature-number" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 3.2 </span><span class="caption-text">Effect of feature number on 250 training data points averaged over 10 data samples/feature choices combinations.</span><a class="headerlink" href="#large-feature-number" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p><a class="reference internal" href="#large-feature-number"><span class="std std-numref">Fig. 3.2</span></a> shows the same analysis but for 250 train and 250 test data. The accuracy on test data is better (about 1.9 vs 2.5). There is not much overfitting visible here. The model is clearly underfit until about 10 features and then each additional feature has little effect. Past 20 features, we again see an underfit because the model is not trained well. This could fixed by adding more training steps.</p>
@@ -1175,26 +928,26 @@ it in parallel, and timing its execution.</p>
 <p>The risk of overfitting is lower as your dataset size increases. The reason for this is that the noise becomes smaller than the effect of labels on training as you increase data points. Recall from the Central Limit Theorem that reducing noise by a factor of 10 requires 100 times more data, so this is not as efficient as choosing better features. Thinking about these trade-offs, to double your feature number you should quadruple the number of data points to reduce the risk of overfitting. Thus there is a strong relationship between how complex your model can be, the achievable accuracy, the data required, and the noise in labels.</p>
 </section>
 <section id="bias-variance-decomposition">
-<h2><span class="section-number">3.4. </span>Bias Variance Decomposition<a class="headerlink" href="#bias-variance-decomposition" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">3.4. </span>Bias Variance Decomposition<a class="headerlink" href="#bias-variance-decomposition" title="Link to this heading">#</a></h2>
 <p>We will now try to be more systematic about this difference in model performance between training and testing data. Consider an unseen label <span class="math notranslate nohighlight">\(y\)</span> and our model <span class="math notranslate nohighlight">\(\hat{f}(\vec{x})\)</span>. Our error on the unseen label is:</p>
 <div class="math notranslate nohighlight" id="equation-exp-error">
-<span class="eqno">(3.4)<a class="headerlink" href="#equation-exp-error" title="Permalink to this equation">#</a></span>\[    E\left[\left(y - \hat{f}(\vec{x})\right)^2\right]\]</div>
+<span class="eqno">(3.4)<a class="headerlink" href="#equation-exp-error" title="Link to this equation">#</a></span>\[    E\left[\left(y - \hat{f}(\vec{x})\right)^2\right]\]</div>
 <p>What is the expectation over? For now, let’s just assume the only source of randomness is in the noise from the label (recall <span class="math notranslate nohighlight">\(y = f(\vec{x}) + \epsilon\)</span>). Then our expression becomes:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2e387e2f-fa29-4e13-8d05-db3b58f6c486">
-<span class="eqno">(3.5)<a class="headerlink" href="#equation-2e387e2f-fa29-4e13-8d05-db3b58f6c486" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-0f760ece-a93c-4400-a2a8-169a02d65732">
+<span class="eqno">(3.5)<a class="headerlink" href="#equation-0f760ece-a93c-4400-a2a8-169a02d65732" title="Permalink to this equation">#</a></span>\[\begin{equation}
     E\left[\left(y - \hat{f}(\vec{x})\right)^2\right] =  E\left[y^2\right] + E\left[\hat{f}(\vec{x})^2\right] - 2 E\left[y\hat{f}(\vec{x})\right]
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-d029e492-845b-41ac-ae9c-dfcabf06e713">
-<span class="eqno">(3.6)<a class="headerlink" href="#equation-d029e492-845b-41ac-ae9c-dfcabf06e713" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-c18b353b-ae5e-429c-9a48-0ad69cca0b92">
+<span class="eqno">(3.6)<a class="headerlink" href="#equation-c18b353b-ae5e-429c-9a48-0ad69cca0b92" title="Permalink to this equation">#</a></span>\[\begin{equation}
     E\left[\left(y - \hat{f}(\vec{x})\right)^2\right] =  E\left[\left(f(\vec{x}) - \epsilon\right)^2\right] + \hat{f}(\vec{x})^2 - 2 E\left[\left(f(\vec{x}) - \epsilon\right)\right]\hat{f}(\vec{x})
 \end{equation}\]</div>
 <p>I have dropped the expectations over deterministic expression <span class="math notranslate nohighlight">\(\hat{f}\)</span>. You can continue this, again dropping any <span class="math notranslate nohighlight">\(E[f(\vec{x})]\)</span> terms and using the definition of <span class="math notranslate nohighlight">\(\epsilon\)</span>, a zero mean normal distribution with standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span>. You will arrive at:</p>
 <div class="math notranslate nohighlight" id="equation-exp-error-nod">
-<span class="eqno">(3.7)<a class="headerlink" href="#equation-exp-error-nod" title="Permalink to this equation">#</a></span>\[    E\left[\left(y - \hat{f}(\vec{x})\right)^2\right] = \left(f(\vec{x}) - \hat{f}(\vec{x})\right)^2 + \sigma^2\]</div>
+<span class="eqno">(3.7)<a class="headerlink" href="#equation-exp-error-nod" title="Link to this equation">#</a></span>\[    E\left[\left(y - \hat{f}(\vec{x})\right)^2\right] = \left(f(\vec{x}) - \hat{f}(\vec{x})\right)^2 + \sigma^2\]</div>
 <p>This expression means the best we can do on an unseen label is the noise of the label. This is very reasonable, and probably matches your intuition. The best you can do is match exactly the noise in the label when you have a perfect agreement between <span class="math notranslate nohighlight">\(f(\vec{x})\)</span>  and <span class="math notranslate nohighlight">\(\hat{f}(\vec{x})\)</span></p>
 <p><em>However, this analysis did not account for the fact our choice of training data is random</em>. Things become more complex when we consider that our choice of training data is random. Return to Equation <a class="reference internal" href="#equation-exp-error">(3.4)</a> and now replace <span class="math notranslate nohighlight">\(\hat{f}\left(\vec{x}\right)\)</span> with <span class="math notranslate nohighlight">\(\hat{f}\left(\vec{x}; \mathbf{D}\right)\)</span> where <span class="math notranslate nohighlight">\(\mathbf{D}\)</span> is a random variable indicating the random data sample. You can find a complete derivation on <a class="reference external" href="https://en.wikipedia.org/wiki/Bias-variance_tradeoff">Wikipedia</a>. The key change is that  <span class="math notranslate nohighlight">\(\left(f(\vec{x}) - \hat{f}\left(\vec{x}; \mathbf{D}\right)\right)^2\)</span> is now a random variable. Equation <a class="reference internal" href="#equation-exp-error-nod">(3.7)</a> becomes:</p>
 <div class="math notranslate nohighlight" id="equation-bv">
-<span class="eqno">(3.8)<a class="headerlink" href="#equation-bv" title="Permalink to this equation">#</a></span>\[    E\left[\left(y - \hat{f}(\vec{x})\right)^2\right] = E\left[f(\vec{x}) - \hat{f}\left(\vec{x}; \mathbf{D}\right)\right]^2 + 
+<span class="eqno">(3.8)<a class="headerlink" href="#equation-bv" title="Link to this equation">#</a></span>\[    E\left[\left(y - \hat{f}(\vec{x})\right)^2\right] = E\left[f(\vec{x}) - \hat{f}\left(\vec{x}; \mathbf{D}\right)\right]^2 + 
     E\left[\left(E\left[\hat{f}\left(\vec{x}; \mathbf{D}\right)\right] - \hat{f}\left(\vec{x}; \mathbf{D}\right)\right)^2\right] + \sigma^2\]</div>
 <p>This expression is the most important equation for understanding ML and deep learning training. The first term in this expression is called <strong>bias</strong> and captures how far away our model is from the correct function <span class="math notranslate nohighlight">\(f(\vec{x})\)</span>. This is the expected (average) loss we get given a random dataset evaluated on a new unseen data point. You may think this the most important quantity – expected difference between the true function and our model on a new data point. However, bias does not determine the expected error on an unseen data point alone, there other terms.</p>
 <aside class="margin sidebar">
@@ -1207,29 +960,23 @@ it in parallel, and timing its execution.</p>
 <p>There are three sources of randomness in the expectation: the choice of test data, the label noise, and the choice of training data. However, once you pick the training data, the test data is fixed so we do not indicate or worry about this. A quantity like <span class="math notranslate nohighlight">\(E[\hat{f}(\vec{x})]\)</span> means splitting your data every possible way, fitting the models, then computing the value <span class="math notranslate nohighlight">\(\hat{f}(\vec{x})\)</span> on the unseen test <span class="math notranslate nohighlight">\(\vec{x}\)</span>. Then you take the average over the unseen test values. You can also skip the last step and leave <span class="math notranslate nohighlight">\(E[\hat{f}(\vec{x})]\)</span> as a function of <span class="math notranslate nohighlight">\(\vec{x}\)</span>, which is what is plotted in <a class="reference internal" href="#low-var"><span class="std std-numref">Fig. 3.3</span></a>  and <a class="reference internal" href="#high-var"><span class="std std-numref">Fig. 3.4</span></a>.</p>
 </div>
 <figure class="align-default" id="low-var">
-<div class="cell_output docutils container">
-<img alt="../_images/regression_28_0.png" src="../_images/regression_28_0.png" />
-</div>
+<img alt="../_images/10364c445759955bfd2d7d2d0a0f17f80e7d58c72868e9555c277c4a9fde9a3b.png" src="../_images/10364c445759955bfd2d7d2d0a0f17f80e7d58c72868e9555c277c4a9fde9a3b.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 3.3 </span><span class="caption-text">A single feature fit to the polynomial model example above. The left panel shows a single train/test split and the resulting model fit. The right panel shows the result of many fits. The model variance is the variance across each of those model fits and the bias is the agreement of the average model. It can be seen that this model has low variance but poor average agreement (high bias).</span><a class="headerlink" href="#low-var" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 3.3 </span><span class="caption-text">A single feature fit to the polynomial model example above. The left panel shows a single train/test split and the resulting model fit. The right panel shows the result of many fits. The model variance is the variance across each of those model fits and the bias is the agreement of the average model. It can be seen that this model has low variance but poor average agreement (high bias).</span><a class="headerlink" href="#low-var" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>These three terms: noise, bias, and variance set the minimum value for test error. Noise is set by your data and not controllable. However, bias and variance are controllable. What does a high bias, low variance model look like? A 1D linear model is a good example. See <a class="reference internal" href="#low-var"><span class="std std-numref">Fig. 3.3</span></a>. It has one parameter so a sample of data points gives a consistent estimate. However, a 1D model cannot capture the true <span class="math notranslate nohighlight">\(f(\vec{x})\)</span> so it has a large average error (bias) at a given point. What does a low bias, high variance model look like? An overfit model like the one shown in <a class="reference internal" href="#high-var"><span class="std std-numref">Fig. 3.4</span></a>. It has extreme outliers on test data, but on average it actually has a low bias.</p>
 <figure class="align-default" id="high-var">
-<div class="cell_output docutils container">
-<img alt="../_images/regression_29_0.png" src="../_images/regression_29_0.png" />
-</div>
+<img alt="../_images/19cc78b01f5f290589dda66ea9368f08bb97739bae911935a22816e56650ec94.png" src="../_images/19cc78b01f5f290589dda66ea9368f08bb97739bae911935a22816e56650ec94.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 3.4 </span><span class="caption-text">A 7 feature fit to the polynomial model example above. The left panel shows a single train/test split and the resulting model fit. The right panel shows the result of many fits. The model variance is the variance across each of those model fits and the bias is the agreement of the average model. It can be seen that this model has high variance but good average agreement (low bias).</span><a class="headerlink" href="#high-var" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 3.4 </span><span class="caption-text">A 7 feature fit to the polynomial model example above. The left panel shows a single train/test split and the resulting model fit. The right panel shows the result of many fits. The model variance is the variance across each of those model fits and the bias is the agreement of the average model. It can be seen that this model has high variance but good average agreement (low bias).</span><a class="headerlink" href="#high-var" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p><strong>The Tradeoff</strong></p>
 <figure class="align-default" id="bv">
-<div class="cell_output docutils container">
-<img alt="../_images/regression_30_0.png" src="../_images/regression_30_0.png" />
-</div>
+<img alt="../_images/d29ad17a9ce3afc30068bc8101da15d5a7e0ac99a75126e3b6c18759ab4a5498.png" src="../_images/d29ad17a9ce3afc30068bc8101da15d5a7e0ac99a75126e3b6c18759ab4a5498.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 3.5 </span><span class="caption-text">The bias, variance, and fit on test values for the polynomial example averaged across 2,500 train/test splits. As the number of features increases, variance increases and bias decreases. There is a minimum at 4 features. The plot stops at 5 because the variance becomes very large beyond 5.</span><a class="headerlink" href="#bv" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 3.5 </span><span class="caption-text">The bias, variance, and fit on test values for the polynomial example averaged across 2,500 train/test splits. As the number of features increases, variance increases and bias decreases. There is a minimum at 4 features. The plot stops at 5 because the variance becomes very large beyond 5.</span><a class="headerlink" href="#bv" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>The way to change bias and variance is through <strong>model complexity</strong>, which is feature number in our linear models. Increasing model complexity reduces bias and increases variance. There is an optimum for our polynomial example, shown in <a class="reference internal" href="#bv"><span class="std std-numref">Fig. 3.5</span></a>. Indeed this is true of most ML models, although it can be difficult to cleanly increase model complexity and keep training converged. However, this is <a class="reference external" href="https://www.bradyneal.com/bias-variance-tradeoff-textbooks-update">not typically true in deep learning with neural networks</a><span id="id3">[<a class="reference internal" href="#id45" title="Brady Neal, Sarthak Mittal, Aristide Baratin, Vinayak Tantia, Matthew Scicluna, Simon Lacoste-Julien, and Ioannis Mitliagkas. A modern take on the bias-variance tradeoff in neural networks. arXiv preprint arXiv:1810.08591, 2018.">NMB+18</a>]</span>.</p>
@@ -1240,37 +987,35 @@ it in parallel, and timing its execution.</p>
 <p>The bias–variance tradeoff is powerful for explaining the intuition we’ve learned from examples above. Large datasets reduce model variance, explaining why it is possible to increase model complexity to improve model accuracy only with larger datasets. Overfitting reduces bias at the cost of high variance. Not training long enough increases bias, but reduces variance as well since you can only move so far from your starting parameters.</p>
 </section>
 <section id="regularization">
-<h2><span class="section-number">3.5. </span>Regularization<a class="headerlink" href="#regularization" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">3.5. </span>Regularization<a class="headerlink" href="#regularization" title="Link to this heading">#</a></h2>
 <p>Adding features is a challenging way to exchange model bias and variance because it comes in discrete steps and some features are just better than others. A different way is to use a complex model (all features) but reduce variance through <strong>regularization</strong>. Regularization is the addition of an extra term to your loss function that captures some unwanted property about your model that you want to minimize.</p>
 <section id="l2-regularization">
-<h3><span class="section-number">3.5.1. </span>L2 Regularization<a class="headerlink" href="#l2-regularization" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">3.5.1. </span>L2 Regularization<a class="headerlink" href="#l2-regularization" title="Link to this heading">#</a></h3>
 <aside class="margin sidebar">
 <p class="sidebar-title"></p>
 <p>You can add the bias <span class="math notranslate nohighlight">\(b\)</span> to the regularization term, but this should
 only be done if you have some prior belief that the bias should be 0 – like if it represents some physical quantity that should be minimized. Otherwise minimizing <span class="math notranslate nohighlight">\(b\)</span> has no effect on overfitting and so is not part of regularization.</p>
 </aside>
 <p>Our first example is the magnitude of fit coefficients. The magnitude of the coefficients is <span class="math notranslate nohighlight">\(\sum_k w_k^2\)</span> where <span class="math notranslate nohighlight">\(w_k\)</span> the index of a single coefficient. We add this to our loss function:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c0ec0aa0-e7df-4828-bd2b-87a68c247fa4">
-<span class="eqno">(3.9)<a class="headerlink" href="#equation-c0ec0aa0-e7df-4828-bd2b-87a68c247fa4" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-7f211ba2-8841-4212-b2c0-86b26be799c3">
+<span class="eqno">(3.9)<a class="headerlink" href="#equation-7f211ba2-8841-4212-b2c0-86b26be799c3" title="Permalink to this equation">#</a></span>\[\begin{equation}
     L = \frac{1}{N}\sum_i^N \left[y_i - \hat{f}(\vec{x}_i, \vec{w}, b)\right]^2 + \lambda \sum_k w_k^2
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\lambda\)</span> is our strength of regularization. By changing <span class="math notranslate nohighlight">\(\lambda\)</span>, we control how large the magnitude of our parameters are and that directly reduces the variance. You can see the result in <a class="reference internal" href="#l2"><span class="std std-numref">Fig. 3.6</span></a> for our polynomial example. Increasing the strength of regularization decreases variance at the cost of increasing model bias. Remember in deep learning there isn’t as much of a tradeoff and often you just get a reduction in variance with no degradation in bias. Adding L2 regularization with a linear model has a specific name: <strong>Ridge Regression</strong>.</p>
 <figure class="align-default" id="l2">
-<div class="cell_output docutils container">
-<img alt="../_images/regression_43_0.png" src="../_images/regression_43_0.png" />
-</div>
+<img alt="../_images/ddfae54a2c0dcb4d5fedb1869f2b72fdce03239399bb5d6445c7e1532359c767.png" src="../_images/ddfae54a2c0dcb4d5fedb1869f2b72fdce03239399bb5d6445c7e1532359c767.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 3.6 </span><span class="caption-text">A 7 feature fit to the polynomial model example above with increasing strength of regularization. The vertical bars indicate standard deviation of model at each point.</span><a class="headerlink" href="#l2" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 3.6 </span><span class="caption-text">A 7 feature fit to the polynomial model example above with increasing strength of regularization. The vertical bars indicate standard deviation of model at each point.</span><a class="headerlink" href="#l2" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Why does this work? Look at the gradient of a particular weight of our new loss function:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7a999790-56cb-48d9-942a-7632ced69b03">
-<span class="eqno">(3.10)<a class="headerlink" href="#equation-7a999790-56cb-48d9-942a-7632ced69b03" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-4245c0e8-431d-45f2-b185-bee7c411a425">
+<span class="eqno">(3.10)<a class="headerlink" href="#equation-4245c0e8-431d-45f2-b185-bee7c411a425" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \frac{\partial L}{\partial w_4} = \frac{2}{N}\sum_i^N \left[y_i - \hat{f}(\vec{x}_i, \vec{w}, b)\right]\frac{\partial \hat{f}(\vec{x}_i, \vec{w}, b)}{\partial w_4} + 2\lambda w_4
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(w_4\)</span> is one of our weights. The first term on the right-hand side accounts for how <span class="math notranslate nohighlight">\(w_4\)</span> affects our accuracy, like usual. The second term is from the regularization. You can see that the gradient is just the value of weight times a constant. Let’s contract the first term into a variable called <span class="math notranslate nohighlight">\(g_{w_4}\)</span> and look at how this new gradient affects our updates to <span class="math notranslate nohighlight">\(w_4\)</span>. Our gradient descent update of <span class="math notranslate nohighlight">\(w_4\)</span> becomes:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-91ae4a28-f300-4846-b815-90c8df59c3fa">
-<span class="eqno">(3.11)<a class="headerlink" href="#equation-91ae4a28-f300-4846-b815-90c8df59c3fa" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-cca673f1-0d7d-4683-8ca4-a8e290717aa1">
+<span class="eqno">(3.11)<a class="headerlink" href="#equation-cca673f1-0d7d-4683-8ca4-a8e290717aa1" title="Permalink to this equation">#</a></span>\[\begin{equation}
     w_4' = w_4 -\eta g_{w_4} - 2\eta\lambda w_4
 \end{equation}\]</div>
 <p>So our regularization pushes <span class="math notranslate nohighlight">\(w_4'\)</span> to always have a lower magnitude. If <span class="math notranslate nohighlight">\(w_4' = 2.5\)</span>, the update will include a term of <span class="math notranslate nohighlight">\(-2\eta \lambda 2.5\)</span>, pushing our weight value closer to zero. This means our weights always are pushed towards zero. Of course the term coming from model error (<span class="math notranslate nohighlight">\(g_{w_4}\)</span>) also has an effect so that we end up at a balance of lower magnitude weights and model error. We control that balance through the <span class="math notranslate nohighlight">\(\lambda\)</span> term.</p>
@@ -1281,10 +1026,10 @@ used in the norm: <span class="math notranslate nohighlight">\((\sum_i x_i^p)^{1
 </aside>
 </section>
 <section id="l1-regularization">
-<h3><span class="section-number">3.5.2. </span>L1 Regularization<a class="headerlink" href="#l1-regularization" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">3.5.2. </span>L1 Regularization<a class="headerlink" href="#l1-regularization" title="Link to this heading">#</a></h3>
 <p>L1 regularization changes our loss to be the following:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9cdd2a88-76da-4e6e-b07e-248721d82ba9">
-<span class="eqno">(3.12)<a class="headerlink" href="#equation-9cdd2a88-76da-4e6e-b07e-248721d82ba9" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-5465a1b4-4384-43e3-95a1-1bd321828c97">
+<span class="eqno">(3.12)<a class="headerlink" href="#equation-5465a1b4-4384-43e3-95a1-1bd321828c97" title="Permalink to this equation">#</a></span>\[\begin{equation}
     L = \frac{1}{N}\sum_i^N \left[y_i - \hat{f}(\vec{x}_i, \vec{w}, b)\right]^2 + \lambda \sum_k \left|w_k\right|
 \end{equation}\]</div>
 <p>It may appear at first that this is identical to L2. In fact, the L1 regularization has a powerful benefit: it induces sparsity. L2 just causes regression coefficients to be on average lower, but L1 forces some coefficients to be 0. This gives us a kind of “automatic” feature selection. This is called <strong>Lasso Regression</strong> when you combine L1 regularization with linear regression.</p>
@@ -1295,14 +1040,19 @@ used in the norm: <span class="math notranslate nohighlight">\((\sum_i x_i^p)^{1
 </section>
 </section>
 <section id="strategies-to-assess-models">
-<h2><span class="section-number">3.6. </span>Strategies to Assess Models<a class="headerlink" href="#strategies-to-assess-models" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">3.6. </span>Strategies to Assess Models<a class="headerlink" href="#strategies-to-assess-models" title="Link to this heading">#</a></h2>
 <p>We will now discuss more ways to assess model performance. These are more robust approaches to assess loss on testing data.</p>
 <section id="k-fold-cross-validation">
-<h3><span class="section-number">3.6.1. </span>k-Fold Cross-Validation<a class="headerlink" href="#k-fold-cross-validation" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">3.6.1. </span>k-Fold Cross-Validation<a class="headerlink" href="#k-fold-cross-validation" title="Link to this heading">#</a></h3>
 <p>The bias–variance decomposition shows that our testing error is sensitive to what training data has been chosen. The expected mean test error <span class="math notranslate nohighlight">\(E\left[\left(y - \hat{f}(\vec{x})\right)^2\right]\)</span> depends on the label noise <strong>and</strong> the way we split our data into training and testing data. Thus far, we’ve only gotten a single sample from this expectation by splitting. One way to better estimate the value on unseen data is to repeat the process of splitting data into training and testing multiple times. This is called <strong>k-fold</strong> cross-validation, where <span class="math notranslate nohighlight">\(k\)</span> is the number of times you repeat the process. k-fold cross-validation is useful because certain high-variance model choices can give different testing errors depending on the train/test split. k-fold also provides multiple samples so that you can estimate the <strong>uncertainty</strong> in testing error. As all things to do with model variance, the smaller the dataset the more important this is. Typically with very large datasets k-fold cross-validation is not done because label noise dominates and testing a model k times can be time-consuming.</p>
 <p>k-fold cross-validation has a specific process for splitting testing and training data. What we did previously was split into a 50/50 split of training and testing. In k-fold, we split our data into k segments. Then we train on k-1 segments and test on the last segment. You can do this k-ways. For example, with K = 3 you would split your data into A, B, C. The first train/test split would be A, B for training and C for testing. Then B, C for training and A for testing. The last would be A, C for training and B for testing. Following this procedure means that your percentage split will be 90/10 for <span class="math notranslate nohighlight">\(k = 10\)</span> and 50/50 for <span class="math notranslate nohighlight">\(k = 2\)</span>. This has a disadvantage that the number of estimates for testing error depends on size of train/test split. For example, you cannot get 10 estimates for an 80/20 split. An 80/20 split means exactly 5-fold cross-validation. We’ll see other methods that relax this later on. The 80/20 is a typical rule that balances having enough data for good training and enough to robustly assess how well your model performs.</p>
 <p>Let’s now use k-fold cross-validation in two examples: our full dataset and a smaller 25 data point sample. Rather than using gradient descent here, we’ll just use the pseudo-inverse to keep our code simple. The pseudo-inverse is the least-squares solution.</p>
 <div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">k</span> <span class="o">=</span> <span class="mi">10</span>
 <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">soldata</span><span class="p">)</span>
@@ -1329,13 +1079,19 @@ used in the norm: <span class="math notranslate nohighlight">\((\sum_i x_i^p)^{1
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
-<img alt="../_images/regression_47_0.png" src="../_images/regression_47_0.png" />
+<img alt="../_images/ed0921c87a360815327374bb08529e38c8aa18aef757ce034a946bd55b070ea8.png" src="../_images/ed0921c87a360815327374bb08529e38c8aa18aef757ce034a946bd55b070ea8.png" />
 </div>
 </div>
 <p>The final answer in this case is the average of these values: <span class="pasted-text">2.69</span><span class="math notranslate nohighlight">\(\pm\)</span><span class="pasted-text">2.25</span>. The advantage of the k-fold is that we can report standard deviation like this.</p>
 <p>Now what effect does k have on the test error? Let’s see how our choice of k matters</p>
 <div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">soldata</span><span class="p">)</span>
 <span class="n">error</span> <span class="o">=</span> <span class="p">[]</span>
@@ -1365,13 +1121,19 @@ used in the norm: <span class="math notranslate nohighlight">\((\sum_i x_i^p)^{1
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
-<img alt="../_images/regression_50_0.png" src="../_images/regression_50_0.png" />
+<img alt="../_images/88f72eacc0265454655cace2d444c7bd832cf41575d4d3f1acf08120dfdd3250.png" src="../_images/88f72eacc0265454655cace2d444c7bd832cf41575d4d3f1acf08120dfdd3250.png" />
 </div>
 </div>
 <p>As you can see, there is not much sensitivity to k. This is good, because k is mostly arbitrary. Larger k means more samples, but each test data is smaller so that these two effects should balance out.</p>
 <p>Large datasets are not that sensitive because the training and testing splits are large. Let us examine what happens with <span class="math notranslate nohighlight">\(N = 25\)</span>, a realistic case in chemistry data. We’ll just pick 25 data points at the beginning and not change that choice, mocking what would happen in a real example.</p>
 <div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">small_soldata</span> <span class="o">=</span> <span class="n">soldata</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">small_soldata</span><span class="p">)</span>
@@ -1402,28 +1164,29 @@ used in the norm: <span class="math notranslate nohighlight">\((\sum_i x_i^p)^{1
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
-<img alt="../_images/regression_53_0.png" src="../_images/regression_53_0.png" />
+<img alt="../_images/d6592ea80abda8a9b75eb8b56de5a6a31e3c23cf082b01bb9a30c3c4ad5c80bc.png" src="../_images/d6592ea80abda8a9b75eb8b56de5a6a31e3c23cf082b01bb9a30c3c4ad5c80bc.png" />
 </div>
 </div>
 <p>Our results are a little sensitive to the choice of <span class="math notranslate nohighlight">\(k\)</span>. Now why might test error decrease? Remember that a larger <span class="math notranslate nohighlight">\(k\)</span> means <em>more</em> data points for training. This did not matter above when we had 10,000 data points. Now it is very importatnt, since we only have 25 data points. Thus larger k means more training data.</p>
 </section>
 <section id="leave-one-out-cv">
-<h3><span class="section-number">3.6.2. </span>Leave-one-out CV<a class="headerlink" href="#leave-one-out-cv" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">3.6.2. </span>Leave-one-out CV<a class="headerlink" href="#leave-one-out-cv" title="Link to this heading">#</a></h3>
 <p>Larger k means more training data, so what is the largest it can be? Remember that k is the number segments in your data. So <span class="math notranslate nohighlight">\(k = N\)</span> is the max, where each data point is a segement. This is called <strong>leave-one-out cross-validation</strong> (LOOCV). It creates <span class="math notranslate nohighlight">\(N\)</span> different models, one for each data point left out, and so is only used for small datasets. Thus the advantage of LOOCV is it maximizes training data, but maximizes the number of times the model needs to be trained.</p>
 </section>
 </section>
 <section id="computing-other-measures">
-<h2><span class="section-number">3.7. </span>Computing Other Measures<a class="headerlink" href="#computing-other-measures" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">3.7. </span>Computing Other Measures<a class="headerlink" href="#computing-other-measures" title="Link to this heading">#</a></h2>
 <p>Using LOOCV and k-fold cross-validation, we’re able to predict test error. This “test error” is specifically an expected error on an unseen data point. Now how do we actually treat a new data point? What will we report as the certainty in a new point? The test error? We’ll call this point the <strong>prediction point</strong> and we’ll try to estimate the quantiles of this point. Quantiles are the building blocks for confidence intervals. Recall that confidence intervals allow us to report our model prediction as <span class="math notranslate nohighlight">\(4.3 \pm 0.2\)</span>, for example.</p>
 <aside class="margin sidebar">
 <p class="sidebar-title"></p>
 <p>Classically bootstrap resampling and <strong>jacknife</strong>, its predecessor, are used for estimating variance in model parameters (i.e., model variance). However, they are more commonly used in ML for predicting confidence intervals and/or test error for new points (also called generalization error).</p>
 </aside>
 <section id="bootstrap-resampling">
-<h3><span class="section-number">3.7.1. </span>Bootstrap Resampling<a class="headerlink" href="#bootstrap-resampling" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">3.7.1. </span>Bootstrap Resampling<a class="headerlink" href="#bootstrap-resampling" title="Link to this heading">#</a></h3>
 <p>To estimate quantiles, we need to have a series of observations of predictions from the prediction point <span class="math notranslate nohighlight">\(\hat{f}(\vec{x}')\)</span>, where <span class="math notranslate nohighlight">\(\vec{x}'\)</span> is the prediction point. For example, we could do 5-fold cross-validation and have 5 estimates of <span class="math notranslate nohighlight">\(\hat{f}_k(\vec{x}')\)</span> and could estimate the quantiles using a t-statistic. Instead, we’ll use a method called <strong>bootstrap resampling</strong> which removes the restriction that we can only use <span class="math notranslate nohighlight">\(1 - 1 / k\)</span> of the training data. Bootstrap resampling is a general process for estimating uncertainty for empirical statistics without assuming a probability distribution (i.e., non-parametric). In bootstrap resampling, we create as many as desired new training datasets that are the same size as the original by sampling <strong>with replacement</strong> from the original dataset. That means our new dataset has fewer members than the original and makes up the difference with duplicates. Let’s see an example. If your training dataset originally has data A, B, C, D, E, our bootstrap resampled training data is:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>A, B, B, D, E</p></li>
 <li><p>B, C, C, C, E</p></li>
 <li><p>A, B, D, E, E</p></li>
@@ -1479,24 +1242,24 @@ used in the norm: <span class="math notranslate nohighlight">\((\sum_i x_i^p)^{1
 <p>Bootstrap resampling is still an excellent technique that is used often to estimate uncertainties. However, it is not a great choice for estimating model error on unseen datapoints.</p>
 </section>
 <section id="jacknife">
-<h3><span class="section-number">3.7.2. </span>Jacknife+<a class="headerlink" href="#jacknife" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">3.7.2. </span>Jacknife+<a class="headerlink" href="#jacknife" title="Link to this heading">#</a></h3>
 <aside class="margin sidebar">
 <p class="sidebar-title"></p>
 <p>There is a method called Jacknife, which does not compute multiple predictions. It computes the residuals as mentioned above, but it trains one final model on all data. Since it requires you to compute all <span class="math notranslate nohighlight">\(N\)</span> models to get the residuals, it is preferred to just use Jacknife+ which is more robust.</p>
 </aside>
 <p>An alternative approach that accounts for model variance like the bootstrap method and model bias like the k-fold cross-validation method is called <strong>Jacknife+</strong> <span id="id4">[<a class="reference internal" href="#id16" title="Rina Foygel Barber, Emmanuel J Candes, Aaditya Ramdas, and Ryan J Tibshirani. Predictive inference with the jackknife+. arXiv preprint arXiv:1905.02928, 2019.">BCRT19</a>]</span>.  Jacknife+ carries strong guarantees about accuracy of the confidence intervals generated, regardless of the underlying data or model. The change now is that we use LOOCV to create an ensemble of models (although you can subsample down if you do not want N of them) and also compute the models’ test error on the withheld test data. The final quantile estimates incorporate the variance from the variety of models (model variance) and also each models’ individual test error (model bias).
 Specifically, we compute:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b535cbac-af2a-4df8-aca5-48e0eba90c00">
-<span class="eqno">(3.13)<a class="headerlink" href="#equation-b535cbac-af2a-4df8-aca5-48e0eba90c00" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-4989b55e-fee0-4b9b-b9b9-f62c66adc61e">
+<span class="eqno">(3.13)<a class="headerlink" href="#equation-4989b55e-fee0-4b9b-b9b9-f62c66adc61e" title="Permalink to this equation">#</a></span>\[\begin{equation}
 R_i = \left|y_i - \hat{f}(\vec{x}_i;\,\mathbf{X} \setminus \vec{x}_i )\right|
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\mathbf{X} \setminus \vec{x}_i\)</span> is the dataset to train the <span class="math notranslate nohighlight">\(i\)</span>th model and is the dataset excluding point <span class="math notranslate nohighlight">\((\vec{x}_i, y_i)\)</span>, <span class="math notranslate nohighlight">\(\hat{f}(\vec{x}_i;\,\mathbf{X} \setminus \vec{x}_i ) \)</span> is the <span class="math notranslate nohighlight">\(i\)</span>th model evaluated on point <span class="math notranslate nohighlight">\(\vec{x}_i\)</span>, and <span class="math notranslate nohighlight">\(R_i\)</span> is the residual of model <span class="math notranslate nohighlight">\(i\)</span> computed by taking the difference between the label and prediction on point <span class="math notranslate nohighlight">\(i\)</span>. <span class="math notranslate nohighlight">\(R_i\)</span> encodes how good the <span class="math notranslate nohighlight">\(i\)</span>th model is. We then combine it with the predictions on our new test point <span class="math notranslate nohighlight">\((\vec{x}', y')\)</span> to make our set for quantiling</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8a5a9700-5e0a-4448-8d3b-f25ba9a52a78">
-<span class="eqno">(3.14)<a class="headerlink" href="#equation-8a5a9700-5e0a-4448-8d3b-f25ba9a52a78" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-8d903167-8496-4937-9938-8646e48581ef">
+<span class="eqno">(3.14)<a class="headerlink" href="#equation-8d903167-8496-4937-9938-8646e48581ef" title="Permalink to this equation">#</a></span>\[\begin{equation}
 q_1 = \left\{ \hat{f}(\vec{x}';\,\mathbf{X} \setminus \vec{x}_i ) - R_i\right\}
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-9882876a-a0a2-43a8-b476-ebcbe68c7183">
-<span class="eqno">(3.15)<a class="headerlink" href="#equation-9882876a-a0a2-43a8-b476-ebcbe68c7183" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-004d8959-ba96-4a07-bf12-d1df91d54077">
+<span class="eqno">(3.15)<a class="headerlink" href="#equation-004d8959-ba96-4a07-bf12-d1df91d54077" title="Permalink to this equation">#</a></span>\[\begin{equation}
 q_2 = \left\{\hat{f}(\vec{x}';\,\mathbf{X} \setminus \vec{x}_i ) + R_i\right\}
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(q\)</span> means quantile. The first quantile <span class="math notranslate nohighlight">\(q_1\)</span>, with <span class="math notranslate nohighlight">\( - R_i\)</span>, is how low below the estimate from the <span class="math notranslate nohighlight">\(i\)</span>th model we could expect to see our prediction based on how the <span class="math notranslate nohighlight">\(i\)</span>th model did on its test point. The second set, with <span class="math notranslate nohighlight">\( + R_i\)</span>, is how high above the estimate from the <span class="math notranslate nohighlight">\(i\)</span>th model we could expect to see our prediction based on how the <span class="math notranslate nohighlight">\(i\)</span>th model did on its test point. To compute our final value, we take the median of <span class="math notranslate nohighlight">\(\hat{f}(\vec{x}';\,\mathbf{X} \setminus \vec{x}_i )\)</span> and report the lower end of the interval as the 5% quantile of <span class="math notranslate nohighlight">\(q_1\)</span> and the top as the 95% quantile of <span class="math notranslate nohighlight">\(q_2\)</span>. You can see that this method combines the ensemble of prediction models given by bootstrap resampling with the error estimates from LOOCV. Let’s see an example.</p>
@@ -1545,7 +1308,7 @@ Average test error = 1.05
 </section>
 </section>
 <section id="training-data-distribution">
-<h2><span class="section-number">3.8. </span>Training Data Distribution<a class="headerlink" href="#training-data-distribution" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">3.8. </span>Training Data Distribution<a class="headerlink" href="#training-data-distribution" title="Link to this heading">#</a></h2>
 <p>We have come a long ways now. We’re able to compute test error, identify overfitting, understand model bias and variance, and predict uncertainty on unseen data points. One of the implied assumptions so far is that our splitting of data into training and testing data mimics what it will be like to predict on an unseen data point. More specifically, we assume that testing data comes from the same probability distribution as our training data. This is true when we’re doing the splitting, but is often violated when we actually get new data to make predictions with.</p>
 <p>There are specific categories for how we have left the training distribution. <strong>Covariate shift</strong> is when the distribution of features changes. Covariate is another word for features. An example might be that the molecular weights of your molecules are larger in your testing data. The relationship between features and labels, <span class="math notranslate nohighlight">\(f(\vec{x})\)</span> remains the same, but the distribution of features is different. <strong>Label shift</strong> means that the distribution of labels has changed. Perhaps our training data was all very soluble molecules but at test time, we’re examining mostly insoluble molecules. Again, our fundamental relationship  <span class="math notranslate nohighlight">\(f(\vec{x})\)</span> that we try to estimate with our model still holds.</p>
 <aside class="margin sidebar">
@@ -1555,7 +1318,7 @@ avoiding covariate shift by trying to stay within the training data distribution
 </aside>
 <p>There are two common reasons unseen data can be out of the training data distribution. The first is that you are extrapolating to new regions of chemical space. For example, you have training data of drug activities. You make a model that can predict activity. What do you do with the model? You obviously find the highest activity drug molecule. However, this molecule is likely to be unusual and not in your training data. If it was in your training data you would probably already be done – namely, you already synthesized and found a molecule with very high activity. Thus you will be pushing your model to regions outside of your training data. Another reason you can be out of training data is that the way you generated training data is different than how the model is used. For example, perhaps you trained on molecules that do not contain fluorine. Then you try your model on molecules that contain fluorine. Your features will be different than what you observed in training. The result of leaving your training data distribution is that your test error increases and the estimates you provide will be too low.</p>
 <section id="leave-one-class-out-cross-validation">
-<h3><span class="section-number">3.8.1. </span>Leave One Class Out Cross-Validation<a class="headerlink" href="#leave-one-class-out-cross-validation" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">3.8.1. </span>Leave One Class Out Cross-Validation<a class="headerlink" href="#leave-one-class-out-cross-validation" title="Link to this heading">#</a></h3>
 <p>Thus understanding and assessing training data distribution is an important task. In general, standard models that minimize a loss are poor at predicting extreme values. We will approach this challenge later with specific methods like black-box function optimization. For now, be wary of using your models as tools to find extreme values. The second challenge, that you’re leaving your training data due to how points are generated, can be assessed by computing a more realistic estimate of model error. Namely, your training data is typically gathered (generated) according to a different process than when your model is deployed at test time. This is generalization error, sometimes called <strong>covariate shift</strong>, and we sometimes wish to approximate its effect by simulating different training and testing distributions. This leads us to <strong>leave one class out cross-validation</strong> (LOCOCV).</p>
 <p>In LOCOCV, we must first assign a class to each training data point. This is domain specific. It could be based on the molecule. You could use a clustering method. In our case, our solubility data actually is a combination of five other datasets so our data is already pre-classified based on who measured the solubility. We will now perform a kind of k-fold cross-validation, leaving one class out at a time and assessing model error. We’ll compare this to k-fold cross-validation without classes.</p>
 <div class="cell docutils container">
@@ -1567,7 +1330,9 @@ avoiding covariate shift by trying to stay within the training data distribution
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;G1&#39; &#39;G3&#39; &#39;G5&#39; &#39;G4&#39; &#39;G2&#39;]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;StringArray&gt;
+[&#39;G1&#39;, &#39;G3&#39;, &#39;G5&#39;, &#39;G4&#39;, &#39;G2&#39;]
+Length: 5, dtype: str
 </pre></div>
 </div>
 </div>
@@ -1606,7 +1371,7 @@ avoiding covariate shift by trying to stay within the training data distribution
 </section>
 </section>
 <section id="chapter-summary">
-<h2><span class="section-number">3.9. </span>Chapter Summary<a class="headerlink" href="#chapter-summary" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">3.9. </span>Chapter Summary<a class="headerlink" href="#chapter-summary" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Regression is supervised learning where the labels are real numbers. We only considered scalars</p></li>
 <li><p>To assess a regressed model, we split data into training and testing and only report error on testing data</p></li>
@@ -1619,52 +1384,58 @@ avoiding covariate shift by trying to stay within the training data distribution
 </ul>
 </section>
 <section id="exercises">
-<h2><span class="section-number">3.10. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">3.10. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
 <section id="id7">
-<h3><span class="section-number">3.10.1. </span>Overfitting<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h3>
-<ol class="simple">
+<h3><span class="section-number">3.10.1. </span>Overfitting<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
 <li><p>What happens if we have redundant features but no noise? Is it possible to overfit?</p></li>
 <li><p>We said that increasing dataset size reduces model variance. Show this by using k-fold cross-validation on a few different dataset sizes.</p></li>
 </ol>
 </section>
 <section id="id8">
-<h3><span class="section-number">3.10.2. </span>Regularization<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h3>
-<ol class="simple">
+<h3><span class="section-number">3.10.2. </span>Regularization<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
 <li><p>Implement L1 regularization on the solubility data with <span class="math notranslate nohighlight">\(N = 35\)</span> data points. Increase the strength until some feature coefficients (<span class="math notranslate nohighlight">\(w_i\)</span>) go to zero. Which ones are they? Why do you think they go to zero first?</p></li>
 <li><p>Repeat 1 with a few different sets of training data. Are your results consistent on which features disappear? Based on your results, do you think there is meaning to the features which go to zero?</p></li>
 <li><p>Implement the L-infinity (supremum norm) regularization, which returns the maxmium of the absolute values of the elements.</p></li>
 </ol>
 </section>
 <section id="model-assessment">
-<h3><span class="section-number">3.10.3. </span>Model Assessment<a class="headerlink" href="#model-assessment" title="Permalink to this headline">#</a></h3>
-<ol class="simple">
+<h3><span class="section-number">3.10.3. </span>Model Assessment<a class="headerlink" href="#model-assessment" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
 <li><p>Develop the best linear model for the complete solubility dataset and assess using your best judgment. Justify your choice of model and assessment.</p></li>
 </ol>
 </section>
 </section>
 <section id="cited-references">
-<h2><span class="section-number">3.11. </span>Cited References<a class="headerlink" href="#cited-references" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">3.11. </span>Cited References<a class="headerlink" href="#cited-references" title="Link to this heading">#</a></h2>
 <div class="docutils container" id="id9">
-<dl class="citation">
-<dt class="label" id="id26"><span class="brackets"><a class="fn-backref" href="#id2">SKE19</a></span></dt>
-<dd><p>Murat Cihan Sorkun, Abhishek Khetan, and Süleyman Er. AqSolDB, a curated reference set of aqueous solubility and 2D descriptors for a diverse set of compounds. <em>Sci. Data</em>, 6(1):143, 2019. <a class="reference external" href="https://doi.org/10.1038/s41597-019-0151-1">doi:10.1038/s41597-019-0151-1</a>.</p>
-</dd>
-<dt class="label" id="id18"><span class="brackets"><a class="fn-backref" href="#id1">Bis06</a></span></dt>
-<dd><p>Christopher M Bishop. <em>Pattern recognition and machine learning</em>. springer, 2006.</p>
-</dd>
-<dt class="label" id="id45"><span class="brackets"><a class="fn-backref" href="#id3">NMB+18</a></span></dt>
-<dd><p>Brady Neal, Sarthak Mittal, Aristide Baratin, Vinayak Tantia, Matthew Scicluna, Simon Lacoste-Julien, and Ioannis Mitliagkas. A modern take on the bias-variance tradeoff in neural networks. <em>arXiv preprint arXiv:1810.08591</em>, 2018.</p>
-</dd>
-<dt class="label" id="id16"><span class="brackets"><a class="fn-backref" href="#id4">BCRT19</a></span></dt>
-<dd><p>Rina Foygel Barber, Emmanuel J Candes, Aaditya Ramdas, and Ryan J Tibshirani. Predictive inference with the jackknife+. <em>arXiv preprint arXiv:1905.02928</em>, 2019.</p>
-</dd>
-<dt class="label" id="id28"><span class="brackets"><a class="fn-backref" href="#id5">SBG+20</a></span></dt>
-<dd><p>Christopher Sutton, Mario Boley, Luca M Ghiringhelli, Matthias Rupp, Jilles Vreeken, and Matthias Scheffler. Identifying domains of applicability of machine learning models for materials science. <em>Nature Communications</em>, 11(1):1–9, 2020.</p>
-</dd>
-<dt class="label" id="id34"><span class="brackets"><a class="fn-backref" href="#id6">Ras18</a></span></dt>
-<dd><p>Sebastian Raschka. Model evaluation, model selection, and algorithm selection in machine learning. <em>arXiv preprint arXiv:1811.12808</em>, 2018.</p>
-</dd>
-</dl>
+<div role="list" class="citation-list">
+<div class="citation" id="id26" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">SKE19</a><span class="fn-bracket">]</span></span>
+<p>Murat Cihan Sorkun, Abhishek Khetan, and Süleyman Er. AqSolDB, a curated reference set of aqueous solubility and 2D descriptors for a diverse set of compounds. <em>Sci. Data</em>, 6(1):143, 2019. <a class="reference external" href="https://doi.org/10.1038/s41597-019-0151-1">doi:10.1038/s41597-019-0151-1</a>.</p>
+</div>
+<div class="citation" id="id18" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">Bis06</a><span class="fn-bracket">]</span></span>
+<p>Christopher M Bishop. <em>Pattern recognition and machine learning</em>. springer, 2006.</p>
+</div>
+<div class="citation" id="id45" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">NMB+18</a><span class="fn-bracket">]</span></span>
+<p>Brady Neal, Sarthak Mittal, Aristide Baratin, Vinayak Tantia, Matthew Scicluna, Simon Lacoste-Julien, and Ioannis Mitliagkas. A modern take on the bias-variance tradeoff in neural networks. <em>arXiv preprint arXiv:1810.08591</em>, 2018.</p>
+</div>
+<div class="citation" id="id16" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">BCRT19</a><span class="fn-bracket">]</span></span>
+<p>Rina Foygel Barber, Emmanuel J Candes, Aaditya Ramdas, and Ryan J Tibshirani. Predictive inference with the jackknife+. <em>arXiv preprint arXiv:1905.02928</em>, 2019.</p>
+</div>
+<div class="citation" id="id28" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">SBG+20</a><span class="fn-bracket">]</span></span>
+<p>Christopher Sutton, Mario Boley, Luca M Ghiringhelli, Matthias Rupp, Jilles Vreeken, and Matthias Scheffler. Identifying domains of applicability of machine learning models for materials science. <em>Nature Communications</em>, 11(1):1–9, 2020.</p>
+</div>
+<div class="citation" id="id34" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id6">Ras18</a><span class="fn-bracket">]</span></span>
+<p>Sebastian Raschka. Model evaluation, model selection, and algorithm selection in machine learning. <em>arXiv preprint arXiv:1811.12808</em>, 2018.</p>
+</div>
+</div>
 </div>
 </section>
 </section>
@@ -1681,7 +1452,7 @@ avoiding covariate shift by trying to stay within the training data distribution
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./ml"
         },
         predefinedOutput: true
@@ -1689,53 +1460,140 @@ avoiding covariate shift by trying to stay within the training data distribution
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="introduction.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">2. </span>Introduction to Machine Learning</p>
-        </div>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="introduction.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">2. </span>Introduction to Machine Learning</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="classification.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="classification.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title"><span class="section-number">4. </span>Classification</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-this-notebook">3.1. Running This Notebook</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting">3.2. Overfitting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting-with-synthetic-data">3.2.1. Overfitting with Synthetic Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting-conclusion">3.2.2. Overfitting Conclusion</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploring-effect-of-feature-number">3.3. Exploring Effect of Feature Number</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bias-variance-decomposition">3.4. Bias Variance Decomposition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regularization">3.5. Regularization</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#l2-regularization">3.5.1. L2 Regularization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#l1-regularization">3.5.2. L1 Regularization</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#strategies-to-assess-models">3.6. Strategies to Assess Models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#k-fold-cross-validation">3.6.1. k-Fold Cross-Validation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#leave-one-out-cv">3.6.2. Leave-one-out CV</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-other-measures">3.7. Computing Other Measures</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bootstrap-resampling">3.7.1. Bootstrap Resampling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jacknife">3.7.2. Jacknife+</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-data-distribution">3.8. Training Data Distribution</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#leave-one-class-out-cross-validation">3.8.1. Leave One Class Out Cross-Validation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-summary">3.9. Chapter Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">3.10. Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">3.10.1. Overfitting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">3.10.2. Regularization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-assessment">3.10.3. Model Assessment</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cited-references">3.11. Cited References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-    By Andrew D. White<br/>
-  
-      &copy; Copyright 2022.<br/>
-    <div class="extra_footer">
-      <a href="http://thewhitelab.org">thewhitelab.org</a> <div id="wh-modal"> <button class="wh-venti-button" aria-label="close modal" id="wh-modal-close">✕</button> <img id="wh-modal-img"> </div>
-    </div>
-</p>
-        </footer>
-    </div>
+  <div class="footer-item">
     
+<p class="component-author">
+By Andrew D. White
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <a href="http://thewhitelab.org">thewhitelab.org</a> <div id="wh-modal"> <button class="wh-venti-button" aria-label="close modal" id="wh-modal-close">✕</button> <img id="wh-modal-img"> </div>
 </div>
+  </div>
+  
+</div>
+          </footer>
+        
 
-
-      </div>
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

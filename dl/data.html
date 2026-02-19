@@ -1,10 +1,12 @@
 
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="../" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta content="Deep Learning for Molecules &amp; Materials Book" lang="en" name="description" xml:lang="en" />
 <meta content="en_US" property="og:locale" />
 <meta content="summary" name="twitter:card" />
@@ -14,113 +16,175 @@
 <meta content="&#64;andrewwhite01" name="twitter:site" />
 
     <title>9. Input Data &amp; Equivariances &#8212; deep learning for molecules &amp; materials</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/a11y.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=cb1cce99" />
+    <link rel="stylesheet" type="text/css" href="../_static/a11y.css?v=ffeaf963" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
-    <script src="../_static/custom.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <script src="../_static/togglebutton.js?v=1ae7504c"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'dl/data';</script>
+    <script src="../_static/custom.js?v=3f5092eb"></script>
     <link rel="canonical" href="https://dmol.pub/dl/data.html" />
-    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <link rel="icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="10. Equivariant Neural Networks" href="Equivariant.html" />
     <link rel="prev" title="8. Graph Neural Networks" href="gnn.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
-    
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../_static/logo.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">deep learning for molecules & materials</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="deep learning for molecules & materials - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="deep learning for molecules & materials - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -129,704 +193,332 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  A. Math Review
- </span>
-</p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">A. Math Review</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../math/tensors-and-shapes.html">
-   1. Tensors and Shapes
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../math/tensors-and-shapes.html">1. Tensors and Shapes</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  B. Machine Learning
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">B. Machine Learning</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../ml/introduction.html">
-   2. Introduction to Machine Learning
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../ml/regression.html">
-   3. Regression &amp; Model Assessment
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../ml/classification.html">
-   4. Classification
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../ml/kernel.html">
-   5. Kernel Learning
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../ml/introduction.html">2. Introduction to Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ml/regression.html">3. Regression &amp; Model Assessment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ml/classification.html">4. Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ml/kernel.html">5. Kernel Learning</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  C. Deep Learning
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">C. Deep Learning</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="introduction.html">
-   6. Deep Learning Overview
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="layers.html">
-   7. Standard Layers
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="gnn.html">
-   8. Graph Neural Networks
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   9. Input Data &amp; Equivariances
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Equivariant.html">
-   10. Equivariant Neural Networks
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="xai.html">
-   11. Explaining Predictions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="attention.html">
-   12. Attention Layers
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="NLP.html">
-   13. Deep Learning on Sequences
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="VAE.html">
-   14. Variational Autoencoder
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="flows.html">
-   15. Normalizing Flows
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">6. Deep Learning Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="layers.html">7. Standard Layers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gnn.html">8. Graph Neural Networks</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">9. Input Data &amp; Equivariances</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Equivariant.html">10. Equivariant Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xai.html">11. Explaining Predictions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="attention.html">12. Attention Layers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NLP.html">13. Deep Learning on Sequences</a></li>
+<li class="toctree-l1"><a class="reference internal" href="VAE.html">14. Variational Autoencoder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flows.html">15. Normalizing Flows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="molnets.html">16. Modern Molecular NNs</a></li>
+
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  D. Applications
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">D. Applications</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../applied/QM9.html">
-   16. Predicting DFT Energies with GNNs
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../applied/MolGenerator.html">
-   17. Generative RNN in Browser
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../applied/QM9.html">17. Predicting DFT Energies with GNNs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../applied/MolGenerator.html">18. Generative RNN in Browser</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  E. Contributed Chapters
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">E. Contributed Chapters</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="Hyperparameter_tuning.html">
-   18. Hyperparameter Tuning
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../applied/e3nn_traj.html">
-   19. Equivariant Neural Network for Predicting Trajectories
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="pretraining.html">
-   20. Pretraining
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../applied/e3nn_traj.html">19. Equivariant Neural Network for Predicting Trajectories</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pretraining.html">20. Pretraining</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  F. Appendix
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">F. Appendix</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../style.html">
-   21. Style Guide
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../changelog.html">
-   22. Changelog
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  G. In Progress
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="molnets.html">
-   23. Modern Molecular NNs
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../style.html">21. Style Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">22. Changelog</a></li>
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            <script async defer src="https://api.dmol.pub/latest.js"></script><noscript><img src="https://api.dmol.pub/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript> By <a href="https://twitter.com/andrewwhite01">Andrew White</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
-</div>
-
-
-          
-
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
   
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://colab.research.google.com/github/whitead/dmol-book/blob/master/dl/data.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Colab"
->
   
-
-<span class="headerbtn__icon-container">
-  
-    <img src="../_static/images/logo_colab.png">
-  </span>
-<span class="headerbtn__text-container">Colab</span>
-</a>
-
-      </li>
-      
-    </ul>
+  <div class="sidebar-primary-items__end sidebar-primary__section">
   </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/whitead/dmol-book/blob/master/dl/data.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
 </div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/whitead/dmol-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/whitead/dmol-book/issues/new?title=Issue%20on%20page%20%2Fdl/data.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/dl/data.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
 
 <button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/whitead/dmol-book"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
+`);
+</script>
 
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
 
-      </li>
-      
-      <li>
-        <a href="https://github.com/whitead/dmol-book/issues/new?title=Issue%20on%20page%20%2Fdl/data.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../_sources/dl/data.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.ipynb</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
 </button>
-
-      </li>
+</div></div>
       
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
+    </div>
   
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
-
-    </div>
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#equivariances">
-   9.1. Equivariances
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#equivariances-of-coordinates">
-   9.2. Equivariances of Coordinates
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#constructing-equivariant-models">
-   9.3. Constructing Equivariant Models
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#matrix-determinant">
-     9.3.1. Matrix Determinant
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#eigendecomposition">
-     9.3.2. Eigendecomposition
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#reductions">
-     9.3.3. Reductions
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#pairwise-distance">
-     9.3.4. Pairwise Distance
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#angles">
-     9.3.5. Angles
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#convolutional-layers">
-     9.3.6. Convolutional Layers
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#atom-centered-symmetry-functions">
-     9.3.7. Atom-centered Symmetry Functions
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#trajectory-alignment">
-     9.3.8. Trajectory Alignment
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#molecular-descriptors">
-     9.3.9. Molecular Descriptors
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#examples">
-   9.4. Examples
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#running-this-notebook">
-   9.5. Running This Notebook
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#no-equivariances">
-     9.5.1. No equivariances
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#permutation-invariant">
-     9.5.2. Permutation Invariant
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#translation-invariant">
-     9.5.3. Translation Invariant
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#rotation-invariant">
-     9.5.4. Rotation Invariant
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#trajectory-alignment-example">
-   9.6. Trajectory Alignment Example
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#using-unsupervised-methods-for-alignment">
-     9.6.1. Using Unsupervised Methods for Alignment
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#distance-features">
-   9.7. Distance Features
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#repeating">
-     9.7.1. Repeating
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#binning">
-     9.7.2. Binning
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#radial-basis-functions">
-     9.7.3. Radial Basis Functions
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#sub-nn">
-     9.7.4. Sub NN
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#chapter-summary">
-   9.8. Chapter Summary
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#cited-references">
-   9.9. Cited References
-  </a>
- </li>
-</ul>
-
-    </nav>
 </div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Input Data & Equivariances</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#equivariances">
-   9.1. Equivariances
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#equivariances-of-coordinates">
-   9.2. Equivariances of Coordinates
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#constructing-equivariant-models">
-   9.3. Constructing Equivariant Models
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#matrix-determinant">
-     9.3.1. Matrix Determinant
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#eigendecomposition">
-     9.3.2. Eigendecomposition
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#reductions">
-     9.3.3. Reductions
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#pairwise-distance">
-     9.3.4. Pairwise Distance
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#angles">
-     9.3.5. Angles
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#convolutional-layers">
-     9.3.6. Convolutional Layers
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#atom-centered-symmetry-functions">
-     9.3.7. Atom-centered Symmetry Functions
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#trajectory-alignment">
-     9.3.8. Trajectory Alignment
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#molecular-descriptors">
-     9.3.9. Molecular Descriptors
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#examples">
-   9.4. Examples
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#running-this-notebook">
-   9.5. Running This Notebook
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#no-equivariances">
-     9.5.1. No equivariances
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#permutation-invariant">
-     9.5.2. Permutation Invariant
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#translation-invariant">
-     9.5.3. Translation Invariant
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#rotation-invariant">
-     9.5.4. Rotation Invariant
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#trajectory-alignment-example">
-   9.6. Trajectory Alignment Example
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#using-unsupervised-methods-for-alignment">
-     9.6.1. Using Unsupervised Methods for Alignment
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#distance-features">
-   9.7. Distance Features
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#repeating">
-     9.7.1. Repeating
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#binning">
-     9.7.2. Binning
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#radial-basis-functions">
-     9.7.3. Radial Basis Functions
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#sub-nn">
-     9.7.4. Sub NN
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#chapter-summary">
-   9.8. Chapter Summary
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#cited-references">
-   9.9. Cited References
-  </a>
- </li>
-</ul>
+              
+              
 
-                        </nav>
-                    </div>
-                </div>
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Input Data & Equivariances</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
             </div>
-            <main id="main-content" role="main">
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#equivariances">9.1. Equivariances</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#equivariances-of-coordinates">9.2. Equivariances of Coordinates</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constructing-equivariant-models">9.3. Constructing Equivariant Models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-determinant">9.3.1. Matrix Determinant</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eigendecomposition">9.3.2. Eigendecomposition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reductions">9.3.3. Reductions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pairwise-distance">9.3.4. Pairwise Distance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#angles">9.3.5. Angles</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convolutional-layers">9.3.6. Convolutional Layers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#atom-centered-symmetry-functions">9.3.7. Atom-centered Symmetry Functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trajectory-alignment">9.3.8. Trajectory Alignment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#molecular-descriptors">9.3.9. Molecular Descriptors</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">9.4. Examples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-this-notebook">9.5. Running This Notebook</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#no-equivariances">9.5.1. No equivariances</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#permutation-invariant">9.5.2. Permutation Invariant</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#translation-invariant">9.5.3. Translation Invariant</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rotation-invariant">9.5.4. Rotation Invariant</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trajectory-alignment-example">9.6. Trajectory Alignment Example</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-unsupervised-methods-for-alignment">9.6.1. Using Unsupervised Methods for Alignment</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distance-features">9.7. Distance Features</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#repeating">9.7.1. Repeating</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#binning">9.7.2. Binning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#radial-basis-functions">9.7.3. Radial Basis Functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sub-nn">9.7.4. Sub NN</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-summary">9.8. Chapter Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cited-references">9.9. Cited References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
                 
-              <div>
-                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
   <section class="tex2jax_ignore mathjax_ignore" id="input-data-equivariances">
-<h1><span class="section-number">9. </span>Input Data &amp; Equivariances<a class="headerlink" href="#input-data-equivariances" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">9. </span>Input Data &amp; Equivariances<a class="headerlink" href="#input-data-equivariances" title="Link to this heading">#</a></h1>
 <p>Molecular graphs and structures (xyz coordinates) are the fundamental features in molecules and materials. As discussed, often these are converted into <em>molecular descriptors</em> or some other representation. Why is that? Why can we not work with the data directly? For example, let’s say we have a butane molecule and would like to predict its potential energy from its positions. You could train a linear model <span class="math notranslate nohighlight">\(\hat{E}\)</span> that predicts energy</p>
 <div class="math notranslate nohighlight">
 \[
 \vec{x} = \textrm{flatten}(\textbf{X})
 \]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-4b43a0ff-1ca8-41fe-be58-2ad2682f5351">
-<span class="eqno">(9.1)<a class="headerlink" href="#equation-4b43a0ff-1ca8-41fe-be58-2ad2682f5351" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-bf52b4d8-e654-4a87-9af1-dce496ff5d26">
+<span class="eqno">(9.1)<a class="headerlink" href="#equation-bf52b4d8-e654-4a87-9af1-dce496ff5d26" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \hat{E} = \vec{x}\cdot\vec{w} + b
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\textbf{X}\)</span> is <span class="math notranslate nohighlight">\(N\)</span> (14 atoms) <span class="math notranslate nohighlight">\(\times\)</span> <span class="math notranslate nohighlight">\(3\)</span> (xyz coordinates) matrix containing positions, <span class="math notranslate nohighlight">\(\vec{x}\)</span> is a flattened length <span class="math notranslate nohighlight">\(3N\)</span> vector, <span class="math notranslate nohighlight">\(\vec{w}\)</span> is a trainable <span class="math notranslate nohighlight">\(3N\)</span> length vector, and <span class="math notranslate nohighlight">\(b\)</span> is a trainable constant. So far, this is all superficially reasonable – <strong>but do not actually use this model, it is wrong in a few ways</strong>. Now what if I translate each <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span>, <span class="math notranslate nohighlight">\(z\)</span> coordinate by -10:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-80e0af89-3112-4356-a07b-4da5013297ef">
-<span class="eqno">(9.2)<a class="headerlink" href="#equation-80e0af89-3112-4356-a07b-4da5013297ef" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-2e94943e-fb8f-4abb-afd3-7b14fea55260">
+<span class="eqno">(9.2)<a class="headerlink" href="#equation-2e94943e-fb8f-4abb-afd3-7b14fea55260" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \left(\vec{x} - 10\cdot\vec{1}\right)\cdot\vec{w} + b =  \vec{x}\cdot\vec{w} + b - 10\sum\vec{w} = \hat{E} - 10 \sum \vec{w}
 \end{equation}\]</div>
 <p>We know the energy should not change if we translate all the coordinates equally – the molecule is not changing conformations. However, our linear regression will change by <span class="math notranslate nohighlight">\( - 10 \sum \vec{w}\)</span>. We have accidentally made our model sensitive to the origin of our coordinate system, which is not physical. This is <strong>translational variance</strong> – our model changes when we translate the coordinates. I made this word up by the way, no one says that; but it’s just easier to type out than “not translational invariant.” We want our models to be insensitive to this — <strong>translationally invariant.</strong></p>
@@ -845,16 +537,16 @@ title="Print to PDF"
 <p>You could teach your model to learn permutation variance of left/right in this example, either by making your training data contain multiple orderings of <span class="math notranslate nohighlight">\(\textbf{X}\)</span> or somehow making your <span class="math notranslate nohighlight">\(\textbf{W}\)</span> be symmetric. You can accomplish this via data augmentation. However, this is inefficient because the number of permutations you want to train the model to ignore is combinatorially large.</p>
 </aside>
 <section id="equivariances">
-<h2><span class="section-number">9.1. </span>Equivariances<a class="headerlink" href="#equivariances" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">9.1. </span>Equivariances<a class="headerlink" href="#equivariances" title="Link to this heading">#</a></h2>
 <p>Models that work with molecules should be permutation equivariant if they are outputting a per-atom or per-bond quantity. Permutation equivariant means that if you rearrange the order of atoms, the output changes in the same way. For example, if you’re predicting partial charge per atom <span class="math notranslate nohighlight">\(\vec{y} = f(\textbf{X})\)</span> where <span class="math notranslate nohighlight">\( f(\textbf{X})\)</span> is our model function. If you rearrange <span class="math notranslate nohighlight">\(\textbf{X}\)</span>, you expect the <span class="math notranslate nohighlight">\(\vec{y}\)</span> to rearrange to match that. Let’s try to state this with an equation. Consider <span class="math notranslate nohighlight">\(\mathcal{P}_{34}\)</span> to be the <em>permutation operator</em>. It swaps indices 3 and 4 in axis 0 of a tensor. Then a permutation equivariant model equation should have:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c3a20c89-8ce9-47a8-a229-1b54da320f86">
-<span class="eqno">(9.3)<a class="headerlink" href="#equation-c3a20c89-8ce9-47a8-a229-1b54da320f86" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-06e51586-cf8d-4ef2-b709-8dee54abfa68">
+<span class="eqno">(9.3)<a class="headerlink" href="#equation-06e51586-cf8d-4ef2-b709-8dee54abfa68" title="Permalink to this equation">#</a></span>\[\begin{equation}
     f\left(\mathcal{P}_{ij}\left[\textbf{X}\right]\right) = \mathcal{P}_{ij}\left[\vec{y}\right], \quad \forall i,j
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(i,j\)</span> are indices of <span class="math notranslate nohighlight">\(\textbf{X}\)</span> (atom indices). For example, consider <span class="math notranslate nohighlight">\(f(\textbf{X})\)</span> to predict partial charge given a molecule. If the input is water, our input atoms could be arranged HOH and <span class="math notranslate nohighlight">\(f(\textbf{X}) = (0.3, -0.6, 0.3)\)</span>. Now if we swap atoms 0 and 1, our input is arranged OHH. If our function is permutation equivariant, then it should output <span class="math notranslate nohighlight">\(f\left(\mathcal{P}_{01}\left[\textbf{X}\right]\right) =  \mathcal{P}_{01}\left[\vec{y}\right] = (-0.6, 0.3, 0.3)\)</span>.</p>
 <p>You can find a more general form of permutation equivariance in <span id="id1">[<a class="reference internal" href="#id64" title="Nathaniel Thomas, Tess Smidt, Steven Kearnes, Lusann Yang, Li Li, Kai Kohlhoff, and Patrick Riley. Tensor field networks: rotation-and translation-equivariant neural networks for 3d point clouds. arXiv preprint arXiv:1802.08219, 2018.">TSK+18</a>]</span>. Now what happens if we output a scalar like energy? Then our permutation operator does nothing:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0e498842-410a-4e0d-8111-5b42b8b36a77">
-<span class="eqno">(9.4)<a class="headerlink" href="#equation-0e498842-410a-4e0d-8111-5b42b8b36a77" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-42b7498f-bca5-4a15-a7c6-8085a3ce6cee">
+<span class="eqno">(9.4)<a class="headerlink" href="#equation-42b7498f-bca5-4a15-a7c6-8085a3ce6cee" title="Permalink to this equation">#</a></span>\[\begin{equation}
     f\left(\mathcal{P}_{ij}\left[\textbf{X}\right]\right) = \mathcal{P}_{ij}\left[\hat{E}\right] = \hat{E}
 \end{equation}\]</div>
 <p>we call this case a <strong>permutation invariance</strong>.</p>
@@ -868,106 +560,107 @@ title="Print to PDF"
 </div>
 </section>
 <section id="equivariances-of-coordinates">
-<h2><span class="section-number">9.2. </span>Equivariances of Coordinates<a class="headerlink" href="#equivariances-of-coordinates" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">9.2. </span>Equivariances of Coordinates<a class="headerlink" href="#equivariances-of-coordinates" title="Link to this heading">#</a></h2>
 <p>When we work with molecular coordinates as features we need to be a bit more careful in distinguishing between the “features” that might be element identity and those which specify the location in space. This kind of data is referred to as <strong>point clouds</strong> in computer science. Let’s break our features into <span class="math notranslate nohighlight">\((\vec{r}, \vec{x})\)</span> where <span class="math notranslate nohighlight">\(\vec{r}\)</span> is the location of the atom/point and <span class="math notranslate nohighlight">\(\vec{x}\)</span> are its features (e.g., element, charge, spin, etc.). Similarly, we may have labels at each point so that we write our labels as <span class="math notranslate nohighlight">\((\vec{r}', \vec{y})\)</span>. The label might be direction <span class="math notranslate nohighlight">\(\vec{r}'\)</span> and force magnitude <span class="math notranslate nohighlight">\(y\)</span> or perhaps a field at <span class="math notranslate nohighlight">\(\vec{r}'\)</span> with vectors <span class="math notranslate nohighlight">\(\vec{y}\)</span>. You may not have <span class="math notranslate nohighlight">\(\vec{r}'\)</span> like if you’re predicting energy. It may be that <span class="math notranslate nohighlight">\(\vec{r} = \vec{r}'\)</span>. With this notation, we can write out <strong>translation equivariance</strong> as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7e525c65-425a-4da1-804e-0a9df05a4edc">
-<span class="eqno">(9.5)<a class="headerlink" href="#equation-7e525c65-425a-4da1-804e-0a9df05a4edc" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-28a4016e-b539-4ea4-bf11-8e85c41dd066">
+<span class="eqno">(9.5)<a class="headerlink" href="#equation-28a4016e-b539-4ea4-bf11-8e85c41dd066" title="Permalink to this equation">#</a></span>\[\begin{equation}
     f\left(\vec{r} + \vec{t}, \vec{x}\right) = (\vec{r}' + \vec{t}, \vec{y}), \quad  \forall\vec{t}
 \end{equation}\]</div>
 <p>You can also write this out if you have a matrix of atom positions (like a molecule):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-fda53ba4-706a-4342-981a-57ac56434b52">
-<span class="eqno">(9.6)<a class="headerlink" href="#equation-fda53ba4-706a-4342-981a-57ac56434b52" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-3dc18a27-b4f6-4288-b22c-ca2ecbf627b5">
+<span class="eqno">(9.6)<a class="headerlink" href="#equation-3dc18a27-b4f6-4288-b22c-ca2ecbf627b5" title="Permalink to this equation">#</a></span>\[\begin{equation}
     f\left(\textbf{R} + \vec{t}, \textbf{X}\right) = (\textbf{R}' + \vec{t}, \vec{y}_i), \quad  \forall\vec{t}
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\textbf{R}\)</span> is the matrix of all position vectors <span class="math notranslate nohighlight">\(\vec{r}_i\)</span>. In the case that you do not have output coordinates <span class="math notranslate nohighlight">\(\vec{r}'\)</span>, then it becomes:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-250ebd25-b4fe-474d-8671-0ad05954ccb4">
-<span class="eqno">(9.7)<a class="headerlink" href="#equation-250ebd25-b4fe-474d-8671-0ad05954ccb4" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-7d24b397-0eed-4725-bfe4-d970effbb4b3">
+<span class="eqno">(9.7)<a class="headerlink" href="#equation-7d24b397-0eed-4725-bfe4-d970effbb4b3" title="Permalink to this equation">#</a></span>\[\begin{equation}
     f\left(\textbf{R} + \vec{t}, \textbf{X}\right) = \vec{y}_i, \quad  \forall\vec{t}
 \end{equation}\]</div>
 <p>which we call <strong>translation invariance.</strong> It’s important to note that these equations do not apply to some specific <span class="math notranslate nohighlight">\(\vec{t}\)</span>, but any <span class="math notranslate nohighlight">\(\vec{t}\)</span>.</p>
 <p><strong>Rotational equivariance</strong> can be similarly defined. Consider <span class="math notranslate nohighlight">\(\mathcal{R}\)</span> to be a rotation operator (e.g., a quaternion). Then our rotation equivariance equation is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-76989953-06a0-408b-9678-686fe83b82db">
-<span class="eqno">(9.8)<a class="headerlink" href="#equation-76989953-06a0-408b-9678-686fe83b82db" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-0ab58660-75b3-4eee-abd1-09a11dfb8080">
+<span class="eqno">(9.8)<a class="headerlink" href="#equation-0ab58660-75b3-4eee-abd1-09a11dfb8080" title="Permalink to this equation">#</a></span>\[\begin{equation}
     f\left(\mathcal{R}\left[\textbf{R}\right], \textbf{X}\right) = (\mathcal{R}\left[\textbf{R}'\right], \vec{y}_i), \quad  \forall\mathcal{R}
 \end{equation}\]</div>
 <p>an example might be again that <span class="math notranslate nohighlight">\((\textbf{R}', \vec{y}_i)\)</span> defines some field and our equivariance says that if we rotate our input points, our output points will obey the same rotation. Again, we can also have <strong>rotation invariance</strong> if our model does not output <span class="math notranslate nohighlight">\(\textbf{R}'\)</span>.</p>
 </section>
 <section id="constructing-equivariant-models">
-<h2><span class="section-number">9.3. </span>Constructing Equivariant Models<a class="headerlink" href="#constructing-equivariant-models" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">9.3. </span>Constructing Equivariant Models<a class="headerlink" href="#constructing-equivariant-models" title="Link to this heading">#</a></h2>
 <p>There has been some work to unify equivariances into a single “layer” type so that you can just pick what equivariances you want like you would a hyperparameter <span id="id2">[<a class="reference internal" href="#id64" title="Nathaniel Thomas, Tess Smidt, Steven Kearnes, Lusann Yang, Li Li, Kai Kohlhoff, and Patrick Riley. Tensor field networks: rotation-and translation-equivariant neural networks for 3d point clouds. arXiv preprint arXiv:1802.08219, 2018.">TSK+18</a>, <a class="reference internal" href="#id65" title="Maurice Weiler, Mario Geiger, Max Welling, Wouter Boomsma, and Taco S Cohen. 3d steerable cnns: learning rotationally equivariant features in volumetric data. In Advances in Neural Information Processing Systems, 10381–10392. 2018.">WGW+18</a>]</span>. The chapter <a class="reference internal" href="Equivariant.html"><span class="doc">Equivariant Neural Networks</span></a> covers these and a recent review may be found in <span id="id3">[<a class="reference internal" href="#id85" title="Carlos Esteves. Theoretical aspects of group equivariant neural networks. arXiv preprint arXiv:2004.05154, 2020.">Est20</a>]</span>. A popular implementation is <a class="reference external" href="https://github.com/e3nn/e3nn">available here</a>. A recent application in molecules was in predicting dipole moments, a great example of where rotation invariance would fail because dipole moments should rotate the same way when the molecule rotates<span id="id4">[<a class="reference internal" href="#id92" title="Benjamin Kurt Miller, Mario Geiger, Tess E Smidt, and Frank Noé. Relevance of rotationally equivariant convolutions for predicting molecular properties. arXiv preprint arXiv:2008.08461, 2020.">MGSNoe20</a>]</span>.</p>
 <p>If you do not need full equivariances, you can often use a data transformation to make the model invariant regardless of its architecture. Some of the common transforms are summarized in the table below and you can find a much more detailed discussion of data transformations in Musil et al. <span id="id5">[<a class="reference internal" href="#id108" title="Felix Musil, Andrea Grisafi, Albert P. Bartók, Christoph Ortner, Gábor Csányi, and Michele Ceriotti. Physics-inspired structural representations for molecules and materials. arXiv preprint arXiv:2101.04673, 2021.">MGB+21</a>]</span>. The list below omits <a class="reference external" href="https://en.wikipedia.org/wiki/Data_augmentation">data augmentation</a> where you try to teach your model these invariances through training — which is a common and effective strategy in image deep learning. Alternatively, if your invariants are finite (e.g., only 90 degree rotations or you have small permutation invariant sets) you can just apply each possible transformation (rotation/permutation) and average the results to make a quick and easy invariant network<span id="id6">[<a class="reference internal" href="gnn.html#id115" title="Manzil Zaheer, Satwik Kottur, Siamak Ravanbakhsh, Barnabas Poczos, Russ R Salakhutdinov, and Alexander J Smola. Deep sets. In Advances in neural information processing systems, 3391–3401. 2017.">ZKR+17</a>]</span>. That is sometimes called <strong>test augmentation</strong>.</p>
-<table class="colwidths-auto table">
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
-<tr class="row-odd"><th class="text-align:left head"><p>Data Transformation</p></th>
-<th class="text-align:right head"><p>Equivariance</p></th>
+<tr class="row-odd"><th class="head text-left"><p>Data Transformation</p></th>
+<th class="head text-right"><p>Equivariance</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-align:left"><p>Matrix Determinant</p></td>
-<td class="text-align:right"><p>Permutation Invariance</p></td>
+<tr class="row-even"><td class="text-left"><p>Matrix Determinant</p></td>
+<td class="text-right"><p>Permutation Invariance</p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:left"><p>Eigendecomposition</p></td>
-<td class="text-align:right"><p>Permutation Invariance</p></td>
+<tr class="row-odd"><td class="text-left"><p>Eigendecomposition</p></td>
+<td class="text-right"><p>Permutation Invariance</p></td>
 </tr>
-<tr class="row-even"><td class="text-align:left"><p>Reduction (sum, mean)</p></td>
-<td class="text-align:right"><p>Permutation Invariance</p></td>
+<tr class="row-even"><td class="text-left"><p>Reduction (sum, mean)</p></td>
+<td class="text-right"><p>Permutation Invariance</p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:left"><p>Pairwise Vector/Distance</p></td>
-<td class="text-align:right"><p>Translation/Rotation Invariance</p></td>
+<tr class="row-odd"><td class="text-left"><p>Pairwise Vector/Distance</p></td>
+<td class="text-right"><p>Translation/Rotation Invariance</p></td>
 </tr>
-<tr class="row-even"><td class="text-align:left"><p>Angles</p></td>
-<td class="text-align:right"><p>Translation/Rotation Invariance</p></td>
+<tr class="row-even"><td class="text-left"><p>Angles</p></td>
+<td class="text-right"><p>Translation/Rotation Invariance</p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:left"><p>Atom-centered Symmetry Functions</p></td>
-<td class="text-align:right"><p>Rotation/Translation Invariance</p></td>
+<tr class="row-odd"><td class="text-left"><p>Atom-centered Symmetry Functions</p></td>
+<td class="text-right"><p>Rotation/Translation Invariance</p></td>
 </tr>
-<tr class="row-even"><td class="text-align:left"><p>Trajectory Alignment</p></td>
-<td class="text-align:right"><p>Rotation/Translation Invariance</p></td>
+<tr class="row-even"><td class="text-left"><p>Trajectory Alignment</p></td>
+<td class="text-right"><p>Rotation/Translation Invariance</p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:left"><p>Molecular Descriptors</p></td>
-<td class="text-align:right"><p>All invariant</p></td>
+<tr class="row-odd"><td class="text-left"><p>Molecular Descriptors</p></td>
+<td class="text-right"><p>All invariant</p></td>
 </tr>
 </tbody>
 </table>
+</div>
 <section id="matrix-determinant">
-<h3><span class="section-number">9.3.1. </span>Matrix Determinant<a class="headerlink" href="#matrix-determinant" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">9.3.1. </span>Matrix Determinant<a class="headerlink" href="#matrix-determinant" title="Link to this heading">#</a></h3>
 <p>A matrix determinant is not quite permutation invariant. If you swap two rows in a matrix, it makes the determinant change signs. However, you can easily just square the determinant to remove the sign change. How would you use a determinant in a model? It’s just a building block. You could build a matrix of all neighbor features in a molecular graph and then do a determinant to arrive at a permutation invariant output. The determinant has two major disadvantages: (i) it outputs a single number (not that expressive) and (ii) it’s really expensive <span class="math notranslate nohighlight">\(O(n^3)\)</span>. Thus you won’t see a determinant too frequently in deep learning.</p>
 </section>
 <section id="eigendecomposition">
-<h3><span class="section-number">9.3.2. </span>Eigendecomposition<a class="headerlink" href="#eigendecomposition" title="Permalink to this headline">#</a></h3>
-<p>The eigendecomposition is when you factorize a matrix into its eigenvalues and eigenvectors. The (sorted) eigenvalues of a matrix are permutation invariant. Compared with the determinant, you get more eigenvalues from a matrix than determinants so there is less loss of information. Computing eigenvalues is still expensive at <span class="math notranslate nohighlight">\(O(n^3)\)</span> and they are not differentiable. Nevertheless, you will see this strategy in kernel learning where you do not need to propagate derivatives through the kernel. One important application of this is in some of the early work on quantum machine learning <span id="id7">[<a class="reference internal" href="../ml/kernel.html#id18" title="Matthias Rupp, Alexandre Tkatchenko, Klaus-Robert Müller, and O Anatole Von Lilienfeld. Fast and accurate modeling of molecular atomization energies with machine learning. Physical review letters, 108(5):058301, 2012.">RTMullerVL12</a>]</span>.</p>
+<h3><span class="section-number">9.3.2. </span>Eigendecomposition<a class="headerlink" href="#eigendecomposition" title="Link to this heading">#</a></h3>
+<p>The eigendecomposition is when you factorize a matrix into its eigenvalues and eigenvectors. The (sorted) eigenvalues of a matrix are permutation invariant. Compared with the determinant, you get more eigenvalues from a matrix than determinants so there is less loss of information. Computing eigenvalues is still expensive at <span class="math notranslate nohighlight">\(O(n^3)\)</span> and they are not differentiable. Nevertheless, you will see this strategy in kernel learning where you do not need to propagate derivatives through the kernel. One important application of this is in some of the early work on quantum machine learning <span id="id7">[<a class="reference internal" href="../ml/kernel.html#id19" title="Matthias Rupp, Alexandre Tkatchenko, Klaus-Robert Müller, and O Anatole Von Lilienfeld. Fast and accurate modeling of molecular atomization energies with machine learning. Physical review letters, 108(5):058301, 2012.">RTMullerVL12</a>]</span>.</p>
 </section>
 <section id="reductions">
-<h3><span class="section-number">9.3.3. </span>Reductions<a class="headerlink" href="#reductions" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">9.3.3. </span>Reductions<a class="headerlink" href="#reductions" title="Link to this heading">#</a></h3>
 <p>An obvious way to remove permutation variance is to just sum over the points or atoms. More generally, you can use any kind of reduction like a mean or product. Like a determinant, this results in a single number or at least removal of an axis. Reductions are fast and differentiable.</p>
 </section>
 <section id="pairwise-distance">
-<h3><span class="section-number">9.3.4. </span>Pairwise Distance<a class="headerlink" href="#pairwise-distance" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">9.3.4. </span>Pairwise Distance<a class="headerlink" href="#pairwise-distance" title="Link to this heading">#</a></h3>
 <p>Using pairwise distances or vectors is the standard solution to translation invariance. Rarely are we actually that concerned with translational equivariance. If using pairwise vectors between atoms instead of the xyz coordinates, this naturally removes the choice of origin and thus makes the model translation invariant. If we go further and use pairwise distance instead of vectors, this also removes the effect of rotations giving a rotation invariance. This is fast, differentiable, and the usual approach to add translation and rotation invariance.</p>
 </section>
 <section id="angles">
-<h3><span class="section-number">9.3.5. </span>Angles<a class="headerlink" href="#angles" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">9.3.5. </span>Angles<a class="headerlink" href="#angles" title="Link to this heading">#</a></h3>
 <p>Angles are rotation, translation, and scale invariant. You can define angles any way, but often they are done between consecutive bonds (3 atoms total). Combining angles and pairwise distances (along bonds only) are called <strong>internal coordinates.</strong></p>
 </section>
 <section id="convolutional-layers">
-<h3><span class="section-number">9.3.6. </span>Convolutional Layers<a class="headerlink" href="#convolutional-layers" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">9.3.6. </span>Convolutional Layers<a class="headerlink" href="#convolutional-layers" title="Link to this heading">#</a></h3>
 <p>Convolutional layers are well-known to be translationally equivariant. Remember that they work in 3D as well, so they can be an input layer if translational equivariance is desired. However, convolutions work on pixels or voxels in 3D, so you must first bin your coordinates into a voxel grid. See Chew et al. for an example <span id="id8">[<a class="reference internal" href="#id109" title="Alex K Chew, Shengli Jiang, Weiqi Zhang, Victor M Zavala, and Reid C Van Lehn. Fast predictions of liquid-phase acid-catalyzed reaction rates using molecular dynamics simulations and convolutional neural networks. Chemical Science, 11(46):12464–12476, 2020.">CJZ+20</a>]</span>.</p>
 </section>
 <section id="atom-centered-symmetry-functions">
-<h3><span class="section-number">9.3.7. </span>Atom-centered Symmetry Functions<a class="headerlink" href="#atom-centered-symmetry-functions" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">9.3.7. </span>Atom-centered Symmetry Functions<a class="headerlink" href="#atom-centered-symmetry-functions" title="Link to this heading">#</a></h3>
 <p>These are a large class of functions described by Behler<span id="id9">[<a class="reference internal" href="#id67" title="Jörg Behler. Atom-centered symmetry functions for constructing high-dimensional neural network potentials. The Journal of chemical physics, 134(7):074106, 2011.">Beh11</a>]</span> that transform from the input coordinate/features <span class="math notranslate nohighlight">\((\mathbf{R}, \mathbf{X})\)</span>  to a new set of features <span class="math notranslate nohighlight">\(\mathbf{X}'\)</span> that obey rotational and translational symmetry. This makes them translational and rotationally invariant. Behler didn’t propose a single function to get these features, but instead explored the choices and theory. Bartók et al. <span id="id10">[<a class="reference internal" href="#id66" title="Albert P. Bartók, Risi Kondor, and Gábor Csányi. On representing chemical environments. Phys. Rev. B, 87:184115, May 2013. URL: https://link.aps.org/doi/10.1103/PhysRevB.87.184115, doi:10.1103/PhysRevB.87.184115.">BartokKCsanyi13</a>]</span> provided a specific recipe which is called a SOAP descriptor. These are drop-in replacements for <span class="math notranslate nohighlight">\((\mathbf{R}, \mathbf{X})\)</span> that are translation and rotation invariant but do not lose much information. They are differentiable, although complex to implement.</p>
 </section>
 <section id="trajectory-alignment">
-<h3><span class="section-number">9.3.8. </span>Trajectory Alignment<a class="headerlink" href="#trajectory-alignment" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">9.3.8. </span>Trajectory Alignment<a class="headerlink" href="#trajectory-alignment" title="Link to this heading">#</a></h3>
 <p>One special case is when your points are part of a time-dependent trajectory. This usually implies that the order of the points does not change. Thus, we do not need to worry about permutation invariance. This is the case when analyzing results from a molecular dynamics trajectory, like a dynamic simulation of a protein. One way to make our data translation and rotation invariant in this case is to align it to some reference coordinates. For example, you could always make the center of mass of the trajectory be at the origin. This will make the points translation invariant, because you always center a new set of points. A natural question is if it must be the center of mass? No, because your points are permutation invariant, you could just pick point 0 as the origin. Then if the points are translated, this will be undone when you move the points such that point 0 is the origin. To be more precise, we always apply a centering function <span class="math notranslate nohighlight">\(c\left(\mathbf{R}\right)\)</span> that redefines the origin before processing a set of points. We can also define a rotation function <span class="math notranslate nohighlight">\(r\left(\mathbf{R}\right)\)</span> that will be applied where we align to some definite set of three Euler angles (two vectors). See the example below for this.</p>
 </section>
 <section id="molecular-descriptors">
-<h3><span class="section-number">9.3.9. </span>Molecular Descriptors<a class="headerlink" href="#molecular-descriptors" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">9.3.9. </span>Molecular Descriptors<a class="headerlink" href="#molecular-descriptors" title="Link to this heading">#</a></h3>
 <p>Molecular descriptors are the classic way to convert molecules into translation/rotation/permutation invariant features. There exists 3D descriptors as well that can treat structure. They are also called <strong>fingerprints</strong>. Fingerprints is a broad term for converting a molecular structure to a binary sequence. Commonly, each bit indicates the presence or absence of a specific substructure. We won’t focus on these in this course because they are untrainable and choosing the correct combination of descriptors is an unsolved problem which has no clear process.</p>
 </section>
 </section>
 <section id="examples">
-<h2><span class="section-number">9.4. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">9.4. </span>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h2>
 <p>Let’s demonstrate with some code how to go about creating functions that obey these equivariances. We won’t be training these models because training has no effect on equivariances, but you should train your models if you’re doing learning 😉</p>
 <aside class="margin sidebar">
 <p class="sidebar-title"></p>
@@ -976,7 +669,7 @@ title="Print to PDF"
 <p>I’ll define my butane molecule as a set of coordinates <span class="math notranslate nohighlight">\(\mathbf{R}_i\)</span> and features <span class="math notranslate nohighlight">\(\mathbf{X}_i\)</span>. My features are just one-hot vectors indicating if a particular point is a carbon atom <span class="math notranslate nohighlight">\([1,0]\)</span> or a hydrogen atom <span class="math notranslate nohighlight">\([0,1]\)</span>. In our example, we will just be interested in predicting energy. We will not train our models, so the energy will not be accurate.</p>
 </section>
 <section id="running-this-notebook">
-<h2><span class="section-number">9.5. </span>Running This Notebook<a class="headerlink" href="#running-this-notebook" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">9.5. </span>Running This Notebook<a class="headerlink" href="#running-this-notebook" title="Link to this heading">#</a></h2>
 <p>Click the  <i aria-label="Launch interactive content" class="fas fa-rocket"></i>  above to launch this page as an interactive Google Colab. See details below on installing packages.</p>
 <div class="dropdown admonition tip">
 <p class="admonition-title">Tip</p>
@@ -987,8 +680,13 @@ title="Print to PDF"
 <p>If you find install problems, you can get the latest working versions of packages used in <a class="reference external" href="https://github.com/whitead/dmol-book/blob/main/package/setup.py">this book here</a></p>
 </div>
 <div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
 <span class="n">R_i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
     <span class="p">[</span>
@@ -1043,14 +741,15 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 <section id="no-equivariances">
-<h3><span class="section-number">9.5.1. </span>No equivariances<a class="headerlink" href="#no-equivariances" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">9.5.1. </span>No equivariances<a class="headerlink" href="#no-equivariances" title="Link to this heading">#</a></h3>
 <p>A one-hidden layer dense neural network is an example of a model with no equivariances. To fit our data into this dense layer, we’ll just stack the positions and features into a large input tensor and output energy. We’ll use a tanh as activation, 16 hidden layer dimension, and our output layer has no activation because we’re doing regression to energy. Our weights will always be randomly initialized.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># our 1-hidden layer model</span>
-<span class="k">def</span> <span class="nf">hidden_model</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">w1</span><span class="p">,</span> <span class="n">w2</span><span class="p">,</span> <span class="n">b1</span><span class="p">,</span> <span class="n">b2</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">hidden_model</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">w1</span><span class="p">,</span> <span class="n">w2</span><span class="p">,</span> <span class="n">b1</span><span class="p">,</span> <span class="n">b2</span><span class="p">):</span>
     <span class="c1"># stack into one large input</span>
     <span class="n">i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">r</span><span class="p">,</span> <span class="n">x</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
     <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">i</span> <span class="o">@</span> <span class="n">w1</span> <span class="o">+</span> <span class="n">b1</span><span class="p">)</span>
@@ -1075,7 +774,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-0.15661844175945916
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(-8.136422559605114)
 </pre></div>
 </div>
 </div>
@@ -1088,7 +787,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-2.28169204607694
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(-3.8625060182810547)
 </pre></div>
 </div>
 </div>
@@ -1096,7 +795,7 @@ title="Print to PDF"
 <p>As expected, it is sensitive to translation. I added the vector <span class="math notranslate nohighlight">\((1, 2, 3)\)</span> to all input points and the energy changed. This model is not translation invariant. The choice of <span class="math notranslate nohighlight">\((1,2,3)\)</span> is arbitrary, the model should not change output regardless of the choice of the translation vector if the model is translation invariant. Rotations can be done using the <code class="docutils literal notranslate"><span class="pre">scipy.transformation</span></code> library which takes care of some of the messiness of working with quaternions, which are the operators that perform rotations.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">scipy.spatial.transform</span> <span class="k">as</span> <span class="nn">trans</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">scipy.spatial.transform</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">trans</span>
 
 <span class="c1"># rotate around x coord by 45 degrees</span>
 <span class="n">rot</span> <span class="o">=</span> <span class="n">trans</span><span class="o">.</span><span class="n">Rotation</span><span class="o">.</span><span class="n">from_euler</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="n">degrees</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -1107,8 +806,8 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>No rotation -0.15661844175945916
-Rotated -5.119274714081461
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>No rotation -8.136422559605114
+Rotated -8.708703810256177
 </pre></div>
 </div>
 </div>
@@ -1127,8 +826,8 @@ Rotated -5.119274714081461
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original -0.15661844175945916
-permuted 0.03127964078571854
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original -8.136422559605114
+permuted -10.433652964320718
 </pre></div>
 </div>
 </div>
@@ -1136,12 +835,12 @@ permuted 0.03127964078571854
 <p>Our model is not permutation invariant!</p>
 </section>
 <section id="permutation-invariant">
-<h3><span class="section-number">9.5.2. </span>Permutation Invariant<a class="headerlink" href="#permutation-invariant" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">9.5.2. </span>Permutation Invariant<a class="headerlink" href="#permutation-invariant" title="Link to this heading">#</a></h3>
 <p>We will use a reduction to achieve permutation invariance. All that is needed is to ensure that weights are not a function of our atom number axis and then do a reduction (sum) prior to the output layer. Here is the implementation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># our 1-hidden layer model with perm inv</span>
-<span class="k">def</span> <span class="nf">hidden_model_pi</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">w1</span><span class="p">,</span> <span class="n">w2</span><span class="p">,</span> <span class="n">b1</span><span class="p">,</span> <span class="n">b2</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">hidden_model_pi</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">w1</span><span class="p">,</span> <span class="n">w2</span><span class="p">,</span> <span class="n">b1</span><span class="p">,</span> <span class="n">b2</span><span class="p">):</span>
     <span class="c1"># stack into one large input</span>
     <span class="n">i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">r</span><span class="p">,</span> <span class="n">x</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">i</span> <span class="o">@</span> <span class="n">w1</span> <span class="o">+</span> <span class="n">b1</span><span class="p">)</span>
@@ -1169,8 +868,8 @@ permuted 0.03127964078571854
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original -2.8563726750717713
-permuted -2.8563726750717713
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original -10.619828528887027
+permuted -10.619828528887027
 </pre></div>
 </div>
 </div>
@@ -1178,12 +877,12 @@ permuted -2.8563726750717713
 <p>It is!</p>
 </section>
 <section id="translation-invariant">
-<h3><span class="section-number">9.5.3. </span>Translation Invariant<a class="headerlink" href="#translation-invariant" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">9.5.3. </span>Translation Invariant<a class="headerlink" href="#translation-invariant" title="Link to this heading">#</a></h3>
 <p>The next change we will make is to convert our <span class="math notranslate nohighlight">\(N\times3\)</span> shaped coordinates into <span class="math notranslate nohighlight">\(N\times N\times 3\)</span> pairwise vectors. This gives us translation invariance. This causes an issue because our distance features went from being <span class="math notranslate nohighlight">\(3\)</span> per atom to <span class="math notranslate nohighlight">\(N \times 3\)</span> per atom. Thus we’ve introduced a dependence on atom number in our distance features and that means it’s easy to accidentally break our permutation invariance. We can just sum over this new axis though. Let’s see an implementation:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># our 1-hidden layer model with perm inv, trans inv</span>
-<span class="k">def</span> <span class="nf">hidden_model_pti</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">w1</span><span class="p">,</span> <span class="n">w2</span><span class="p">,</span> <span class="n">b1</span><span class="p">,</span> <span class="n">b2</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">hidden_model_pti</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">w1</span><span class="p">,</span> <span class="n">w2</span><span class="p">,</span> <span class="n">b1</span><span class="p">,</span> <span class="n">b2</span><span class="p">):</span>
     <span class="c1"># compute pairwise distances using broadcasting</span>
     <span class="n">d</span> <span class="o">=</span> <span class="n">r</span> <span class="o">-</span> <span class="n">r</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
     <span class="c1"># stack into one large input of N x N x 5</span>
@@ -1209,10 +908,10 @@ permuted -2.8563726750717713
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original -50.87198674851824
-permuted -50.87198674851826
-translated -50.87198674851826
-rotated -54.67158374882283
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original -143.41816143466133
+permuted -143.4181614346613
+translated -143.41816143466133
+rotated -143.02509967607455
 </pre></div>
 </div>
 </div>
@@ -1220,12 +919,12 @@ rotated -54.67158374882283
 <p>It is now translation and permutation invariant. But not yet rotation invariant.</p>
 </section>
 <section id="rotation-invariant">
-<h3><span class="section-number">9.5.4. </span>Rotation Invariant<a class="headerlink" href="#rotation-invariant" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">9.5.4. </span>Rotation Invariant<a class="headerlink" href="#rotation-invariant" title="Link to this heading">#</a></h3>
 <p>It is a simple change to make it rotationally invariant. We just convert the pairwise vectors into pairwise distances. We’ll use squared distances for simplicity.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># our 1-hidden layer model with perm, trans, rot inv.</span>
-<span class="k">def</span> <span class="nf">hidden_model_ptri</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">w1</span><span class="p">,</span> <span class="n">w2</span><span class="p">,</span> <span class="n">b1</span><span class="p">,</span> <span class="n">b2</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">hidden_model_ptri</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">w1</span><span class="p">,</span> <span class="n">w2</span><span class="p">,</span> <span class="n">b1</span><span class="p">,</span> <span class="n">b2</span><span class="p">):</span>
     <span class="c1"># compute pairwise distances using broadcasting</span>
     <span class="n">d</span> <span class="o">=</span> <span class="n">r</span> <span class="o">-</span> <span class="n">r</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
     <span class="c1"># x^2 + y^2 + z^2 of pairwise vectors</span>
@@ -1260,10 +959,10 @@ rotated -54.67158374882283
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original -207.3246711060532
-permuted -207.32467110605322
-translated -207.3246711060532
-rotated -207.32467110605322
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>original 1049.256280462965
+permuted 1049.256280462965
+translated 1049.256280462965
+rotated 1049.256280462965
 </pre></div>
 </div>
 </div>
@@ -1278,7 +977,7 @@ rotated -207.32467110605322
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>changed -222.58046782961173
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>changed 1088.5982800369843
 </pre></div>
 </div>
 </div>
@@ -1287,7 +986,7 @@ rotated -207.32467110605322
 </section>
 </section>
 <section id="trajectory-alignment-example">
-<h2><span class="section-number">9.6. </span>Trajectory Alignment Example<a class="headerlink" href="#trajectory-alignment-example" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">9.6. </span>Trajectory Alignment Example<a class="headerlink" href="#trajectory-alignment-example" title="Link to this heading">#</a></h2>
 <p>As described above, if you’re working with a trajectory there is no requirement to have permutation equivariance. To achieve translation and rotation invariance, we can align to some fixed points that will be present in all structures (like center of mass). As we’ll see below, trajectory alignment is fraught with issues like rotation ambiguities, unphysical rotations, and creating fictitious covariances between far away points due to alignment. Internal coordinates (pairwise dist, angles) are almost always better. However, trajectory alignment has good scaling properties.</p>
 <p>The movie below shows an example trajectory that we’ll examine. I’ve made it 2D to make it simple to visualize, but the same principles apply to 3D.</p>
 <div>
@@ -1295,14 +994,20 @@ rotated -207.32467110605322
 </div>
 <p>Let’s start by loading the trajectory and defining/testing our centering function. The trajectory is a tensor that is shape <code class="docutils literal notranslate"><span class="pre">time,</span> <span class="pre">point</span> <span class="pre">number,</span> <span class="pre">xy</span> <span class="pre">-&gt;</span> <span class="pre">(2048,</span> <span class="pre">12,</span> <span class="pre">2)</span></code>. I’ll examine two centering functions: align to center of mass and align to point 0 to see what the two look like.</p>
 <div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># new imports</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">urllib</span>
-<span class="kn">import</span> <span class="nn">dmol</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">urllib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">dmol</span>
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1320,18 +1025,18 @@ rotated -207.32467110605322
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/data_31_0.png" src="../_images/data_31_0.png" />
+<img alt="../_images/c996073df204661e966fc6dd238cfbddde8d52c1b7ffcb5355c53713c20ae39a.png" src="../_images/c996073df204661e966fc6dd238cfbddde8d52c1b7ffcb5355c53713c20ae39a.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">center_com</span><span class="p">(</span><span class="n">paths</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">center_com</span><span class="p">(</span><span class="n">paths</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Align paths to COM at each frame&quot;&quot;&quot;</span>
     <span class="n">coms</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">paths</span> <span class="o">-</span> <span class="n">coms</span>
 
 
-<span class="k">def</span> <span class="nf">center_point</span><span class="p">(</span><span class="n">paths</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">center_point</span><span class="p">(</span><span class="n">paths</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Align paths to particle 0&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">paths</span> <span class="o">-</span> <span class="n">paths</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">1</span><span class="p">]</span>
 
@@ -1366,7 +1071,7 @@ rotated -207.32467110605322
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/data_34_0.png" src="../_images/data_34_0.png" />
+<img alt="../_images/729f7790babf41d3482b033c57ef445690ac1ea85e55d5db50733d3b6f4d7445.png" src="../_images/729f7790babf41d3482b033c57ef445690ac1ea85e55d5db50733d3b6f4d7445.png" />
 </div>
 </div>
 <p>The color indicates time. You can see that having no alignment makes the spatial coordinates depend on time implicitly because the points drift over time. Both aligning to COM or point 0 removes this effect. The COM implicitly removes 2 degrees of freedom. Point 0 alignment makes point 0 have no variance (also remove degrees of freedom), which could affect how you design or interpret your model.</p>
@@ -1377,13 +1082,13 @@ rotated -207.32467110605322
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_2drot</span><span class="p">(</span><span class="n">angle</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">make_2drot</span><span class="p">(</span><span class="n">angle</span><span class="p">):</span>
     <span class="n">mats</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">),</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">)],</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">)]])</span>
     <span class="c1"># swap so batch axis is first</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">swapaxes</span><span class="p">(</span><span class="n">mats</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">align_point</span><span class="p">(</span><span class="n">paths</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">align_point</span><span class="p">(</span><span class="n">paths</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Align to 0-1 vector assuming 2D data&quot;&quot;&quot;</span>
     <span class="n">vecs</span> <span class="o">=</span> <span class="n">paths</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">:]</span> <span class="o">-</span> <span class="n">paths</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">:]</span>
     <span class="c1"># find angle to rotate so these are pointed towards pos x</span>
@@ -1394,7 +1099,7 @@ rotated -207.32467110605322
     <span class="k">return</span> <span class="n">paths</span> <span class="o">@</span> <span class="n">rot_mat</span>
 
 
-<span class="k">def</span> <span class="nf">find_principle_axis</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">naxis</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">find_principle_axis</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">naxis</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute single principle axis for points&quot;&quot;&quot;</span>
     <span class="n">inertia</span> <span class="o">=</span> <span class="n">points</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">points</span>
     <span class="n">evals</span><span class="p">,</span> <span class="n">evecs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">inertia</span><span class="p">)</span>
@@ -1403,7 +1108,7 @@ rotated -207.32467110605322
     <span class="k">return</span> <span class="n">evecs</span><span class="p">[:,</span> <span class="n">order</span><span class="p">[:</span><span class="n">naxis</span><span class="p">]]</span><span class="o">.</span><span class="n">T</span>
 
 
-<span class="k">def</span> <span class="nf">align_principle</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="n">axis_finder</span><span class="o">=</span><span class="n">find_principle_axis</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">align_principle</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="n">axis_finder</span><span class="o">=</span><span class="n">find_principle_axis</span><span class="p">):</span>
     <span class="c1"># someone should tell me how to vectorize this in numpy</span>
     <span class="n">vecs</span> <span class="o">=</span> <span class="p">[</span><span class="n">axis_finder</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">paths</span><span class="p">]</span>
     <span class="n">vecs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">vecs</span><span class="p">)</span>
@@ -1445,11 +1150,16 @@ rotated -207.32467110605322
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/data_37_0.png" src="../_images/data_37_0.png" />
+<img alt="../_images/22ed5dd8caad2d14befcc75ef2edd6837d36b5bee7ef28fe3c0dd51548620102.png" src="../_images/22ed5dd8caad2d14befcc75ef2edd6837d36b5bee7ef28fe3c0dd51548620102.png" />
 </div>
 </div>
 <p>You can see how points far away on the chain from 0 have much more variance in the point 0 align, whereas the COM alignment looks better spread. Remember, to apply these methods you must do them to both your training data and any prediction points. Thus, they should be viewed as part of your neural network. We can now check that rotating has no effect on these. The plots below have the trajectory rotated by 1 radian and you can see that both alignment methods have no change (the lines are overlapping).</p>
 <div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rot_paths</span> <span class="o">=</span> <span class="n">paths</span> <span class="o">@</span> <span class="n">make_2drot</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">rot_appaths</span> <span class="o">=</span> <span class="n">align_point</span><span class="p">(</span><span class="n">center_point</span><span class="p">(</span><span class="n">rot_paths</span><span class="p">))</span>
@@ -1478,17 +1188,23 @@ rotated -207.32467110605322
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
-<img alt="../_images/data_39_0.png" src="../_images/data_39_0.png" />
+<img alt="../_images/f63746146b745b8016db06b335f3d5a77e556ccc47ce8293e3eb23de8e8a0d98.png" src="../_images/f63746146b745b8016db06b335f3d5a77e556ccc47ce8293e3eb23de8e8a0d98.png" />
 </div>
 </div>
 <p>Now which method is better? Aligning based on arbitrary points is indeed easier, but it creates an unusual new variance in your features. For example, let’s see what happens if we make a small perturbation to one conformation. The code is hidden for simplicity. We try changing point 1, then point 0, then point 11 to see the effects of perturbations along the chain.</p>
 <div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">NP</span> <span class="o">=</span> <span class="mi">16</span>
 
 
-<span class="k">def</span> <span class="nf">perturb_paths</span><span class="p">(</span><span class="n">perturb_point</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">perturb_paths</span><span class="p">(</span><span class="n">perturb_point</span><span class="p">):</span>
     <span class="n">perturbation</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">paths</span><span class="p">[:</span><span class="n">NP</span><span class="p">])</span>
     <span class="n">perturbation</span><span class="p">[:,</span> <span class="n">perturb_point</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">NP</span><span class="p">)</span>
     <span class="n">test_paths</span> <span class="o">=</span> <span class="n">paths</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">perturbation</span>
@@ -1526,10 +1242,11 @@ rotated -207.32467110605322
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
-<img alt="../_images/data_41_0.png" src="../_images/data_41_0.png" />
-<img alt="../_images/data_41_1.png" src="../_images/data_41_1.png" />
-<img alt="../_images/data_41_2.png" src="../_images/data_41_2.png" />
+<img alt="../_images/ba1f3f9fb82ed2986c024f5ae682ee90bbed7e90b1f9b838c159c12d3ab54d95.png" src="../_images/ba1f3f9fb82ed2986c024f5ae682ee90bbed7e90b1f9b838c159c12d3ab54d95.png" />
+<img alt="../_images/5725b04d754b33604d7e96c96816fb09aea0d152a4aa14be2fde49159c87792d.png" src="../_images/5725b04d754b33604d7e96c96816fb09aea0d152a4aa14be2fde49159c87792d.png" />
+<img alt="../_images/7a1065ca0346c6a2f0a0bdbc8788f2fd960eb640751dba129429a548b8f9d72a.png" src="../_images/7a1065ca0346c6a2f0a0bdbc8788f2fd960eb640751dba129429a548b8f9d72a.png" />
 </div>
 </div>
 <p>As you can see, perturbing one point alters all others after alignment. This makes these transformed features sensitive to noise, especially aligning to point 0 or 1. More importantly, this effect is uneven in the alignment to point 0. This can in-turn make training quite difficult. Of course, neural networks are universal approximators so in theory this should not matter. However, I expect that using the COM alignment approach will give better training because the network will not need to account for this unusual variance structure.</p>
@@ -1546,38 +1263,38 @@ rotated -207.32467110605322
 <p>Some people refer to principle axes finding as a kind of PCA. It is. But when we discuss PCA, we mean identifying the sources of variances across the trajectory, not across points in a single frame. You could do PCA in a single frame and use that to define your trans/rot invariant frame. It’s mathematically equivalent to principle axes finding.</p>
 </aside>
 <section id="using-unsupervised-methods-for-alignment">
-<h3><span class="section-number">9.6.1. </span>Using Unsupervised Methods for Alignment<a class="headerlink" href="#using-unsupervised-methods-for-alignment" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">9.6.1. </span>Using Unsupervised Methods for Alignment<a class="headerlink" href="#using-unsupervised-methods-for-alignment" title="Link to this heading">#</a></h3>
 <p>There are additional methods for aligning trajectories. You could define one frame as the “reference” and find the translation and rotations that best align with that reference. This could give some interpretability to your rotation and translation alignment. A tempting option is to use dimensionality reduction (like PCA), but these are not rotation invariant. This is confusing at first, because remember PCA should remove translation and rotation. It removes it though from the training data and not an arbitrary frame because it examines motion along a trajectory. You can easily see this getting principle components and then trying to align a new frame to them and a rotated version of the new frame. You’ll get different results. Another important consideration is if the unsupervised method can handle new data. Manifold embeddings do not provide a linear transform that can handle new data for inference. Manifold embeddings are also not necessarily rotation invariant or equivariant.</p>
 </section>
 </section>
 <section id="distance-features">
-<h2><span class="section-number">9.7. </span>Distance Features<a class="headerlink" href="#distance-features" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">9.7. </span>Distance Features<a class="headerlink" href="#distance-features" title="Link to this heading">#</a></h2>
 <p>One more topic on parsing data is treating distances. As we saw above, pairwise distance is a wise transformation because it is translation and rotation invariant. However, we may want to sometimes transform this further. One obvious choice is to use <span class="math notranslate nohighlight">\(1 / r\)</span> as the input to our neural network. This is because most properties of atoms (and thus molecules) are affected by their closest nearby atoms. An oxygen nearby a carbon is much more important than an oxygen that is 100 nanometers away. Choosing <span class="math notranslate nohighlight">\(1 / r\)</span> as an input makes it easier for a neural network to train because it encodes this physical insight about local interactions being the most important. Of course, a neural network could learn to turn <span class="math notranslate nohighlight">\(r\)</span> into <span class="math notranslate nohighlight">\(1/r\)</span> because they are universal approximators. Yet this approach means we do not need to waste training data and weights on learning to change <span class="math notranslate nohighlight">\(r\)</span> into <span class="math notranslate nohighlight">\(1 / r\)</span>. <em>This approach will not work on non-local or mildly-non-local effects like electrostatics or multi-scale phenomena.</em></p>
 <p>Another detail on distances is that we often want to “featurize” them; we’d like to go from one a single number like <span class="math notranslate nohighlight">\(r = 3.2\)</span> to a vector of reals. Why? Well that’s just how neural networks learn. Hidden-layers need to have more than 1 dimension to be expressive enough to model any function. This seems like an obvious point though: if you used <span class="math notranslate nohighlight">\(r\)</span> in a neural network it would obviously get larger as it goes through hidden layers. However, there are a few “standard” ways that people like to do this process. There are valid reasons, like making it smoothly differentiable, that you might choose one of these special “featurizing” functions.</p>
 <section id="repeating">
-<h3><span class="section-number">9.7.1. </span>Repeating<a class="headerlink" href="#repeating" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">9.7.1. </span>Repeating<a class="headerlink" href="#repeating" title="Link to this heading">#</a></h3>
 <p>The first approach is to just repeat <span class="math notranslate nohighlight">\(r\)</span> up to the desired hidden dimension. This is representable as a dense neural network with no activation.</p>
 </section>
 <section id="binning">
-<h3><span class="section-number">9.7.2. </span>Binning<a class="headerlink" href="#binning" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">9.7.2. </span>Binning<a class="headerlink" href="#binning" title="Link to this heading">#</a></h3>
 <p>As explored in Gilmer et al. <span id="id13">[<a class="reference internal" href="gnn.html#id77" title="Justin Gilmer, Samuel S Schoenholz, Patrick F Riley, Oriol Vinyals, and George E Dahl. Neural message passing for quantum chemistry. arXiv preprint arXiv:1704.01212, 2017.">GSR+17</a>]</span> and others, you can bin your distances to be a one-hot vector. Essentially, you histogram <span class="math notranslate nohighlight">\(r\)</span> into fixed bins so that you only have one bin being “hot”. Each bin will represent a segment of positions (e.g., 4.5-5.0). This has discontinuous derivatives with respect to distance and is rarely used.</p>
 </section>
 <section id="radial-basis-functions">
-<h3><span class="section-number">9.7.3. </span>Radial Basis Functions<a class="headerlink" href="#radial-basis-functions" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">9.7.3. </span>Radial Basis Functions<a class="headerlink" href="#radial-basis-functions" title="Link to this heading">#</a></h3>
 <p>Radial basis functions are a commonly used procedure for converting a scalar into a fixed number of features and were first used in interpolation<span id="id14">[<a class="reference internal" href="#id176" title="Michael James David Powell. Restart procedures for the conjugate gradient method. Mathematical programming, 12(1):241–254, 1977.">Pow77</a>]</span>. Radial basis functions use the following equation:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d8170bc0-57cd-491a-8f63-ba07c8da0ca8">
-<span class="eqno">(9.9)<a class="headerlink" href="#equation-d8170bc0-57cd-491a-8f63-ba07c8da0ca8" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-7b19e9a5-bbad-477b-bd0a-6e4a75f100b7">
+<span class="eqno">(9.9)<a class="headerlink" href="#equation-7b19e9a5-bbad-477b-bd0a-6e4a75f100b7" title="Permalink to this equation">#</a></span>\[\begin{equation}
     e_i = \exp\left[{-\left(r - d_i\right)^2 / w}\right]
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(d_i\)</span> is an equally spaced vector of distances (e.g., <span class="math notranslate nohighlight">\([1.5, 3.0, 4.5, 6.0]\)</span>) and <span class="math notranslate nohighlight">\(w\)</span> is a trainable (or hyper) parameter. This computes a Gaussian kernel between <span class="math notranslate nohighlight">\(r\)</span> and all distances <span class="math notranslate nohighlight">\(d_i\)</span>. What is nice about this expression is the smooth well-behaved derivatives with respect to <span class="math notranslate nohighlight">\(r\)</span> and lack of trainable parameters. You can (almost) represent this with a dense layer and a softmax activation.</p>
 </section>
 <section id="sub-nn">
-<h3><span class="section-number">9.7.4. </span>Sub NN<a class="headerlink" href="#sub-nn" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">9.7.4. </span>Sub NN<a class="headerlink" href="#sub-nn" title="Link to this heading">#</a></h3>
 <p>Another strategy used in Gilmer et al. <span id="id15">[<a class="reference internal" href="gnn.html#id77" title="Justin Gilmer, Samuel S Schoenholz, Patrick F Riley, Oriol Vinyals, and George E Dahl. Neural message passing for quantum chemistry. arXiv preprint arXiv:1704.01212, 2017.">GSR+17</a>]</span> is to just put your distances through a series of dense layers to get features. For example, if you’re going to use the distance in a graph neural network you could run it through three dense layers first to get a larger feature dimension. Remember that repeating and radial basis functions are equivalent to dense layers (assuming correct activation choice), so this strategy can be a simple solution to the above choice.</p>
 </section>
 </section>
 <section id="chapter-summary">
-<h2><span class="section-number">9.8. </span>Chapter Summary<a class="headerlink" href="#chapter-summary" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">9.8. </span>Chapter Summary<a class="headerlink" href="#chapter-summary" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Machine learning models that work with molecules must be permutation invariant, such that if the atoms are rearranged, the output will not change.</p></li>
 <li><p>Translational invariance of molecular coordinates is when the coordinates are shifted and the resulting output does not change.</p></li>
@@ -1589,52 +1306,68 @@ rotated -207.32467110605322
 </ul>
 </section>
 <section id="cited-references">
-<h2><span class="section-number">9.9. </span>Cited References<a class="headerlink" href="#cited-references" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">9.9. </span>Cited References<a class="headerlink" href="#cited-references" title="Link to this heading">#</a></h2>
 <div class="docutils container" id="id16">
-<dl class="citation">
-<dt class="label" id="id31"><span class="brackets"><a class="fn-backref" href="#id7">RTMullerVL12</a></span></dt>
-<dd><p>Matthias Rupp, Alexandre Tkatchenko, Klaus-Robert Müller, and O Anatole Von Lilienfeld. Fast and accurate modeling of molecular atomization energies with machine learning. <em>Physical review letters</em>, 108(5):058301, 2012.</p>
-</dd>
-<dt class="label" id="id58"><span class="brackets">GSR+17</span><span class="fn-backref">(<a href="#id13">1</a>,<a href="#id15">2</a>)</span></dt>
-<dd><p>Justin Gilmer, Samuel S Schoenholz, Patrick F Riley, Oriol Vinyals, and George E Dahl. Neural message passing for quantum chemistry. <em>arXiv preprint arXiv:1704.01212</em>, 2017.</p>
-</dd>
-<dt class="label" id="id96"><span class="brackets"><a class="fn-backref" href="#id6">ZKR+17</a></span></dt>
-<dd><p>Manzil Zaheer, Satwik Kottur, Siamak Ravanbakhsh, Barnabas Poczos, Russ R Salakhutdinov, and Alexander J Smola. Deep sets. In <em>Advances in neural information processing systems</em>, 3391–3401. 2017.</p>
-</dd>
-<dt class="label" id="id64"><span class="brackets">TSK+18</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id2">2</a>)</span></dt>
-<dd><p>Nathaniel Thomas, Tess Smidt, Steven Kearnes, Lusann Yang, Li Li, Kai Kohlhoff, and Patrick Riley. Tensor field networks: rotation-and translation-equivariant neural networks for 3d point clouds. <em>arXiv preprint arXiv:1802.08219</em>, 2018.</p>
-</dd>
-<dt class="label" id="id65"><span class="brackets"><a class="fn-backref" href="#id2">WGW+18</a></span></dt>
-<dd><p>Maurice Weiler, Mario Geiger, Max Welling, Wouter Boomsma, and Taco S Cohen. 3d steerable cnns: learning rotationally equivariant features in volumetric data. In <em>Advances in Neural Information Processing Systems</em>, 10381–10392. 2018.</p>
-</dd>
-<dt class="label" id="id85"><span class="brackets"><a class="fn-backref" href="#id3">Est20</a></span></dt>
-<dd><p>Carlos Esteves. Theoretical aspects of group equivariant neural networks. <em>arXiv preprint arXiv:2004.05154</em>, 2020.</p>
-</dd>
-<dt class="label" id="id92"><span class="brackets"><a class="fn-backref" href="#id4">MGSNoe20</a></span></dt>
-<dd><p>Benjamin Kurt Miller, Mario Geiger, Tess E Smidt, and Frank Noé. Relevance of rotationally equivariant convolutions for predicting molecular properties. <em>arXiv preprint arXiv:2008.08461</em>, 2020.</p>
-</dd>
-<dt class="label" id="id108"><span class="brackets"><a class="fn-backref" href="#id5">MGB+21</a></span></dt>
-<dd><p>Felix Musil, Andrea Grisafi, Albert P. Bartók, Christoph Ortner, Gábor Csányi, and Michele Ceriotti. Physics-inspired structural representations for molecules and materials. <em>arXiv preprint arXiv:2101.04673</em>, 2021.</p>
-</dd>
-<dt class="label" id="id109"><span class="brackets"><a class="fn-backref" href="#id8">CJZ+20</a></span></dt>
-<dd><p>Alex K Chew, Shengli Jiang, Weiqi Zhang, Victor M Zavala, and Reid C Van Lehn. Fast predictions of liquid-phase acid-catalyzed reaction rates using molecular dynamics simulations and convolutional neural networks. <em>Chemical Science</em>, 11(46):12464–12476, 2020.</p>
-</dd>
-<dt class="label" id="id67"><span class="brackets"><a class="fn-backref" href="#id9">Beh11</a></span></dt>
-<dd><p>Jörg Behler. Atom-centered symmetry functions for constructing high-dimensional neural network potentials. <em>The Journal of chemical physics</em>, 134(7):074106, 2011.</p>
-</dd>
-<dt class="label" id="id66"><span class="brackets"><a class="fn-backref" href="#id10">BartokKCsanyi13</a></span></dt>
-<dd><p>Albert P. Bartók, Risi Kondor, and Gábor Csányi. On representing chemical environments. <em>Phys. Rev. B</em>, 87:184115, May 2013. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevB.87.184115">https://link.aps.org/doi/10.1103/PhysRevB.87.184115</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevB.87.184115">doi:10.1103/PhysRevB.87.184115</a>.</p>
-</dd>
-<dt class="label" id="id68"><span class="brackets"><a class="fn-backref" href="#id11">RSPoczos17</a></span></dt>
-<dd><p>Siamak Ravanbakhsh, Jeff Schneider, and Barnabás Póczos. Equivariance through parameter-sharing. In <em>International Conference on Machine Learning</em>, 2892–2901. 2017.</p>
-</dd>
-<dt class="label" id="id84"><span class="brackets"><a class="fn-backref" href="#id12">FR00</a></span></dt>
-<dd><p>Jefferson Foote and Anandi Raman. A relation between the principal axes of inertia and ligand binding. <em>Proceedings of the National Academy of Sciences</em>, 97(3):978–983, 2000.</p>
-</dd>
-<dt class="label" id="id176"><span class="brackets"><a class="fn-backref" href="#id14">Pow77</a></span></dt>
-<dd><p>Michael James David Powell. Restart procedures for the conjugate gradient method. <em>Mathematical programming</em>, 12(1):241–254, 1977.</p>
-</dd>
-</dl>
+<div role="list" class="citation-list">
+<div class="citation" id="id31" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id7">RTMullerVL12</a><span class="fn-bracket">]</span></span>
+<p>Matthias Rupp, Alexandre Tkatchenko, Klaus-Robert Müller, and O Anatole Von Lilienfeld. Fast and accurate modeling of molecular atomization energies with machine learning. <em>Physical review letters</em>, 108(5):058301, 2012.</p>
+</div>
+<div class="citation" id="id58" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>GSR+17<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id13">1</a>,<a role="doc-backlink" href="#id15">2</a>)</span>
+<p>Justin Gilmer, Samuel S Schoenholz, Patrick F Riley, Oriol Vinyals, and George E Dahl. Neural message passing for quantum chemistry. <em>arXiv preprint arXiv:1704.01212</em>, 2017.</p>
+</div>
+<div class="citation" id="id96" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id6">ZKR+17</a><span class="fn-bracket">]</span></span>
+<p>Manzil Zaheer, Satwik Kottur, Siamak Ravanbakhsh, Barnabas Poczos, Russ R Salakhutdinov, and Alexander J Smola. Deep sets. In <em>Advances in neural information processing systems</em>, 3391–3401. 2017.</p>
+</div>
+<div class="citation" id="id64" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>TSK+18<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id1">1</a>,<a role="doc-backlink" href="#id2">2</a>)</span>
+<p>Nathaniel Thomas, Tess Smidt, Steven Kearnes, Lusann Yang, Li Li, Kai Kohlhoff, and Patrick Riley. Tensor field networks: rotation-and translation-equivariant neural networks for 3d point clouds. <em>arXiv preprint arXiv:1802.08219</em>, 2018.</p>
+</div>
+<div class="citation" id="id65" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">WGW+18</a><span class="fn-bracket">]</span></span>
+<p>Maurice Weiler, Mario Geiger, Max Welling, Wouter Boomsma, and Taco S Cohen. 3d steerable cnns: learning rotationally equivariant features in volumetric data. In <em>Advances in Neural Information Processing Systems</em>, 10381–10392. 2018.</p>
+</div>
+<div class="citation" id="id85" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">Est20</a><span class="fn-bracket">]</span></span>
+<p>Carlos Esteves. Theoretical aspects of group equivariant neural networks. <em>arXiv preprint arXiv:2004.05154</em>, 2020.</p>
+</div>
+<div class="citation" id="id92" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">MGSNoe20</a><span class="fn-bracket">]</span></span>
+<p>Benjamin Kurt Miller, Mario Geiger, Tess E Smidt, and Frank Noé. Relevance of rotationally equivariant convolutions for predicting molecular properties. <em>arXiv preprint arXiv:2008.08461</em>, 2020.</p>
+</div>
+<div class="citation" id="id108" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">MGB+21</a><span class="fn-bracket">]</span></span>
+<p>Felix Musil, Andrea Grisafi, Albert P. Bartók, Christoph Ortner, Gábor Csányi, and Michele Ceriotti. Physics-inspired structural representations for molecules and materials. <em>arXiv preprint arXiv:2101.04673</em>, 2021.</p>
+</div>
+<div class="citation" id="id109" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id8">CJZ+20</a><span class="fn-bracket">]</span></span>
+<p>Alex K Chew, Shengli Jiang, Weiqi Zhang, Victor M Zavala, and Reid C Van Lehn. Fast predictions of liquid-phase acid-catalyzed reaction rates using molecular dynamics simulations and convolutional neural networks. <em>Chemical Science</em>, 11(46):12464–12476, 2020.</p>
+</div>
+<div class="citation" id="id67" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id9">Beh11</a><span class="fn-bracket">]</span></span>
+<p>Jörg Behler. Atom-centered symmetry functions for constructing high-dimensional neural network potentials. <em>The Journal of chemical physics</em>, 134(7):074106, 2011.</p>
+</div>
+<div class="citation" id="id66" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id10">BartokKCsanyi13</a><span class="fn-bracket">]</span></span>
+<p>Albert P. Bartók, Risi Kondor, and Gábor Csányi. On representing chemical environments. <em>Phys. Rev. B</em>, 87:184115, May 2013. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevB.87.184115">https://link.aps.org/doi/10.1103/PhysRevB.87.184115</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevB.87.184115">doi:10.1103/PhysRevB.87.184115</a>.</p>
+</div>
+<div class="citation" id="id68" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id11">RSPoczos17</a><span class="fn-bracket">]</span></span>
+<p>Siamak Ravanbakhsh, Jeff Schneider, and Barnabás Póczos. Equivariance through parameter-sharing. In <em>International Conference on Machine Learning</em>, 2892–2901. 2017.</p>
+</div>
+<div class="citation" id="id84" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id12">FR00</a><span class="fn-bracket">]</span></span>
+<p>Jefferson Foote and Anandi Raman. A relation between the principal axes of inertia and ligand binding. <em>Proceedings of the National Academy of Sciences</em>, 97(3):978–983, 2000.</p>
+</div>
+<div class="citation" id="id176" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id14">Pow77</a><span class="fn-bracket">]</span></span>
+<p>Michael James David Powell. Restart procedures for the conjugate gradient method. <em>Mathematical programming</em>, 12(1):241–254, 1977.</p>
+</div>
+</div>
 </div>
 </section>
 </section>
@@ -1651,7 +1384,7 @@ rotated -207.32467110605322
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./dl"
         },
         predefinedOutput: true
@@ -1659,53 +1392,140 @@ rotated -207.32467110605322
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="gnn.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">8. </span>Graph Neural Networks</p>
-        </div>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="gnn.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">8. </span>Graph Neural Networks</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="Equivariant.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="Equivariant.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title"><span class="section-number">10. </span>Equivariant Neural Networks</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#equivariances">9.1. Equivariances</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#equivariances-of-coordinates">9.2. Equivariances of Coordinates</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constructing-equivariant-models">9.3. Constructing Equivariant Models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-determinant">9.3.1. Matrix Determinant</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eigendecomposition">9.3.2. Eigendecomposition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reductions">9.3.3. Reductions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pairwise-distance">9.3.4. Pairwise Distance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#angles">9.3.5. Angles</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#convolutional-layers">9.3.6. Convolutional Layers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#atom-centered-symmetry-functions">9.3.7. Atom-centered Symmetry Functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trajectory-alignment">9.3.8. Trajectory Alignment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#molecular-descriptors">9.3.9. Molecular Descriptors</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">9.4. Examples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-this-notebook">9.5. Running This Notebook</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#no-equivariances">9.5.1. No equivariances</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#permutation-invariant">9.5.2. Permutation Invariant</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#translation-invariant">9.5.3. Translation Invariant</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rotation-invariant">9.5.4. Rotation Invariant</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trajectory-alignment-example">9.6. Trajectory Alignment Example</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-unsupervised-methods-for-alignment">9.6.1. Using Unsupervised Methods for Alignment</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distance-features">9.7. Distance Features</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#repeating">9.7.1. Repeating</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#binning">9.7.2. Binning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#radial-basis-functions">9.7.3. Radial Basis Functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sub-nn">9.7.4. Sub NN</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-summary">9.8. Chapter Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cited-references">9.9. Cited References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-    By Andrew D. White<br/>
-  
-      &copy; Copyright 2022.<br/>
-    <div class="extra_footer">
-      <a href="http://thewhitelab.org">thewhitelab.org</a> <div id="wh-modal"> <button class="wh-venti-button" aria-label="close modal" id="wh-modal-close">✕</button> <img id="wh-modal-img"> </div>
-    </div>
-</p>
-        </footer>
-    </div>
+  <div class="footer-item">
     
+<p class="component-author">
+By Andrew D. White
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <a href="http://thewhitelab.org">thewhitelab.org</a> <div id="wh-modal"> <button class="wh-venti-button" aria-label="close modal" id="wh-modal-close">✕</button> <img id="wh-modal-img"> </div>
 </div>
+  </div>
+  
+</div>
+          </footer>
+        
 
-
-      </div>
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

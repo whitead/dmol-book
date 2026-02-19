@@ -1,10 +1,12 @@
 
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="../" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta content="Deep Learning for Molecules &amp; Materials Book" lang="en" name="description" xml:lang="en" />
 <meta content="en_US" property="og:locale" />
 <meta content="summary" name="twitter:card" />
@@ -14,113 +16,175 @@
 <meta content="&#64;andrewwhite01" name="twitter:site" />
 
     <title>1. Tensors and Shapes &#8212; deep learning for molecules &amp; materials</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/a11y.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=cb1cce99" />
+    <link rel="stylesheet" type="text/css" href="../_static/a11y.css?v=ffeaf963" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
-    <script src="../_static/custom.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <script src="../_static/togglebutton.js?v=1ae7504c"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'math/tensors-and-shapes';</script>
+    <script src="../_static/custom.js?v=3f5092eb"></script>
     <link rel="canonical" href="https://dmol.pub/math/tensors-and-shapes.html" />
-    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <link rel="icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="2. Introduction to Machine Learning" href="../ml/introduction.html" />
     <link rel="prev" title="Overview" href="../index.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
-    
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../_static/logo.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">deep learning for molecules & materials</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="deep learning for molecules & materials - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="deep learning for molecules & materials - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -129,582 +193,309 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  A. Math Review
- </span>
-</p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">A. Math Review</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   1. Tensors and Shapes
-  </a>
- </li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">1. Tensors and Shapes</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  B. Machine Learning
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">B. Machine Learning</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../ml/introduction.html">
-   2. Introduction to Machine Learning
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../ml/regression.html">
-   3. Regression &amp; Model Assessment
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../ml/classification.html">
-   4. Classification
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../ml/kernel.html">
-   5. Kernel Learning
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../ml/introduction.html">2. Introduction to Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ml/regression.html">3. Regression &amp; Model Assessment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ml/classification.html">4. Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ml/kernel.html">5. Kernel Learning</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  C. Deep Learning
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">C. Deep Learning</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/introduction.html">
-   6. Deep Learning Overview
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/layers.html">
-   7. Standard Layers
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/gnn.html">
-   8. Graph Neural Networks
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/data.html">
-   9. Input Data &amp; Equivariances
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/Equivariant.html">
-   10. Equivariant Neural Networks
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/xai.html">
-   11. Explaining Predictions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/attention.html">
-   12. Attention Layers
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/NLP.html">
-   13. Deep Learning on Sequences
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/VAE.html">
-   14. Variational Autoencoder
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/flows.html">
-   15. Normalizing Flows
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/introduction.html">6. Deep Learning Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/layers.html">7. Standard Layers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/gnn.html">8. Graph Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/data.html">9. Input Data &amp; Equivariances</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/Equivariant.html">10. Equivariant Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/xai.html">11. Explaining Predictions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/attention.html">12. Attention Layers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/NLP.html">13. Deep Learning on Sequences</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/VAE.html">14. Variational Autoencoder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/flows.html">15. Normalizing Flows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/molnets.html">16. Modern Molecular NNs</a></li>
+
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  D. Applications
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">D. Applications</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../applied/QM9.html">
-   16. Predicting DFT Energies with GNNs
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../applied/MolGenerator.html">
-   17. Generative RNN in Browser
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../applied/QM9.html">17. Predicting DFT Energies with GNNs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../applied/MolGenerator.html">18. Generative RNN in Browser</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  E. Contributed Chapters
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">E. Contributed Chapters</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/Hyperparameter_tuning.html">
-   18. Hyperparameter Tuning
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../applied/e3nn_traj.html">
-   19. Equivariant Neural Network for Predicting Trajectories
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/pretraining.html">
-   20. Pretraining
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../applied/e3nn_traj.html">19. Equivariant Neural Network for Predicting Trajectories</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/pretraining.html">20. Pretraining</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  F. Appendix
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">F. Appendix</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../style.html">
-   21. Style Guide
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../changelog.html">
-   22. Changelog
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  G. In Progress
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/molnets.html">
-   23. Modern Molecular NNs
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../style.html">21. Style Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">22. Changelog</a></li>
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            <script async defer src="https://api.dmol.pub/latest.js"></script><noscript><img src="https://api.dmol.pub/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript> By <a href="https://twitter.com/andrewwhite01">Andrew White</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
-</div>
-
-
-          
-
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
   
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://colab.research.google.com/github/whitead/dmol-book/blob/master/math/tensors-and-shapes.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Colab"
->
   
-
-<span class="headerbtn__icon-container">
-  
-    <img src="../_static/images/logo_colab.png">
-  </span>
-<span class="headerbtn__text-container">Colab</span>
-</a>
-
-      </li>
-      
-    </ul>
+  <div class="sidebar-primary-items__end sidebar-primary__section">
   </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/whitead/dmol-book/blob/master/math/tensors-and-shapes.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
 </div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/whitead/dmol-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/whitead/dmol-book/issues/new?title=Issue%20on%20page%20%2Fmath/tensors-and-shapes.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/math/tensors-and-shapes.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
 
 <button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/whitead/dmol-book"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
+`);
+</script>
 
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
 
-      </li>
-      
-      <li>
-        <a href="https://github.com/whitead/dmol-book/issues/new?title=Issue%20on%20page%20%2Fmath/tensors-and-shapes.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../_sources/math/tensors-and-shapes.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.ipynb</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
 </button>
-
-      </li>
+</div></div>
       
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
+    </div>
   
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
-
-    </div>
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#einstein-notation">
-   1.1. Einstein Notation
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#tensor-operations">
-   1.2. Tensor Operations
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#reduction-operations">
-     1.2.1. Reduction Operations
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#element-operations">
-     1.2.2. Element Operations
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#broadcasting">
-   1.3. Broadcasting
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#suggested-reading-for-broadcasting">
-     1.3.1. Suggested Reading for Broadcasting
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#modifying-rank">
-   1.4. Modifying Rank
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#reshaping">
-     1.4.1. Reshaping
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#rank-slicing">
-     1.4.2. Rank Slicing
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#view-vs-copy">
-   1.5. View vs Copy
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#chapter-summary">
-   1.6. Chapter Summary
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#exercises">
-   1.7. Exercises
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id2">
-     1.7.1. Einstein notation
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#reductions">
-     1.7.2. Reductions
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#broadcasting-and-shapes">
-     1.7.3. Broadcasting and Shapes
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#cited-references">
-   1.8. Cited References
-  </a>
- </li>
-</ul>
-
-    </nav>
 </div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Tensors and Shapes</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#einstein-notation">
-   1.1. Einstein Notation
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#tensor-operations">
-   1.2. Tensor Operations
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#reduction-operations">
-     1.2.1. Reduction Operations
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#element-operations">
-     1.2.2. Element Operations
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#broadcasting">
-   1.3. Broadcasting
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#suggested-reading-for-broadcasting">
-     1.3.1. Suggested Reading for Broadcasting
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#modifying-rank">
-   1.4. Modifying Rank
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#reshaping">
-     1.4.1. Reshaping
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#rank-slicing">
-     1.4.2. Rank Slicing
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#view-vs-copy">
-   1.5. View vs Copy
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#chapter-summary">
-   1.6. Chapter Summary
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#exercises">
-   1.7. Exercises
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id2">
-     1.7.1. Einstein notation
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#reductions">
-     1.7.2. Reductions
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#broadcasting-and-shapes">
-     1.7.3. Broadcasting and Shapes
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#cited-references">
-   1.8. Cited References
-  </a>
- </li>
-</ul>
+              
+              
 
-                        </nav>
-                    </div>
-                </div>
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Tensors and Shapes</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
             </div>
-            <main id="main-content" role="main">
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#einstein-notation">1.1. Einstein Notation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tensor-operations">1.2. Tensor Operations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reduction-operations">1.2.1. Reduction Operations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#element-operations">1.2.2. Element Operations</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#broadcasting">1.3. Broadcasting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suggested-reading-for-broadcasting">1.3.1. Suggested Reading for Broadcasting</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modifying-rank">1.4. Modifying Rank</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reshaping">1.4.1. Reshaping</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rank-slicing">1.4.2. Rank Slicing</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#view-vs-copy">1.5. View vs Copy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-summary">1.6. Chapter Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">1.7. Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1.7.1. Einstein notation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reductions">1.7.2. Reductions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#broadcasting-and-shapes">1.7.3. Broadcasting and Shapes</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cited-references">1.8. Cited References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
                 
-              <div>
-                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
   <section class="tex2jax_ignore mathjax_ignore" id="tensors-and-shapes">
-<h1><span class="section-number">1. </span>Tensors and Shapes<a class="headerlink" href="#tensors-and-shapes" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">1. </span>Tensors and Shapes<a class="headerlink" href="#tensors-and-shapes" title="Link to this heading">#</a></h1>
 <p>This textbook will draw upon linear algebra, vector calculus, and probability theory. Each chapter states the expected background in an <code class="docutils literal notranslate"><span class="pre">Audience</span> <span class="pre">&amp;</span> <span class="pre">Objectives</span></code> admonition (see example below). This math review fills in details missing from those typical classes: working with tensors. If you would like a chemistry-focused background on those topics, you can read the online book <a class="reference external" href="https://unitcirclepress.com/"><em>Mathematical Methods for Molecule Sciences</em> by John Straub</a><span id="id1">[<a class="reference internal" href="#id191" title="J Straub. Mathematical methods for molecular science. 2020.">Str20</a>]</span>.</p>
 <p>Tensors are the generalization of vectors (rank 1) and matrices (rank 2) to arbitrary <strong>rank</strong>. Rank can be defined as the number of indices required to get individual elements of a tensor. A matrix requires two indices (row, column), and is thus a rank 2 tensor. We may say in normal conversation that a matrix is a “two-dimensional object” because it has rows and columns, but this is ambiguous because the row could be 6 dimensions and the columns could be 1 dimension. Always use the word rank to distinguish vectors, matrices, and higher-order tensors. The components that make up rank are called <strong>axes</strong> (plural of <strong>axis</strong>). The <strong>dimension</strong> is how many elements are in a particular axis. The <strong>shape</strong> of a tensor combines all of these. A shape is a tuple (ordered list of numbers) whose length is the rank and elements are the dimension of each axis.</p>
 <div class="admonition-audience-objectives admonition">
@@ -731,8 +522,8 @@ in numpy and often used when describing tensors in Python. Tensor is the mathema
 equivalent.</p>
 </div>
 <section id="einstein-notation">
-<h2><span class="section-number">1.1. </span>Einstein Notation<a class="headerlink" href="#einstein-notation" title="Permalink to this headline">#</a></h2>
-<p>Einstein notation is the way tensor operations can be written out. We’ll be using a simplified version, based on the <code class="docutils literal notranslate"><span class="pre">einsum</span></code> function available in many numerical libraries (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.einsum.html#numpy.einsum" title="(in NumPy v1.24)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">np.einsum</span></code></a>, <a class="reference external" href="https://www.tensorflow.org/api_docs/python/tf/einsum" title="(in TensorFlow v2.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tf.einsum</span></code></a>, <a class="reference external" href="https://jax.readthedocs.io/en/latest/_autosummary/jax.numpy.einsum.html#jax.numpy.einsum" title="(in JAX)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">jnp.einsum</span></code></a>). It’s relatively simple. Each tensor is written as a lower case variable with explicit indices, like <span class="math notranslate nohighlight">\(a_{ijk}\)</span> for a rank 3 tensor. The reason the variable name is written in lower case is because if you fill in the indices <span class="math notranslate nohighlight">\(a_{023}\)</span>, you get a scalar.  A variable without an index, <span class="math notranslate nohighlight">\(b\)</span>, is a scalar. There is one rule for this notation: if an index doesn’t appear on both sides of the equation, it is summed over on the one side in which it appears. Einstein notation requires both sides of the equation to be written-out, so that its clear what the input/output shapes of the operation are.</p>
+<h2><span class="section-number">1.1. </span>Einstein Notation<a class="headerlink" href="#einstein-notation" title="Link to this heading">#</a></h2>
+<p>Einstein notation is the way tensor operations can be written out. We’ll be using a simplified version, based on the <code class="docutils literal notranslate"><span class="pre">einsum</span></code> function available in many numerical libraries (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.einsum.html#numpy.einsum" title="(in NumPy v2.4)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">np.einsum</span></code></a>, <a class="reference external" href="https://www.tensorflow.org/api_docs/python/tf/einsum" title="(in TensorFlow v2.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tf.einsum</span></code></a>, <a class="reference external" href="https://docs.jax.dev/en/latest/_autosummary/jax.numpy.einsum.html#jax.numpy.einsum" title="(in JAX)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">jnp.einsum</span></code></a>). It’s relatively simple. Each tensor is written as a lower case variable with explicit indices, like <span class="math notranslate nohighlight">\(a_{ijk}\)</span> for a rank 3 tensor. The reason the variable name is written in lower case is because if you fill in the indices <span class="math notranslate nohighlight">\(a_{023}\)</span>, you get a scalar.  A variable without an index, <span class="math notranslate nohighlight">\(b\)</span>, is a scalar. There is one rule for this notation: if an index doesn’t appear on both sides of the equation, it is summed over on the one side in which it appears. Einstein notation requires both sides of the equation to be written-out, so that its clear what the input/output shapes of the operation are.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>The concept of Tensors from physics involves a more complex picture of connecting algebraic sets of objects, typically vectors in a space. Here we just treat tensors as a synonym for multidimensional array. Be aware that looking-up tensor on wikipedia will bring you to the physics picture.</p>
@@ -740,13 +531,13 @@ equivalent.</p>
 <p>Here are some examples of writing tensor operations in Einstein notation.</p>
 <p><strong>Total Sum</strong></p>
 <p>Sum all elements of a rank 4 tensor. In Einstein notation this is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a48c997c-b258-4145-a76b-c0b0306aef0f">
-<span class="eqno">(1.1)<a class="headerlink" href="#equation-a48c997c-b258-4145-a76b-c0b0306aef0f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e403a9fa-a3bd-4d78-bf55-9a759217af73">
+<span class="eqno">(1.1)<a class="headerlink" href="#equation-e403a9fa-a3bd-4d78-bf55-9a759217af73" title="Permalink to this equation">#</a></span>\[\begin{equation}
   a_{ijkl} = b
 \end{equation}\]</div>
 <p>in normal mathematic notation, this would be</p>
-<div class="amsmath math notranslate nohighlight" id="equation-afa12edd-db21-4874-ba81-b224ced23c41">
-<span class="eqno">(1.2)<a class="headerlink" href="#equation-afa12edd-db21-4874-ba81-b224ced23c41" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-82efd108-4ead-4165-a6be-6a8e2c111221">
+<span class="eqno">(1.2)<a class="headerlink" href="#equation-82efd108-4ead-4165-a6be-6a8e2c111221" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \sum_i \sum_j \sum_k \sum_l a_{ijkl} = b
 \end{equation}\]</div>
 <aside class="margin sidebar">
@@ -757,24 +548,24 @@ It is called <a class="reference external" href="https://einops.rocks/">einops</
 </aside>
 <p><strong>Sum Specific Axis</strong></p>
 <p>Sum over last axis</p>
-<div class="amsmath math notranslate nohighlight" id="equation-54c6784f-304b-457d-818c-cde5b57bccdd">
-<span class="eqno">(1.3)<a class="headerlink" href="#equation-54c6784f-304b-457d-818c-cde5b57bccdd" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-f8e2c1c5-0ef2-4556-aa14-3c6326f3548a">
+<span class="eqno">(1.3)<a class="headerlink" href="#equation-f8e2c1c5-0ef2-4556-aa14-3c6326f3548a" title="Permalink to this equation">#</a></span>\[\begin{equation}
   a_{ijkl} = b_{ijk}
 \end{equation}\]</div>
 <p>In normal notation:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0ac67352-5b98-436d-9916-c87a0b0c5edd">
-<span class="eqno">(1.4)<a class="headerlink" href="#equation-0ac67352-5b98-436d-9916-c87a0b0c5edd" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b3f02b20-c4fd-4b50-ba90-daaf6d7d9699">
+<span class="eqno">(1.4)<a class="headerlink" href="#equation-b3f02b20-c4fd-4b50-ba90-daaf6d7d9699" title="Permalink to this equation">#</a></span>\[\begin{equation}
  \sum_l a_{ijkl} = b_{ijk}
 \end{equation}\]</div>
 <p><strong>Dot Product</strong></p>
 <p>In Einstein notation:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-bf5c4fc6-2b42-4727-9604-509b1c877522">
-<span class="eqno">(1.5)<a class="headerlink" href="#equation-bf5c4fc6-2b42-4727-9604-509b1c877522" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-7d328b7b-be52-467d-9196-022c15fb28bf">
+<span class="eqno">(1.5)<a class="headerlink" href="#equation-7d328b7b-be52-467d-9196-022c15fb28bf" title="Permalink to this equation">#</a></span>\[\begin{equation}
   a_{i} b_{i} = c
 \end{equation}\]</div>
 <p>In normal notation:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-52d18270-030d-41ee-9a4a-5ca08036bd45">
-<span class="eqno">(1.6)<a class="headerlink" href="#equation-52d18270-030d-41ee-9a4a-5ca08036bd45" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-8b0dfa64-8735-41a9-a3fe-bedf6204a14b">
+<span class="eqno">(1.6)<a class="headerlink" href="#equation-8b0dfa64-8735-41a9-a3fe-bedf6204a14b" title="Permalink to this equation">#</a></span>\[\begin{equation}
   \sum_i a_{i} b_{i} = c
 \end{equation}\]</div>
 <p>Notice that <span class="math notranslate nohighlight">\(a_i\)</span> and <span class="math notranslate nohighlight">\(b_i\)</span> must have the same dimension in their 0th axis in order for the sum in the dot product to be valid. This makes sense, since to compute a dot product the vectors must be the same dimension. In general, if two tensors share the same index (<span class="math notranslate nohighlight">\(b_{ij}\)</span>, <span class="math notranslate nohighlight">\(a_{ik}\)</span>), then that axis must be the same dimension.</p>
@@ -783,8 +574,8 @@ It is called <a class="reference external" href="https://einops.rocks/">einops</
 <p>The matrix product of 2 tensors, where each tensor is rank 2.</p>
 <div class="dropdown admonition">
 <p class="admonition-title">Answer</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f806643c-c0b7-4d0e-90c2-68c6b861507f">
-<span class="eqno">(1.7)<a class="headerlink" href="#equation-f806643c-c0b7-4d0e-90c2-68c6b861507f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-4153801c-465c-43d3-9ccd-7765cb4e6e69">
+<span class="eqno">(1.7)<a class="headerlink" href="#equation-4153801c-465c-43d3-9ccd-7765cb4e6e69" title="Permalink to this equation">#</a></span>\[\begin{equation}
     a_{ij} b_{jk} = c_{ik}
 \end{equation}\]</div>
 </div>
@@ -792,8 +583,8 @@ It is called <a class="reference external" href="https://einops.rocks/">einops</
 <p>Apply matrix <span class="math notranslate nohighlight">\(a\)</span> to column vector <span class="math notranslate nohighlight">\(b\)</span> by multiplication. <span class="math notranslate nohighlight">\(\mathbf{A}\vec{b}\)</span> in linear algebra notation.</p>
 <div class="dropdown admonition">
 <p class="admonition-title">Answer</p>
-<div class="amsmath math notranslate nohighlight" id="equation-dbf25e91-9b52-486b-b2ad-fd4df0092700">
-<span class="eqno">(1.8)<a class="headerlink" href="#equation-dbf25e91-9b52-486b-b2ad-fd4df0092700" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-61d3f5e8-c953-4060-9302-96d09727ef0c">
+<span class="eqno">(1.8)<a class="headerlink" href="#equation-61d3f5e8-c953-4060-9302-96d09727ef0c" title="Permalink to this equation">#</a></span>\[\begin{equation}
     a_{ij} b_{j} = c_{i}
 \end{equation}\]</div>
 </div>
@@ -801,14 +592,14 @@ It is called <a class="reference external" href="https://einops.rocks/">einops</
 <p>Swap the values in a matrix to make it a transpose.</p>
 <div class="dropdown admonition">
 <p class="admonition-title">Answer</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f3605cb0-d648-4ec4-abd8-2c7ab0dd354b">
-<span class="eqno">(1.9)<a class="headerlink" href="#equation-f3605cb0-d648-4ec4-abd8-2c7ab0dd354b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-8e2e4aac-b226-422a-aa3b-3a6c539311d0">
+<span class="eqno">(1.9)<a class="headerlink" href="#equation-8e2e4aac-b226-422a-aa3b-3a6c539311d0" title="Permalink to this equation">#</a></span>\[\begin{equation}
     a_{ij} = t_{ji}
 \end{equation}\]</div>
 </div>
 </section>
 <section id="tensor-operations">
-<h2><span class="section-number">1.2. </span>Tensor Operations<a class="headerlink" href="#tensor-operations" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">1.2. </span>Tensor Operations<a class="headerlink" href="#tensor-operations" title="Link to this heading">#</a></h2>
 <aside class="margin sidebar">
 <p class="sidebar-title">Why Tensors?</p>
 <p>Tensors are the main building block
@@ -818,29 +609,29 @@ Being able to understand how shape affects them
 is the key to understanding how algorithms work.</p>
 </aside>
 <p>Although you can specify operations in Einstein notation, it is typically not expressive enough. How would you write this operation: sum the last axis of a tensor? Without knowing the rank, you do not know how many indices you should indicate in the expression. Maybe like this?</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0b8c6f03-a98e-4b89-ba45-759498db0892">
-<span class="eqno">(1.10)<a class="headerlink" href="#equation-0b8c6f03-a98e-4b89-ba45-759498db0892" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e228a3d8-c8b0-460e-86e6-c5f795ed83e8">
+<span class="eqno">(1.10)<a class="headerlink" href="#equation-e228a3d8-c8b0-460e-86e6-c5f795ed83e8" title="Permalink to this equation">#</a></span>\[\begin{equation}
 a_{i_0, i_1, \ldots i_N} = a_{i_0, i_1, \ldots i_{N - 1}}
 \end{equation}\]</div>
 <p>Well, that’s good but what if your operation has two arguments: which axis to sum and the tensor. That would also be clumsy to write. Einstein notation is useful and we’ll see it more, but we need to think about <strong>tensor operations</strong> as analogies to functions. Tensor operations take in 1 or more tensors and output 1 or more tensors and the output shape depends on the input shape.</p>
 <p>One of the difficult things about tensors is understanding how shape is treated in equations. For example, consider this equation:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-033e511d-0d8b-4d04-82c6-9ab69133bd37">
-<span class="eqno">(1.11)<a class="headerlink" href="#equation-033e511d-0d8b-4d04-82c6-9ab69133bd37" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-efaa31c8-cbcf-4869-8c3d-a878751bfa96">
+<span class="eqno">(1.11)<a class="headerlink" href="#equation-efaa31c8-cbcf-4869-8c3d-a878751bfa96" title="Permalink to this equation">#</a></span>\[\begin{equation}
     g = \exp\left(a - b\right)^2
 \end{equation}\]</div>
 <p>Seems like a reasonable enough equation. But what if <span class="math notranslate nohighlight">\(a\)</span> is rank 3 and <span class="math notranslate nohighlight">\(b\)</span> is rank 1? Is <span class="math notranslate nohighlight">\(g\)</span> rank 1 or 3 then? Actually, this is taken from a real example where <span class="math notranslate nohighlight">\(g\)</span> was rank 4. You subtract each element of <span class="math notranslate nohighlight">\(b\)</span> from each element of <span class="math notranslate nohighlight">\(a\)</span>. You could write this in Einstein notation:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f99a07e6-28ba-4f1e-82f6-031b82e87c39">
-<span class="eqno">(1.12)<a class="headerlink" href="#equation-f99a07e6-28ba-4f1e-82f6-031b82e87c39" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-7e7bfb98-3cbb-484e-a52a-cd9eaec5c22c">
+<span class="eqno">(1.12)<a class="headerlink" href="#equation-7e7bfb98-3cbb-484e-a52a-cd9eaec5c22c" title="Permalink to this equation">#</a></span>\[\begin{equation}
     g_{ijkl} = \exp\left(a_{ijk} - b_l\right)^2
 \end{equation}\]</div>
 <p>except this function should work on arbitrary ranked <span class="math notranslate nohighlight">\(a\)</span> and always output <span class="math notranslate nohighlight">\(g\)</span> being the rank of <span class="math notranslate nohighlight">\(a + 1\)</span>. Typically, the best way to express this is explicitly stating how rank and shape are treated.</p>
 <section id="reduction-operations">
-<h3><span class="section-number">1.2.1. </span>Reduction Operations<a class="headerlink" href="#reduction-operations" title="Permalink to this headline">#</a></h3>
-<p>Reduction operations reduce the rank of an input tensor. <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.sum.html#numpy.sum" title="(in NumPy v1.24)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">np.sum(a,</span> <span class="pre">axis=0)</span></code></a> is an example. The axis argument means that we’re summing over the 0th axis so that it will be removed. If <code class="docutils literal notranslate"><span class="pre">a</span></code> is a rank 1 vector, this would leave us with a scalar. If <code class="docutils literal notranslate"><span class="pre">a</span></code> is a matrix, this would remove the rows so that only columns are left over. That means we would be left with <em>column sums</em>. You can also specify a tuple of axes to be removed, which will be done in that order <code class="docutils literal notranslate"><span class="pre">np.sum(a,</span> <span class="pre">axis=(0,1)</span> <span class="pre">)</span></code>.</p>
-<p>In addition to <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.sum.html#numpy.sum" title="(in NumPy v1.24)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">np.sum</span></code></a>, there are <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.minimum.html#numpy.minimum" title="(in NumPy v1.24)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">np.minimum</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.maximum.html#numpy.maximum" title="(in NumPy v1.24)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">np.maximum</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.any.html#numpy.any" title="(in NumPy v1.24)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">np.any</span></code></a> (logical or), and more. Let’s see some examples</p>
+<h3><span class="section-number">1.2.1. </span>Reduction Operations<a class="headerlink" href="#reduction-operations" title="Link to this heading">#</a></h3>
+<p>Reduction operations reduce the rank of an input tensor. <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.sum.html#numpy.sum" title="(in NumPy v2.4)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">np.sum(a,</span> <span class="pre">axis=0)</span></code></a> is an example. The axis argument means that we’re summing over the 0th axis so that it will be removed. If <code class="docutils literal notranslate"><span class="pre">a</span></code> is a rank 1 vector, this would leave us with a scalar. If <code class="docutils literal notranslate"><span class="pre">a</span></code> is a matrix, this would remove the rows so that only columns are left over. That means we would be left with <em>column sums</em>. You can also specify a tuple of axes to be removed, which will be done in that order <code class="docutils literal notranslate"><span class="pre">np.sum(a,</span> <span class="pre">axis=(0,1)</span> <span class="pre">)</span></code>.</p>
+<p>In addition to <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.sum.html#numpy.sum" title="(in NumPy v2.4)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">np.sum</span></code></a>, there are <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.minimum.html#numpy.minimum" title="(in NumPy v2.4)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">np.minimum</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.maximum.html#numpy.maximum" title="(in NumPy v2.4)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">np.maximum</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.any.html#numpy.any" title="(in NumPy v2.4)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">np.any</span></code></a> (logical or), and more. Let’s see some examples</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
 <span class="n">a_shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 <span class="n">a_len</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">*</span> <span class="mi">2</span>
@@ -874,13 +665,18 @@ a_{i_0, i_1, \ldots i_N} = a_{i_0, i_1, \ldots i_{N - 1}}
 </div>
 <p>Try to guess the shape of the output tensors using <code class="docutils literal notranslate"><span class="pre">a</span></code> in the below code based on what you’ve learned.</p>
 <div class="cell tag_hide-output docutils container">
-<div class="cell_input docutils container">
+<div class="cell_input above-output-prompt docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<details class="admonition hide below-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell output</p>
+<p class="expanded admonition-title">Hide code cell output</p>
+</summary>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(3, 2)
 [[36 40]
@@ -889,15 +685,21 @@ a_{i_0, i_1, \ldots i_N} = a_{i_0, i_1, \ldots i_{N - 1}}
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 <div class="cell tag_hide-output docutils container">
-<div class="cell_input docutils container">
+<div class="cell_input above-output-prompt docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">a</span> <span class="o">&gt;</span> <span class="mi">4</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<details class="admonition hide below-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell output</p>
+<p class="expanded admonition-title">Hide code cell output</p>
+</summary>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(4, 2)
 [[False  True]
@@ -907,25 +709,32 @@ a_{i_0, i_1, \ldots i_N} = a_{i_0, i_1, \ldots i_{N - 1}}
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 <div class="cell tag_hide-output docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<details class="admonition hide below-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell output</p>
+<p class="expanded admonition-title">Hide code cell output</p>
+</summary>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(4,)
 [       0   332640  8910720 72681840]
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 </section>
 <section id="element-operations">
-<h3><span class="section-number">1.2.2. </span>Element Operations<a class="headerlink" href="#element-operations" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">1.2.2. </span>Element Operations<a class="headerlink" href="#element-operations" title="Link to this heading">#</a></h3>
 <p>Default operations in Python, like <code class="docutils literal notranslate"><span class="pre">+</span></code> <code class="docutils literal notranslate"><span class="pre">-</span></code> <code class="docutils literal notranslate"><span class="pre">*</span></code> <code class="docutils literal notranslate"><span class="pre">/</span></code> <code class="docutils literal notranslate"><span class="pre">^</span></code> , are also tensor operations. They preserve shape so that the output shape is the same as the inputs’. The input tensors must have the same shape or be able to become the same shape through broadcasting, which is defined in the next section.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -968,7 +777,7 @@ a_{i_0, i_1, \ldots i_N} = a_{i_0, i_1, \ldots i_{N - 1}}
 </section>
 </section>
 <section id="broadcasting">
-<h2><span class="section-number">1.3. </span>Broadcasting<a class="headerlink" href="#broadcasting" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">1.3. </span>Broadcasting<a class="headerlink" href="#broadcasting" title="Link to this heading">#</a></h2>
 <p>One of the difficulties with the elementary operations is that they require the input tensors to have the same shape. For example, you cannot multiply a scalar (rank 0) and a vector (rank 1). Of course, if you’re familiar with <code class="docutils literal notranslate"><span class="pre">numpy</span></code> this is common. It is done with <strong>broadcasting</strong> comes in. Broadcasting increases the rank of one of the input tensors to be compatible with another. Broadcasting works at the last axis and works its way forward. Let’s see an example</p>
 <aside class="margin sidebar">
 <p class="sidebar-title">Broadcasting order</p>
@@ -978,8 +787,8 @@ at the last axis gives a scalar (rank 0)
 no matter what rank. This makes it possible to
 copy to fill up axis to align shapes.</p>
 </aside>
-<div class="amsmath math notranslate nohighlight" id="equation-0dc833f3-a677-4583-8f2a-123506812e57">
-<span class="eqno">(1.13)<a class="headerlink" href="#equation-0dc833f3-a677-4583-8f2a-123506812e57" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-902f230f-caa5-4328-8d0a-a07f3e0af1e7">
+<span class="eqno">(1.13)<a class="headerlink" href="#equation-902f230f-caa5-4328-8d0a-a07f3e0af1e7" title="Permalink to this equation">#</a></span>\[\begin{equation}
     A + B
 \end{equation}\]</div>
 <p><strong>Input A</strong></p>
@@ -1040,102 +849,105 @@ copy to fill up axis to align shapes.</p>
 </div>
 <hr class="docutils" />
 <p>Let’s see some more examples, but only looking at the input/output shape</p>
-<table class="colwidths-auto table">
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
-<tr class="row-odd"><th class="text-align:left head"><p>A Shape</p></th>
-<th class="text-align:center head"><p>B Shape</p></th>
-<th class="text-align:right head"><p>Output Shape</p></th>
+<tr class="row-odd"><th class="head text-left"><p>A Shape</p></th>
+<th class="head text-center"><p>B Shape</p></th>
+<th class="head text-right"><p>Output Shape</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-align:left"><p>(4,2)</p></td>
-<td class="text-align:center"><p>(4,1)</p></td>
-<td class="text-align:right"><p>(4,2)</p></td>
+<tr class="row-even"><td class="text-left"><p>(4,2)</p></td>
+<td class="text-center"><p>(4,1)</p></td>
+<td class="text-right"><p>(4,2)</p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:left"><p>(4,2)</p></td>
-<td class="text-align:center"><p>(2,)</p></td>
-<td class="text-align:right"><p>(4,2)</p></td>
+<tr class="row-odd"><td class="text-left"><p>(4,2)</p></td>
+<td class="text-center"><p>(2,)</p></td>
+<td class="text-right"><p>(4,2)</p></td>
 </tr>
-<tr class="row-even"><td class="text-align:left"><p>(16,1,3)</p></td>
-<td class="text-align:center"><p>(4,3)</p></td>
-<td class="text-align:right"><p>(16,4,3)</p></td>
+<tr class="row-even"><td class="text-left"><p>(16,1,3)</p></td>
+<td class="text-center"><p>(4,3)</p></td>
+<td class="text-right"><p>(16,4,3)</p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:left"><p>(16,3,3)</p></td>
-<td class="text-align:center"><p>(4,1)</p></td>
-<td class="text-align:right"><p><code class="docutils literal notranslate"><span class="pre">Error</span></code></p></td>
-</tr>
-</tbody>
-</table>
-<p>Try some for yourself!</p>
-<table class="colwidths-auto table">
-<thead>
-<tr class="row-odd"><th class="text-align:left head"><p>A Shape</p></th>
-<th class="text-align:center head"><p>B Shape</p></th>
-<th class="text-align:right head"><p>Output Shape</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td class="text-align:left"><p>(7,4,3)</p></td>
-<td class="text-align:center"><p>(1,)</p></td>
-<td class="text-align:right"><p>?</p></td>
-</tr>
-<tr class="row-odd"><td class="text-align:left"><p>(16, 16, 3)</p></td>
-<td class="text-align:center"><p>(3,)</p></td>
-<td class="text-align:right"><p>?</p></td>
-</tr>
-<tr class="row-even"><td class="text-align:left"><p>(2,4,5)</p></td>
-<td class="text-align:center"><p>(5,4,1)</p></td>
-<td class="text-align:right"><p>?</p></td>
-</tr>
-<tr class="row-odd"><td class="text-align:left"><p>(1,4)</p></td>
-<td class="text-align:center"><p>(16,)</p></td>
-<td class="text-align:right"><p>?</p></td>
-</tr>
-</tbody>
-</table>
-<div class="dropdown admonition">
-<p class="admonition-title">Answer</p>
-<table class="colwidths-auto table">
-<thead>
-<tr class="row-odd"><th class="text-align:left head"><p>A Shape</p></th>
-<th class="text-align:center head"><p>B Shape</p></th>
-<th class="text-align:right head"><p>Output Shape</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td class="text-align:left"><p>(7,4,3)</p></td>
-<td class="text-align:center"><p>(1,)</p></td>
-<td class="text-align:right"><p>(7,4,3)</p></td>
-</tr>
-<tr class="row-odd"><td class="text-align:left"><p>(16, 16, 3)</p></td>
-<td class="text-align:center"><p>(3,)</p></td>
-<td class="text-align:right"><p>(16,16,3)</p></td>
-</tr>
-<tr class="row-even"><td class="text-align:left"><p>(2,4,5)</p></td>
-<td class="text-align:center"><p>(5,4,1)</p></td>
-<td class="text-align:right"><p><code class="docutils literal notranslate"><span class="pre">Error</span></code></p></td>
-</tr>
-<tr class="row-odd"><td class="text-align:left"><p>(1,4)</p></td>
-<td class="text-align:center"><p>(16,)</p></td>
-<td class="text-align:right"><p><code class="docutils literal notranslate"><span class="pre">Error</span></code></p></td>
+<tr class="row-odd"><td class="text-left"><p>(16,3,3)</p></td>
+<td class="text-center"><p>(4,1)</p></td>
+<td class="text-right"><p><code class="docutils literal notranslate"><span class="pre">Error</span></code></p></td>
 </tr>
 </tbody>
 </table>
 </div>
+<p>Try some for yourself!</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>A Shape</p></th>
+<th class="head text-center"><p>B Shape</p></th>
+<th class="head text-right"><p>Output Shape</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>(7,4,3)</p></td>
+<td class="text-center"><p>(1,)</p></td>
+<td class="text-right"><p>?</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>(16, 16, 3)</p></td>
+<td class="text-center"><p>(3,)</p></td>
+<td class="text-right"><p>?</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>(2,4,5)</p></td>
+<td class="text-center"><p>(5,4,1)</p></td>
+<td class="text-right"><p>?</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>(1,4)</p></td>
+<td class="text-center"><p>(16,)</p></td>
+<td class="text-right"><p>?</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>A Shape</p></th>
+<th class="head text-center"><p>B Shape</p></th>
+<th class="head text-right"><p>Output Shape</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>(7,4,3)</p></td>
+<td class="text-center"><p>(1,)</p></td>
+<td class="text-right"><p>(7,4,3)</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>(16, 16, 3)</p></td>
+<td class="text-center"><p>(3,)</p></td>
+<td class="text-right"><p>(16,16,3)</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>(2,4,5)</p></td>
+<td class="text-center"><p>(5,4,1)</p></td>
+<td class="text-right"><p><code class="docutils literal notranslate"><span class="pre">Error</span></code></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>(1,4)</p></td>
+<td class="text-center"><p>(16,)</p></td>
+<td class="text-right"><p><code class="docutils literal notranslate"><span class="pre">Error</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <section id="suggested-reading-for-broadcasting">
-<h3><span class="section-number">1.3.1. </span>Suggested Reading for Broadcasting<a class="headerlink" href="#suggested-reading-for-broadcasting" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">1.3.1. </span>Suggested Reading for Broadcasting<a class="headerlink" href="#suggested-reading-for-broadcasting" title="Link to this heading">#</a></h3>
 <p>You can read more about broadcastnig in the <a class="reference external" href="https://numpy.org/doc/stable/user/basics.broadcasting.html">numpy tutorial</a> or the <a class="reference external" href="https://jakevdp.github.io/PythonDataScienceHandbook/02.05-computation-on-arrays-broadcasting.html">Python Data Science Handbook</a>.</p>
 </section>
 </section>
 <section id="modifying-rank">
-<h2><span class="section-number">1.4. </span>Modifying Rank<a class="headerlink" href="#modifying-rank" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">1.4. </span>Modifying Rank<a class="headerlink" href="#modifying-rank" title="Link to this heading">#</a></h2>
 <aside class="margin sidebar">
 <p class="sidebar-title">newaxis</p>
 <p><code class="docutils literal notranslate"><span class="pre">newaxis</span></code> slices like <code class="docutils literal notranslate"><span class="pre">a[np.newaxis]</span></code> are possible
 in tensorflow, jax, and numpy. In PyTorch there is <code class="docutils literal notranslate"><span class="pre">unsqueeze</span></code>.
 You can also use <code class="docutils literal notranslate"><span class="pre">reshape</span></code> and ignore newaxis</p>
 </aside>
-<p>The last example we saw brings up an interesting questions: what if we want to add a (1,4) and (16,) to end up with a (4,16) tensor? We could insert a new axis at the end of <span class="math notranslate nohighlight">\(B\)</span> to make its shape (16, 1). This can be done using the <a class="reference external" href="https://numpy.org/doc/stable/reference/constants.html#numpy.newaxis" title="(in NumPy v1.24)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">np.newaxis</span></code></a> syntax:</p>
+<p>The last example we saw brings up an interesting questions: what if we want to add a (1,4) and (16,) to end up with a (4,16) tensor? We could insert a new axis at the end of <span class="math notranslate nohighlight">\(B\)</span> to make its shape (16, 1). This can be done using the <a class="reference external" href="https://numpy.org/doc/stable/reference/constants.html#numpy.newaxis" title="(in NumPy v2.4)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">np.newaxis</span></code></a> syntax:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
@@ -1153,7 +965,7 @@ You can also use <code class="docutils literal notranslate"><span class="pre">re
 </div>
 </div>
 </div>
-<p>Just as newaxis can increase rank, we can decrease rank. One way is to just slice, like <code class="docutils literal notranslate"><span class="pre">a[0]</span></code>. A more general way is to <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.squeeze.html#numpy.squeeze" title="(in NumPy v1.24)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">np.squeeze</span></code></a> which removes any axes that are dimension 1 without needing to know the specific axes that are dimension 1.</p>
+<p>Just as newaxis can increase rank, we can decrease rank. One way is to just slice, like <code class="docutils literal notranslate"><span class="pre">a[0]</span></code>. A more general way is to <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.squeeze.html#numpy.squeeze" title="(in NumPy v2.4)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">np.squeeze</span></code></a> which removes any axes that are dimension 1 without needing to know the specific axes that are dimension 1.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
@@ -1190,8 +1002,8 @@ after squeeze: (32, 4)
 </div>
 <p>I recommend against this because it can be a bit confusing and it’s really not saving that many keystrokes.</p>
 <section id="reshaping">
-<h3><span class="section-number">1.4.1. </span>Reshaping<a class="headerlink" href="#reshaping" title="Permalink to this headline">#</a></h3>
-<p>The most general way of changing rank and shape is through <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.reshape.html#numpy.reshape" title="(in NumPy v1.24)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">np.reshape</span></code></a>. This allows you to reshape a tensor, as long as the number of elements remains the same. You could make a (4, 2) into an (8,). You could make a (4, 3) into a (1, 4, 3, 1). Thus it can accomplish the two tasks done by <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.squeeze.html#numpy.squeeze" title="(in NumPy v1.24)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">np.squeeze</span></code></a> and <a class="reference external" href="https://numpy.org/doc/stable/reference/constants.html#numpy.newaxis" title="(in NumPy v1.24)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">np.newaxis</span></code></a>.</p>
+<h3><span class="section-number">1.4.1. </span>Reshaping<a class="headerlink" href="#reshaping" title="Link to this heading">#</a></h3>
+<p>The most general way of changing rank and shape is through <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.reshape.html#numpy.reshape" title="(in NumPy v2.4)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">np.reshape</span></code></a>. This allows you to reshape a tensor, as long as the number of elements remains the same. You could make a (4, 2) into an (8,). You could make a (4, 3) into a (1, 4, 3, 1). Thus it can accomplish the two tasks done by <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.squeeze.html#numpy.squeeze" title="(in NumPy v2.4)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">np.squeeze</span></code></a> and <a class="reference external" href="https://numpy.org/doc/stable/reference/constants.html#numpy.newaxis" title="(in NumPy v2.4)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">np.newaxis</span></code></a>.</p>
 <p>There is one special syntax element to shaping:  A <code class="docutils literal notranslate"><span class="pre">-1</span></code> dimension. <code class="docutils literal notranslate"><span class="pre">-1</span></code> can appear once in a reshape command and means to have the computer figure out what goes there. We know the number of elements doesn’t change in a reshape, so the computer can infer what goes in the dimension marked as <code class="docutils literal notranslate"><span class="pre">-1</span></code>. Let’s see some examples.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1235,7 +1047,7 @@ after squeeze: (32, 4)
 </div>
 </section>
 <section id="rank-slicing">
-<h3><span class="section-number">1.4.2. </span>Rank Slicing<a class="headerlink" href="#rank-slicing" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">1.4.2. </span>Rank Slicing<a class="headerlink" href="#rank-slicing" title="Link to this heading">#</a></h3>
 <p>Hopefully you’re familiar with slicing in numpy/Python. Review at the <a class="reference external" href="https://docs.python.org/3/tutorial/introduction.html#lists">Python Tutorial</a> and the <a class="reference external" href="https://numpy.org/doc/stable/reference/arrays.indexing.html">numpy tutorial</a> for a refresher if you need it. <strong>Rank Slicing</strong> is just my terminology for slicing without knowing the rank of a tensor. Use the <code class="docutils literal notranslate"><span class="pre">...</span></code> (ellipsis) keyword. This allows you to account for unknown rank when slicing. Examples:</p>
 <ul class="simple">
 <li><p>Access last axis: <code class="docutils literal notranslate"><span class="pre">a[...,:]</span></code></p></li>
@@ -1245,14 +1057,14 @@ after squeeze: (32, 4)
 </ul>
 <hr class="docutils" />
 <p>Let’s see if we can put together our skills to implement the equation example from above,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-79a192a4-6645-4528-bc69-90467aa48036">
-<span class="eqno">(1.14)<a class="headerlink" href="#equation-79a192a4-6645-4528-bc69-90467aa48036" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-cdf64931-c266-4850-a1fb-1c283bd6ca54">
+<span class="eqno">(1.14)<a class="headerlink" href="#equation-cdf64931-c266-4850-a1fb-1c283bd6ca54" title="Permalink to this equation">#</a></span>\[\begin{equation}
     g = \exp\left(a - b\right)^2
 \end{equation}\]</div>
 <p>for arbitrary rank <span class="math notranslate nohighlight">\(a\)</span>. Recall <span class="math notranslate nohighlight">\(b\)</span> is a rank 1 tensor and we want <span class="math notranslate nohighlight">\(g\)</span> to be the rank of <span class="math notranslate nohighlight">\(a + 1\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">eq</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">eq</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="n">a</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
 
 
@@ -1278,15 +1090,15 @@ input a2: (4, 3, 2, 1) output: (4, 3, 2, 1, 4)
 </section>
 </section>
 <section id="view-vs-copy">
-<h2><span class="section-number">1.5. </span>View vs Copy<a class="headerlink" href="#view-vs-copy" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">1.5. </span>View vs Copy<a class="headerlink" href="#view-vs-copy" title="Link to this heading">#</a></h2>
 <aside class="margin sidebar">
 <p class="sidebar-title"></p>
 <p>In most machine learning frameworks, it is actually not possible to modify an array because element assignment interferes with automatic differentiation. So this distinction of a view vs a copy is irrelevant.</p>
 </aside>
-<p>Most slicing and reshaping operations produce a <strong>view</strong> of the original array. That means no copy operation is done. This is default behavior in all frameworks to reduce required memory – you can slice as much as you want without increasing memory use. This typically has no consequences for how we program; it is more of an optimization detail. However, if you modify elements in a view, you will also modify the original array from which the view was constructed. Sometimes this can be unexpected. You should not rely on this behavior though, because in <code class="docutils literal notranslate"><span class="pre">numpy</span></code> a copy may be returned for certain <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.reshape.html#numpy.reshape" title="(in NumPy v1.24)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">np.reshape</span></code></a> and <a class="reference external" href="https://numpy.org/doc/stable/reference/arrays.indexing.html#advanced-indexing">slicing commands</a>. Thus, I recommend being aware that views may be returned as an optimization, but not assume that is always the case. If you actually want a copy you should explicitly create a copy, like with <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.copy.html#numpy.copy" title="(in NumPy v1.24)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">np.copy</span></code></a>.</p>
+<p>Most slicing and reshaping operations produce a <strong>view</strong> of the original array. That means no copy operation is done. This is default behavior in all frameworks to reduce required memory – you can slice as much as you want without increasing memory use. This typically has no consequences for how we program; it is more of an optimization detail. However, if you modify elements in a view, you will also modify the original array from which the view was constructed. Sometimes this can be unexpected. You should not rely on this behavior though, because in <code class="docutils literal notranslate"><span class="pre">numpy</span></code> a copy may be returned for certain <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.reshape.html#numpy.reshape" title="(in NumPy v2.4)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">np.reshape</span></code></a> and <a class="reference external" href="https://numpy.org/doc/stable/reference/arrays.indexing.html#advanced-indexing">slicing commands</a>. Thus, I recommend being aware that views may be returned as an optimization, but not assume that is always the case. If you actually want a copy you should explicitly create a copy, like with <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.copy.html#numpy.copy" title="(in NumPy v2.4)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">np.copy</span></code></a>.</p>
 </section>
 <section id="chapter-summary">
-<h2><span class="section-number">1.6. </span>Chapter Summary<a class="headerlink" href="#chapter-summary" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">1.6. </span>Chapter Summary<a class="headerlink" href="#chapter-summary" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Tensors are the building blocks of machine learning. A tensor has a rank and shape that specifies how many elements it has and how they are arranged. An axis describes each element in the shape.</p></li>
 <li><p>A euclidean vector is a rank 1 tensor with shape (3). It has 1 axis of dimension 3. A matrix is a rank 2 tensor. It has two axes.</p></li>
@@ -1297,11 +1109,11 @@ input a2: (4, 3, 2, 1) output: (4, 3, 2, 1, 4)
 </ul>
 </section>
 <section id="exercises">
-<h2><span class="section-number">1.7. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">1.7. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
 <section id="id2">
-<h3><span class="section-number">1.7.1. </span>Einstein notation<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">1.7.1. </span>Einstein notation<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
 <p>Write out the following in Einstein notation:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Matrix product of two matrices</p></li>
 <li><p>Trace of a matrix</p></li>
 <li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Outer_product">Outer product</a> of two Euclidean vectors</p></li>
@@ -1309,9 +1121,9 @@ input a2: (4, 3, 2, 1) output: (4, 3, 2, 1, 4)
 </ol>
 </section>
 <section id="reductions">
-<h3><span class="section-number">1.7.2. </span>Reductions<a class="headerlink" href="#reductions" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">1.7.2. </span>Reductions<a class="headerlink" href="#reductions" title="Link to this heading">#</a></h3>
 <p>Answer the following with Python code with reductions. Write your code to be as general as possible – being able to take arbitrary rank tensors unless it is specified that something is a vector.</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Normalize a vector so that the sum of its elements is 1. Note the rank of the vector should be unchanged.</p></li>
 <li><p>Normalize the last axis of a tensor</p></li>
 <li><p>Compute the mean squared error between two tensors</p></li>
@@ -1319,8 +1131,8 @@ input a2: (4, 3, 2, 1) output: (4, 3, 2, 1, 4)
 </ol>
 </section>
 <section id="broadcasting-and-shapes">
-<h3><span class="section-number">1.7.3. </span>Broadcasting and Shapes<a class="headerlink" href="#broadcasting-and-shapes" title="Permalink to this headline">#</a></h3>
-<ol class="simple">
+<h3><span class="section-number">1.7.3. </span>Broadcasting and Shapes<a class="headerlink" href="#broadcasting-and-shapes" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
 <li><p>Consider two vectors <span class="math notranslate nohighlight">\(\vec{a}\)</span> and <span class="math notranslate nohighlight">\(\vec{b}\)</span>. Using reshaping and broadcasting alone, write python code to compute their outer product.</p></li>
 <li><p>Why is the code <code class="docutils literal notranslate"><span class="pre">a.reshape((-1,</span> <span class="pre">3,</span> <span class="pre">-1))</span></code> invalid?</p></li>
 <li><p>You have a tensor of unknown rank <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> and would like to subtract both 3.5 and 2.5 from every element, giving two outputs for every input. Your output will be a new tensor <span class="math notranslate nohighlight">\(\mathbf{B}\)</span> with rank <span class="math notranslate nohighlight">\(\textrm{rank}(\mathbf{A}) + 1\)</span>. The last axis of <span class="math notranslate nohighlight">\(\mathbf{B}\)</span> should be dimension 2. Here is the example:</p></li>
@@ -1343,13 +1155,14 @@ input a2: (4, 3, 2, 1) output: (4, 3, 2, 1, 4)
 </section>
 </section>
 <section id="cited-references">
-<h2><span class="section-number">1.8. </span>Cited References<a class="headerlink" href="#cited-references" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">1.8. </span>Cited References<a class="headerlink" href="#cited-references" title="Link to this heading">#</a></h2>
 <div class="docutils container" id="id3">
-<dl class="citation">
-<dt class="label" id="id191"><span class="brackets"><a class="fn-backref" href="#id1">Str20</a></span></dt>
-<dd><p>J Straub. Mathematical methods for molecular science. 2020.</p>
-</dd>
-</dl>
+<div role="list" class="citation-list">
+<div class="citation" id="id191" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">Str20</a><span class="fn-bracket">]</span></span>
+<p>J Straub. Mathematical methods for molecular science. 2020.</p>
+</div>
+</div>
 </div>
 </section>
 </section>
@@ -1366,7 +1179,7 @@ input a2: (4, 3, 2, 1) output: (4, 3, 2, 1, 4)
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./math"
         },
         predefinedOutput: true
@@ -1374,53 +1187,129 @@ input a2: (4, 3, 2, 1) output: (4, 3, 2, 1, 4)
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../index.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Overview</p>
-        </div>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Overview</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="../ml/introduction.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="../ml/introduction.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title"><span class="section-number">2. </span>Introduction to Machine Learning</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#einstein-notation">1.1. Einstein Notation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tensor-operations">1.2. Tensor Operations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reduction-operations">1.2.1. Reduction Operations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#element-operations">1.2.2. Element Operations</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#broadcasting">1.3. Broadcasting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#suggested-reading-for-broadcasting">1.3.1. Suggested Reading for Broadcasting</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modifying-rank">1.4. Modifying Rank</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reshaping">1.4.1. Reshaping</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rank-slicing">1.4.2. Rank Slicing</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#view-vs-copy">1.5. View vs Copy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-summary">1.6. Chapter Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">1.7. Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1.7.1. Einstein notation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reductions">1.7.2. Reductions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#broadcasting-and-shapes">1.7.3. Broadcasting and Shapes</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cited-references">1.8. Cited References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-    By Andrew D. White<br/>
-  
-      &copy; Copyright 2022.<br/>
-    <div class="extra_footer">
-      <a href="http://thewhitelab.org">thewhitelab.org</a> <div id="wh-modal"> <button class="wh-venti-button" aria-label="close modal" id="wh-modal-close">✕</button> <img id="wh-modal-img"> </div>
-    </div>
-</p>
-        </footer>
-    </div>
+  <div class="footer-item">
     
+<p class="component-author">
+By Andrew D. White
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <a href="http://thewhitelab.org">thewhitelab.org</a> <div id="wh-modal"> <button class="wh-venti-button" aria-label="close modal" id="wh-modal-close">✕</button> <img id="wh-modal-img"> </div>
 </div>
+  </div>
+  
+</div>
+          </footer>
+        
 
-
-      </div>
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

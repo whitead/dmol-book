@@ -1,12 +1,13 @@
 ---
-html_meta:
-  "description lang=en": "Deep Learning for Molecules & Materials Book"
-  "property=og:locale": "en_US"
-  "twitter:card": "summary"
-  "twitter:description": "Deep Learning for Molecules & Materials Book"
-  "twitter:title": "dmol.pub 📖"
-  "twitter:image": "https://dmol.pub/_static/robot-chem.png"
-  "twitter:site": "@andrewwhite01"
+myst:
+  html_meta:
+    "description lang=en": "Deep Learning for Molecules & Materials Book"
+    "property=og:locale": "en_US"
+    "twitter:card": "summary"
+    "twitter:description": "Deep Learning for Molecules & Materials Book"
+    "twitter:title": "dmol.pub 📖"
+    "twitter:image": "https://dmol.pub/_static/robot-chem.png"
+    "twitter:site": "@andrewwhite01"
 ---
 ![Header image showing molecules plotted in two different ways](_static/images/header.png)
 
@@ -24,7 +25,7 @@ The target audience of this book is students with a programming and chemistry ba
 
 ## Framework Choice
 
-Deep learning is always a little tied up in the implementation details -- it's hard to grasp without seeing code. Thus, framework choice can be a part of the learning process. This book assumes familiarity with Python and `numpy` and we use exclusively Python. For the deep learning framework, we use `Jax`, `Tensorflow`, `Keras`, and `scikit-learn` for different purposes. `Jax` is easy to learn because it's essentially `numpy` with automatic differentiation and GPU/TPU-acceleration. In this book, we use `Jax` when it's important to understand the implementation details and connect the equations to the code. `Keras` is a high-level framework that has many common deep learning features implemented. It is used when we would like to work with more complex models and I'm trying to show a more complete model. Of course, you can use `Jax` for complete models and show detailed implementations in `Keras`. This is just my reasoning for the choice of framework. `scikit-learn` is an ML package and thus we'll see in the early chapters on ML. Finally, `Tensorflow` is the underlying library of `Keras` so if we want to implement new layers in `Keras` we do it through `Tensorflow`. `TensorflowProbability` is an extension to `Tensorflow` that supports random variables and probability distributions used in our generative models. The most important framework left out of this book is `PyTorch`, which has recently taken the lead to be the most popular framework in deep learning research (not necessarily industry). Ultimately, this book presents the equations and implementation details so that you will learn concepts that are independent of the framework. You should thus be able to quickly pick up `PyTorch`, MXNet, or whatever the next new framework might be.
+Deep learning is always a little tied up in the implementation details -- it's hard to grasp without seeing code. Thus, framework choice can be a part of the learning process. This book assumes familiarity with Python and `numpy` and we use exclusively Python. For the deep learning framework, we use `jax`, `PyTorch`, and `scikit-learn` for different purposes. `Jax` is easy to learn because it's essentially `numpy` with automatic differentiation and GPU/TPU-acceleration. In this book, we use `Jax` when it's important to understand the implementation details and connect the equations to the code. `PyTorch` is a more opinionated framework that has many common deep learning features implemented. It is used when we would like to work with more complex models and I'm trying to show a more complete model. Of course, you can use `Jax` for complete models and show detailed implementations in `PyTorch`. This is just my reasoning for the choice of framework. `scikit-learn` is an ML package and thus we'll see in the early chapters on ML. `PyTorch` is now the leading framework in deep learning research. This may change someday, but I would say it's about 80% `PyTorch` now and 15% `jax`. I personally think `jax` is a beautiful language that teaches quite a bit, but if you want to jump into frontier research `PyTorch` will catch you up with the latest models. Ultimately, this book presents the equations and implementation details so that you will learn concepts that are independent of the framework. You should thus be able to quickly pick up `tensorflow`, MXNet, or whatever the next new framework might be.
 
 One of the most common mistakes I see from students is that they try to learn deep learning via web searching questions and reading documentation. *This is a terrible way to learn deep learning.* There is quite a bit of information out there, but you will end up with a distorted and framework-specific understanding of deep learning. Remember, a high-ranking search result may be relevant and popular, but that doesn't mean it will help you learn. More importantly, learning deep learning through blogs and Stack overflow makes it so hard to grasp the mathematics and intuition. Web searching and hacking together code is definitely a part of deep learning (for better or worse), but you should do this once you have a firm grasp of the math and details of the model you want to implement.
 
@@ -37,7 +38,7 @@ When using interactivity, many of the chapter will benefit from using a graphics
 
 ## Example models
 
-Here are the major models we will construct learn to implement in this book: *Sorry, but I'm unable to link directly to the examples, so you'll need to scroll to them.*
+Here are the major models we will learn to implement in this book:
 
 1. We explore predicting solubility of molecules with {doc}`graph convolutional neural networks<dl/gnn>`, {doc}`recurrent neural networks<dl/NLP>`, {doc}`dense neural networks<dl/xai>`, and {doc}`kernel learning<ml/kernel>`.
 2. We implement a SchNet model to {doc}`predict what space group a structure belongs to<dl/gnn>`.

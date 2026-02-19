@@ -1,10 +1,12 @@
 
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="../" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta content="Deep Learning for Molecules &amp; Materials Book" lang="en" name="description" xml:lang="en" />
 <meta content="en_US" property="og:locale" />
 <meta content="summary" name="twitter:card" />
@@ -13,114 +15,176 @@
 <meta content="https://dmol.pub/_static/logo.png" name="twitter:image" />
 <meta content="&#64;andrewwhite01" name="twitter:site" />
 
-    <title>17. Generative RNN in Browser &#8212; deep learning for molecules &amp; materials</title>
-    
+    <title>18. Generative RNN in Browser &#8212; deep learning for molecules &amp; materials</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/a11y.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=cb1cce99" />
+    <link rel="stylesheet" type="text/css" href="../_static/a11y.css?v=ffeaf963" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
-    <script src="../_static/custom.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <script src="../_static/togglebutton.js?v=1ae7504c"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'applied/MolGenerator';</script>
+    <script src="../_static/custom.js?v=3f5092eb"></script>
     <link rel="canonical" href="https://dmol.pub/applied/MolGenerator.html" />
-    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <link rel="icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="18. Hyperparameter Tuning" href="../dl/Hyperparameter_tuning.html" />
-    <link rel="prev" title="16. Predicting DFT Energies with GNNs" href="QM9.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+    <link rel="next" title="19. Equivariant Neural Network for Predicting Trajectories" href="e3nn_traj.html" />
+    <link rel="prev" title="17. Predicting DFT Energies with GNNs" href="QM9.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
-    
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../_static/logo.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">deep learning for molecules & materials</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="deep learning for molecules & materials - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="deep learning for molecules & materials - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -129,505 +193,305 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  A. Math Review
- </span>
-</p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">A. Math Review</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../math/tensors-and-shapes.html">
-   1. Tensors and Shapes
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../math/tensors-and-shapes.html">1. Tensors and Shapes</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  B. Machine Learning
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">B. Machine Learning</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../ml/introduction.html">
-   2. Introduction to Machine Learning
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../ml/regression.html">
-   3. Regression &amp; Model Assessment
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../ml/classification.html">
-   4. Classification
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../ml/kernel.html">
-   5. Kernel Learning
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../ml/introduction.html">2. Introduction to Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ml/regression.html">3. Regression &amp; Model Assessment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ml/classification.html">4. Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ml/kernel.html">5. Kernel Learning</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  C. Deep Learning
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">C. Deep Learning</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/introduction.html">
-   6. Deep Learning Overview
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/layers.html">
-   7. Standard Layers
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/gnn.html">
-   8. Graph Neural Networks
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/data.html">
-   9. Input Data &amp; Equivariances
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/Equivariant.html">
-   10. Equivariant Neural Networks
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/xai.html">
-   11. Explaining Predictions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/attention.html">
-   12. Attention Layers
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/NLP.html">
-   13. Deep Learning on Sequences
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/VAE.html">
-   14. Variational Autoencoder
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/flows.html">
-   15. Normalizing Flows
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/introduction.html">6. Deep Learning Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/layers.html">7. Standard Layers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/gnn.html">8. Graph Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/data.html">9. Input Data &amp; Equivariances</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/Equivariant.html">10. Equivariant Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/xai.html">11. Explaining Predictions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/attention.html">12. Attention Layers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/NLP.html">13. Deep Learning on Sequences</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/VAE.html">14. Variational Autoencoder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/flows.html">15. Normalizing Flows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/molnets.html">16. Modern Molecular NNs</a></li>
+
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  D. Applications
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">D. Applications</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="QM9.html">
-   16. Predicting DFT Energies with GNNs
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   17. Generative RNN in Browser
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="QM9.html">17. Predicting DFT Energies with GNNs</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">18. Generative RNN in Browser</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  E. Contributed Chapters
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">E. Contributed Chapters</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/Hyperparameter_tuning.html">
-   18. Hyperparameter Tuning
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e3nn_traj.html">
-   19. Equivariant Neural Network for Predicting Trajectories
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/pretraining.html">
-   20. Pretraining
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="e3nn_traj.html">19. Equivariant Neural Network for Predicting Trajectories</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/pretraining.html">20. Pretraining</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  F. Appendix
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">F. Appendix</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../style.html">
-   21. Style Guide
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../changelog.html">
-   22. Changelog
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  G. In Progress
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/molnets.html">
-   23. Modern Molecular NNs
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../style.html">21. Style Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">22. Changelog</a></li>
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            <script async defer src="https://api.dmol.pub/latest.js"></script><noscript><img src="https://api.dmol.pub/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript> By <a href="https://twitter.com/andrewwhite01">Andrew White</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
-</div>
-
-
-          
-
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
   
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://colab.research.google.com/github/whitead/dmol-book/blob/master/applied/MolGenerator.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Colab"
->
   
-
-<span class="headerbtn__icon-container">
-  
-    <img src="../_static/images/logo_colab.png">
-  </span>
-<span class="headerbtn__text-container">Colab</span>
-</a>
-
-      </li>
-      
-    </ul>
+  <div class="sidebar-primary-items__end sidebar-primary__section">
   </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/whitead/dmol-book/blob/master/applied/MolGenerator.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
 </div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/whitead/dmol-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/whitead/dmol-book/issues/new?title=Issue%20on%20page%20%2Fapplied/MolGenerator.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/applied/MolGenerator.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
 
 <button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/whitead/dmol-book"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
+`);
+</script>
 
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
 
-      </li>
-      
-      <li>
-        <a href="https://github.com/whitead/dmol-book/issues/new?title=Issue%20on%20page%20%2Fapplied/MolGenerator.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../_sources/applied/MolGenerator.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.ipynb</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
 </button>
-
-      </li>
+</div></div>
       
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
+    </div>
   
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
-
-    </div>
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#running-this-notebook">
-   17.1. Running This Notebook
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#approach-1-token-sampling">
-   17.2. Approach 1: Token Sampling
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#approach-2-token-rnn">
-   17.3. Approach 2: Token RNN
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#data-construction">
-     17.3.1. Data Construction
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#model-construction">
-     17.3.2. Model Construction
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#training">
-     17.3.3. Training
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#inference">
-     17.3.4. Inference
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#model-deployment">
-   17.4. Model Deployment
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#cited-references">
-   17.5. Cited References
-  </a>
- </li>
-</ul>
-
-    </nav>
 </div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Generative RNN in Browser</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#running-this-notebook">
-   17.1. Running This Notebook
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#approach-1-token-sampling">
-   17.2. Approach 1: Token Sampling
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#approach-2-token-rnn">
-   17.3. Approach 2: Token RNN
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#data-construction">
-     17.3.1. Data Construction
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#model-construction">
-     17.3.2. Model Construction
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#training">
-     17.3.3. Training
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#inference">
-     17.3.4. Inference
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#model-deployment">
-   17.4. Model Deployment
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#cited-references">
-   17.5. Cited References
-  </a>
- </li>
-</ul>
+              
+              
 
-                        </nav>
-                    </div>
-                </div>
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Generative RNN in Browser</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
             </div>
-            <main id="main-content" role="main">
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-this-notebook">18.1. Running This Notebook</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#approach-1-token-sampling">18.2. Approach 1: Token Sampling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#approach-2-token-rnn">18.3. Approach 2: Token RNN</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-construction">18.3.1. Data Construction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-construction">18.3.2. Model Construction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training">18.3.3. Training</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inference">18.3.4. Inference</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-deployment">18.4. Model Deployment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cited-references">18.5. Cited References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
                 
-              <div>
-                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
   <section class="tex2jax_ignore mathjax_ignore" id="generative-rnn-in-browser">
-<h1><span class="section-number">17. </span>Generative RNN in Browser<a class="headerlink" href="#generative-rnn-in-browser" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">18. </span>Generative RNN in Browser<a class="headerlink" href="#generative-rnn-in-browser" title="Link to this heading">#</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This chapter uses TensorFlow/Keras instead of PyTorch because the trained model is deployed to the browser via TensorFlow.js. See the live demo at <a class="reference external" href="https://whitead.github.io/molecule-dream/">Molecule Dream</a>.</p>
+</div>
 <p>This chapter builds on the model and information presented in <a class="reference internal" href="../dl/NLP.html"><span class="doc">Deep Learning on Sequences</span></a>. We’ll see how to develop, train, and deploy a model to a website. The goal is to develop a model that can propose new molecules. A “molecule” is a broad term, so we’ll restrict ourselves to molecules like those that might be used for a small molecule drug. These are called drug-like. There is an existing database for this task called <a class="reference external" href="http://zinc15.docking.org/">ZINC</a> (recursive acronym: <em>ZINC is not commercial</em>). The ZINC database contains 750 million molecules (as SMILES) that <strong>can be purchased directly</strong>. By training with ZINC, you are restricting your training distribution to molecules that can be synthesized.<span id="id1">[<a class="reference internal" href="#id7" title="Teague Sterling and John J Irwin. Zinc 15–ligand discovery for everyone. Journal of chemical information and modeling, 55(11):2324–2337, 2015.">SI15</a>]</span></p>
 <p>750 million molecules is often enough. Instead of generating new molecules with a model, you can just sample from ZINC and be assured that each molecule is purchasable. Sometimes that is not possible because we’re more interested in building a representation (a vector for each molecule), rather than actually sampling like in self-supervised learning. My recommendation in projects is to strongly consider just using ZINC directly if possible. We’ll continue on for our approach, because we may go on to use the RNN for “downstream tasks” like predicting solubility using the self-supervised trained RNN.</p>
 <p>You can see the final idea of what we’re trying to accomplish in this chapter at <a class="reference external" href="https://whitead.github.io/molecule-dream/">whitead.github.io/molecule-dream/</a>. This model was generated using our final code at the bottom.</p>
 <section id="running-this-notebook">
-<h2><span class="section-number">17.1. </span>Running This Notebook<a class="headerlink" href="#running-this-notebook" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">18.1. </span>Running This Notebook<a class="headerlink" href="#running-this-notebook" title="Link to this heading">#</a></h2>
 <p>Click the  <i aria-label="Launch interactive content" class="fas fa-rocket"></i>  above to launch this page as an interactive Google Colab. See details below on installing packages.</p>
 <div class="dropdown admonition tip">
 <p class="admonition-title">Tip</p>
@@ -639,19 +503,36 @@ title="Print to PDF"
 </div>
 </section>
 <section id="approach-1-token-sampling">
-<h2><span class="section-number">17.2. </span>Approach 1: Token Sampling<a class="headerlink" href="#approach-1-token-sampling" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">18.2. </span>Approach 1: Token Sampling<a class="headerlink" href="#approach-1-token-sampling" title="Link to this heading">#</a></h2>
 <p>At first, it may seem simple to generate new molecules. Any sequence of SELFIES is a valid molecule <span id="id2">[<a class="reference internal" href="#id6" title="Mario Krenn, Florian Häse, AkshatKumar Nigam, Pascal Friederich, and Alan Aspuru-Guzik. Self-referencing embedded strings (selfies): a 100% robust molecular string representation. Machine Learning: Science and Technology, 1(4):045024, 2020.">KHaseN+20</a>]</span>. Let’s start by trying this approach – making random sequences. Recall that a sequence is an array of tokens, like characters or words. In SELFIES, the tokens are very clear because they are enclosed by square brackets. For example,<code class="docutils literal notranslate"><span class="pre">[C][C]</span></code> is a SELFIES sequence with two tokens.</p>
 <p>We want to generate new molecules similar to ZINC remember, so we’ll start by extracting all unique tokens from that database. To save everyone a little time, we’ll work with a subset of ZINC that has about 250,000 molecules that comes from the SELFIES repo.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">selfies</span> <span class="k">as</span> <span class="nn">sf</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">rdkit</span><span class="o">,</span> <span class="nn">rdkit.Chem</span><span class="o">,</span> <span class="nn">rdkit.Chem.Draw</span>
-<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
-<span class="kn">import</span> <span class="nn">dmol</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Protobuf gencode version&quot;</span><span class="p">)</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">selfies</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sf</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tensorflow</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tf</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">rdkit</span><span class="o">,</span><span class="w"> </span><span class="nn">rdkit.Chem</span><span class="o">,</span><span class="w"> </span><span class="nn">rdkit.Chem.Draw</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">dmol</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">7</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="ne">----&gt; </span><span class="mi">7</span> <span class="kn">import</span><span class="w"> </span><span class="nn">tensorflow</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tf</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="kn">import</span><span class="w"> </span><span class="nn">rdkit</span><span class="o">,</span><span class="w"> </span><span class="nn">rdkit.Chem</span><span class="o">,</span><span class="w"> </span><span class="nn">rdkit.Chem.Draw</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;tensorflow&#39;
 </pre></div>
 </div>
 </div>
@@ -661,11 +542,6 @@ title="Print to PDF"
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_url</span> <span class="o">=</span> <span class="s2">&quot;https://github.com/aspuru-guzik-group/selfies/raw/16a489afa70882428bc194b2b24a2d33573f1651/examples/vae_example/datasets/dataJ_250k_rndm_zinc_drugs_clean.txt&quot;</span>
 <span class="n">pd_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_url</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total data size&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">pd_data</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total data size 249455
 </pre></div>
 </div>
 </div>
@@ -685,11 +561,6 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[C][C@@H1][C][C][Branch2][Ring1][Ring2][N][C][=C][N][=C][C][Branch1][=Branch2][C][=N][N][=C][N][Ring1][Branch1][C][=C][Ring1][N][C][C@@H1][Branch1][C][C][C][Ring2][Ring1][Ring2]
-</pre></div>
-</div>
-</div>
 </div>
 <p>Let’s extract now all the possible tokens and count them. I’ll initialize my list with the ‘[nop]’ token, which is the SELFIES null token we’ll use later for padding.</p>
 <div class="cell docutils container">
@@ -697,7 +568,7 @@ title="Print to PDF"
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">selfies_symbol_counts</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;[nop]&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
 
 
-<span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">parse</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">si</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;[&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]:</span>
         <span class="n">token</span> <span class="o">=</span> <span class="s2">&quot;[&quot;</span> <span class="o">+</span> <span class="n">si</span>
         <span class="k">if</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">selfies_symbol_counts</span><span class="p">:</span>
@@ -715,20 +586,6 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[C] 3533632
-[=C] 1124758
-[Ring1] 858765
-[Branch1] 621080
-[=Branch1] 523631
-[N] 508933
-[=O] 318168
-[O] 279513
-[Branch2] 202232
-[Ring2] 177924
-</pre></div>
-</div>
-</div>
 </div>
 <p>We’ll finish up parsing by creating a dictionary to go back from string to index and a list for our vocab.</p>
 <div class="cell docutils container">
@@ -737,14 +594,14 @@ title="Print to PDF"
 <span class="n">vocab_stoi</span> <span class="o">=</span> <span class="p">{</span><span class="n">o</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">o</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">vocab</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vocab</span><span class="p">)))}</span>
 
 
-<span class="k">def</span> <span class="nf">selfies2ints</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">selfies2ints</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
     <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">si</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;[&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]:</span>
         <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vocab_stoi</span><span class="p">[</span><span class="s2">&quot;[&quot;</span> <span class="o">+</span> <span class="n">si</span><span class="p">])</span>
     <span class="k">return</span> <span class="n">result</span>
 
 
-<span class="k">def</span> <span class="nf">ints2selfies</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">ints2selfies</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
     <span class="k">return</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">vocab</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">v</span><span class="p">])</span>
 
 
@@ -759,18 +616,11 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>selfies: [C][C@@H1][C][C][Branch2][Ring1][Ring2][N][C][=C][N][=C][C][Branch1][=Branch2][C][=N][N][=C][N][Ring1][Branch1][C][=C][Ring1][N][C][C@@H1][Branch1][C][C][C][Ring2][Ring1][Ring2]
-selfies2ints: [1, 2, 1, 1, 3, 4, 5, 6, 1, 7, 6, 7, 1, 8, 9, 1, 10, 6, 7, 6, 4, 8, 1, 7, 4, 6, 1, 2, 8, 1, 1, 1, 5, 4, 5]
-ints2selfes: [C][C@@H1][C][C][Branch2][Ring1][Ring2][N][C][=C][N][=C][C][Branch1][=Branch2][C][=N][N][=C][N][Ring1][Branch1][C][=C][Ring1][N][C][C@@H1][Branch1][C][C][C][Ring2][Ring1][Ring2]
-</pre></div>
-</div>
-</div>
 </div>
 <p>Now we’ll try sampling directly from the tokens. I’m not very good at inferring if a SELFIES string is a reasonable molecule, so we’ll render a few using rdkit.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">model1</span><span class="p">():</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">model1</span><span class="p">():</span>
     <span class="c1"># pick random length</span>
     <span class="n">length</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
     <span class="n">seq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">vocab</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="n">length</span><span class="p">)</span>
@@ -781,10 +631,10 @@ ints2selfes: [C][C@@H1][C][C][Branch2][Ring1][Ring2][N][C][=C][N][=C][C][Branch1
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">draw_examples</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">draw_examples</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
     <span class="n">examples</span> <span class="o">=</span> <span class="p">[</span><span class="n">ints2selfies</span><span class="p">(</span><span class="n">model</span><span class="p">())</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">)]</span>
     <span class="n">examples_smiles</span> <span class="o">=</span> <span class="p">[</span><span class="n">sf</span><span class="o">.</span><span class="n">decoder</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">examples</span><span class="p">]</span>
-    <span class="kn">from</span> <span class="nn">rdkit.Chem</span> <span class="kn">import</span> <span class="n">rdDepictor</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">rdkit.Chem</span><span class="w"> </span><span class="kn">import</span> <span class="n">rdDepictor</span>
 
     <span class="n">examples_mols</span> <span class="o">=</span> <span class="p">[</span><span class="n">rdkit</span><span class="o">.</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">examples_smiles</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">rdkit</span><span class="o">.</span><span class="n">Chem</span><span class="o">.</span><span class="n">Draw</span><span class="o">.</span><span class="n">MolsToGridImage</span><span class="p">(</span>
@@ -796,8 +646,6 @@ ints2selfes: [C][C@@H1][C][C][Branch2][Ring1][Ring2][N][C][=C][N][=C][C][Branch1
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/MolGenerator_16_0.svg" src="../_images/MolGenerator_16_0.svg" /></div>
 </div>
 <p>As you can see, these molecules are a bit extreme – we see bizarre valences and highly unusual combinations of elements. We can try to sample now according to the frequency of tokens we saw in the corpus (ZINC smiles).</p>
 <div class="cell docutils container">
@@ -810,7 +658,7 @@ ints2selfes: [C][C@@H1][C][C][Branch2][Ring1][Ring2][N][C][=C][N][=C][C][Branch1
 <span class="n">token_counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">token_counts</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">model2</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">model2</span><span class="p">():</span>
     <span class="c1"># pick random length</span>
     <span class="n">length</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
     <span class="n">seq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span>
@@ -825,13 +673,11 @@ ints2selfes: [C][C@@H1][C][C][Branch2][Ring1][Ring2][N][C][=C][N][=C][C][Branch1
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/MolGenerator_18_0.svg" src="../_images/MolGenerator_18_0.svg" /></div>
 </div>
 <p>These are much better! Still, they are very exotic – if they could even be synthesized they would probably explode if you sneezed on them. The advantage of SELFIES over SMILES is that none of these were invalid. Just a bit unreasonable.</p>
 </section>
 <section id="approach-2-token-rnn">
-<h2><span class="section-number">17.3. </span>Approach 2: Token RNN<a class="headerlink" href="#approach-2-token-rnn" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">18.3. </span>Approach 2: Token RNN<a class="headerlink" href="#approach-2-token-rnn" title="Link to this heading">#</a></h2>
 <p>Our next approach will be to use a recurrent neural network as we did in <a class="reference internal" href="../dl/NLP.html"><span class="doc">Deep Learning on Sequences</span></a>. We will make one major change. The RNN will be trained to predict a whole sequence instead of one value (like solubility). This training process is called self-supervised. We create labels, from splitting up the training data, so it is not exactly unsupervised.</p>
 <p>The way we implement self-supervised training with an RNN is that we feed it a sequence up to position <span class="math notranslate nohighlight">\(i-1\)</span> and then ask it to predict the sequence value at position <span class="math notranslate nohighlight">\(i\)</span>. Then at inference time, we feed its output at <span class="math notranslate nohighlight">\(i - 1\)</span> as the input to <span class="math notranslate nohighlight">\(i\)</span>. There are a few tricks to make this efficient. The first is that if we split our data into all possible pairs of training labels (sequence up to <span class="math notranslate nohighlight">\(i - 1\)</span>) and labels (value at <span class="math notranslate nohighlight">\(i\)</span>), we’ll have <span class="math notranslate nohighlight">\(N\times L\)</span> examples which in our case is about 100 million. To treat this, we’ll consider the predicted label to be the whole sequence <span class="math notranslate nohighlight">\(\vec{\hat{y}}\)</span>  and that will include each individual prediction challenge. For example, predicting <span class="math notranslate nohighlight">\(\hat{y}\)</span> given <span class="math notranslate nohighlight">\(x_0, x_1, x_2\)</span> will be the value of <span class="math notranslate nohighlight">\(\vec{\hat{y}}\)</span> at index 3.</p>
 <p>You’ll notice there is a bit of a length mismatch with this approach. What would <span class="math notranslate nohighlight">\(\hat{y}_0\)</span> correspond to? You might say it is the predicted label without any input features, but RNNs require an input to have an output. Instead, we’ll prefix every sequence with the special <code class="docutils literal notranslate"><span class="pre">[nop]</span></code> token which means do nothing. Then <span class="math notranslate nohighlight">\(\hat{0}\)</span> will be the prediction given a <code class="docutils literal notranslate"><span class="pre">[nop]</span></code> token. We just need to remember at inference time we need to always begin with the <code class="docutils literal notranslate"><span class="pre">[nop]</span></code> token to match the training conditions.</p>
@@ -839,7 +685,7 @@ ints2selfes: [C][C@@H1][C][C][Branch2][Ring1][Ring2][N][C][=C][N][=C][C][Branch1
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@dataclass</span>
-<span class="k">class</span> <span class="nc">Config</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Config</span><span class="p">:</span>
     <span class="n">vocab_size</span><span class="p">:</span> <span class="nb">int</span>
     <span class="n">example_number</span><span class="p">:</span> <span class="nb">int</span>
     <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span>
@@ -861,7 +707,7 @@ ints2selfes: [C][C@@H1][C][C][Branch2][Ring1][Ring2][N][C][=C][N][=C][C][Branch1
 </div>
 </div>
 <section id="data-construction">
-<h3><span class="section-number">17.3.1. </span>Data Construction<a class="headerlink" href="#data-construction" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">18.3.1. </span>Data Construction<a class="headerlink" href="#data-construction" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># now get sequences</span>
@@ -873,7 +719,7 @@ ints2selfes: [C][C@@H1][C][C][Branch2][Ring1][Ring2][N][C][=C][N][=C][C][Branch1
 <span class="n">seqs_data</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="o">.</span><span class="n">from_tensor_slices</span><span class="p">((</span><span class="n">padded_seqs</span><span class="p">,))</span>
 
 
-<span class="k">def</span> <span class="nf">split_input_target</span><span class="p">(</span><span class="n">sequence</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">split_input_target</span><span class="p">(</span><span class="n">sequence</span><span class="p">):</span>
     <span class="c1"># remove last input (since no label exists)</span>
     <span class="c1"># prefix with [nop]</span>
     <span class="n">input_text</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">concat</span><span class="p">(([</span><span class="mi">0</span><span class="p">],</span> <span class="n">sequence</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span> <span class="mi">0</span><span class="p">)</span>
@@ -902,7 +748,7 @@ ints2selfes: [C][C@@H1][C][C][Branch2][Ring1][Ring2][N][C][=C][N][=C][C][Branch1
 </div>
 </section>
 <section id="model-construction">
-<h3><span class="section-number">17.3.2. </span>Model Construction<a class="headerlink" href="#model-construction" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">18.3.2. </span>Model Construction<a class="headerlink" href="#model-construction" title="Link to this heading">#</a></h3>
 <p>Our model will be the same as <a class="reference internal" href="../dl/NLP.html"><span class="doc">Deep Learning on Sequences</span></a>: an embedding, one RNN (GRU variant), and one dense layer. The dense layer could be omitted if an even simpler model was desired. We do not add a softmax to the dense layer because we’ll be working with logits instead of probability in training and inference. One change is that we specify the <code class="docutils literal notranslate"><span class="pre">return_sequences</span></code> since we’re training across sequences. The other flags to <a class="reference external" href="https://www.tensorflow.org/api_docs/python/tf/keras/layers/GRU" title="(in TensorFlow v2.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tf.keras.layers.GRU</span></code></a> are to set-up for deploying the model to javascript, which we’ll see below.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -928,63 +774,10 @@ ints2selfes: [C][C@@H1][C][C][Branch2][Ring1][Ring2][N][C][=C][N][=C][C][Branch1
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;model&quot;
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>_________________________________________________________________
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Layer (type)                Output Shape              Param #   
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=================================================================
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> input_1 (InputLayer)        [(None, None)]            0         
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                                                 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> embedding (Embedding)       (None, None, 256)         27648     
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                                                 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> gru (GRU)                   (None, None, 128)         147840    
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                                                 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> dense (Dense)               (None, None, 108)         13932     
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                                                 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=================================================================
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total params: 189,420
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Trainable params: 189,420
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Non-trainable params: 0
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>_________________________________________________________________
-</pre></div>
-</div>
-</div>
 </div>
 </section>
 <section id="training">
-<h3><span class="section-number">17.3.3. </span>Training<a class="headerlink" href="#training" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">18.3.3. </span>Training<a class="headerlink" href="#training" title="Link to this heading">#</a></h3>
 <p>Now we will train the model. We use a special loss function <code class="xref py py-obj docutils literal notranslate"><span class="pre">tf.losses.SparseCategoricalCrossentropy</span></code> that works on a sequence of logits for computing cross-entropy in the multi-class setting (multi-class because we have multiple possible tokens). I will train for only 2 epochs to reduce the runtime of this notebook, but I’ve found ~4 is a reasonable balance of time and loss.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -997,7 +790,7 @@ ints2selfes: [C][C@@H1][C][C][Branch2][Ring1][Ring2][N][C][=C][N][=C][C][Branch1
 </div>
 </section>
 <section id="inference">
-<h3><span class="section-number">17.3.4. </span>Inference<a class="headerlink" href="#inference" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">18.3.4. </span>Inference<a class="headerlink" href="#inference" title="Link to this heading">#</a></h3>
 <p>In the inference setting, we need to feed the output from each step back into the model to generate the next token. RNNs are defined by the input and their <strong>state vector</strong> (or state vectors for LSTM). To ensure our model is not forgetting about the tokens it has seen so far, we could keep the state and last output token to use as input to the model. However, an easier approach is to make the underlying model <strong>stateful</strong>. That means its state will be stored as a kind of internal weight and we do not need to bother with passing around the state vector.</p>
 <p>We’ll construct a second model that is stateful and make its weights equal to the one we trained. Another change is that we do not need the model to output the whole sequence since we’re generating one token at a time.</p>
 <div class="cell docutils container">
@@ -1031,14 +824,11 @@ ints2selfes: [C][C@@H1][C][C][Branch2][Ring1][Ring2][N][C][=C][N][=C][C][Branch1
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/MolGenerator_35_0.png" src="../_images/MolGenerator_35_0.png" />
-</div>
 </div>
 <p>This is the logit probability for each token. We need to sample from this to get our prediction for the first token. We’ll sample it with an adjustable parameter called <strong>temperature</strong>. Temperature controls how close we are to sampling the maximum. <span class="math notranslate nohighlight">\(T = 0\)</span> means we sampling the max only, <span class="math notranslate nohighlight">\(T = 1\)</span> means we sample according to the logits, and <span class="math notranslate nohighlight">\(T = \infty\)</span> means we sample randomly.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sample_token</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">sample_token</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">categorical</span><span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="n">T</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
 
@@ -1047,21 +837,18 @@ ints2selfes: [C][C@@H1][C][C][Branch2][Ring1][Ring2][N][C][=C][N][=C][C][Branch1
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tf.Tensor([[54]], shape=(1, 1), dtype=int64)
-</pre></div>
-</div>
-</div>
 </div>
 <p>Now to continue we feed back into the stateful model. Let’s wrap this into a function.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sample_model</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">sample_model</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
     <span class="n">length</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
     <span class="n">seq</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
-    <span class="c1"># reset stateful model</span>
-    <span class="n">inference_model</span><span class="o">.</span><span class="n">reset_states</span><span class="p">()</span>
+    <span class="c1"># reset stateful GRU layer</span>
+    <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="n">inference_model</span><span class="o">.</span><span class="n">layers</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">layer</span><span class="p">,</span> <span class="s2">&quot;reset_states&quot;</span><span class="p">):</span>
+            <span class="n">layer</span><span class="o">.</span><span class="n">reset_states</span><span class="p">()</span>
     <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">length</span><span class="p">):</span>
         <span class="n">v</span> <span class="o">=</span> <span class="n">inference_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">sample_token</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
@@ -1078,8 +865,6 @@ ints2selfes: [C][C@@H1][C][C][Branch2][Ring1][Ring2][N][C][=C][N][=C][C][Branch1
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/MolGenerator_41_0.svg" src="../_images/MolGenerator_41_0.svg" /></div>
 </div>
 <p>These are better still! Now we can try adjusting the temperature to see more unusual or more common molecules</p>
 <p><span class="math notranslate nohighlight">\(T = 0.5\)</span></p>
@@ -1089,8 +874,6 @@ ints2selfes: [C][C@@H1][C][C][Branch2][Ring1][Ring2][N][C][=C][N][=C][C][Branch1
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/MolGenerator_44_0.svg" src="../_images/MolGenerator_44_0.svg" /></div>
 </div>
 <p><span class="math notranslate nohighlight">\(T = 100\)</span></p>
 <div class="cell docutils container">
@@ -1099,25 +882,21 @@ ints2selfes: [C][C@@H1][C][C][Branch2][Ring1][Ring2][N][C][=C][N][=C][C][Branch1
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/MolGenerator_46_0.svg" src="../_images/MolGenerator_46_0.svg" /></div>
 </div>
 <p>You can see that the <span class="math notranslate nohighlight">\(T = 0.5\)</span> case seems to works the best of the three.</p>
 </section>
 </section>
 <section id="model-deployment">
-<h2><span class="section-number">17.4. </span>Model Deployment<a class="headerlink" href="#model-deployment" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">18.4. </span>Model Deployment<a class="headerlink" href="#model-deployment" title="Link to this heading">#</a></h2>
 <p>Finally, to get the model into javascript as shown at <a class="reference external" href="https://whitead.github.io/molecule-dream/">Molecule Dream</a> we can export using tensorflowjs. It is relatively simple, but you may notice when you load the model into javascript that console errors may indicate you need to adjust flags in model construction.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflowjs</span> <span class="k">as</span> <span class="nn">tfjs</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">tensorflowjs</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tfjs</span>
 
-<span class="n">tfjs</span><span class="o">.</span><span class="n">converters</span><span class="o">.</span><span class="n">save_keras_model</span><span class="p">(</span><span class="n">inference_model</span><span class="p">,</span> <span class="s2">&quot;tfjs_model&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:tensorflow:Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+    <span class="n">tfjs</span><span class="o">.</span><span class="n">converters</span><span class="o">.</span><span class="n">save_keras_model</span><span class="p">(</span><span class="n">inference_model</span><span class="p">,</span> <span class="s2">&quot;tfjs_model&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;tensorflowjs not available, skipping export&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1125,34 +904,35 @@ ints2selfes: [C][C@@H1][C][C][Branch2][Ring1][Ring2][N][C][=C][N][=C][C][Branch1
 <p>I also like to save the config in case I need to know things like the vocab or dimension of the vectors. JSON files can be easily loaded into javascript objects.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">asdict</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">asdict</span>
 
 <span class="n">model_info</span> <span class="o">=</span> <span class="n">asdict</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
 <span class="n">model_info</span><span class="p">[</span><span class="s2">&quot;stoi&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">vocab_stoi</span>
 <span class="n">model_info</span><span class="p">[</span><span class="s2">&quot;vocab&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">vocab</span>
 
-
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s2">&quot;tfjs_model&quot;</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;tfjs_model/config.json&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">model_info</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span>import * as tf from &#39;@tensorflow/tfjs&#39;;
-import config from &#39;tfjs_model/config.json;
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">tf</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@tensorflow/tfjs&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="nx">config</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;tfjs_model/config.json&#39;</span><span class="p">;</span>
 
-const rnn_mod = {}
+<span class="kd">const</span><span class="w"> </span><span class="nx">rnn_mod</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{}</span>
 
-const loader = tf.loadLayersModel(&#39;/tfjs_model/model.json&#39;);
-loader.then((model) =&gt; {
-    rnn_mod.model = (t) =&gt; {
-        return model.predict(t);
-    }
-    rnn_mod.resetStates = () =&gt; {
-        model.resetStates();
-    }
-});
+<span class="kd">const</span><span class="w"> </span><span class="nx">loader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">tf</span><span class="p">.</span><span class="nx">loadLayersModel</span><span class="p">(</span><span class="s1">&#39;/tfjs_model/model.json&#39;</span><span class="p">);</span>
+<span class="nx">loader</span><span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">model</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">rnn_mod</span><span class="p">.</span><span class="nx">model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">t</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">model</span><span class="p">.</span><span class="nx">predict</span><span class="p">(</span><span class="nx">t</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">rnn_mod</span><span class="p">.</span><span class="nx">resetStates</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">model</span><span class="p">.</span><span class="nx">resetStates</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">});</span>
 </pre></div>
 </div>
 <p>Next we need a few helper functions that we used for inference. These are sampling and for converting from integers to the SELFIES tokens.</p>
@@ -1194,16 +974,18 @@ loader.then((model) =&gt; {
 <p>This code gives us a javascript module that can then be used for sampling from our trained model. See the <a class="reference external" href="https://github.com/whitead/molecule-dream/">Molecular Dream repo</a> for the complete code.</p>
 </section>
 <section id="cited-references">
-<h2><span class="section-number">17.5. </span>Cited References<a class="headerlink" href="#cited-references" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">18.5. </span>Cited References<a class="headerlink" href="#cited-references" title="Link to this heading">#</a></h2>
 <div class="docutils container" id="id3">
-<dl class="citation">
-<dt class="label" id="id7"><span class="brackets"><a class="fn-backref" href="#id1">SI15</a></span></dt>
-<dd><p>Teague Sterling and John J Irwin. Zinc 15–ligand discovery for everyone. <em>Journal of chemical information and modeling</em>, 55(11):2324–2337, 2015.</p>
-</dd>
-<dt class="label" id="id6"><span class="brackets"><a class="fn-backref" href="#id2">KHaseN+20</a></span></dt>
-<dd><p>Mario Krenn, Florian Häse, AkshatKumar Nigam, Pascal Friederich, and Alan Aspuru-Guzik. Self-referencing embedded strings (selfies): a 100% robust molecular string representation. <em>Machine Learning: Science and Technology</em>, 1(4):045024, 2020.</p>
-</dd>
-</dl>
+<div role="list" class="citation-list">
+<div class="citation" id="id7" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">SI15</a><span class="fn-bracket">]</span></span>
+<p>Teague Sterling and John J Irwin. Zinc 15–ligand discovery for everyone. <em>Journal of chemical information and modeling</em>, 55(11):2324–2337, 2015.</p>
+</div>
+<div class="citation" id="id6" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">KHaseN+20</a><span class="fn-bracket">]</span></span>
+<p>Mario Krenn, Florian Häse, AkshatKumar Nigam, Pascal Friederich, and Alan Aspuru-Guzik. Self-referencing embedded strings (selfies): a 100% robust molecular string representation. <em>Machine Learning: Science and Technology</em>, 1(4):045024, 2020.</p>
+</div>
+</div>
 </div>
 </section>
 </section>
@@ -1220,7 +1002,7 @@ loader.then((model) =&gt; {
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./applied"
         },
         predefinedOutput: true
@@ -1228,53 +1010,116 @@ loader.then((model) =&gt; {
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="QM9.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">16. </span>Predicting DFT Energies with GNNs</p>
-        </div>
-    </a>
-    <a class='right-next' id="next-link" href="../dl/Hyperparameter_tuning.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">18. </span>Hyperparameter Tuning</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
-</div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
-  
-    By Andrew D. White<br/>
-  
-      &copy; Copyright 2022.<br/>
-    <div class="extra_footer">
-      <a href="http://thewhitelab.org">thewhitelab.org</a> <div id="wh-modal"> <button class="wh-venti-button" aria-label="close modal" id="wh-modal-close">✕</button> <img id="wh-modal-img"> </div>
-    </div>
-</p>
-        </footer>
-    </div>
-    
-</div>
 
-
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="QM9.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">17. </span>Predicting DFT Energies with GNNs</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="e3nn_traj.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">19. </span>Equivariant Neural Network for Predicting Trajectories</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-this-notebook">18.1. Running This Notebook</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#approach-1-token-sampling">18.2. Approach 1: Token Sampling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#approach-2-token-rnn">18.3. Approach 2: Token RNN</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-construction">18.3.1. Data Construction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-construction">18.3.2. Model Construction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training">18.3.3. Training</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inference">18.3.4. Inference</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-deployment">18.4. Model Deployment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cited-references">18.5. Cited References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Andrew D. White
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <a href="http://thewhitelab.org">thewhitelab.org</a> <div id="wh-modal"> <button class="wh-venti-button" aria-label="close modal" id="wh-modal-close">✕</button> <img id="wh-modal-img"> </div>
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

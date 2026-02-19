@@ -1,10 +1,12 @@
 
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="../" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta content="Deep Learning for Molecules &amp; Materials Book" lang="en" name="description" xml:lang="en" />
 <meta content="en_US" property="og:locale" />
 <meta content="summary" name="twitter:card" />
@@ -13,113 +15,176 @@
 <meta content="https://dmol.pub/_static/logo.png" name="twitter:image" />
 <meta content="&#64;andrewwhite01" name="twitter:site" />
 
-    <title>23. Modern Molecular NNs &#8212; deep learning for molecules &amp; materials</title>
-    
+    <title>16. Modern Molecular NNs &#8212; deep learning for molecules &amp; materials</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/a11y.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=cb1cce99" />
+    <link rel="stylesheet" type="text/css" href="../_static/a11y.css?v=ffeaf963" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
-    <script src="../_static/custom.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <script src="../_static/togglebutton.js?v=1ae7504c"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'dl/molnets';</script>
+    <script src="../_static/custom.js?v=3f5092eb"></script>
     <link rel="canonical" href="https://dmol.pub/dl/molnets.html" />
-    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <link rel="icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="22. Changelog" href="../changelog.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+    <link rel="next" title="17. Predicting DFT Energies with GNNs" href="../applied/QM9.html" />
+    <link rel="prev" title="15. Normalizing Flows" href="flows.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
-    
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../_static/logo.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">deep learning for molecules & materials</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="deep learning for molecules & materials - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="deep learning for molecules & materials - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -128,494 +193,300 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  A. Math Review
- </span>
-</p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">A. Math Review</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../math/tensors-and-shapes.html">
-   1. Tensors and Shapes
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../math/tensors-and-shapes.html">1. Tensors and Shapes</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  B. Machine Learning
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">B. Machine Learning</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../ml/introduction.html">
-   2. Introduction to Machine Learning
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../ml/regression.html">
-   3. Regression &amp; Model Assessment
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../ml/classification.html">
-   4. Classification
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../ml/kernel.html">
-   5. Kernel Learning
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../ml/introduction.html">2. Introduction to Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ml/regression.html">3. Regression &amp; Model Assessment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ml/classification.html">4. Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ml/kernel.html">5. Kernel Learning</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  C. Deep Learning
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="introduction.html">
-   6. Deep Learning Overview
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="layers.html">
-   7. Standard Layers
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="gnn.html">
-   8. Graph Neural Networks
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="data.html">
-   9. Input Data &amp; Equivariances
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Equivariant.html">
-   10. Equivariant Neural Networks
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="xai.html">
-   11. Explaining Predictions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="attention.html">
-   12. Attention Layers
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="NLP.html">
-   13. Deep Learning on Sequences
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="VAE.html">
-   14. Variational Autoencoder
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="flows.html">
-   15. Normalizing Flows
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  D. Applications
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../applied/QM9.html">
-   16. Predicting DFT Energies with GNNs
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../applied/MolGenerator.html">
-   17. Generative RNN in Browser
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  E. Contributed Chapters
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="Hyperparameter_tuning.html">
-   18. Hyperparameter Tuning
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../applied/e3nn_traj.html">
-   19. Equivariant Neural Network for Predicting Trajectories
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="pretraining.html">
-   20. Pretraining
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  F. Appendix
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../style.html">
-   21. Style Guide
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../changelog.html">
-   22. Changelog
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  G. In Progress
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">C. Deep Learning</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   23. Modern Molecular NNs
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">6. Deep Learning Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="layers.html">7. Standard Layers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gnn.html">8. Graph Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data.html">9. Input Data &amp; Equivariances</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Equivariant.html">10. Equivariant Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xai.html">11. Explaining Predictions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="attention.html">12. Attention Layers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NLP.html">13. Deep Learning on Sequences</a></li>
+<li class="toctree-l1"><a class="reference internal" href="VAE.html">14. Variational Autoencoder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flows.html">15. Normalizing Flows</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">16. Modern Molecular NNs</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">D. Applications</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../applied/QM9.html">17. Predicting DFT Energies with GNNs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../applied/MolGenerator.html">18. Generative RNN in Browser</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">E. Contributed Chapters</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../applied/e3nn_traj.html">19. Equivariant Neural Network for Predicting Trajectories</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pretraining.html">20. Pretraining</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">F. Appendix</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../style.html">21. Style Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">22. Changelog</a></li>
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            <script async defer src="https://api.dmol.pub/latest.js"></script><noscript><img src="https://api.dmol.pub/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript> By <a href="https://twitter.com/andrewwhite01">Andrew White</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
-</div>
-
-
-          
-
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
   
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://colab.research.google.com/github/whitead/dmol-book/blob/master/dl/molnets.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Colab"
->
   
-
-<span class="headerbtn__icon-container">
-  
-    <img src="../_static/images/logo_colab.png">
-  </span>
-<span class="headerbtn__text-container">Colab</span>
-</a>
-
-      </li>
-      
-    </ul>
+  <div class="sidebar-primary-items__end sidebar-primary__section">
   </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/whitead/dmol-book/blob/master/dl/molnets.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
 </div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/whitead/dmol-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/whitead/dmol-book/issues/new?title=Issue%20on%20page%20%2Fdl/molnets.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/dl/molnets.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
 
 <button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/whitead/dmol-book"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
+`);
+</script>
 
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
 
-      </li>
-      
-      <li>
-        <a href="https://github.com/whitead/dmol-book/issues/new?title=Issue%20on%20page%20%2Fdl/molnets.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../_sources/dl/molnets.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.ipynb</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
 </button>
-
-      </li>
+</div></div>
       
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
+    </div>
   
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
-
-    </div>
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   23. Modern Molecular NNs
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#expressiveness">
-   24. Expressiveness
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-elements-of-modern-molecular-nns">
-     24.1. The Elements of Modern Molecular NNs
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#atom-features">
-       24.1.1. Atom features
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#atomic-cluster-expansions">
-       24.1.2. Atomic Cluster Expansions
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#normalization">
-     24.2. Normalization
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#running-this-notebook">
-     24.3. Running This Notebook
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#cited-references">
-     24.4. Cited References
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
-
-    </nav>
 </div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Modern Molecular NNs</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   23. Modern Molecular NNs
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#expressiveness">
-   24. Expressiveness
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-elements-of-modern-molecular-nns">
-     24.1. The Elements of Modern Molecular NNs
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#atom-features">
-       24.1.1. Atom features
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#atomic-cluster-expansions">
-       24.1.2. Atomic Cluster Expansions
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#normalization">
-     24.2. Normalization
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#running-this-notebook">
-     24.3. Running This Notebook
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#cited-references">
-     24.4. Cited References
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
+              
+              
 
-                        </nav>
-                    </div>
-                </div>
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Modern Molecular NNs</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
             </div>
-            <main id="main-content" role="main">
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">16. Modern Molecular NNs</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-this-notebook">16.1. Running This Notebook</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#expressiveness">16. Expressiveness</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-elements-of-modern-molecular-nns">16.1. The Elements of Modern Molecular NNs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#atom-features">16.1.1. Atom features</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#atomic-cluster-expansions">16.1.2. Atomic Cluster Expansions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normalization">16.2. Normalization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cited-references">16.3. Cited References</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
                 
-              <div>
-                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
   <section class="tex2jax_ignore mathjax_ignore" id="modern-molecular-nns">
-<h1><span class="section-number">23. </span>Modern Molecular NNs<a class="headerlink" href="#modern-molecular-nns" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">16. </span>Modern Molecular NNs<a class="headerlink" href="#modern-molecular-nns" title="Link to this heading">#</a></h1>
 <p>We have seen two chapters about equivariances in <a class="reference internal" href="data.html"><span class="doc">Input Data &amp; Equivariances</span></a> and <a class="reference internal" href="Equivariant.html"><span class="doc">Equivariant Neural Networks</span></a>. We have seen one chapter on dealing with molecules as objects with permutation equivariance <a class="reference internal" href="gnn.html"><span class="doc">Graph Neural Networks</span></a>. We will combine these ideas and create neural networks that can treat arbitrary molecules with point clouds and permutation equivariance. We already saw SchNet is able to do this by working with an invariant point cloud representation (distance to atoms), but modern networks mix in ideas from <a class="reference internal" href="Equivariant.html"><span class="doc">Equivariant Neural Networks</span></a> along with graph neural networks (GNN). This is a highly-active research area, especially for predicting energies, forces, and relaxed structures of molecules.</p>
 <div class="admonition-audience-objectives admonition">
 <p class="admonition-title">Audience &amp; Objectives</p>
@@ -630,53 +501,8 @@ title="Print to PDF"
 <p class="admonition-title">Warning</p>
 <p>This chapter is in progress</p>
 </div>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="expressiveness">
-<h1><span class="section-number">24. </span>Expressiveness<a class="headerlink" href="#expressiveness" title="Permalink to this headline">#</a></h1>
-<p>The Equivariant SO(3) ideas from <a class="reference internal" href="Equivariant.html"><span class="doc">Equivariant Neural Networks</span></a> will not work on variable sized molecules because the layers are not permutation equivariant. We also know that graph neural networks (GNNs) have permutation equivariance and, with the correct choice of edge features, rotation and translation invariance. So why go beyond GNNs?</p>
-<p>One reason is that the standard GNNs cannot distinguish certain types of graphs relevant for chemistry is they cannot distinguish molecules like decaline and bicylopentyl, which indeed have different properties. Look at the <a class="reference internal" href="#decaline-bicylopentyl"><span class="std std-numref">Fig. 24.1</span></a> below and think about the degree and neighbors of the atoms near the mixing of the rings – you’ll see if you try to use message passing the two molecules are identical. This is known as the Wesifeiler-Lehman Test <span id="id1">[<a class="reference internal" href="#id222" title="Boris Weisfeiler and Andrei Leman. The reduction of a graph to canonical form and the algebra which appears therein. NTI, Series, 2(9):12–16, 1968.">WL68</a>]</span>.</p>
-<figure class="align-default" id="decaline-bicylopentyl">
-<img alt="decaline and bicyclopentyl structures drawn side-by-side, which visually are different." src="../_images/lwtest.svg" /><figcaption>
-<p><span class="caption-number">Fig. 24.1 </span><span class="caption-text">Comparison of decaline and bicylopentyl, which have identical output in most GNNs despite being different molecules.</span><a class="headerlink" href="#decaline-bicylopentyl" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
-<p>These can be distinguished if we also have (and use) their Cartesian coordinates. We cannot distinguish enantiomers with GNNs, except maybe with pre-computed node attributes. Even those start to breakdown when we have helical chirality that is not centered at any one molecule.</p>
-<p>These are arguments for using Cartesian coordinates in addition to a GNN, but why use equivariant neural networks? Most molnet research is for <strong>neural potentials</strong>. These are neural networks that predict energy and forces given atom positions and elements. We know that the force on each atom is given by</p>
-<div class="amsmath math notranslate nohighlight" id="equation-02506295-21f1-4cb0-9a31-2a56f60db602">
-<span class="eqno">(24.1)<a class="headerlink" href="#equation-02506295-21f1-4cb0-9a31-2a56f60db602" title="Permalink to this equation">#</a></span>\[\begin{equation}
-F\left(\vec{r}\right) = -\nabla U\left(\vec{r}\right)
-\end{equation}\]</div>
-<p>where <span class="math notranslate nohighlight">\(U\left(\vec{x}\right)\)</span> is the rotation invariant potential given all atom positions <span class="math notranslate nohighlight">\(\vec{r}\)</span>. So if we’re predicting a translation, rotation, and permutation invariant potential, why use equivariance? Part of it is performance. Models like SchNet or ANI are invariant and are not as accurate as models like NequiP or TorchMD-NET that have equivariances in their internal layers. Another reason is that there are indeed specific 3D configurations that should have different energies (according to quantum chemistry calculations), but are invariant if treatd with pairwise distance alone <span id="id2">[<a class="reference internal" href="#id224" title="Sergey N Pozdnyakov and Michele Ceriotti. Incompleteness of graph convolutional neural networks for points clouds in three dimensions. arXiv preprint arXiv:2201.07136, 2022.">PC22</a>]</span>.</p>
-<section id="the-elements-of-modern-molecular-nns">
-<h2><span class="section-number">24.1. </span>The Elements of Modern Molecular NNs<a class="headerlink" href="#the-elements-of-modern-molecular-nns" title="Permalink to this headline">#</a></h2>
-<p>There has been a flurry of ideas about molents in the last few years, especially with the advances in equivariant neural network layers. Batatia et al.<span id="id3">[<a class="reference internal" href="#id223" title="Ilyes Batatia, Simon Batzner, Dávid Péter Kovács, Albert Musaelian, Gregor NC Simm, Ralf Drautz, Christoph Ortner, Boris Kozinsky, and Gábor Csányi. The design space of e (3)-equivariant atom-centered interatomic potentials. arXiv preprint arXiv:2205.06643, 2022.">BBKovacs+22</a>]</span> have proposed a categorization of the main elements of molnets (which they call E(3)-equivariant NNs) that I will adopt here. They categorize the decisions to be made into three parts of the architecture: the atomic cluster expansions (ACE), the body-order of the messages, and the architecture of the message passing neural network (MPNN). This categorization might also be viewed within the GNN theory as node features (ACE), message creation and aggregation (body-order), and node update (MPNN details). See <a class="reference internal" href="gnn.html"><span class="doc">Graph Neural Networks</span></a> for more details on MPNNs.</p>
-<p>This is a relatively new categorization and certainly is not necessary to use. Most papers do not use this categorization and it takes some effort to put models into it. The benefit of thinking about models with this abstractions is it helps us differentiate between the very large number of models now being pursued in the literature. There is also a bit of chaos in teasing out what <em>differentiates</em> the best models from others. For example, it took a while to discover that the most important features in NequIP were data normalization and how atom embeddings are treated <span id="id4">[<a class="reference internal" href="#id223" title="Ilyes Batatia, Simon Batzner, Dávid Péter Kovács, Albert Musaelian, Gregor NC Simm, Ralf Drautz, Christoph Ortner, Boris Kozinsky, and Gábor Csányi. The design space of e (3)-equivariant atom-centered interatomic potentials. arXiv preprint arXiv:2205.06643, 2022.">BBKovacs+22</a>]</span>. This categorization is also improving how these models are designed.</p>
-<section id="atom-features">
-<h3><span class="section-number">24.1.1. </span>Atom features<a class="headerlink" href="#atom-features" title="Permalink to this headline">#</a></h3>
-<p>Let’s start with the general terminology for an atom. Of course, the input to these networks an atom is just a Cartesian coordinate <span class="math notranslate nohighlight">\(\vec{r}_i\)</span> and the element <span class="math notranslate nohighlight">\(z_i\)</span>. As we pass through GNN layers the features will become larger. The atoms are the nodes. The atom features need to be organized a bit differently than previously because some of the features should be invariant with respect to the group — SO(3) — and some need to be equivariant.</p>
-</section>
-<section id="atomic-cluster-expansions">
-<h3><span class="section-number">24.1.2. </span>Atomic Cluster Expansions<a class="headerlink" href="#atomic-cluster-expansions" title="Permalink to this headline">#</a></h3>
-<p>An ACE is a per-atom tensor. The main idea of ACE is to encode the local environment of an atom into a feature tensor that describes its neighborhood of nearby atoms. This is like distinguishing between an oxygen in an alcohol group vs an oxygen in an ether. Both are oxygens, but we expect them to behave differently. ACE is the same idea, but for nearby atoms in space instead of just on the molecular graph.</p>
-<p>The general equation for ACE (assuming O(3) equivariance) is [cite]:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9bf77a71-5b70-4789-b0b6-198910472620">
-<span class="eqno">(24.2)<a class="headerlink" href="#equation-9bf77a71-5b70-4789-b0b6-198910472620" title="Permalink to this equation">#</a></span>\[\begin{equation}
-A^{(t)}_{i, kl_3m_3} = \sum_{l_1m_1,l2_m2}C_{l1m_1,l_2m_2}^{l_3,m_3}\sum_{j \in \mathcal{N}(i)} R^{(t)}_{kl_1l_2l_3}\left(r_{ji}\right)Y_{l1}^{m_1}\left(\hat{\mathbf{r}}_{ji}\right)\mathcal{W}^{(t)}_{kl_2}h_{j,l_2m_2}^{(t)}
-\end{equation}\]</div>
-<p>Wow! What an expression. Let’s go through this carefully, starting with the output. <span class="math notranslate nohighlight">\(A^{(t)}_{i, kl_3m_3}\)</span> are the feature tensor values for atom <span class="math notranslate nohighlight">\(i\)</span> at layer <span class="math notranslate nohighlight">\(t\)</span>. There are channels indexed by <span class="math notranslate nohighlight">\(k\)</span> and the spherical harmonic indexes <span class="math notranslate nohighlight">\(l_3m_3\)</span>. The right-hand side is nearly identical to the G-equivariant neural network layer equation from <a class="reference internal" href="Equivariant.html"><span class="doc">Equivariant Neural Networks</span></a>. We have the input</p>
-<p>How is this different than a MPNN</p>
-</section>
-</section>
-<section id="normalization">
-<h2><span class="section-number">24.2. </span>Normalization<a class="headerlink" href="#normalization" title="Permalink to this headline">#</a></h2>
-<ul class="simple">
-<li><p>Physics-based energy/force normalization</p></li>
-<li><p>Pooling</p></li>
-<li><p>Layers</p></li>
-</ul>
-</section>
 <section id="running-this-notebook">
-<h2><span class="section-number">24.3. </span>Running This Notebook<a class="headerlink" href="#running-this-notebook" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">16.1. </span>Running This Notebook<a class="headerlink" href="#running-this-notebook" title="Link to this heading">#</a></h2>
 <p>Click the  <i aria-label="Launch interactive content" class="fas fa-rocket"></i>  above to launch this page as an interactive Google Colab. See details below on installing packages.</p>
 <div class="dropdown admonition tip">
 <p class="admonition-title">Tip</p>
@@ -686,694 +512,92 @@ A^{(t)}_{i, kl_3m_3} = \sum_{l_1m_1,l2_m2}C_{l1m_1,l_2m_2}^{l_3,m_3}\sum_{j \in 
 </div>
 <p>If you find install problems, you can get the latest working versions of packages used in <a class="reference external" href="https://github.com/whitead/dmol-book/blob/main/package/setup.py">this book here</a></p>
 </div>
-</section>
-<section id="cited-references">
-<h2><span class="section-number">24.4. </span>Cited References<a class="headerlink" href="#cited-references" title="Permalink to this headline">#</a></h2>
-<div class="docutils container" id="id5">
-<dl class="citation">
-<dt class="label" id="id222"><span class="brackets"><a class="fn-backref" href="#id1">WL68</a></span></dt>
-<dd><p>Boris Weisfeiler and Andrei Leman. The reduction of a graph to canonical form and the algebra which appears therein. <em>NTI, Series</em>, 2(9):12–16, 1968.</p>
-</dd>
-<dt class="label" id="id224"><span class="brackets"><a class="fn-backref" href="#id2">PC22</a></span></dt>
-<dd><p>Sergey N Pozdnyakov and Michele Ceriotti. Incompleteness of graph convolutional neural networks for points clouds in three dimensions. <em>arXiv preprint arXiv:2201.07136</em>, 2022.</p>
-</dd>
-<dt class="label" id="id223"><span class="brackets">BBKovacs+22</span><span class="fn-backref">(<a href="#id3">1</a>,<a href="#id4">2</a>)</span></dt>
-<dd><p>Ilyes Batatia, Simon Batzner, Dávid Péter Kovács, Albert Musaelian, Gregor NC Simm, Ralf Drautz, Christoph Ortner, Boris Kozinsky, and Gábor Csányi. The design space of e (3)-equivariant atom-centered interatomic potentials. <em>arXiv preprint arXiv:2205.06643</em>, 2022.</p>
-</dd>
-</dl>
-</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">rdkit</span><span class="o">,</span> <span class="nn">rdkit.Chem</span><span class="o">,</span> <span class="nn">rdkit.Chem.rdDepictor</span><span class="o">,</span> <span class="nn">rdkit.Chem.Draw</span>
-<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
-<span class="kn">import</span> <span class="nn">dmol</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpl</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">rdkit</span><span class="o">,</span><span class="w"> </span><span class="nn">rdkit.Chem</span><span class="o">,</span><span class="w"> </span><span class="nn">rdkit.Chem.rdDepictor</span><span class="o">,</span><span class="w"> </span><span class="nn">rdkit.Chem.Draw</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nx</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">dmol</span>
 
 <span class="n">my_elements</span> <span class="o">=</span> <span class="p">{</span><span class="mi">6</span><span class="p">:</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="mi">8</span><span class="p">:</span> <span class="s2">&quot;O&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s2">&quot;H&quot;</span><span class="p">}</span>
 </pre></div>
 </div>
 </div>
 </div>
-<div class="cell tag_hide-cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">smiles2graph</span><span class="p">(</span><span class="n">sml</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Argument for the RD2NX function should be a valid SMILES sequence</span>
-<span class="sd">    returns: the graph</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">m</span> <span class="o">=</span> <span class="n">rdkit</span><span class="o">.</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="n">sml</span><span class="p">)</span>
-    <span class="n">m</span> <span class="o">=</span> <span class="n">rdkit</span><span class="o">.</span><span class="n">Chem</span><span class="o">.</span><span class="n">AddHs</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
-    <span class="n">order_string</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="n">rdkit</span><span class="o">.</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">BondType</span><span class="o">.</span><span class="n">SINGLE</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="n">rdkit</span><span class="o">.</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">BondType</span><span class="o">.</span><span class="n">DOUBLE</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-        <span class="n">rdkit</span><span class="o">.</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">BondType</span><span class="o">.</span><span class="n">TRIPLE</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-        <span class="n">rdkit</span><span class="o">.</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">BondType</span><span class="o">.</span><span class="n">AROMATIC</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
-    <span class="p">}</span>
-    <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">GetAtoms</span><span class="p">()))</span>
-    <span class="n">nodes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">my_elements</span><span class="p">)))</span>
-    <span class="n">lookup</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">my_elements</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">m</span><span class="o">.</span><span class="n">GetAtoms</span><span class="p">():</span>
-        <span class="n">nodes</span><span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">GetIdx</span><span class="p">(),</span> <span class="n">lookup</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">GetAtomicNum</span><span class="p">())]</span> <span class="o">=</span> <span class="mi">1</span>
-
-    <span class="n">adj</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">m</span><span class="o">.</span><span class="n">GetBonds</span><span class="p">():</span>
-        <span class="n">u</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">GetBeginAtomIdx</span><span class="p">(),</span> <span class="n">j</span><span class="o">.</span><span class="n">GetEndAtomIdx</span><span class="p">())</span>
-        <span class="n">v</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">GetBeginAtomIdx</span><span class="p">(),</span> <span class="n">j</span><span class="o">.</span><span class="n">GetEndAtomIdx</span><span class="p">())</span>
-        <span class="n">order</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">GetBondType</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">order</span> <span class="ow">in</span> <span class="n">order_string</span><span class="p">:</span>
-            <span class="n">order</span> <span class="o">=</span> <span class="n">order_string</span><span class="p">[</span><span class="n">order</span><span class="p">]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">Warning</span><span class="p">(</span><span class="s2">&quot;Ignoring bond order&quot;</span> <span class="o">+</span> <span class="n">order</span><span class="p">)</span>
-        <span class="n">adj</span><span class="p">[</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">order</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-        <span class="n">adj</span><span class="p">[</span><span class="n">v</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">order</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="k">return</span> <span class="n">nodes</span><span class="p">,</span> <span class="n">adj</span>
-</pre></div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="expressiveness">
+<h1><span class="section-number">16. </span>Expressiveness<a class="headerlink" href="#expressiveness" title="Link to this heading">#</a></h1>
+<p>The Equivariant SO(3) ideas from <a class="reference internal" href="Equivariant.html"><span class="doc">Equivariant Neural Networks</span></a> will not work on variable sized molecules because the layers are not permutation equivariant. We also know that graph neural networks (GNNs) have permutation equivariance and, with the correct choice of edge features, rotation and translation invariance. So why go beyond GNNs?</p>
+<p>One reason is that the standard GNNs cannot distinguish certain types of graphs relevant for chemistry is they cannot distinguish molecules like decaline and bicylopentyl, which indeed have different properties. Look at the <a class="reference internal" href="#decaline-bicylopentyl"><span class="std std-numref">Fig. 16.1</span></a> below and think about the degree and neighbors of the atoms near the mixing of the rings – you’ll see if you try to use message passing the two molecules are identical. This is known as the Wesifeiler-Lehman Test <span id="id1">[<a class="reference internal" href="#id222" title="Boris Weisfeiler and Andrei Leman. The reduction of a graph to canonical form and the algebra which appears therein. NTI, Series, 2(9):12–16, 1968.">WL68</a>]</span>.</p>
+<figure class="align-default" id="decaline-bicylopentyl">
+<img alt="decaline and bicyclopentyl structures drawn side-by-side, which visually are different." src="../_images/lwtest.svg" />
+<figcaption>
+<p><span class="caption-number">Fig. 16.1 </span><span class="caption-text">Comparison of decaline and bicylopentyl, which have identical output in most GNNs despite being different molecules.</span><a class="headerlink" href="#decaline-bicylopentyl" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>These can be distinguished if we also have (and use) their Cartesian coordinates. We cannot distinguish enantiomers with GNNs, except maybe with pre-computed node attributes. Even those start to breakdown when we have helical chirality that is not centered at any one atom.</p>
+<p>These are arguments for using Cartesian coordinates in addition to a GNN, but why use equivariant neural networks as opposed to the simpler invariant networks discussed in <a class="reference internal" href="data.html"><span class="doc">Input Data &amp; Equivariances</span></a>? Most molnet research is for <strong>neural potentials</strong>. These are neural networks that predict energy and forces given atom positions and elements. We know that the force on each atom is given by</p>
+<div class="amsmath math notranslate nohighlight" id="equation-9655a861-5562-48e5-a405-3d1e3a124c6d">
+<span class="eqno">(16.1)<a class="headerlink" href="#equation-9655a861-5562-48e5-a405-3d1e3a124c6d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+F\left(\vec{r}\right) = -\nabla U\left(\vec{r}\right)
+\end{equation}\]</div>
+<p>where <span class="math notranslate nohighlight">\(U\left(\vec{x}\right)\)</span> is the rotation invariant potential given all atom positions <span class="math notranslate nohighlight">\(\vec{r}\)</span>. So if we’re predicting a translation, rotation, and permutation invariant potential, why use equivariance? Part of it is performance. Models like SchNet or ANI are invariant and are not as accurate as models like NequiP or TorchMD-NET that have equivariances in their internal layers. Another reason is that there are indeed specific 3D configurations that should have different energies (according to quantum chemistry calculations), but are invariant if treated with pairwise distance alone <span id="id2">[<a class="reference internal" href="#id224" title="Sergey N Pozdnyakov and Michele Ceriotti. Incompleteness of graph convolutional neural networks for points clouds in three dimensions. arXiv preprint arXiv:2201.07136, 2022.">PC22</a>]</span>.</p>
+<section id="the-elements-of-modern-molecular-nns">
+<h2><span class="section-number">16.1. </span>The Elements of Modern Molecular NNs<a class="headerlink" href="#the-elements-of-modern-molecular-nns" title="Link to this heading">#</a></h2>
+<p>There has been a flurry of ideas about molents in the last few years, especially with the advances in equivariant neural network layers. Batatia et al.<span id="id3">[<a class="reference internal" href="#id223" title="Ilyes Batatia, Simon Batzner, Dávid Péter Kovács, Albert Musaelian, Gregor NC Simm, Ralf Drautz, Christoph Ortner, Boris Kozinsky, and Gábor Csányi. The design space of e (3)-equivariant atom-centered interatomic potentials. arXiv preprint arXiv:2205.06643, 2022.">BBKovacs+22</a>]</span> have proposed a categorization of the main elements of molnets (which they call E(3)-equivariant NNs) that I will adopt here. They categorize the decisions to be made into three parts of the architecture: the atomic cluster expansions (ACE), the body-order of the messages, and the architecture of the message passing neural network (MPNN). This categorization might also be viewed within the GNN theory as node features (ACE), message creation and aggregation (body-order), and node update (MPNN details). See <a class="reference internal" href="gnn.html"><span class="doc">Graph Neural Networks</span></a> for more details on MPNNs.</p>
+<p>This is a relatively new categorization and certainly is not necessary to use. Most papers do not use this categorization and it takes some effort to put models into it. The benefit of thinking about models with this abstractions is it helps us differentiate between the very large number of models now being pursued in the literature. There is also a bit of chaos in teasing out what <em>differentiates</em> the best models from others. For example, it took a while to discover that the most important features in NequIP were data normalization and how atom embeddings are treated <span id="id4">[<a class="reference internal" href="#id223" title="Ilyes Batatia, Simon Batzner, Dávid Péter Kovács, Albert Musaelian, Gregor NC Simm, Ralf Drautz, Christoph Ortner, Boris Kozinsky, and Gábor Csányi. The design space of e (3)-equivariant atom-centered interatomic potentials. arXiv preprint arXiv:2205.06643, 2022.">BBKovacs+22</a>]</span>. This categorization is also improving how these models are designed.</p>
+<section id="atom-features">
+<h3><span class="section-number">16.1.1. </span>Atom features<a class="headerlink" href="#atom-features" title="Link to this heading">#</a></h3>
+<p>Let’s start with the general terminology for an atom. Of course, the input to these networks an atom is just a Cartesian coordinate <span class="math notranslate nohighlight">\(\vec{r}_i\)</span> and the element <span class="math notranslate nohighlight">\(z_i\)</span>. As we pass through GNN layers the features will become larger. The atoms are the nodes. The atom features need to be organized a bit differently than previously because some of the features should be invariant with respect to the group — SO(3) — and some need to be equivariant.</p>
+</section>
+<section id="atomic-cluster-expansions">
+<h3><span class="section-number">16.1.2. </span>Atomic Cluster Expansions<a class="headerlink" href="#atomic-cluster-expansions" title="Link to this heading">#</a></h3>
+<p>An ACE is a per-atom tensor. The main idea of ACE is to encode the local environment of an atom into a feature tensor that describes its neighborhood of nearby atoms. This is like distinguishing between an oxygen in an alcohol group vs an oxygen in an ether. Both are oxygens, but we expect them to behave differently. ACE is the same idea, but for nearby atoms in space instead of just on the molecular graph.</p>
+<p>The general equation for ACE (assuming O(3) equivariance) is [cite]:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-ae5ffbc9-9a48-4dfb-ac43-8bfbec4fa8ab">
+<span class="eqno">(16.2)<a class="headerlink" href="#equation-ae5ffbc9-9a48-4dfb-ac43-8bfbec4fa8ab" title="Permalink to this equation">#</a></span>\[\begin{equation}
+A^{(t)}_{i, kl_3m_3} = \sum_{l_1m_1,l2_m2}C_{l1m_1,l_2m_2}^{l_3,m_3}\sum_{j \in \mathcal{N}(i)} R^{(t)}_{kl_1l_2l_3}\left(r_{ji}\right)Y_{l1}^{m_1}\left(\hat{\mathbf{r}}_{ji}\right)\mathcal{W}^{(t)}_{kl_2}h_{j,l_2m_2}^{(t)}
+\end{equation}\]</div>
+<p>Wow! What an expression. Let’s go through this carefully, starting with the output. <span class="math notranslate nohighlight">\(A^{(t)}_{i, kl_3m_3}\)</span> are the feature tensor values for atom <span class="math notranslate nohighlight">\(i\)</span> at layer <span class="math notranslate nohighlight">\(t\)</span>. There are channels indexed by <span class="math notranslate nohighlight">\(k\)</span> and the spherical harmonic indexes <span class="math notranslate nohighlight">\(l_3m_3\)</span>. The right-hand side is nearly identical to the G-equivariant neural network layer equation from <a class="reference internal" href="Equivariant.html"><span class="doc">Equivariant Neural Networks</span></a>. We have the input</p>
+<p>How is this different than a MPNN</p>
+<p>To help understand the GCN layer, look at <code class="xref std std-numref docutils literal notranslate"><span class="pre">molnet-dframe</span></code>. It shows an intermediate step of the GCN layer. Each node feature is represented here as a one-hot encoded vector at input. The animation in <a class="reference internal" href="#molnet-gcnanim"><span class="std std-numref">Fig. 16.2</span></a> shows the averaging</p>
+<figure class="align-default" id="molnet-gcnanim">
+<img alt="animation of the graph convolution layer operation" src="../_images/molnet.gif" />
+<figcaption>
+<p><span class="caption-number">Fig. 16.2 </span><span class="caption-text">Animation of the graph convolution layer operation. The left is input, right is output node features. Note that two layers are shown (see title change). As the animation plays out, you can see how the information about the atoms propagates through the molecule via the averaging over neighbors. Note how each fragment set is updated independently to maintain equivariance.</span><a class="headerlink" href="#molnet-gcnanim" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="normalization">
+<h2><span class="section-number">16.2. </span>Normalization<a class="headerlink" href="#normalization" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Physics-based energy/force normalization</p></li>
+<li><p>Pooling</p></li>
+<li><p>Layers</p></li>
+</ul>
+</section>
+<section id="cited-references">
+<h2><span class="section-number">16.3. </span>Cited References<a class="headerlink" href="#cited-references" title="Link to this heading">#</a></h2>
+<div class="docutils container" id="id5">
+<div role="list" class="citation-list">
+<div class="citation" id="id222" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">WL68</a><span class="fn-bracket">]</span></span>
+<p>Boris Weisfeiler and Andrei Leman. The reduction of a graph to canonical form and the algebra which appears therein. <em>NTI, Series</em>, 2(9):12–16, 1968.</p>
+</div>
+<div class="citation" id="id224" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">PC22</a><span class="fn-bracket">]</span></span>
+<p>Sergey N Pozdnyakov and Michele Ceriotti. Incompleteness of graph convolutional neural networks for points clouds in three dimensions. <em>arXiv preprint arXiv:2201.07136</em>, 2022.</p>
+</div>
+<div class="citation" id="id223" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>BBKovacs+22<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id3">1</a>,<a role="doc-backlink" href="#id4">2</a>)</span>
+<p>Ilyes Batatia, Simon Batzner, Dávid Péter Kovács, Albert Musaelian, Gregor NC Simm, Ralf Drautz, Christoph Ortner, Boris Kozinsky, and Gábor Csányi. The design space of e (3)-equivariant atom-centered interatomic potentials. <em>arXiv preprint arXiv:2205.06643</em>, 2022.</p>
 </div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># THIS CELL IS USED TO GENERATE A FIGURE</span>
-<span class="c1"># AND NOT RELATED TO CHAPTER</span>
-<span class="c1"># YOU CAN SKIP IT</span>
-<span class="kn">from</span> <span class="nn">myst_nb</span> <span class="kn">import</span> <span class="n">glue</span>
-<span class="kn">from</span> <span class="nn">moviepy.editor</span> <span class="kn">import</span> <span class="n">VideoClip</span>
-<span class="kn">from</span> <span class="nn">moviepy.video.io.bindings</span> <span class="kn">import</span> <span class="n">mplfig_to_npimage</span>
-
-
-<span class="k">def</span> <span class="nf">draw_vector</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">cmap</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="n">x</span> <span class="o">+=</span> <span class="n">s</span> <span class="o">/</span> <span class="mi">2</span>
-    <span class="n">y</span> <span class="o">+=</span> <span class="n">s</span> <span class="o">/</span> <span class="mi">2</span>
-    <span class="c1"># iterate vertically</span>
-    <span class="n">L</span> <span class="o">=</span> <span class="nb">max</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">vi</span><span class="p">)</span> <span class="k">for</span> <span class="n">vi</span> <span class="ow">in</span> <span class="n">v</span><span class="p">])</span>
-    <span class="k">for</span> <span class="n">dy</span><span class="p">,</span> <span class="n">vi</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">dx</span><span class="p">,</span> <span class="n">vij</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">vi</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">cmap</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span>
-                    <span class="n">mpl</span><span class="o">.</span><span class="n">patches</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">(</span>
-                        <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">dx</span> <span class="o">*</span> <span class="n">s</span> <span class="o">*</span> <span class="mf">1.5</span> <span class="o">/</span> <span class="n">L</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">dy</span> <span class="o">*</span> <span class="n">s</span><span class="p">),</span>
-                        <span class="n">s</span> <span class="o">*</span> <span class="mf">1.5</span> <span class="o">/</span> <span class="n">L</span><span class="p">,</span>
-                        <span class="n">s</span><span class="p">,</span>
-                        <span class="n">facecolor</span><span class="o">=</span><span class="n">cmap</span><span class="p">(</span><span class="n">vij</span><span class="p">),</span>
-                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
-                    <span class="p">)</span>
-                <span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span>
-                    <span class="n">mpl</span><span class="o">.</span><span class="n">patches</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">(</span>
-                        <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">dx</span> <span class="o">*</span> <span class="n">s</span> <span class="o">*</span> <span class="mf">1.5</span> <span class="o">/</span> <span class="n">L</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">dy</span> <span class="o">*</span> <span class="n">s</span><span class="p">),</span>
-                        <span class="n">s</span> <span class="o">*</span> <span class="mf">1.5</span> <span class="o">/</span> <span class="n">L</span><span class="p">,</span>
-                        <span class="n">s</span><span class="p">,</span>
-                        <span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;#FFF&quot;</span><span class="p">,</span>
-                        <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;#333&quot;</span><span class="p">,</span>
-                        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
-                    <span class="p">)</span>
-                <span class="p">)</span>
-            <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
-                <span class="n">x</span> <span class="o">+</span> <span class="n">dx</span> <span class="o">*</span> <span class="n">s</span> <span class="o">*</span> <span class="mf">1.5</span> <span class="o">/</span> <span class="n">L</span> <span class="o">+</span> <span class="n">s</span> <span class="o">*</span> <span class="mf">1.5</span> <span class="o">/</span> <span class="n">L</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
-                <span class="n">y</span> <span class="o">+</span> <span class="n">s</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">dy</span> <span class="o">*</span> <span class="n">s</span><span class="p">,</span>
-                <span class="s2">&quot;</span><span class="si">{:.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">vij</span><span class="p">),</span>
-                <span class="n">verticalalignment</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span>
-                <span class="n">horizontalalignment</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span>
-                <span class="n">fontsize</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-            <span class="p">)</span>
-
-
-<span class="k">def</span> <span class="nf">draw_key</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">cmap</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="n">x</span> <span class="o">+=</span> <span class="n">s</span> <span class="o">/</span> <span class="mi">2</span>
-    <span class="n">y</span> <span class="o">+=</span> <span class="n">s</span> <span class="o">/</span> <span class="mi">2</span>
-    <span class="k">for</span> <span class="n">vi</span> <span class="ow">in</span> <span class="n">v</span><span class="p">:</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span>
-            <span class="n">mpl</span><span class="o">.</span><span class="n">patches</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="n">s</span> <span class="o">*</span> <span class="mf">1.5</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="n">cmap</span><span class="p">(</span><span class="mf">1.0</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
-            <span class="n">x</span> <span class="o">+</span> <span class="n">s</span> <span class="o">*</span> <span class="mf">1.5</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
-            <span class="n">y</span> <span class="o">+</span> <span class="n">s</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
-            <span class="n">vi</span><span class="p">,</span>
-            <span class="n">verticalalignment</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span>
-            <span class="n">horizontalalignment</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span>
-        <span class="p">)</span>
-        <span class="n">y</span> <span class="o">+=</span> <span class="n">s</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
-        <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">s</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;Key:&quot;</span><span class="p">,</span> <span class="n">verticalalignment</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">horizontalalignment</span><span class="o">=</span><span class="s2">&quot;left&quot;</span>
-    <span class="p">)</span>
-
-
-<span class="k">def</span> <span class="nf">draw</span><span class="p">(</span>
-    <span class="n">nodes</span><span class="p">,</span>
-    <span class="n">node_features</span><span class="p">,</span>
-    <span class="n">adj</span><span class="p">,</span>
-    <span class="n">ax</span><span class="p">,</span>
-    <span class="n">highlight</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">key</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-    <span class="n">labels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">mask</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">draw_nodes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-<span class="p">):</span>
-    <span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">adj</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">adj</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
-            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">adj</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]):</span>
-                <span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">mask</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">mask</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">draw_nodes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">draw_nodes</span> <span class="o">=</span> <span class="n">nodes</span>
-    <span class="c1"># go from atomic number to element</span>
-    <span class="n">elements</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">draw_nodes</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">el_labels</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">my_elements</span><span class="o">.</span><span class="n">values</span><span class="p">())[</span><span class="n">e</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">elements</span><span class="p">)}</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">nx_agraph</span><span class="o">.</span><span class="n">graphviz_layout</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">prog</span><span class="o">=</span><span class="s2">&quot;sfdp&quot;</span><span class="p">)</span>
-    <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-        <span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">rescale_layout_dict</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
-    <span class="n">c</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;white&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
-    <span class="n">all_h</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">if</span> <span class="n">highlight</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">h</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">highlight</span><span class="p">):</span>
-            <span class="k">for</span> <span class="n">hj</span> <span class="ow">in</span> <span class="n">h</span><span class="p">:</span>
-                <span class="n">c</span><span class="p">[</span><span class="n">hj</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;C</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-                <span class="n">all_h</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">hj</span><span class="p">)</span>
-    <span class="c1"># now we add all edges to close (using pos) atoms to emphasize spatial locality</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">adj</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">adj</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
-            <span class="k">if</span> <span class="p">(</span>
-                <span class="n">i</span> <span class="o">!=</span> <span class="n">j</span>
-                <span class="ow">and</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">adj</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">])</span>
-                <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pos</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pos</span><span class="p">[</span><span class="n">j</span><span class="p">]))</span> <span class="o">&lt;</span> <span class="mi">1</span>
-            <span class="p">):</span>
-                <span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">space</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="c1"># set-up edge colors based on if they are space or not</span>
-    <span class="n">edge_colors</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;#000&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">True</span><span class="p">)):</span>
-        <span class="k">if</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;space&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-            <span class="n">edge_colors</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;#AAA&quot;</span>
-    <span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span>
-        <span class="n">G</span><span class="p">,</span>
-        <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
-        <span class="n">pos</span><span class="o">=</span><span class="n">pos</span><span class="p">,</span>
-        <span class="n">labels</span><span class="o">=</span><span class="n">el_labels</span><span class="p">,</span>
-        <span class="n">node_size</span><span class="o">=</span><span class="mi">700</span><span class="p">,</span>
-        <span class="n">node_color</span><span class="o">=</span><span class="n">c</span><span class="p">,</span>
-        <span class="n">edge_color</span><span class="o">=</span><span class="n">edge_colors</span><span class="p">,</span>
-    <span class="p">)</span>
-    <span class="n">cmap</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s2">&quot;Wistia&quot;</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">G</span><span class="p">)):</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">mask</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
-            <span class="k">continue</span>
-        <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">all_h</span><span class="p">:</span>
-            <span class="n">draw_vector</span><span class="p">(</span><span class="o">*</span><span class="n">pos</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="mf">0.15</span><span class="p">,</span> <span class="n">node_features</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">ax</span><span class="p">,</span> <span class="n">cmap</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">draw_vector</span><span class="p">(</span><span class="o">*</span><span class="n">pos</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="mf">0.15</span><span class="p">,</span> <span class="n">node_features</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">ax</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">key</span><span class="p">:</span>
-        <span class="n">draw_key</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="n">my_elements</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span> <span class="n">ax</span><span class="p">,</span> <span class="n">cmap</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">labels</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">legend_elements</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">labels</span><span class="p">):</span>
-            <span class="n">p</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">lines</span><span class="o">.</span><span class="n">Line2D</span><span class="p">(</span>
-                <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="n">l</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">15</span>
-            <span class="p">)</span>
-            <span class="n">legend_elements</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="o">=</span><span class="n">legend_elements</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s2">&quot;#f5f4e9&quot;</span><span class="p">)</span>
-
-
-<span class="n">nodes</span><span class="p">,</span> <span class="n">adj</span> <span class="o">=</span> <span class="n">smiles2graph</span><span class="p">(</span><span class="s2">&quot;CO&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span>
-<span class="n">nodes_vectors</span> <span class="o">=</span> <span class="p">[[</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">[:</span><span class="mi">2</span><span class="p">]]</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">nodes</span><span class="p">)]</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">nodes_vectors</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-<span class="n">draw</span><span class="p">(</span>
-    <span class="n">nodes</span><span class="p">,</span>
-    <span class="n">nodes_vectors</span><span class="p">,</span>
-    <span class="n">adj</span><span class="p">,</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">(),</span>
-    <span class="n">highlight</span><span class="o">=</span><span class="p">[[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">]],</span>
-    <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="s2">&quot;neighbors&quot;</span><span class="p">],</span>
-<span class="p">)</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s2">&quot;#f5f4e9&quot;</span><span class="p">)</span>
-<span class="n">glue</span><span class="p">(</span><span class="s2">&quot;dframe&quot;</span><span class="p">,</span> <span class="n">plt</span><span class="o">.</span><span class="n">gcf</span><span class="p">(),</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1. 0. 0.]
- [0. 1. 0.]
- [0. 0. 1.]
- [0. 0. 1.]
- [0. 0. 1.]
- [0. 0. 1.]]
-[array([0., 1., 0.]), array([0., 1.])]
-</pre></div>
-</div>
-<img alt="../_images/molnets_13_2.png" src="../_images/molnets_13_2.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">glue</span><span class="p">(</span><span class="s2">&quot;dframe&quot;</span><span class="p">,</span> <span class="n">plt</span><span class="o">.</span><span class="n">gcf</span><span class="p">(),</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-
-<span class="c1"># THIS CELL IS USED TO GENERATE A FIGURE</span>
-<span class="c1"># AND NOT RELATED TO CHAPTER</span>
-<span class="c1"># YOU CAN SKIP IT</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">squeeze</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-<span class="n">order</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
-<span class="n">time_per_node</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="n">last_layer</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">layers</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="n">input_nodes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">nodes</span><span class="p">)</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s2">&quot;#f5f4e9&quot;</span><span class="p">)</span>
-
-
-<span class="k">def</span> <span class="nf">make_frame</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
-    <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
-    <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
-
-    <span class="n">layer_i</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">t</span> <span class="o">/</span> <span class="p">(</span><span class="n">time_per_node</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">order</span><span class="p">)))</span>
-    <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Layer </span><span class="si">{</span><span class="n">layer_i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2"> Input&quot;</span><span class="p">)</span>
-    <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Layer </span><span class="si">{</span><span class="n">layer_i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2"> Output&quot;</span><span class="p">)</span>
-
-    <span class="n">flat_adj</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">adj</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
-    <span class="c1">#     out_nodes = np.einsum(</span>
-    <span class="c1">#         &quot;i,ij,jk-&gt;ik&quot;,</span>
-    <span class="c1">#         1 / (np.sum(flat_adj, axis=1) + 1),</span>
-    <span class="c1">#         flat_adj + np.eye(*flat_adj.shape),</span>
-    <span class="c1">#         nodes,</span>
-    <span class="c1">#     )</span>
-    <span class="n">out_nodes</span> <span class="o">=</span> <span class="n">nodes</span>
-    <span class="n">node_vectors</span> <span class="o">=</span> <span class="p">[[</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">[:</span><span class="mi">2</span><span class="p">]]</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">out_nodes</span><span class="p">)]</span>
-    <span class="k">if</span> <span class="n">last_layer</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">layer_i</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;recomputing&quot;</span><span class="p">)</span>
-        <span class="n">nodes</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">out_nodes</span>
-        <span class="n">last_layer</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">layer_i</span>
-
-    <span class="n">t</span> <span class="o">-=</span> <span class="n">layer_i</span> <span class="o">*</span> <span class="n">time_per_node</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
-    <span class="n">i</span> <span class="o">=</span> <span class="n">order</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">t</span> <span class="o">/</span> <span class="n">time_per_node</span><span class="p">)]</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">last_layer</span><span class="p">,</span> <span class="n">layer_i</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
-    <span class="n">mask</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span><span class="p">]</span> <span class="o">*</span> <span class="n">nodes</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">order</span><span class="p">[:</span> <span class="nb">int</span><span class="p">(</span><span class="n">t</span> <span class="o">/</span> <span class="n">time_per_node</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]:</span>
-        <span class="n">mask</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
-    <span class="n">neighs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">adj</span><span class="p">[</span><span class="n">i</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">t</span> <span class="o">/</span> <span class="n">time_per_node</span><span class="p">)</span> <span class="o">*</span> <span class="n">time_per_node</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">time_per_node</span> <span class="o">/</span> <span class="mi">4</span><span class="p">:</span>
-        <span class="n">draw</span><span class="p">(</span>
-            <span class="n">nodes</span><span class="p">,</span>
-            <span class="n">node_vectors</span><span class="p">,</span>
-            <span class="n">adj</span><span class="p">,</span>
-            <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-            <span class="n">highlight</span><span class="o">=</span><span class="p">[[</span><span class="n">i</span><span class="p">],</span> <span class="n">neighs</span><span class="p">],</span>
-            <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="s2">&quot;neighbors&quot;</span><span class="p">],</span>
-            <span class="n">draw_nodes</span><span class="o">=</span><span class="n">input_nodes</span><span class="p">,</span>
-        <span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">draw</span><span class="p">(</span>
-            <span class="n">nodes</span><span class="p">,</span>
-            <span class="n">node_vectors</span><span class="p">,</span>
-            <span class="n">adj</span><span class="p">,</span>
-            <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-            <span class="n">highlight</span><span class="o">=</span><span class="p">[[</span><span class="n">i</span><span class="p">]],</span>
-            <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="s2">&quot;neighbors&quot;</span><span class="p">],</span>
-            <span class="n">draw_nodes</span><span class="o">=</span><span class="n">input_nodes</span><span class="p">,</span>
-        <span class="p">)</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">t</span> <span class="o">/</span> <span class="n">time_per_node</span><span class="p">)</span> <span class="o">*</span> <span class="n">time_per_node</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">time_per_node</span> <span class="o">/</span> <span class="mi">2</span><span class="p">:</span>
-        <span class="n">mask</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
-    <span class="n">draw</span><span class="p">(</span>
-        <span class="n">out_nodes</span><span class="p">,</span>
-        <span class="n">node_vectors</span><span class="p">,</span>
-        <span class="n">adj</span><span class="p">,</span>
-        <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
-        <span class="n">highlight</span><span class="o">=</span><span class="p">[[</span><span class="n">i</span><span class="p">]],</span>
-        <span class="n">key</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-        <span class="n">mask</span><span class="o">=</span><span class="n">mask</span><span class="p">,</span>
-        <span class="n">draw_nodes</span><span class="o">=</span><span class="n">input_nodes</span><span class="p">,</span>
-    <span class="p">)</span>
-    <span class="n">fig</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s2">&quot;#f5f4e9&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">mplfig_to_npimage</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
-
-
-<span class="n">animation</span> <span class="o">=</span> <span class="n">VideoClip</span><span class="p">(</span><span class="n">make_frame</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="n">time_per_node</span> <span class="o">*</span> <span class="n">nodes</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">layers</span><span class="p">)</span>
-<span class="n">animation</span><span class="o">.</span><span class="n">write_gif</span><span class="p">(</span><span class="s2">&quot;../_static/images/molnet.gif&quot;</span><span class="p">,</span> <span class="n">fps</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0] 0 5 0
-[False, False, False, False, False, True] 5
-MoviePy - Building file ../_static/images/molnet.gif with imageio.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t:   0%|          | 0/48 [00:00&lt;?, ?it/s, now=None]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0] 0 5 0.0
-[False, False, False, False, False, True] 5
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t:   4%|▍         | 2/48 [00:00&lt;00:06,  6.62it/s, now=None]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0] 0 5 0.5
-[False, False, False, False, False, True] 5
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t:   6%|▋         | 3/48 [00:00&lt;00:09,  4.67it/s, now=None]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0] 0 5 1.0
-[False, False, False, False, False, True] 5
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t:   8%|▊         | 4/48 [00:00&lt;00:11,  3.94it/s, now=None]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0] 0 5 1.5
-[False, False, False, False, False, True] 5
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t:  10%|█         | 5/48 [00:01&lt;00:11,  3.71it/s, now=None]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0] 0 1 2.0
-[False, True, False, False, False, True] 1
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t:  12%|█▎        | 6/48 [00:01&lt;00:11,  3.54it/s, now=None]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0] 0 1 2.5
-[False, True, False, False, False, True] 1
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t:  15%|█▍        | 7/48 [00:01&lt;00:11,  3.42it/s, now=None]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0] 0 1 3.0
-[False, True, False, False, False, True] 1
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t:  17%|█▋        | 8/48 [00:02&lt;00:11,  3.35it/s, now=None]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0] 0 1 3.5
-[False, True, False, False, False, True] 1
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t:  19%|█▉        | 9/48 [00:02&lt;00:11,  3.29it/s, now=None]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0] 0 0 4.0
-[True, True, False, False, False, True] 0
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t:  21%|██        | 10/48 [00:02&lt;00:11,  3.19it/s, now=None]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0] 0 0 4.5
-[True, True, False, False, False, True] 0
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t:  23%|██▎       | 11/48 [00:03&lt;00:14,  2.60it/s, now=None]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0] 0 0 5.0
-[True, True, False, False, False, True] 0
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t:  25%|██▌       | 12/48 [00:03&lt;00:13,  2.73it/s, now=None]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0] 0 0 5.5
-[True, True, False, False, False, True] 0
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t:  27%|██▋       | 13/48 [00:03&lt;00:12,  2.84it/s, now=None]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0] 0 2 6.0
-[True, True, True, False, False, True] 2
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t:  29%|██▉       | 14/48 [00:04&lt;00:11,  2.93it/s, now=None]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0] 0 2 6.5
-[True, True, True, False, False, True] 2
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t:  31%|███▏      | 15/48 [00:04&lt;00:11,  2.93it/s, now=None]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0] 0 2 7.0
-[True, True, True, False, False, True] 2
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t:  33%|███▎      | 16/48 [00:04&lt;00:10,  2.96it/s, now=None]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0] 0 2 7.5
-[True, True, True, False, False, True] 2
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t:  35%|███▌      | 17/48 [00:05&lt;00:10,  3.01it/s, now=None]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0] 0 3 8.0
-[True, True, True, True, False, True] 3
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t:  38%|███▊      | 18/48 [00:05&lt;00:09,  3.00it/s, now=None]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0] 0 3 8.5
-[True, True, True, True, False, True] 3
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t:  40%|███▉      | 19/48 [00:05&lt;00:09,  3.00it/s, now=None]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0] 0 3 9.0
-[True, True, True, True, False, True] 3
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t:  42%|████▏     | 20/48 [00:06&lt;00:09,  2.98it/s, now=None]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0] 0 3 9.5
-[True, True, True, True, False, True] 3
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t:  44%|████▍     | 21/48 [00:06&lt;00:09,  2.96it/s, now=None]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0] 0 4 10.0
-[True, True, True, True, True, True] 4
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t:  46%|████▌     | 22/48 [00:07&lt;00:10,  2.44it/s, now=None]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0] 0 4 10.5
-[True, True, True, True, True, True] 4
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t:  48%|████▊     | 23/48 [00:07&lt;00:09,  2.60it/s, now=None]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0] 0 4 11.0
-[True, True, True, True, True, True] 4
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t:  50%|█████     | 24/48 [00:07&lt;00:08,  2.69it/s, now=None]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0] 0 4 11.5
-[True, True, True, True, True, True] 4
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t:  52%|█████▏    | 25/48 [00:08&lt;00:08,  2.75it/s, now=None]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>recomputing
-[1] 1 5 0.0
-[False, False, False, False, False, True] 5
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t:  54%|█████▍    | 26/48 [00:08&lt;00:07,  2.89it/s, now=None]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] 1 5 0.5
-[False, False, False, False, False, True] 5
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t:  56%|█████▋    | 27/48 [00:08&lt;00:06,  3.02it/s, now=None]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] 1 5 1.0
-[False, False, False, False, False, True] 5
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t:  58%|█████▊    | 28/48 [00:09&lt;00:06,  3.11it/s, now=None]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] 1 5 1.5
-[False, False, False, False, False, True] 5
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t:  60%|██████    | 29/48 [00:09&lt;00:05,  3.18it/s, now=None]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] 1 1 2.0
-[False, True, False, False, False, True] 1
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t:  62%|██████▎   | 30/48 [00:09&lt;00:05,  3.20it/s, now=None]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] 1 1 2.5
-[False, True, False, False, False, True] 1
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t:  65%|██████▍   | 31/48 [00:10&lt;00:05,  3.23it/s, now=None]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] 1 1 3.0
-[False, True, False, False, False, True] 1
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t:  67%|██████▋   | 32/48 [00:10&lt;00:04,  3.24it/s, now=None]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] 1 1 3.5
-[False, True, False, False, False, True] 1
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t:  69%|██████▉   | 33/48 [00:10&lt;00:04,  3.18it/s, now=None]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] 1 0 4.0
-[True, True, False, False, False, True] 0
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t:  71%|███████   | 34/48 [00:11&lt;00:05,  2.62it/s, now=None]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] 1 0 4.5
-[True, True, False, False, False, True] 0
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t:  73%|███████▎  | 35/48 [00:11&lt;00:04,  2.75it/s, now=None]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] 1 0 5.0
-[True, True, False, False, False, True] 0
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t:  75%|███████▌  | 36/48 [00:11&lt;00:04,  2.85it/s, now=None]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] 1 0 5.5
-[True, True, False, False, False, True] 0
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t:  77%|███████▋  | 37/48 [00:12&lt;00:03,  2.93it/s, now=None]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] 1 2 6.0
-[True, True, True, False, False, True] 2
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t:  79%|███████▉  | 38/48 [00:12&lt;00:03,  3.00it/s, now=None]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] 1 2 6.5
-[True, True, True, False, False, True] 2
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t:  81%|████████▏ | 39/48 [00:12&lt;00:02,  3.02it/s, now=None]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] 1 2 7.0
-[True, True, True, False, False, True] 2
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t:  83%|████████▎ | 40/48 [00:13&lt;00:02,  3.03it/s, now=None]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] 1 2 7.5
-[True, True, True, False, False, True] 2
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t:  85%|████████▌ | 41/48 [00:13&lt;00:02,  3.02it/s, now=None]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] 1 3 8.0
-[True, True, True, True, False, True] 3
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t:  88%|████████▊ | 42/48 [00:13&lt;00:01,  3.00it/s, now=None]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] 1 3 8.5
-[True, True, True, True, False, True] 3
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t:  90%|████████▉ | 43/48 [00:14&lt;00:01,  3.02it/s, now=None]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] 1 3 9.0
-[True, True, True, True, False, True] 3
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t:  92%|█████████▏| 44/48 [00:14&lt;00:01,  3.02it/s, now=None]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] 1 3 9.5
-[True, True, True, True, False, True] 3
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t:  94%|█████████▍| 45/48 [00:15&lt;00:01,  2.47it/s, now=None]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] 1 4 10.0
-[True, True, True, True, True, True] 4
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t:  96%|█████████▌| 46/48 [00:15&lt;00:00,  2.61it/s, now=None]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] 1 4 10.5
-[True, True, True, True, True, True] 4
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t:  98%|█████████▊| 47/48 [00:15&lt;00:00,  2.70it/s, now=None]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] 1 4 11.0
-[True, True, True, True, True, True] 4
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t: 100%|██████████| 48/48 [00:16&lt;00:00,  2.74it/s, now=None]
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] 1 4 11.5
-[True, True, True, True, True, True] 4
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                                            
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 900x692.308 with 0 Axes&gt;
-</pre></div>
-</div>
-<img alt="../_images/molnets_14_101.png" src="../_images/molnets_14_101.png" />
 </div>
 </div>
 </section>
@@ -1391,7 +615,7 @@ MoviePy - Building file ../_static/images/molnet.gif with imageio.
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./dl"
         },
         predefinedOutput: true
@@ -1399,46 +623,120 @@ MoviePy - Building file ../_static/images/molnet.gif with imageio.
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../changelog.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">22. </span>Changelog</p>
-        </div>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="flows.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">15. </span>Normalizing Flows</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../applied/QM9.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">17. </span>Predicting DFT Energies with GNNs</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">16. Modern Molecular NNs</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-this-notebook">16.1. Running This Notebook</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#expressiveness">16. Expressiveness</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-elements-of-modern-molecular-nns">16.1. The Elements of Modern Molecular NNs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#atom-features">16.1.1. Atom features</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#atomic-cluster-expansions">16.1.2. Atomic Cluster Expansions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normalization">16.2. Normalization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cited-references">16.3. Cited References</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-    By Andrew D. White<br/>
-  
-      &copy; Copyright 2022.<br/>
-    <div class="extra_footer">
-      <a href="http://thewhitelab.org">thewhitelab.org</a> <div id="wh-modal"> <button class="wh-venti-button" aria-label="close modal" id="wh-modal-close">✕</button> <img id="wh-modal-img"> </div>
-    </div>
-</p>
-        </footer>
-    </div>
+  <div class="footer-item">
     
+<p class="component-author">
+By Andrew D. White
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <a href="http://thewhitelab.org">thewhitelab.org</a> <div id="wh-modal"> <button class="wh-venti-button" aria-label="close modal" id="wh-modal-close">✕</button> <img id="wh-modal-img"> </div>
 </div>
+  </div>
+  
+</div>
+          </footer>
+        
 
-
-      </div>
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

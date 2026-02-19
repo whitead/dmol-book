@@ -1,10 +1,12 @@
 
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="../" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta content="Deep Learning for Molecules &amp; Materials Book" lang="en" name="description" xml:lang="en" />
 <meta content="en_US" property="og:locale" />
 <meta content="summary" name="twitter:card" />
@@ -13,114 +15,176 @@
 <meta content="https://dmol.pub/_static/logo.png" name="twitter:image" />
 <meta content="&#64;andrewwhite01" name="twitter:site" />
 
-    <title>16. Predicting DFT Energies with GNNs &#8212; deep learning for molecules &amp; materials</title>
-    
+    <title>17. Predicting DFT Energies with GNNs &#8212; deep learning for molecules &amp; materials</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/a11y.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=cb1cce99" />
+    <link rel="stylesheet" type="text/css" href="../_static/a11y.css?v=ffeaf963" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
-    <script src="../_static/custom.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <script src="../_static/togglebutton.js?v=1ae7504c"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'applied/QM9';</script>
+    <script src="../_static/custom.js?v=3f5092eb"></script>
     <link rel="canonical" href="https://dmol.pub/applied/QM9.html" />
-    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <link rel="icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="17. Generative RNN in Browser" href="MolGenerator.html" />
-    <link rel="prev" title="15. Normalizing Flows" href="../dl/flows.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+    <link rel="next" title="18. Generative RNN in Browser" href="MolGenerator.html" />
+    <link rel="prev" title="16. Modern Molecular NNs" href="../dl/molnets.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
-    
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../_static/logo.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">deep learning for molecules & materials</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="deep learning for molecules & materials - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="deep learning for molecules & materials - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -129,597 +193,403 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  A. Math Review
- </span>
-</p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">A. Math Review</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../math/tensors-and-shapes.html">
-   1. Tensors and Shapes
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../math/tensors-and-shapes.html">1. Tensors and Shapes</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  B. Machine Learning
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">B. Machine Learning</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../ml/introduction.html">
-   2. Introduction to Machine Learning
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../ml/regression.html">
-   3. Regression &amp; Model Assessment
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../ml/classification.html">
-   4. Classification
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../ml/kernel.html">
-   5. Kernel Learning
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../ml/introduction.html">2. Introduction to Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ml/regression.html">3. Regression &amp; Model Assessment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ml/classification.html">4. Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ml/kernel.html">5. Kernel Learning</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  C. Deep Learning
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">C. Deep Learning</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/introduction.html">
-   6. Deep Learning Overview
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/layers.html">
-   7. Standard Layers
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/gnn.html">
-   8. Graph Neural Networks
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/data.html">
-   9. Input Data &amp; Equivariances
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/Equivariant.html">
-   10. Equivariant Neural Networks
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/xai.html">
-   11. Explaining Predictions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/attention.html">
-   12. Attention Layers
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/NLP.html">
-   13. Deep Learning on Sequences
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/VAE.html">
-   14. Variational Autoencoder
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/flows.html">
-   15. Normalizing Flows
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/introduction.html">6. Deep Learning Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/layers.html">7. Standard Layers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/gnn.html">8. Graph Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/data.html">9. Input Data &amp; Equivariances</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/Equivariant.html">10. Equivariant Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/xai.html">11. Explaining Predictions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/attention.html">12. Attention Layers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/NLP.html">13. Deep Learning on Sequences</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/VAE.html">14. Variational Autoencoder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/flows.html">15. Normalizing Flows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/molnets.html">16. Modern Molecular NNs</a></li>
+
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  D. Applications
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">D. Applications</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   16. Predicting DFT Energies with GNNs
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="MolGenerator.html">
-   17. Generative RNN in Browser
-  </a>
- </li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">17. Predicting DFT Energies with GNNs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MolGenerator.html">18. Generative RNN in Browser</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  E. Contributed Chapters
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">E. Contributed Chapters</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/Hyperparameter_tuning.html">
-   18. Hyperparameter Tuning
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="e3nn_traj.html">
-   19. Equivariant Neural Network for Predicting Trajectories
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/pretraining.html">
-   20. Pretraining
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="e3nn_traj.html">19. Equivariant Neural Network for Predicting Trajectories</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/pretraining.html">20. Pretraining</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  F. Appendix
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">F. Appendix</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../style.html">
-   21. Style Guide
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../changelog.html">
-   22. Changelog
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  G. In Progress
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/molnets.html">
-   23. Modern Molecular NNs
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../style.html">21. Style Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">22. Changelog</a></li>
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            <script async defer src="https://api.dmol.pub/latest.js"></script><noscript><img src="https://api.dmol.pub/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript> By <a href="https://twitter.com/andrewwhite01">Andrew White</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
-</div>
-
-
-          
-
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
   
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://colab.research.google.com/github/whitead/dmol-book/blob/master/applied/QM9.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Colab"
->
   
-
-<span class="headerbtn__icon-container">
-  
-    <img src="../_static/images/logo_colab.png">
-  </span>
-<span class="headerbtn__text-container">Colab</span>
-</a>
-
-      </li>
-      
-    </ul>
+  <div class="sidebar-primary-items__end sidebar-primary__section">
   </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/whitead/dmol-book/blob/master/applied/QM9.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
 </div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/whitead/dmol-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/whitead/dmol-book/issues/new?title=Issue%20on%20page%20%2Fapplied/QM9.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/applied/QM9.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
 
 <button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/whitead/dmol-book"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
+`);
+</script>
 
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
 
-      </li>
-      
-      <li>
-        <a href="https://github.com/whitead/dmol-book/issues/new?title=Issue%20on%20page%20%2Fapplied/QM9.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../_sources/applied/QM9.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.ipynb</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
 </button>
-
-      </li>
+</div></div>
       
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
+    </div>
   
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
-
-    </div>
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#label-description">
-   16.1. Label Description
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#data">
-   16.2. Data
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#running-this-notebook">
-   16.3. Running This Notebook
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#baseline-model">
-   16.4. Baseline Model
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#example-gnn-model">
-   16.5. Example GNN Model
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#jax-model-implementation">
-     16.5.1. JAX Model Implementation
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#relevant-videos-about-modeling-qm9">
-   16.6. Relevant Videos About Modeling QM9
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#cited-references">
-   16.7. Cited References
-  </a>
- </li>
-</ul>
-
-    </nav>
 </div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Predicting DFT Energies with GNNs</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#label-description">
-   16.1. Label Description
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#data">
-   16.2. Data
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#running-this-notebook">
-   16.3. Running This Notebook
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#baseline-model">
-   16.4. Baseline Model
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#example-gnn-model">
-   16.5. Example GNN Model
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#jax-model-implementation">
-     16.5.1. JAX Model Implementation
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#relevant-videos-about-modeling-qm9">
-   16.6. Relevant Videos About Modeling QM9
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#cited-references">
-   16.7. Cited References
-  </a>
- </li>
-</ul>
+              
+              
 
-                        </nav>
-                    </div>
-                </div>
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Predicting DFT Energies with GNNs</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
             </div>
-            <main id="main-content" role="main">
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#label-description">17.1. Label Description</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data">17.2. Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-this-notebook">17.3. Running This Notebook</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#baseline-model">17.4. Baseline Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-gnn-model">17.5. Example GNN Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax-model-implementation">17.5.1. JAX Model Implementation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relevant-videos-about-modeling-qm9">17.6. Relevant Videos About Modeling QM9</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cited-references">17.7. Cited References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
                 
-              <div>
-                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
   <section class="tex2jax_ignore mathjax_ignore" id="predicting-dft-energies-with-gnns">
-<h1><span class="section-number">16. </span>Predicting DFT Energies with GNNs<a class="headerlink" href="#predicting-dft-energies-with-gnns" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">17. </span>Predicting DFT Energies with GNNs<a class="headerlink" href="#predicting-dft-energies-with-gnns" title="Link to this heading">#</a></h1>
 <p>QM9 is a dataset of 134,000 molecules consisting of 9 heavy atoms drawn from the elements C, H, O, N, F<span id="id1">[<a class="reference internal" href="#id5" title="Raghunathan Ramakrishnan, Pavlo O Dral, Matthias Rupp, and O Anatole Von Lilienfeld. Quantum chemistry structures and properties of 134 kilo molecules. Scientific data, 1(1):1–7, 2014.">RDRVL14</a>]</span>. The features are the xyz coordinates (<span class="math notranslate nohighlight">\(\mathbf{X}\)</span>) and elements (<span class="math notranslate nohighlight">\(\vec{e}\)</span>) of the molecule. The coordinates are determined from B3LYP/6-31G(2df,p) level DFT geometry optimization. There are multiple labels (see table below), but we’ll be interested specifically in the energy of formation (Enthalpy at 298.15 K). The goal in this chapter is to regress a graph neural network to predict the energy of formation given the coordinates of a molecule. We will build upon ideas in the following chapters:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p><a class="reference internal" href="../ml/regression.html"><span class="doc">Regression &amp; Model Assessment</span></a></p></li>
 <li><p><a class="reference internal" href="../dl/gnn.html"><span class="doc">Graph Neural Networks</span></a></p></li>
 <li><p><a class="reference internal" href="../dl/data.html"><span class="doc">Input Data &amp; Equivariances</span></a></p></li>
 </ol>
 <p>QM9 is one of the most popular dataset for machine learning and deep learning since it came out in 2014. The first papers could achieve about 10 kcal/mol on this regression problem and now are down to ~1 kcal/mol and lower. Any model on this dataset must be translation, rotation, and permutation invariant.</p>
 <section id="label-description">
-<h2><span class="section-number">16.1. </span>Label Description<a class="headerlink" href="#label-description" title="Permalink to this headline">#</a></h2>
-<table class="colwidths-auto table">
+<h2><span class="section-number">17.1. </span>Label Description<a class="headerlink" href="#label-description" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
-<tr class="row-odd"><th class="text-align:left head"><p>Index</p></th>
+<tr class="row-odd"><th class="head text-left"><p>Index</p></th>
 <th class="head"><p>Name</p></th>
 <th class="head"><p>Units</p></th>
-<th class="text-align:right head"><p>Description</p></th>
+<th class="head text-right"><p>Description</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-align:left"><p>0</p></td>
+<tr class="row-even"><td class="text-left"><p>0</p></td>
 <td><p>index</p></td>
 <td><p>-</p></td>
-<td class="text-align:right"><p>Consecutive, 1-based integer identifier of molecule</p></td>
+<td class="text-right"><p>Consecutive, 1-based integer identifier of molecule</p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:left"><p>1</p></td>
+<tr class="row-odd"><td class="text-left"><p>1</p></td>
 <td><p>A</p></td>
 <td><p>GHz</p></td>
-<td class="text-align:right"><p>Rotational constant A</p></td>
+<td class="text-right"><p>Rotational constant A</p></td>
 </tr>
-<tr class="row-even"><td class="text-align:left"><p>2</p></td>
+<tr class="row-even"><td class="text-left"><p>2</p></td>
 <td><p>B</p></td>
 <td><p>GHz</p></td>
-<td class="text-align:right"><p>Rotational constant B</p></td>
+<td class="text-right"><p>Rotational constant B</p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:left"><p>3</p></td>
+<tr class="row-odd"><td class="text-left"><p>3</p></td>
 <td><p>C</p></td>
 <td><p>GHz</p></td>
-<td class="text-align:right"><p>Rotational constant C</p></td>
+<td class="text-right"><p>Rotational constant C</p></td>
 </tr>
-<tr class="row-even"><td class="text-align:left"><p>4</p></td>
+<tr class="row-even"><td class="text-left"><p>4</p></td>
 <td><p>mu</p></td>
 <td><p>Debye</p></td>
-<td class="text-align:right"><p>Dipole moment</p></td>
+<td class="text-right"><p>Dipole moment</p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:left"><p>5</p></td>
+<tr class="row-odd"><td class="text-left"><p>5</p></td>
 <td><p>alpha</p></td>
 <td><p>Bohr^3</p></td>
-<td class="text-align:right"><p>Isotropic polarizability</p></td>
+<td class="text-right"><p>Isotropic polarizability</p></td>
 </tr>
-<tr class="row-even"><td class="text-align:left"><p>6</p></td>
+<tr class="row-even"><td class="text-left"><p>6</p></td>
 <td><p>homo</p></td>
 <td><p>Hartree</p></td>
-<td class="text-align:right"><p>Energy of Highest occupied molecular orbital (HOMO)</p></td>
+<td class="text-right"><p>Energy of Highest occupied molecular orbital (HOMO)</p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:left"><p>7</p></td>
+<tr class="row-odd"><td class="text-left"><p>7</p></td>
 <td><p>lumo</p></td>
 <td><p>Hartree</p></td>
-<td class="text-align:right"><p>Energy of Lowest unoccupied molecular orbital (LUMO)</p></td>
+<td class="text-right"><p>Energy of Lowest unoccupied molecular orbital (LUMO)</p></td>
 </tr>
-<tr class="row-even"><td class="text-align:left"><p>8</p></td>
+<tr class="row-even"><td class="text-left"><p>8</p></td>
 <td><p>gap</p></td>
 <td><p>Hartree</p></td>
-<td class="text-align:right"><p>Gap, difference between LUMO and HOMO</p></td>
+<td class="text-right"><p>Gap, difference between LUMO and HOMO</p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:left"><p>9</p></td>
+<tr class="row-odd"><td class="text-left"><p>9</p></td>
 <td><p>r2</p></td>
 <td><p>Bohr^2</p></td>
-<td class="text-align:right"><p>Electronic spatial extent</p></td>
+<td class="text-right"><p>Electronic spatial extent</p></td>
 </tr>
-<tr class="row-even"><td class="text-align:left"><p>10</p></td>
+<tr class="row-even"><td class="text-left"><p>10</p></td>
 <td><p>zpve</p></td>
 <td><p>Hartree</p></td>
-<td class="text-align:right"><p>Zero point vibrational energy</p></td>
+<td class="text-right"><p>Zero point vibrational energy</p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:left"><p>11</p></td>
+<tr class="row-odd"><td class="text-left"><p>11</p></td>
 <td><p>U0</p></td>
 <td><p>Hartree</p></td>
-<td class="text-align:right"><p>Internal energy at 0 K</p></td>
+<td class="text-right"><p>Internal energy at 0 K</p></td>
 </tr>
-<tr class="row-even"><td class="text-align:left"><p>12</p></td>
+<tr class="row-even"><td class="text-left"><p>12</p></td>
 <td><p>U</p></td>
 <td><p>Hartree</p></td>
-<td class="text-align:right"><p>Internal energy at 298.15 K</p></td>
+<td class="text-right"><p>Internal energy at 298.15 K</p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:left"><p>13</p></td>
+<tr class="row-odd"><td class="text-left"><p>13</p></td>
 <td><p>H</p></td>
 <td><p>Hartree</p></td>
-<td class="text-align:right"><p>Enthalpy at 298.15 K</p></td>
+<td class="text-right"><p>Enthalpy at 298.15 K</p></td>
 </tr>
-<tr class="row-even"><td class="text-align:left"><p>14</p></td>
+<tr class="row-even"><td class="text-left"><p>14</p></td>
 <td><p>G</p></td>
 <td><p>Hartree</p></td>
-<td class="text-align:right"><p>Free energy at 298.15 K</p></td>
+<td class="text-right"><p>Free energy at 298.15 K</p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:left"><p>15</p></td>
+<tr class="row-odd"><td class="text-left"><p>15</p></td>
 <td><p>Cv</p></td>
 <td><p>cal/(mol K)</p></td>
-<td class="text-align:right"><p>Heat capacity at 298.15 K</p></td>
+<td class="text-right"><p>Heat capacity at 298.15 K</p></td>
 </tr>
 </tbody>
 </table>
+</div>
 </section>
 <section id="data">
-<h2><span class="section-number">16.2. </span>Data<a class="headerlink" href="#data" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">17.2. </span>Data<a class="headerlink" href="#data" title="Link to this heading">#</a></h2>
 <p>I have written some helper code in the <code class="docutils literal notranslate"><span class="pre">fetch_data.py</span></code> file. It downloads the data and converts into a format easily used in Python. The data returned from this function is broken into the features <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> and <span class="math notranslate nohighlight">\(\vec{e}\)</span>. <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> is an <span class="math notranslate nohighlight">\(N\times4\)</span> matrix of atom positions + partial charge of the atom. <span class="math notranslate nohighlight">\(\vec{e}\)</span> is vector of atomic numbers for each atom in the molecule. Remember to slice the specific label you want from the label vector.</p>
 </section>
 <section id="running-this-notebook">
-<h2><span class="section-number">16.3. </span>Running This Notebook<a class="headerlink" href="#running-this-notebook" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">17.3. </span>Running This Notebook<a class="headerlink" href="#running-this-notebook" title="Link to this heading">#</a></h2>
 <p>Click the  <i aria-label="Launch interactive content" class="fas fa-rocket"></i>  above to launch this page as an interactive Google Colab. See details below on installing packages.</p>
 <div class="dropdown admonition tip">
 <p class="admonition-title">Tip</p>
@@ -731,10 +601,9 @@ title="Print to PDF"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">fetch_data</span> <span class="kn">import</span> <span class="n">qm9_parse</span><span class="p">,</span> <span class="n">qm9_fetch</span>
-<span class="kn">import</span> <span class="nn">dmol</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fetch_data</span><span class="w"> </span><span class="kn">import</span> <span class="n">qm9_fetch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">dmol</span>
 </pre></div>
 </div>
 </div>
@@ -742,8 +611,7 @@ title="Print to PDF"
 <p>Let’s load the data. This step will take a few minutes as it is downloaded and processed.</p>
 <div class="cell tag_remove-output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">qm9_records</span> <span class="o">=</span> <span class="n">qm9_fetch</span><span class="p">()</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">qm9_parse</span><span class="p">(</span><span class="n">qm9_records</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">qm9_fetch</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -751,54 +619,41 @@ title="Print to PDF"
 <p><code class="docutils literal notranslate"><span class="pre">data</span></code> is an iterable containing the data for the 133k molecules. Let’s examine the first one.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
-    <span class="k">break</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((&lt;tf.Tensor: shape=(5,), dtype=int64, numpy=array([6, 1, 1, 1, 1])&gt;, &lt;tf.Tensor: shape=(5, 4), dtype=float32, numpy=
-array([[-1.2698136e-02,  1.0858041e+00,  8.0009960e-03, -5.3568900e-01],
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((array([6, 1, 1, 1, 1]), array([[-1.2698136e-02,  1.0858041e+00,  8.0009960e-03, -5.3568900e-01],
        [ 2.1504159e-03, -6.0313176e-03,  1.9761203e-03,  1.3392100e-01],
        [ 1.0117308e+00,  1.4637512e+00,  2.7657481e-04,  1.3392200e-01],
        [-5.4081506e-01,  1.4475266e+00, -8.7664372e-01,  1.3392299e-01],
        [-5.2381361e-01,  1.4379326e+00,  9.0639728e-01,  1.3392299e-01]],
-      dtype=float32)&gt;), &lt;tf.Tensor: shape=(16,), dtype=float32, numpy=
-array([ 1.0000000e+00,  1.5771181e+02,  1.5770998e+02,  1.5770699e+02,
+      dtype=float32)), array([ 1.0000000e+00,  1.5771181e+02,  1.5770998e+02,  1.5770699e+02,
         0.0000000e+00,  1.3210000e+01, -3.8769999e-01,  1.1710000e-01,
         5.0480002e-01,  3.5364101e+01,  4.4748999e-02, -4.0478931e+01,
        -4.0476063e+01, -4.0475117e+01, -4.0498596e+01,  6.4689999e+00],
-      dtype=float32)&gt;)
+      dtype=float32))
 </pre></div>
 </div>
 </div>
 </div>
-<p>These are Tensorflow Tensors. They can be converted to numpy arrays via <code class="docutils literal notranslate"><span class="pre">x.numpy()</span></code>. The first item is the element vector <code class="docutils literal notranslate"><span class="pre">6,1,1,1,1</span></code>. Do you recognize the elements? It’s C, H, H, H, H. The positions come next. Note that there is an extra column containing the atom partial charges, which we will not use as a feature. Finally, the last tensor is the label vector.</p>
-<p>Now we will do some processing of the data to get into a more usable format. Let’s convert to numpy arrays, remove the partial charges, and convert the elements into one-hot vectors.</p>
+<p>These are numpy arrays. The first item is the element vector <code class="docutils literal notranslate"><span class="pre">6,1,1,1,1</span></code>. Do you recognize the elements? It’s C, H, H, H, H. The positions come next. Note that there is an extra column containing the atom partial charges, which we will not use as a feature. Finally, the last array is the label vector.</p>
+<p>Now we will do some processing of the data to get into a more usable format. Let’s remove the partial charges and convert the elements into one-hot vectors.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">convert_record</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
-    <span class="c1"># break up record</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">convert_record</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
     <span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">x</span><span class="p">),</span> <span class="n">y</span> <span class="o">=</span> <span class="n">d</span>
-    <span class="c1">#</span>
-    <span class="n">e</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
     <span class="n">r</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]</span>
-    <span class="c1"># make ohc size larger</span>
-    <span class="c1"># so use same node feature</span>
-    <span class="c1"># shape later</span>
     <span class="n">ohc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">e</span><span class="p">),</span> <span class="mi">16</span><span class="p">))</span>
     <span class="n">ohc</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">e</span><span class="p">)),</span> <span class="n">e</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">ohc</span><span class="p">,</span> <span class="n">r</span><span class="p">),</span> <span class="n">y</span><span class="o">.</span><span class="n">numpy</span><span class="p">()[</span><span class="mi">13</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">ohc</span><span class="p">,</span> <span class="n">r</span><span class="p">),</span> <span class="n">y</span><span class="p">[</span><span class="mi">13</span><span class="p">]</span>
 
 
-<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
-    <span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">x</span><span class="p">),</span> <span class="n">y</span> <span class="o">=</span> <span class="n">convert_record</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Element one hots</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Coordinates</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Label:&quot;</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-    <span class="k">break</span>
+<span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">x</span><span class="p">),</span> <span class="n">y</span> <span class="o">=</span> <span class="n">convert_record</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Element one hots</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Coordinates</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Label:&quot;</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -822,28 +677,28 @@ Label: -40.475117
 </div>
 </section>
 <section id="baseline-model">
-<h2><span class="section-number">16.4. </span>Baseline Model<a class="headerlink" href="#baseline-model" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">17.4. </span>Baseline Model<a class="headerlink" href="#baseline-model" title="Link to this heading">#</a></h2>
 <p>Before we get too far into modeling, let’s see what a simple model can do for accuracy. This will help establish a baseline model which any more sophisticated implementation should exceed in accuracy. You can make many choices for this, but I’ll just make a linear regression based on number of atom types.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
-<span class="kn">import</span> <span class="nn">jax.example_libraries.optimizers</span> <span class="k">as</span> <span class="nn">optimizers</span>
-<span class="kn">import</span> <span class="nn">jax</span>
-<span class="kn">import</span> <span class="nn">warnings</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">jax.numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">jnp</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jax.example_libraries.optimizers</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">optimizers</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jax</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
 
 
 <span class="nd">@jax</span><span class="o">.</span><span class="n">jit</span>
-<span class="k">def</span> <span class="nf">baseline_model</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">baseline_model</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
     <span class="c1"># get sum of each element type</span>
     <span class="n">atom_count</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="n">yhat</span> <span class="o">=</span> <span class="n">atom_count</span> <span class="o">@</span> <span class="n">w</span> <span class="o">+</span> <span class="n">b</span>
     <span class="k">return</span> <span class="n">yhat</span>
 
 
-<span class="k">def</span> <span class="nf">baseline_loss</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">baseline_loss</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">baseline_model</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
 
 
@@ -858,12 +713,10 @@ Label: -40.475117
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># we&#39;ll just train on 5,000 and use 1,000 for test</span>
-<span class="c1"># shuffle, but only once (reshuffle_each_iteration=False) so</span>
-<span class="c1"># we lock in which are train/test/val</span>
-<span class="n">shuffled_data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="mi">7000</span><span class="p">,</span> <span class="n">reshuffle_each_iteration</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">test_set</span> <span class="o">=</span> <span class="n">shuffled_data</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
-<span class="n">valid_set</span> <span class="o">=</span> <span class="n">shuffled_data</span><span class="o">.</span><span class="n">skip</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
-<span class="n">train_set</span> <span class="o">=</span> <span class="n">shuffled_data</span><span class="o">.</span><span class="n">skip</span><span class="p">(</span><span class="mi">2000</span><span class="p">)</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="mi">5000</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">test_set</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:</span><span class="mi">1000</span><span class="p">]</span>
+<span class="n">valid_set</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">1000</span><span class="p">:</span><span class="mi">2000</span><span class="p">]</span>
+<span class="n">train_set</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">2000</span><span class="p">:</span><span class="mi">7000</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -879,7 +732,7 @@ Label: -40.475117
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean =  -360.20135 Std = 43.710915
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean =  -411.7117 Std = 39.970882
 </pre></div>
 </div>
 </div>
@@ -887,11 +740,11 @@ Label: -40.475117
 <p>Now we’ll just use this transform when training: <span class="math notranslate nohighlight">\(y_s = \frac{y - \mu_y}{\sigma_y}\)</span> and then our predictions will be transformed by <span class="math notranslate nohighlight">\(\hat{y} = \hat{f}(e,x) \cdot \sigma_y + \mu_y\)</span>. This just helps standardize our range of outputs.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">transform_label</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">transform_label</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">train_ym</span><span class="p">)</span> <span class="o">/</span> <span class="n">train_ys</span>
 
 
-<span class="k">def</span> <span class="nf">transform_prediction</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">transform_prediction</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">y</span> <span class="o">*</span> <span class="n">train_ys</span> <span class="o">+</span> <span class="n">train_ym</span>
 </pre></div>
 </div>
@@ -926,10 +779,7 @@ Label: -40.475117
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
-</pre></div>
-</div>
-<img alt="../_images/QM9_19_1.png" src="../_images/QM9_19_1.png" />
+<img alt="../_images/0644b403619e965a3e9bd135e9278bf39bd850e33264b8d1a31fe8b1407e3c64.png" src="../_images/0644b403619e965a3e9bd135e9278bf39bd850e33264b8d1a31fe8b1407e3c64.png" />
 </div>
 </div>
 <p>This is poor performance, but it gives us a baseline value of what we can expect. One unusual detail I did in this training was to slowly reduce the learning rate. This is because our features and labels are all in different magnitudes. Our weights need to move far to get into the right order of magnitude and then need to fine-tune a little. Thus, we start at high learning rate and decrease.</p>
@@ -954,47 +804,47 @@ Label: -40.475117
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/QM9_21_0.png" src="../_images/QM9_21_0.png" />
+<img alt="../_images/3b6f8bbec4409554c422e5a8cc94e081604053be5f5ddbc6188779ea2124b669.png" src="../_images/3b6f8bbec4409554c422e5a8cc94e081604053be5f5ddbc6188779ea2124b669.png" />
 </div>
 </div>
 <p>You can see that the broad trends about molecule size capture a lot of variance, but more work needs to be done.</p>
 </section>
 <section id="example-gnn-model">
-<h2><span class="section-number">16.5. </span>Example GNN Model<a class="headerlink" href="#example-gnn-model" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">17.5. </span>Example GNN Model<a class="headerlink" href="#example-gnn-model" title="Link to this heading">#</a></h2>
 <p>We now can work with this data to build a model. Let’s build a simple model that can model energy and obeys the invariances required of the problem. We will use a graph neural network (GNN) because it obeys permutation invariance. We will create a <em>graph</em> from the coordinates/element vector by joining all atoms to all other atoms and using their inverse pairwise distance as the edge weight. The choice of pairwise distance gives us translation and rotation invariance. The choice of inverse distance means that atoms which are far away naturally have low edge weights.</p>
 <p>I will now define our model using the Battaglia equations <span id="id2">[<a class="reference internal" href="../dl/gnn.html#id74" title="Peter W Battaglia, Jessica B Hamrick, Victor Bapst, Alvaro Sanchez-Gonzalez, Vinicius Zambaldi, Mateusz Malinowski, Andrea Tacchetti, David Raposo, Adam Santoro, Ryan Faulkner, and others. Relational inductive biases, deep learning, and graph networks. arXiv preprint arXiv:1806.01261, 2018.">BHB+18</a>]</span>. As opposed to most examples we’ve seen in class, I will use the graph level feature vector <span class="math notranslate nohighlight">\(\vec{u}\)</span> which will ultimately be our estimate of energy. The edge update will only consider the sender and the edge weight with trainable parameters:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7204eda8-56a5-4a6c-aa65-1eb40f157479">
-<span class="eqno">(16.1)<a class="headerlink" href="#equation-7204eda8-56a5-4a6c-aa65-1eb40f157479" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-2452c0f1-b01f-4916-ac28-2367327901dd">
+<span class="eqno">(17.1)<a class="headerlink" href="#equation-2452c0f1-b01f-4916-ac28-2367327901dd" title="Permalink to this equation">#</a></span>\[\begin{equation}
       \vec{e}^{'}_k = \phi^e\left( \vec{e}_k, \vec{v}_{rk}, \vec{v}_{sk}, \vec{u}\right) = \sigma\left(\vec{v}_{sk}\vec{w}_ee_k + \vec{b}_e\right)
 \end{equation}\]</div>
 <p>where the input edge <span class="math notranslate nohighlight">\(e_k\)</span> will be a single number (inverse pairwise distance) and <span class="math notranslate nohighlight">\(\vec{b}_e\)</span> is a trainable bias vector. We will use a sum aggregation for edges (not shown). <span class="math notranslate nohighlight">\(\sigma\)</span> is a leaky ReLU. The leaky just prevents vanishing gradients, which I found empirically to reduce performance here. The node update will be</p>
-<div class="amsmath math notranslate nohighlight" id="equation-572e289c-f198-4f7c-9d79-e522ca291de8">
-<span class="eqno">(16.2)<a class="headerlink" href="#equation-572e289c-f198-4f7c-9d79-e522ca291de8" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-1e457968-366b-4f7c-a732-8e78248eb5b4">
+<span class="eqno">(17.2)<a class="headerlink" href="#equation-1e457968-366b-4f7c-a732-8e78248eb5b4" title="Permalink to this equation">#</a></span>\[\begin{equation}
    \vec{v}^{'}_i = \phi^v\left( \bar{e}^{'}_i, \vec{v}_i, \vec{u}\right) = \sigma\left(\mathbf{W}_v \bar{e}^{'}_i\right) + \vec{v}_i
 \end{equation}\]</div>
 <p>The global node aggregation will also be a sum. Finally, we have our graph feature vector update:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c4247cfb-f609-46d7-a4c2-0af9c4619e59">
-<span class="eqno">(16.3)<a class="headerlink" href="#equation-c4247cfb-f609-46d7-a4c2-0af9c4619e59" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-f5138277-466b-46c2-aca2-da2f6c8f5946">
+<span class="eqno">(17.3)<a class="headerlink" href="#equation-f5138277-466b-46c2-aca2-da2f6c8f5946" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \vec{u}^{'} = \phi^u\left( \bar{e}^{'},\bar{v}^{'}, \vec{u}\right) = \sigma\left(\mathbf{W}_u\bar{v}^{'}\right) + \vec{u}
 \end{equation}\]</div>
 <p>To compute the final energy, we’ll use our regression equation:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f982ef81-00d4-413c-9d4e-952f2a768014">
-<span class="eqno">(16.4)<a class="headerlink" href="#equation-f982ef81-00d4-413c-9d4e-952f2a768014" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-cc3a1be2-c1a9-46b5-8d38-934ca599a7e8">
+<span class="eqno">(17.4)<a class="headerlink" href="#equation-cc3a1be2-c1a9-46b5-8d38-934ca599a7e8" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \hat{E} = \vec{w}\cdot \vec{u} + b
 \end{equation}\]</div>
 <p>One final detail is that we will pass on <span class="math notranslate nohighlight">\(\vec{u}\)</span> and the nodes, but we will keep the edges the same at each GNN layer. Remember this is an example model: there are many changes that could be made to the above. Also, it is not kernel learning which is the favorite for this domain. Let’s implement it though and see if it works.</p>
 <section id="jax-model-implementation">
-<h3><span class="section-number">16.5.1. </span>JAX Model Implementation<a class="headerlink" href="#jax-model-implementation" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">17.5.1. </span>JAX Model Implementation<a class="headerlink" href="#jax-model-implementation" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">x2e</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">x2e</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;convert xyz coordinates to inverse pairwise distance&quot;&quot;&quot;</span>
     <span class="n">r2</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">x</span><span class="p">[:,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:])</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">e</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">r2</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">r2</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">e</span>
 
 
-<span class="k">def</span> <span class="nf">gnn_layer</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">edges</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">we</span><span class="p">,</span> <span class="n">web</span><span class="p">,</span> <span class="n">wv</span><span class="p">,</span> <span class="n">wu</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">gnn_layer</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">edges</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">we</span><span class="p">,</span> <span class="n">web</span><span class="p">,</span> <span class="n">wv</span><span class="p">,</span> <span class="n">wu</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Implementation of the GNN&quot;&quot;&quot;</span>
     <span class="c1"># make nodes be N x N so we can just multiply directly</span>
     <span class="c1"># ek is now shaped N x N x features</span>
@@ -1027,7 +877,7 @@ Label: -40.475117
 
 
 <span class="c1"># make our weights</span>
-<span class="k">def</span> <span class="nf">init_weights</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">init_weights</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
     <span class="n">we</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">),</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1e-1</span><span class="p">)</span>
     <span class="n">wb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">m</span><span class="p">),</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1e-1</span><span class="p">)</span>
     <span class="n">wv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1e-1</span><span class="p">)</span>
@@ -1054,8 +904,8 @@ Label: -40.475117
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>input feautres [0. 0. 0. 0. 0. 0. 0. 0.]
-output features [-0.04102137  0.52382195 -0.03180348  0.2903818   0.62120616 -0.035605
- -0.01104182 -0.00201845]
+output features [ 4.824003    2.9230251  -0.03714166  1.5885084   1.3875256  -0.01814961
+  0.14335021  1.385978  ]
 </pre></div>
 </div>
 </div>
@@ -1071,7 +921,7 @@ output features [-0.04102137  0.52382195 -0.03180348  0.2903818   0.62120616 -0.
 
 
 <span class="nd">@jax</span><span class="o">.</span><span class="n">jit</span>
-<span class="k">def</span> <span class="nf">model</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">coords</span><span class="p">,</span> <span class="n">w1</span><span class="p">,</span> <span class="n">w2</span><span class="p">,</span> <span class="n">w3</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">model</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">coords</span><span class="p">,</span> <span class="n">w1</span><span class="p">,</span> <span class="n">w2</span><span class="p">,</span> <span class="n">w3</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
     <span class="n">f0</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">graph_feature_len</span><span class="p">)</span>
     <span class="n">e0</span> <span class="o">=</span> <span class="n">x2e</span><span class="p">(</span><span class="n">coords</span><span class="p">)</span>
     <span class="n">n0</span> <span class="o">=</span> <span class="n">nodes</span>
@@ -1081,7 +931,7 @@ output features [-0.04102137  0.52382195 -0.03180348  0.2903818   0.62120616 -0.
     <span class="k">return</span> <span class="n">yhat</span>
 
 
-<span class="k">def</span> <span class="nf">loss</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">coords</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">w1</span><span class="p">,</span> <span class="n">w2</span><span class="p">,</span> <span class="n">w3</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">loss</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">coords</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">w1</span><span class="p">,</span> <span class="n">w2</span><span class="p">,</span> <span class="n">w3</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">model</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="n">coords</span><span class="p">,</span> <span class="n">w1</span><span class="p">,</span> <span class="n">w2</span><span class="p">,</span> <span class="n">w3</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
 
 
@@ -1129,7 +979,7 @@ output features [-0.04102137  0.52382195 -0.03180348  0.2903818   0.62120616 -0.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/QM9_31_0.png" src="../_images/QM9_31_0.png" />
+<img alt="../_images/ff931f13503423db570d33a2bd6891a19924ac502815d79145825a52f83e4857.png" src="../_images/ff931f13503423db570d33a2bd6891a19924ac502815d79145825a52f83e4857.png" />
 </div>
 </div>
 <p>This is a large dataset and we’re under training, but hopefully you get the principles of this process! Finally, we’ll examine our parity plot.</p>
@@ -1153,27 +1003,29 @@ output features [-0.04102137  0.52382195 -0.03180348  0.2903818   0.62120616 -0.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/QM9_33_0.png" src="../_images/QM9_33_0.png" />
+<img alt="../_images/1d9595fb18e4b744485501eb02c2e687a101d13a178bf10df5f92368e76e01c5.png" src="../_images/1d9595fb18e4b744485501eb02c2e687a101d13a178bf10df5f92368e76e01c5.png" />
 </div>
 </div>
 <p>The clusters are molecule types/sizes. You can see we’re starting to get the correct trend within the clusters, but a lot of work needs to be done to move some of them. Additional learning required!</p>
 </section>
 </section>
 <section id="relevant-videos-about-modeling-qm9">
-<h2><span class="section-number">16.6. </span>Relevant Videos About Modeling QM9<a class="headerlink" href="#relevant-videos-about-modeling-qm9" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">17.6. </span>Relevant Videos About Modeling QM9<a class="headerlink" href="#relevant-videos-about-modeling-qm9" title="Link to this heading">#</a></h2>
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/S09kzo5piAM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </section>
 <section id="cited-references">
-<h2><span class="section-number">16.7. </span>Cited References<a class="headerlink" href="#cited-references" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">17.7. </span>Cited References<a class="headerlink" href="#cited-references" title="Link to this heading">#</a></h2>
 <div class="docutils container" id="id3">
-<dl class="citation">
-<dt class="label" id="id42"><span class="brackets"><a class="fn-backref" href="#id2">BHB+18</a></span></dt>
-<dd><p>Peter W Battaglia, Jessica B Hamrick, Victor Bapst, Alvaro Sanchez-Gonzalez, Vinicius Zambaldi, Mateusz Malinowski, Andrea Tacchetti, David Raposo, Adam Santoro, Ryan Faulkner, and others. Relational inductive biases, deep learning, and graph networks. <em>arXiv preprint arXiv:1806.01261</em>, 2018.</p>
-</dd>
-<dt class="label" id="id5"><span class="brackets"><a class="fn-backref" href="#id1">RDRVL14</a></span></dt>
-<dd><p>Raghunathan Ramakrishnan, Pavlo O Dral, Matthias Rupp, and O Anatole Von Lilienfeld. Quantum chemistry structures and properties of 134 kilo molecules. <em>Scientific data</em>, 1(1):1–7, 2014.</p>
-</dd>
-</dl>
+<div role="list" class="citation-list">
+<div class="citation" id="id42" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">BHB+18</a><span class="fn-bracket">]</span></span>
+<p>Peter W Battaglia, Jessica B Hamrick, Victor Bapst, Alvaro Sanchez-Gonzalez, Vinicius Zambaldi, Mateusz Malinowski, Andrea Tacchetti, David Raposo, Adam Santoro, Ryan Faulkner, and others. Relational inductive biases, deep learning, and graph networks. <em>arXiv preprint arXiv:1806.01261</em>, 2018.</p>
+</div>
+<div class="citation" id="id5" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">RDRVL14</a><span class="fn-bracket">]</span></span>
+<p>Raghunathan Ramakrishnan, Pavlo O Dral, Matthias Rupp, and O Anatole Von Lilienfeld. Quantum chemistry structures and properties of 134 kilo molecules. <em>Scientific data</em>, 1(1):1–7, 2014.</p>
+</div>
+</div>
 </div>
 </section>
 </section>
@@ -1190,7 +1042,7 @@ output features [-0.04102137  0.52382195 -0.03180348  0.2903818   0.62120616 -0.
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./applied"
         },
         predefinedOutput: true
@@ -1198,53 +1050,115 @@ output features [-0.04102137  0.52382195 -0.03180348  0.2903818   0.62120616 -0.
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../dl/flows.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">15. </span>Normalizing Flows</p>
-        </div>
-    </a>
-    <a class='right-next' id="next-link" href="MolGenerator.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">17. </span>Generative RNN in Browser</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
-</div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
-  
-    By Andrew D. White<br/>
-  
-      &copy; Copyright 2022.<br/>
-    <div class="extra_footer">
-      <a href="http://thewhitelab.org">thewhitelab.org</a> <div id="wh-modal"> <button class="wh-venti-button" aria-label="close modal" id="wh-modal-close">✕</button> <img id="wh-modal-img"> </div>
-    </div>
-</p>
-        </footer>
-    </div>
-    
-</div>
 
-
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../dl/molnets.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">16. </span>Modern Molecular NNs</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="MolGenerator.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">18. </span>Generative RNN in Browser</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#label-description">17.1. Label Description</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data">17.2. Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-this-notebook">17.3. Running This Notebook</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#baseline-model">17.4. Baseline Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-gnn-model">17.5. Example GNN Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#jax-model-implementation">17.5.1. JAX Model Implementation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relevant-videos-about-modeling-qm9">17.6. Relevant Videos About Modeling QM9</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cited-references">17.7. Cited References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Andrew D. White
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <a href="http://thewhitelab.org">thewhitelab.org</a> <div id="wh-modal"> <button class="wh-venti-button" aria-label="close modal" id="wh-modal-close">✕</button> <img id="wh-modal-img"> </div>
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

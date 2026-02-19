@@ -1,10 +1,12 @@
 
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="../" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta content="Deep Learning for Molecules &amp; Materials Book" lang="en" name="description" xml:lang="en" />
 <meta content="en_US" property="og:locale" />
 <meta content="summary" name="twitter:card" />
@@ -14,113 +16,175 @@
 <meta content="&#64;andrewwhite01" name="twitter:site" />
 
     <title>2. Introduction to Machine Learning &#8212; deep learning for molecules &amp; materials</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/a11y.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=cb1cce99" />
+    <link rel="stylesheet" type="text/css" href="../_static/a11y.css?v=ffeaf963" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
-    <script src="../_static/custom.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <script src="../_static/togglebutton.js?v=1ae7504c"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'ml/introduction';</script>
+    <script src="../_static/custom.js?v=3f5092eb"></script>
     <link rel="canonical" href="https://dmol.pub/ml/introduction.html" />
-    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <link rel="icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="3. Regression &amp; Model Assessment" href="regression.html" />
     <link rel="prev" title="1. Tensors and Shapes" href="../math/tensors-and-shapes.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
-    
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../_static/logo.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">deep learning for molecules & materials</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="deep learning for molecules & materials - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="deep learning for molecules & materials - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -129,640 +193,315 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  A. Math Review
- </span>
-</p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">A. Math Review</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../math/tensors-and-shapes.html">
-   1. Tensors and Shapes
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../math/tensors-and-shapes.html">1. Tensors and Shapes</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  B. Machine Learning
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">B. Machine Learning</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   2. Introduction to Machine Learning
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="regression.html">
-   3. Regression &amp; Model Assessment
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="classification.html">
-   4. Classification
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="kernel.html">
-   5. Kernel Learning
-  </a>
- </li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">2. Introduction to Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="regression.html">3. Regression &amp; Model Assessment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classification.html">4. Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="kernel.html">5. Kernel Learning</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  C. Deep Learning
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">C. Deep Learning</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/introduction.html">
-   6. Deep Learning Overview
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/layers.html">
-   7. Standard Layers
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/gnn.html">
-   8. Graph Neural Networks
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/data.html">
-   9. Input Data &amp; Equivariances
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/Equivariant.html">
-   10. Equivariant Neural Networks
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/xai.html">
-   11. Explaining Predictions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/attention.html">
-   12. Attention Layers
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/NLP.html">
-   13. Deep Learning on Sequences
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/VAE.html">
-   14. Variational Autoencoder
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/flows.html">
-   15. Normalizing Flows
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/introduction.html">6. Deep Learning Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/layers.html">7. Standard Layers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/gnn.html">8. Graph Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/data.html">9. Input Data &amp; Equivariances</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/Equivariant.html">10. Equivariant Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/xai.html">11. Explaining Predictions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/attention.html">12. Attention Layers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/NLP.html">13. Deep Learning on Sequences</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/VAE.html">14. Variational Autoencoder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/flows.html">15. Normalizing Flows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/molnets.html">16. Modern Molecular NNs</a></li>
+
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  D. Applications
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">D. Applications</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../applied/QM9.html">
-   16. Predicting DFT Energies with GNNs
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../applied/MolGenerator.html">
-   17. Generative RNN in Browser
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../applied/QM9.html">17. Predicting DFT Energies with GNNs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../applied/MolGenerator.html">18. Generative RNN in Browser</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  E. Contributed Chapters
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">E. Contributed Chapters</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/Hyperparameter_tuning.html">
-   18. Hyperparameter Tuning
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../applied/e3nn_traj.html">
-   19. Equivariant Neural Network for Predicting Trajectories
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/pretraining.html">
-   20. Pretraining
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../applied/e3nn_traj.html">19. Equivariant Neural Network for Predicting Trajectories</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dl/pretraining.html">20. Pretraining</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  F. Appendix
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">F. Appendix</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../style.html">
-   21. Style Guide
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../changelog.html">
-   22. Changelog
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  G. In Progress
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../dl/molnets.html">
-   23. Modern Molecular NNs
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../style.html">21. Style Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">22. Changelog</a></li>
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            <script async defer src="https://api.dmol.pub/latest.js"></script><noscript><img src="https://api.dmol.pub/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript> By <a href="https://twitter.com/andrewwhite01">Andrew White</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
-</div>
-
-
-          
-
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
   
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://colab.research.google.com/github/whitead/dmol-book/blob/master/ml/introduction.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Colab"
->
   
-
-<span class="headerbtn__icon-container">
-  
-    <img src="../_static/images/logo_colab.png">
-  </span>
-<span class="headerbtn__text-container">Colab</span>
-</a>
-
-      </li>
-      
-    </ul>
+  <div class="sidebar-primary-items__end sidebar-primary__section">
   </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/whitead/dmol-book/blob/master/ml/introduction.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
 </div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/whitead/dmol-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/whitead/dmol-book/issues/new?title=Issue%20on%20page%20%2Fml/introduction.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/ml/introduction.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
 
 <button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/whitead/dmol-book"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
+`);
+</script>
 
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
 
-      </li>
-      
-      <li>
-        <a href="https://github.com/whitead/dmol-book/issues/new?title=Issue%20on%20page%20%2Fml/introduction.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../_sources/ml/introduction.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.ipynb</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
 </button>
-
-      </li>
+</div></div>
       
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
+    </div>
   
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
-
-    </div>
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#the-ingredients">
-   2.1. The Ingredients
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#supervised-learning">
-   2.2. Supervised Learning
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#running-this-notebook">
-   2.3. Running This Notebook
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#load-data">
-     2.3.1. Load Data
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#data-exploration">
-     2.3.2. Data Exploration
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#feature-correlation">
-     2.3.3. Feature Correlation
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#linear-model">
-     2.3.4. Linear Model
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#gradient-descent">
-     2.3.5. Gradient Descent
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#training-curve">
-     2.3.6. Training Curve
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#batching">
-     2.3.7. Batching
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#standardize-features">
-     2.3.8. Standardize features
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#analyzing-model-performance">
-     2.3.9. Analyzing Model Performance
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#unsupervised-learning">
-   2.4. Unsupervised Learning
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#clustering">
-     2.4.1. Clustering
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#choosing-cluster-number">
-     2.4.2. Choosing Cluster Number
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#chapter-summary">
-   2.5. Chapter Summary
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#exercises">
-   2.6. Exercises
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#data">
-     2.6.1. Data
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#linear-models">
-     2.6.2. Linear Models
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#minimizing-loss">
-     2.6.3. Minimizing Loss
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id8">
-     2.6.4. Clustering
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#cited-references">
-   2.7. Cited References
-  </a>
- </li>
-</ul>
-
-    </nav>
 </div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Introduction to Machine Learning</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#the-ingredients">
-   2.1. The Ingredients
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#supervised-learning">
-   2.2. Supervised Learning
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#running-this-notebook">
-   2.3. Running This Notebook
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#load-data">
-     2.3.1. Load Data
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#data-exploration">
-     2.3.2. Data Exploration
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#feature-correlation">
-     2.3.3. Feature Correlation
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#linear-model">
-     2.3.4. Linear Model
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#gradient-descent">
-     2.3.5. Gradient Descent
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#training-curve">
-     2.3.6. Training Curve
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#batching">
-     2.3.7. Batching
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#standardize-features">
-     2.3.8. Standardize features
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#analyzing-model-performance">
-     2.3.9. Analyzing Model Performance
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#unsupervised-learning">
-   2.4. Unsupervised Learning
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#clustering">
-     2.4.1. Clustering
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#choosing-cluster-number">
-     2.4.2. Choosing Cluster Number
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#chapter-summary">
-   2.5. Chapter Summary
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#exercises">
-   2.6. Exercises
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#data">
-     2.6.1. Data
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#linear-models">
-     2.6.2. Linear Models
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#minimizing-loss">
-     2.6.3. Minimizing Loss
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id8">
-     2.6.4. Clustering
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#cited-references">
-   2.7. Cited References
-  </a>
- </li>
-</ul>
+              
+              
 
-                        </nav>
-                    </div>
-                </div>
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Introduction to Machine Learning</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
             </div>
-            <main id="main-content" role="main">
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-ingredients">2.1. The Ingredients</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#supervised-learning">2.2. Supervised Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-this-notebook">2.3. Running This Notebook</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-data">2.3.1. Load Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-exploration">2.3.2. Data Exploration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-correlation">2.3.3. Feature Correlation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-model">2.3.4. Linear Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-descent">2.3.5. Gradient Descent</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-curve">2.3.6. Training Curve</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#batching">2.3.7. Batching</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#standardize-features">2.3.8. Standardize features</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analyzing-model-performance">2.3.9. Analyzing Model Performance</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unsupervised-learning">2.4. Unsupervised Learning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering">2.4.1. Clustering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-cluster-number">2.4.2. Choosing Cluster Number</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-summary">2.5. Chapter Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">2.6. Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data">2.6.1. Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-models">2.6.2. Linear Models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minimizing-loss">2.6.3. Minimizing Loss</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">2.6.4. Clustering</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cited-references">2.7. Cited References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
                 
-              <div>
-                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
   <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-machine-learning">
-<h1><span class="section-number">2. </span>Introduction to Machine Learning<a class="headerlink" href="#introduction-to-machine-learning" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">2. </span>Introduction to Machine Learning<a class="headerlink" href="#introduction-to-machine-learning" title="Link to this heading">#</a></h1>
 <p>There are probably a thousand articles called <em>introduction to machine learning</em>. Rather than rewrite this, I will instead introduce the main ideas focused on a chemistry example. Here are some introductory sources, and please do recommend new ones to me:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>The book I first read in grad school about machine learning by Ethem Alpaydin<span id="id1">[<a class="reference internal" href="#id14" title="Ethem Alpaydin. Introduction to machine learning. MIT press, 2020.">Alp20</a>]</span></p></li>
 <li><p>Nils Nillson’s online book <a class="reference external" href="https://ai.stanford.edu/~nilsson/mlbook.html"><ins>Introductory Machine Learning</ins></a></p></li>
 <li><p>Two reviews of machine learning in materials<span id="id2">[<a class="reference internal" href="#id20" title="Victor Fung, Jiaxin Zhang, Eric Juarez, and Bobby G. Sumpter. Benchmarking graph neural networks for materials chemistry. npj Computational Materials, June 2021. URL: https://doi.org/10.1038/s41524-021-00554-0, doi:10.1038/s41524-021-00554-0.">FZJS21</a>, <a class="reference internal" href="#id15" title="Prasanna V Balachandran. Machine learning guided design of functional materials with targeted properties. Computational Materials Science, 164:82–90, 2019.">Bal19</a>]</span></p></li>
@@ -782,7 +521,7 @@ title="Print to PDF"
 </ul>
 </div>
 <section id="the-ingredients">
-<h2><span class="section-number">2.1. </span>The Ingredients<a class="headerlink" href="#the-ingredients" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">2.1. </span>The Ingredients<a class="headerlink" href="#the-ingredients" title="Link to this heading">#</a></h2>
 <p>Machine learning the fitting of models <span class="math notranslate nohighlight">\(\hat{f}(\vec{x})\)</span> to data <span class="math notranslate nohighlight">\(\vec{x}, y\)</span> that we know came from some ``data generation’’ process <span class="math notranslate nohighlight">\(f(x)\)</span> . Firstly, definitions:</p>
 <p><strong>Features</strong></p>
 <p>    set of <span class="math notranslate nohighlight">\(N\)</span> vectors <span class="math notranslate nohighlight">\(\{\vec{x}_i\}\)</span> of dimension <span class="math notranslate nohighlight">\(D\)</span>. Can be reals, integers, etc.</p>
@@ -800,12 +539,12 @@ title="Print to PDF"
 <p>     <span class="math notranslate nohighlight">\(\hat{y}\)</span>, our predicted output for a given input <span class="math notranslate nohighlight">\(\vec{x}\)</span>.</p>
 </section>
 <section id="supervised-learning">
-<h2><span class="section-number">2.2. </span>Supervised Learning<a class="headerlink" href="#supervised-learning" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">2.2. </span>Supervised Learning<a class="headerlink" href="#supervised-learning" title="Link to this heading">#</a></h2>
 <p>Our first task will be <strong>supervised learning</strong>. Supervised learning means predicting <span class="math notranslate nohighlight">\(y\)</span> from <span class="math notranslate nohighlight">\(\vec{x}\)</span> with a model trained on data. It is <em>supervised</em> because we tell the algorithm what the labels are in our dataset. Another method we’ll explore is <strong>unsupervised learning</strong> where we do not tell the algorithm the labels. We’ll see this supervised/unsupervised distinction can be more subtle later on, but this is a great definition for now.</p>
 <p>To see an example, we will use a dataset called AqSolDB<span id="id6">[<a class="reference internal" href="regression.html#id26" title="Murat Cihan Sorkun, Abhishek Khetan, and Süleyman Er. AqSolDB, a curated reference set of aqueous solubility and 2D descriptors for a diverse set of compounds. Sci. Data, 6(1):143, 2019. doi:10.1038/s41597-019-0151-1.">SKE19</a>]</span> that is about 10,000 unique compounds with measured solubility in water (label). The dataset also includes molecular properties (features) that we can use for machine learning. The solubility measurement is solubility of the compound in water in units of log molarity.</p>
 </section>
 <section id="running-this-notebook">
-<h2><span class="section-number">2.3. </span>Running This Notebook<a class="headerlink" href="#running-this-notebook" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">2.3. </span>Running This Notebook<a class="headerlink" href="#running-this-notebook" title="Link to this heading">#</a></h2>
 <p>Click the  <i aria-label="Launch interactive content" class="fas fa-rocket"></i>  above to launch this page as an interactive Google Colab. See details below on installing packages.</p>
 <div class="dropdown admonition tip">
 <p class="admonition-title">Tip</p>
@@ -816,23 +555,29 @@ title="Print to PDF"
 <p>If you find install problems, you can get the latest working versions of packages used in <a class="reference external" href="https://github.com/whitead/dmol-book/blob/main/package/setup.py">this book here</a></p>
 </div>
 <section id="load-data">
-<h3><span class="section-number">2.3.1. </span>Load Data<a class="headerlink" href="#load-data" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">2.3.1. </span>Load Data<a class="headerlink" href="#load-data" title="Link to this heading">#</a></h3>
 <p>Download the data and load it into a <a class="reference external" href="https://pandas.pydata.org/">Pandas</a> data frame. The hidden cells below sets-up our imports and/or install necessary packages.</p>
 <div class="cell tag_hide-cell docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell content</p>
+<p class="expanded admonition-title">Hide code cell content</p>
+</summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
-<span class="kn">import</span> <span class="nn">jax</span>
-<span class="kn">from</span> <span class="nn">jax.example_libraries</span> <span class="kn">import</span> <span class="n">optimizers</span>
-<span class="kn">import</span> <span class="nn">sklearn.manifold</span><span class="o">,</span> <span class="nn">sklearn.cluster</span>
-<span class="kn">import</span> <span class="nn">rdkit</span><span class="o">,</span> <span class="nn">rdkit.Chem</span><span class="o">,</span> <span class="nn">rdkit.Chem.Draw</span>
-<span class="kn">import</span> <span class="nn">dmol</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jax.numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">jnp</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jax</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">jax.example_libraries</span><span class="w"> </span><span class="kn">import</span> <span class="n">optimizers</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sklearn.manifold</span><span class="o">,</span><span class="w"> </span><span class="nn">sklearn.cluster</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">rdkit</span><span class="o">,</span><span class="w"> </span><span class="nn">rdkit.Chem</span><span class="o">,</span><span class="w"> </span><span class="nn">rdkit.Chem.Draw</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">dmol</span>
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1015,7 +760,7 @@ title="Print to PDF"
 </div>
 </section>
 <section id="data-exploration">
-<h3><span class="section-number">2.3.2. </span>Data Exploration<a class="headerlink" href="#data-exploration" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">2.3.2. </span>Data Exploration<a class="headerlink" href="#data-exploration" title="Link to this heading">#</a></h3>
 <aside class="margin sidebar">
 <p class="sidebar-title">EDA</p>
 <p>If doing EDA as a way to choose features, you should do the train/test/(valid) split prior to EDA to avoid
@@ -1040,125 +785,125 @@ contaminating model selection with test data.</p>
 width='450px' height='150px' viewBox='0 0 450 150'>
 <!-- END OF HEADER -->
 <rect style='opacity:1.0;fill:#FFFFFF;stroke:none' width='450.0' height='150.0' x='0.0' y='0.0'> </rect>
-<path class='bond-0 atom-0 atom-4' d='M 429.5,79.9 L 408.2,92.6' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
-<path class='bond-1 atom-1 atom-21' d='M 30.0,106.7 L 39.7,89.4' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
-<path class='bond-2 atom-2 atom-21' d='M 54.3,63.4 L 44.6,80.7' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
-<path class='bond-3 atom-3 atom-21' d='M 20.5,72.9 L 38.7,83.1' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
-<path class='bond-4 atom-4 atom-5' d='M 408.2,92.6 L 386.5,80.5' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
-<path class='bond-5 atom-5 atom-6' d='M 386.5,80.5 L 365.1,93.2' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
-<path class='bond-6 atom-6 atom-7' d='M 365.1,93.2 L 343.5,81.1' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
-<path class='bond-7 atom-7 atom-8' d='M 343.5,81.1 L 322.1,93.8' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
-<path class='bond-8 atom-8 atom-9' d='M 322.1,93.8 L 300.4,81.6' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
-<path class='bond-9 atom-9 atom-10' d='M 300.4,81.6 L 279.1,94.3' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
-<path class='bond-10 atom-10 atom-11' d='M 279.1,94.3 L 257.4,82.2' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
-<path class='bond-11 atom-11 atom-12' d='M 257.4,82.2 L 236.0,94.9' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
-<path class='bond-12 atom-12 atom-13' d='M 236.0,94.9 L 214.3,82.8' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
-<path class='bond-13 atom-13 atom-14' d='M 214.3,82.8 L 193.0,95.5' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
-<path class='bond-14 atom-14 atom-15' d='M 193.0,95.5 L 171.3,83.3' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
-<path class='bond-15 atom-15 atom-16' d='M 171.3,83.3 L 149.9,96.0' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
-<path class='bond-16 atom-16 atom-17' d='M 149.9,96.0 L 128.2,83.9' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
-<path class='bond-17 atom-17 atom-18' d='M 128.2,83.9 L 106.9,96.6' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
-<path class='bond-18 atom-18 atom-19' d='M 106.9,96.6 L 85.2,84.5' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
-<path class='bond-19 atom-19 atom-20' d='M 85.2,84.5 L 63.8,97.2' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
-<path class='bond-20 atom-20 atom-21' d='M 63.8,97.2 L 45.6,87.0' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
-<path d='M 409.3,92.0 L 408.2,92.6 L 407.1,92.0' style='fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;' />
-<path d='M 387.6,81.1 L 386.5,80.5 L 385.4,81.1' style='fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;' />
-<path d='M 366.2,92.6 L 365.1,93.2 L 364.1,92.6' style='fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;' />
-<path d='M 344.5,81.7 L 343.5,81.1 L 342.4,81.7' style='fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;' />
-<path d='M 323.2,93.1 L 322.1,93.8 L 321.0,93.2' style='fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;' />
-<path d='M 301.5,82.2 L 300.4,81.6 L 299.3,82.3' style='fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;' />
-<path d='M 280.1,93.7 L 279.1,94.3 L 278.0,93.7' style='fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;' />
-<path d='M 258.5,82.8 L 257.4,82.2 L 256.3,82.8' style='fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;' />
-<path d='M 237.1,94.3 L 236.0,94.9 L 234.9,94.3' style='fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;' />
-<path d='M 215.4,83.4 L 214.3,82.8 L 213.3,83.4' style='fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;' />
-<path d='M 194.0,94.8 L 193.0,95.5 L 191.9,94.9' style='fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;' />
-<path d='M 172.4,83.9 L 171.3,83.3 L 170.2,84.0' style='fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;' />
-<path d='M 151.0,95.4 L 149.9,96.0 L 148.8,95.4' style='fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;' />
-<path d='M 129.3,84.5 L 128.2,83.9 L 127.2,84.5' style='fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;' />
-<path d='M 107.9,96.0 L 106.9,96.6 L 105.8,96.0' style='fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;' />
-<path d='M 86.3,85.1 L 85.2,84.5 L 84.1,85.1' style='fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;' />
-<path d='M 64.9,96.5 L 63.8,97.2 L 62.9,96.7' style='fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;' />
-<path class='atom-21' d='M 40.6 81.5
-L 42.9 85.3
-Q 43.1 85.6, 43.5 86.3
-Q 43.9 87.0, 43.9 87.0
-L 43.9 81.5
-L 44.8 81.5
-L 44.8 88.6
-L 43.8 88.6
-L 41.4 84.5
-Q 41.1 84.0, 40.8 83.5
-Q 40.5 82.9, 40.4 82.7
-L 40.4 88.6
-L 39.5 88.6
-L 39.5 81.5
-L 40.6 81.5
+<path class='bond-0 atom-0 atom-4' d='M 427.5,79.9 L 406.4,92.4' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-1 atom-1 atom-21' d='M 32.0,106.4 L 41.6,89.2' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-2 atom-2 atom-21' d='M 56.0,63.5 L 46.4,80.6' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-3 atom-3 atom-21' d='M 22.5,72.9 L 40.5,83.0' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-4 atom-4 atom-5' d='M 406.4,92.4 L 384.9,80.4' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-5 atom-5 atom-6' d='M 384.9,80.4 L 363.7,93.0' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-6 atom-6 atom-7' d='M 363.7,93.0 L 342.3,81.0' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-7 atom-7 atom-8' d='M 342.3,81.0 L 321.1,93.6' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-8 atom-8 atom-9' d='M 321.1,93.6 L 299.7,81.6' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-9 atom-9 atom-10' d='M 299.7,81.6 L 278.5,94.1' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-10 atom-10 atom-11' d='M 278.5,94.1 L 257.0,82.1' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-11 atom-11 atom-12' d='M 257.0,82.1 L 235.9,94.7' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-12 atom-12 atom-13' d='M 235.9,94.7 L 214.4,82.7' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-13 atom-13 atom-14' d='M 214.4,82.7 L 193.3,95.3' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-14 atom-14 atom-15' d='M 193.3,95.3 L 171.8,83.3' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-15 atom-15 atom-16' d='M 171.8,83.3 L 150.7,95.8' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-16 atom-16 atom-17' d='M 150.7,95.8 L 129.2,83.8' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-17 atom-17 atom-18' d='M 129.2,83.8 L 108.1,96.4' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-18 atom-18 atom-19' d='M 108.1,96.4 L 86.6,84.4' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-19 atom-19 atom-20' d='M 86.6,84.4 L 65.4,97.0' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-20 atom-20 atom-21' d='M 65.4,97.0 L 47.4,86.9' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path d='M 407.4,91.8 L 406.4,92.4 L 405.3,91.8' style='fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-opacity:1;' />
+<path d='M 386.0,81.0 L 384.9,80.4 L 383.8,81.1' style='fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-opacity:1;' />
+<path d='M 364.8,92.4 L 363.7,93.0 L 362.7,92.4' style='fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-opacity:1;' />
+<path d='M 343.3,81.6 L 342.3,81.0 L 341.2,81.6' style='fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-opacity:1;' />
+<path d='M 322.2,92.9 L 321.1,93.6 L 320.1,93.0' style='fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-opacity:1;' />
+<path d='M 300.7,82.2 L 299.7,81.6 L 298.6,82.2' style='fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-opacity:1;' />
+<path d='M 279.6,93.5 L 278.5,94.1 L 277.4,93.5' style='fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-opacity:1;' />
+<path d='M 258.1,82.7 L 257.0,82.1 L 256.0,82.8' style='fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-opacity:1;' />
+<path d='M 237.0,94.1 L 235.9,94.7 L 234.8,94.1' style='fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-opacity:1;' />
+<path d='M 215.5,83.3 L 214.4,82.7 L 213.4,83.3' style='fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-opacity:1;' />
+<path d='M 194.3,94.6 L 193.3,95.3 L 192.2,94.7' style='fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-opacity:1;' />
+<path d='M 172.9,83.9 L 171.8,83.3 L 170.8,83.9' style='fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-opacity:1;' />
+<path d='M 151.7,95.2 L 150.7,95.8 L 149.6,95.2' style='fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-opacity:1;' />
+<path d='M 130.3,84.4 L 129.2,83.8 L 128.1,84.4' style='fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-opacity:1;' />
+<path d='M 109.1,95.8 L 108.1,96.4 L 107.0,95.8' style='fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-opacity:1;' />
+<path d='M 87.7,85.0 L 86.6,84.4 L 85.5,85.0' style='fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-opacity:1;' />
+<path d='M 66.5,96.3 L 65.4,97.0 L 64.5,96.5' style='fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-opacity:1;' />
+<path class='atom-21' d='M 42.4 81.5
+L 44.7 85.2
+Q 44.9 85.5, 45.3 86.2
+Q 45.7 86.8, 45.7 86.9
+L 45.7 81.5
+L 46.6 81.5
+L 46.6 88.4
+L 45.7 88.4
+L 43.2 84.4
+Q 42.9 83.9, 42.6 83.4
+Q 42.3 82.8, 42.2 82.7
+L 42.2 88.4
+L 41.3 88.4
+L 41.3 81.5
+L 42.4 81.5
 ' fill='#000000'/>
-<path class='atom-21' d='M 46.1 82.8
-L 47.4 82.8
-L 47.4 81.5
-L 47.9 81.5
-L 47.9 82.8
-L 49.2 82.8
-L 49.2 83.3
-L 47.9 83.3
-L 47.9 84.6
-L 47.4 84.6
-L 47.4 83.3
-L 46.1 83.3
-L 46.1 82.8
+<path class='atom-21' d='M 47.9 82.7
+L 49.2 82.7
+L 49.2 81.4
+L 49.7 81.4
+L 49.7 82.7
+L 51.0 82.7
+L 51.0 83.2
+L 49.7 83.2
+L 49.7 84.5
+L 49.2 84.5
+L 49.2 83.2
+L 47.9 83.2
+L 47.9 82.7
 ' fill='#000000'/>
-<path class='atom-22' d='M 204.8 46.6
-Q 205.5 46.8, 205.9 47.2
-Q 206.2 47.6, 206.2 48.2
-Q 206.2 49.2, 205.6 49.8
-Q 205.0 50.3, 203.8 50.3
-L 201.4 50.3
-L 201.4 43.3
-L 203.5 43.3
-Q 204.7 43.3, 205.3 43.8
-Q 205.9 44.2, 205.9 45.1
-Q 205.9 46.2, 204.8 46.6
-M 202.4 44.1
-L 202.4 46.3
-L 203.5 46.3
-Q 204.2 46.3, 204.6 46.0
-Q 204.9 45.7, 204.9 45.1
-Q 204.9 44.1, 203.5 44.1
-L 202.4 44.1
-M 203.8 49.5
-Q 204.5 49.5, 204.8 49.2
-Q 205.2 48.9, 205.2 48.2
-Q 205.2 47.7, 204.8 47.4
-Q 204.4 47.1, 203.6 47.1
-L 202.4 47.1
-L 202.4 49.5
-L 203.8 49.5
+<path class='atom-22' d='M 205.0 46.9
+Q 205.7 47.1, 206.1 47.5
+Q 206.4 47.9, 206.4 48.5
+Q 206.4 49.5, 205.8 50.0
+Q 205.2 50.6, 204.0 50.6
+L 201.7 50.6
+L 201.7 43.6
+L 203.7 43.6
+Q 204.9 43.6, 205.5 44.1
+Q 206.1 44.6, 206.1 45.4
+Q 206.1 46.5, 205.0 46.9
+M 202.6 44.4
+L 202.6 46.6
+L 203.7 46.6
+Q 204.4 46.6, 204.8 46.3
+Q 205.1 46.0, 205.1 45.4
+Q 205.1 44.4, 203.7 44.4
+L 202.6 44.4
+M 204.0 49.8
+Q 204.7 49.8, 205.0 49.4
+Q 205.4 49.1, 205.4 48.5
+Q 205.4 47.9, 205.0 47.6
+Q 204.6 47.3, 203.9 47.3
+L 202.6 47.3
+L 202.6 49.8
+L 204.0 49.8
 ' fill='#000000'/>
-<path class='atom-22' d='M 207.8 45.2
-L 207.9 45.9
-Q 208.4 45.1, 209.3 45.1
-Q 209.6 45.1, 210.0 45.2
-L 209.8 46.0
-Q 209.4 45.9, 209.2 45.9
-Q 208.7 45.9, 208.5 46.1
-Q 208.2 46.3, 208.0 46.7
-L 208.0 50.3
-L 207.0 50.3
-L 207.0 45.2
-L 207.8 45.2
+<path class='atom-22' d='M 208.0 45.5
+L 208.1 46.2
+Q 208.6 45.4, 209.5 45.4
+Q 209.8 45.4, 210.1 45.5
+L 210.0 46.3
+Q 209.6 46.2, 209.3 46.2
+Q 208.9 46.2, 208.6 46.4
+Q 208.4 46.6, 208.1 46.9
+L 208.1 50.6
+L 207.2 50.6
+L 207.2 45.5
+L 208.0 45.5
 ' fill='#000000'/>
-<path class='atom-22' d='M 210.5 45.4
-L 212.9 45.4
-L 212.9 45.9
-L 210.5 45.9
-L 210.5 45.4
+<path class='atom-22' d='M 210.7 45.6
+L 213.0 45.6
+L 213.0 46.2
+L 210.7 46.2
+L 210.7 45.6
 ' fill='#000000'/>
 </svg>
 </div></div>
 </div>
 <p>This is first molecule in the dataset rendered using <a class="reference external" href="https://rdkit.org/">rdkit</a>.</p>
-<p>Let’s now look at the extreme values to get a sense of the <strong>range</strong> of solubility data and the molecules that make it. First, we’ll histogram (using <a class="reference external" href="https://seaborn.pydata.org/generated/seaborn.distplot.html#seaborn.distplot" title="(in seaborn v0.12.2)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">seaborn.distplot</span></code></a>) the solubility which tells us about the shape of its probability distribution and the extreme values.</p>
+<p>Let’s now look at the extreme values to get a sense of the <strong>range</strong> of solubility data and the molecules that make it. First, we’ll histogram (using <a class="reference external" href="https://seaborn.pydata.org/generated/seaborn.distplot.html#seaborn.distplot" title="(in seaborn v0.13.2)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">seaborn.distplot</span></code></a>) the solubility which tells us about the shape of its probability distribution and the extreme values.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">soldata</span><span class="o">.</span><span class="n">Solubility</span><span class="p">)</span>
@@ -1167,7 +912,7 @@ L 210.5 45.4
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/introduction_10_0.png" src="../_images/introduction_10_0.png" />
+<img alt="../_images/ca7278a73bf710dc0f5a18addd78d26422bb940d8442997653b7a18fd5934cbf.png" src="../_images/ca7278a73bf710dc0f5a18addd78d26422bb940d8442997653b7a18fd5934cbf.png" />
 </div>
 </div>
 <p>Above we can see the histogram of the solubility with kernel density estimate overlaid. The histogram shows that the solubility varies from about -13 to 2.5 and is not normally distributed.</p>
@@ -1191,7 +936,8 @@ L 210.5 45.4
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/introduction_12_0.svg" src="../_images/introduction_12_0.svg" /></div>
+<img alt="../_images/93e9193936893a46489dd97cca224f509670e3364b9cef4a8eb9418f6e4f7bf2.svg" src="../_images/93e9193936893a46489dd97cca224f509670e3364b9cef4a8eb9418f6e4f7bf2.svg" />
+</div>
 </div>
 <p>The figure of extreme molecules shows highly-chlorinated compounds have the lowest solubility and ionic compounds have higher solubility. Is A-2918 an <strong>outlier</strong>, a mistake? Also, is NH<span class="math notranslate nohighlight">\(_3\)</span> really comparable to these organic compounds? These are the kind of questions that you should consider <em>before</em> doing any modeling.</p>
 <aside class="margin sidebar">
@@ -1200,7 +946,7 @@ L 210.5 45.4
 </aside>
 </section>
 <section id="feature-correlation">
-<h3><span class="section-number">2.3.3. </span>Feature Correlation<a class="headerlink" href="#feature-correlation" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">2.3.3. </span>Feature Correlation<a class="headerlink" href="#feature-correlation" title="Link to this heading">#</a></h3>
 <p>Now let’s examine the features and see how correlated they are with solubility. Note that there are a few columns unrelated to features or solubility: <code class="docutils literal notranslate"><span class="pre">SD</span></code> (standard deviation), <code class="docutils literal notranslate"><span class="pre">Ocurrences</span></code> (how often the molecule occurred in the constituent databases), and <code class="docutils literal notranslate"><span class="pre">Group</span></code> (where the data came from).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1226,13 +972,13 @@ L 210.5 45.4
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/introduction_15_0.png" src="../_images/introduction_15_0.png" />
+<img alt="../_images/794fa877d774a1cd770ddaed0cb8e7a3789bcb4599e54eac9acbe7419dd191f0.png" src="../_images/794fa877d774a1cd770ddaed0cb8e7a3789bcb4599e54eac9acbe7419dd191f0.png" />
 </div>
 </div>
 <p>It’s interesting that molecular weight or hydrogen bond numbers seem to have little correlation, at least from this plot. MolLogP, which is a calculated descriptor related to solubility, does correlate well. You can also see that some of these features have low <strong>variance</strong>, meaning the value of the feature changes little or not at all for many data points (e.g., “NumHDonors”).</p>
 </section>
 <section id="linear-model">
-<h3><span class="section-number">2.3.4. </span>Linear Model<a class="headerlink" href="#linear-model" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">2.3.4. </span>Linear Model<a class="headerlink" href="#linear-model" title="Link to this heading">#</a></h3>
 <p>Let’s begin with one of the simplest approaches — a linear model. This is our first type of supervised learning and is rarely used due to something we’ll see — the difficult choice of features.</p>
 <aside class="margin sidebar">
 <p class="sidebar-title">Autodiff</p>
@@ -1240,15 +986,15 @@ L 210.5 45.4
 that can compute analytical gradients with respect to two variables in a program.</p>
 </aside>
 <p>Our model will be defined by this equation:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c7f36b1f-fe39-41d5-a365-065ff5751b71">
-<span class="eqno">(2.1)<a class="headerlink" href="#equation-c7f36b1f-fe39-41d5-a365-065ff5751b71" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-77713fc0-6e0f-432b-9273-5bb710549cba">
+<span class="eqno">(2.1)<a class="headerlink" href="#equation-77713fc0-6e0f-432b-9273-5bb710549cba" title="Permalink to this equation">#</a></span>\[\begin{equation}
     y = \vec{w} \cdot \vec{x} + b
 \end{equation}\]</div>
 <p>which is defined for a single data point. The shape of a single feature vector,  <span class="math notranslate nohighlight">\(\vec{x}\)</span>, is 17 in our case (for the 17 features). <span class="math notranslate nohighlight">\(\vec{w}\)</span> is a vector of adjustable parameters of length 17 and <span class="math notranslate nohighlight">\(b\)</span> is an adjustable scalar (called <strong>bias</strong>).</p>
 <p>We’ll implement this model using a library called <a class="reference external" href="https://jax.readthedocs.io/en/latest/notebooks/quickstart.html"><code class="docutils literal notranslate"><span class="pre">jax</span></code></a> that is very similar to numpy except it can compute analytical gradients easily via autodiff.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">linear_model</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">linear_model</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span>
 
 
@@ -1262,9 +1008,6 @@ that can compute analytical gradients with respect to two variables in a program
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>No GPU/TPU found, falling back to CPU. (Set TF_CPP_MIN_LOG_LEVEL=0 and rerun for more info.)
-</pre></div>
-</div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Array(5.5, dtype=float32)
 </pre></div>
 </div>
@@ -1292,7 +1035,7 @@ Our goal is to minimize loss.</p>
 
 
 <span class="c1"># define loss</span>
-<span class="k">def</span> <span class="nf">loss</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">labels</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">loss</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">labels</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">jnp</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">y</span> <span class="o">-</span> <span class="n">labels</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
 
 
@@ -1303,7 +1046,7 @@ Our goal is to minimize loss.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Array(3265882.2, dtype=float32)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Array(3.2658822e+06, dtype=float32)
 </pre></div>
 </div>
 </div>
@@ -1311,10 +1054,10 @@ Our goal is to minimize loss.</p>
 <p>Wow! Our loss is terrible, especially considering that solubilities are between -13 and 2. But, that’s right since we just guessed our initial parameters.</p>
 </section>
 <section id="gradient-descent">
-<h3><span class="section-number">2.3.5. </span>Gradient Descent<a class="headerlink" href="#gradient-descent" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">2.3.5. </span>Gradient Descent<a class="headerlink" href="#gradient-descent" title="Link to this heading">#</a></h3>
 <p>We will now try to reduce loss by using information about how it changes with respect to the adjustable parameters. If we write our loss as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-08578b46-559d-4f40-88c5-289ce1596966">
-<span class="eqno">(2.2)<a class="headerlink" href="#equation-08578b46-559d-4f40-88c5-289ce1596966" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-3662fad7-4c51-4c7c-ae31-b7f5288da3ed">
+<span class="eqno">(2.2)<a class="headerlink" href="#equation-3662fad7-4c51-4c7c-ae31-b7f5288da3ed" title="Permalink to this equation">#</a></span>\[\begin{equation}
     L = \frac{1}{N}\sum_i^N \left[y_i - f(\vec{x}_i, \vec{w}, b)\right]^2
 \end{equation}\]</div>
 <p>This loss is called <strong>mean squared error</strong>, often abbreviated MSE. We can compute our loss gradients with respect to the adjustable parameters:</p>
@@ -1326,20 +1069,20 @@ take the derivative of. For example, consider <code class="docutils literal notr
 gives <span class="math notranslate nohighlight">\(\frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}\)</span>. Note too that
 <span class="math notranslate nohighlight">\(x\)</span> may be a tensor.</p>
 </aside>
-<div class="amsmath math notranslate nohighlight" id="equation-71c0171b-485e-4d77-9ba0-f9ce955aa815">
-<span class="eqno">(2.3)<a class="headerlink" href="#equation-71c0171b-485e-4d77-9ba0-f9ce955aa815" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-513c9ee4-a8e4-4666-8762-368e4958a0bc">
+<span class="eqno">(2.3)<a class="headerlink" href="#equation-513c9ee4-a8e4-4666-8762-368e4958a0bc" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \frac{\partial L}{\partial w_i}, \frac{\partial L}{\partial b}
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(w_i\)</span> is the <span class="math notranslate nohighlight">\(i\)</span>th element of the weight vector <span class="math notranslate nohighlight">\(\vec{w}\)</span>. We can reduce the loss by taking a step in the direction of its negative gradient:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-472f3fcc-8566-4cda-bc93-3fbcfebbf364">
-<span class="eqno">(2.4)<a class="headerlink" href="#equation-472f3fcc-8566-4cda-bc93-3fbcfebbf364" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b692f83c-0136-46b4-b8c7-bd052ca413f2">
+<span class="eqno">(2.4)<a class="headerlink" href="#equation-b692f83c-0136-46b4-b8c7-bd052ca413f2" title="Permalink to this equation">#</a></span>\[\begin{equation}
     (w_i, b') = \left(w_i - \eta \frac{\partial L}{\partial w_i}, b - \eta\frac{\partial L}{\partial b}\right)
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\eta\)</span> is <strong>learning rate</strong>, which an adjustable but not trained parameter (an example of a <strong>hyperparameter</strong>) which we just guess to be <span class="math notranslate nohighlight">\(1\times10^{-6}\)</span> in this example. Typically, it’s chosen to be some power of 10 that is at most 0.1. Values higher than that cause stability problems. Let’s try this procedure, which is called <strong>gradient descent</strong>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># compute gradients</span>
-<span class="k">def</span> <span class="nf">loss_wrapper</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">loss_wrapper</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
     <span class="n">features</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">labels</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
     <span class="n">y</span> <span class="o">=</span> <span class="n">linear_model</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
@@ -1386,16 +1129,16 @@ gives <span class="math notranslate nohighlight">\(\frac{\partial f}{\partial x}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/introduction_24_0.png" src="../_images/introduction_24_0.png" />
+<img alt="../_images/1f383bb12203801f8687a406b985d307a1bcf5171e09c04e40c01e40e95024de.png" src="../_images/1f383bb12203801f8687a406b985d307a1bcf5171e09c04e40c01e40e95024de.png" />
 </div>
 </div>
 </section>
 <section id="training-curve">
-<h3><span class="section-number">2.3.6. </span>Training Curve<a class="headerlink" href="#training-curve" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">2.3.6. </span>Training Curve<a class="headerlink" href="#training-curve" title="Link to this heading">#</a></h3>
 <p>The figure above is called a <strong>training curve</strong>. We’ll see these frequently in this book and they show us if the loss is decreasing, indicating the model is learning. Training curves are also called <strong>learning curves</strong>. The x-axis may be example number, total iterations through dataset (called epochs), or some other measure of amount of data used for training the model.</p>
 </section>
 <section id="batching">
-<h3><span class="section-number">2.3.7. </span>Batching<a class="headerlink" href="#batching" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">2.3.7. </span>Batching<a class="headerlink" href="#batching" title="Link to this heading">#</a></h3>
 <aside class="margin sidebar">
 <p class="sidebar-title">batch</p>
 <p>A batch is a subset of your data of size <em>batch size</em>. Batch size is usually as a power of 2 (e.g., 16, 128).
@@ -1445,11 +1188,11 @@ Having random batches of data is how gradient descent becomes stochastic gradien
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/introduction_27_0.png" src="../_images/introduction_27_0.png" />
+<img alt="../_images/c2db33f19cab5974da6e690397e96d8bdf2ac7a71aac306dab58a8bc5db6a67e.png" src="../_images/c2db33f19cab5974da6e690397e96d8bdf2ac7a71aac306dab58a8bc5db6a67e.png" />
 </div>
 </div>
 <p>There are three changes to note:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>The loss is lower than without batching</p></li>
 <li><p>There are more steps, even though we iterated over our dataset once instead of 10 times</p></li>
 <li><p>The loss doesn’t always go down</p></li>
@@ -1457,10 +1200,10 @@ Having random batches of data is how gradient descent becomes stochastic gradien
 <p>The reason the loss is lower is because we’re able to take more steps even though we only see each data point once. That’s because we update at each batch, giving more updates per iteration over the dataset. Specifically if <span class="math notranslate nohighlight">\(B\)</span> is batch size, there are <span class="math notranslate nohighlight">\(N / B\)</span> updates for every 1 update in the original gradient descent. The reason the loss doesn’t always go down is that each time we evaluate it, it’s on a different set of data. Some molecules are harder to predict than others. Also, each step we take in minimizing loss may not be correct because we only updated our parameters based on one batch. Assuming our batches are mixed though, we will always improve in expectation (on average).</p>
 </section>
 <section id="standardize-features">
-<h3><span class="section-number">2.3.8. </span>Standardize features<a class="headerlink" href="#standardize-features" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">2.3.8. </span>Standardize features<a class="headerlink" href="#standardize-features" title="Link to this heading">#</a></h3>
 <p>It seems we cannot get past a certain loss. If you examine the gradients you’ll see some of them are very large and some are very small. Each of the features have different magnitudes. For example, molecular weights are large numbers. The number of rings in a molecule is a small number. Each of these must use the same learning rate, <span class="math notranslate nohighlight">\(\eta\)</span>, and that is ok for some but too small for others. If we increase <span class="math notranslate nohighlight">\(\eta\)</span>, our training procedure will explode because of these larger feature gradients. A standard trick we can do is make all the features have the same magnitude, using the equation for standardization you might see in your statistics textbook:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-6220d18e-83b8-47e1-af17-9dde0fa6f5cd">
-<span class="eqno">(2.5)<a class="headerlink" href="#equation-6220d18e-83b8-47e1-af17-9dde0fa6f5cd" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-c5798fce-ff0d-4d1b-9ee4-bfd8de2dac3b">
+<span class="eqno">(2.5)<a class="headerlink" href="#equation-c5798fce-ff0d-4d1b-9ee4-bfd8de2dac3b" title="Permalink to this equation">#</a></span>\[\begin{equation}
     x_{ij} = \frac{x_{ij} - \bar{x_j}}{\sigma_{x_j}}
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\bar{x_j}\)</span> is column mean and <span class="math notranslate nohighlight">\(\sigma_{x_j}\)</span> is column standard deviation. To be careful about contaminating training data with test data – leaking information between train and test data – we should only use training data in computing the mean and standard deviation. We want our test data to approximate how we’ll use our model on unseen data, so we cannot know what these unseen features means/standard deviations might be and thus cannot use them at training time for standardization.</p>
@@ -1520,13 +1263,13 @@ Having random batches of data is how gradient descent becomes stochastic gradien
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/introduction_31_0.png" src="../_images/introduction_31_0.png" />
+<img alt="../_images/1f2b6615dc673fe4a0daae43121c1e9eab5802d89c363159e9e568fd93293c7d.png" src="../_images/1f2b6615dc673fe4a0daae43121c1e9eab5802d89c363159e9e568fd93293c7d.png" />
 </div>
 </div>
 <p>Notice we safely increased our learning rate to 0.01, which is possible because all the features are of similar magnitude. We also could keep training, since we’re gaining improvements.</p>
 </section>
 <section id="analyzing-model-performance">
-<h3><span class="section-number">2.3.9. </span>Analyzing Model Performance<a class="headerlink" href="#analyzing-model-performance" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">2.3.9. </span>Analyzing Model Performance<a class="headerlink" href="#analyzing-model-performance" title="Link to this heading">#</a></h3>
 <p>This is a large topic that we’ll explore more, but the first thing we typically examine in supervised learning is a <strong>parity plot</strong>, which shows our predictions vs. our label prediction. What’s nice about this plot is that it works no matter what the dimensions of the features are. A perfect fit would fall onto the line at <span class="math notranslate nohighlight">\(y = \hat{y}\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1543,7 +1286,7 @@ Having random batches of data is how gradient descent becomes stochastic gradien
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/introduction_34_0.png" src="../_images/introduction_34_0.png" />
+<img alt="../_images/a42af72f1cd74c0e66dca2b1f3b942144a6a944783e42788230d2fc9313409f7.png" src="../_images/a42af72f1cd74c0e66dca2b1f3b942144a6a944783e42788230d2fc9313409f7.png" />
 </div>
 </div>
 <p>Final model assessment can be done with loss, but typically other metrics are also used. In regression, a <strong>correlation coefficient</strong> is typically reported in addition to loss. In our example, this is computed as</p>
@@ -1556,16 +1299,16 @@ Having random batches of data is how gradient descent becomes stochastic gradien
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.6475304402750961
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.6475304399016176)
 </pre></div>
 </div>
 </div>
 </div>
-<p>A correlation coefficient of <span class="pasted-inline"><code class="output text_plain docutils literal notranslate"><span class="pre">0.65</span></code></span> is OK, but not great.</p>
+<p>A correlation coefficient of <span class="output text_plain">np.float64(0.65)</span> is OK, but not great.</p>
 </section>
 </section>
 <section id="unsupervised-learning">
-<h2><span class="section-number">2.4. </span>Unsupervised Learning<a class="headerlink" href="#unsupervised-learning" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">2.4. </span>Unsupervised Learning<a class="headerlink" href="#unsupervised-learning" title="Link to this heading">#</a></h2>
 <p>In unsupervised learning, the goal is to predict <span class="math notranslate nohighlight">\(\hat{y}\)</span> <em>without</em> labels. This seems like an impossible task. How do we judge success? Typically, unsupervised learning can be broken into three categories:</p>
 <p><strong>Clustering</strong></p>
 <p>     Here we assume <span class="math notranslate nohighlight">\(\{y_i\}\)</span> is a class variable and try to partition our features into these classes. In clustering we are simultaneously learning the definition of the classes (called clusters) and which cluster each feature should be assigned to.</p>
@@ -1580,7 +1323,7 @@ probability distribution of classes (soft).</p>
 <p><strong>Generative</strong></p>
 <p>     Generative methods are methods where we try to learn <span class="math notranslate nohighlight">\(P(\vec{x})\)</span> so that we can sample new values of <span class="math notranslate nohighlight">\(\vec{x}\)</span>. It is analogous to <span class="math notranslate nohighlight">\(y\)</span> being probability and we’re trying to estimate it. We’ll see these more later.</p>
 <section id="clustering">
-<h3><span class="section-number">2.4.1. </span>Clustering<a class="headerlink" href="#clustering" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">2.4.1. </span>Clustering<a class="headerlink" href="#clustering" title="Link to this heading">#</a></h3>
 <p>Clustering is historically one of the most well-known and still popular machine learning methods. It’s always popular because it can provide new insight from data. Clustering gives class labels where none existed and thus can help find patterns in data. This is also a reason that it has become less popular in chemistry (and most fields): there is no right or wrong answer. Two people doing clustering independently will often arrive at different answers. Nevertheless, it should be a tool you know and can be a good exploration strategy.</p>
 <aside class="margin sidebar">
 <p class="sidebar-title">cluster labels</p>
@@ -1621,7 +1364,7 @@ probability distribution of classes (soft).</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/introduction_43_0.png" src="../_images/introduction_43_0.png" />
+<img alt="../_images/6d2283a7585049d06c6203253a9b7537227de7b3b2a9fd38ec80bbf59a96b0c9.png" src="../_images/6d2283a7585049d06c6203253a9b7537227de7b3b2a9fd38ec80bbf59a96b0c9.png" />
 </div>
 </div>
 <aside class="margin sidebar">
@@ -1670,12 +1413,12 @@ like <a class="reference external" href="https://scikit-learn.org/stable/modules
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/introduction_47_0.png" src="../_images/introduction_47_0.png" />
+<img alt="../_images/f13165b68665bfd6d554a1dbf86a4806670e626ff040d625ca1e0577d16fcd74.png" src="../_images/f13165b68665bfd6d554a1dbf86a4806670e626ff040d625ca1e0577d16fcd74.png" />
 </div>
 </div>
 </section>
 <section id="choosing-cluster-number">
-<h3><span class="section-number">2.4.2. </span>Choosing Cluster Number<a class="headerlink" href="#choosing-cluster-number" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">2.4.2. </span>Choosing Cluster Number<a class="headerlink" href="#choosing-cluster-number" title="Link to this heading">#</a></h3>
 <p>How do we know we had the correct number? Intuition. There is one tool we can use to help us, called an <strong>elbow plot</strong>. The k-means clusters can be used to compute the mean squared distance from cluster center, basically a version of loss function. However, if we treat cluster number as a trainable parameter we’d find the best fit at the cluster number being equal to number of data points. Not helpful! However, we can see when the slope of this loss becomes approximately constant and assume that those extra clusters are adding no new insight. Let’s plot the loss and see what happens. Note we’ll be using a subsample of the dataset to save time.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1699,7 +1442,7 @@ like <a class="reference external" href="https://scikit-learn.org/stable/modules
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/introduction_49_0.png" src="../_images/introduction_49_0.png" />
+<img alt="../_images/a719a62d1e0f091793dfd48a92c7d8598eac4168a6422af61001e4fdf15c3543.png" src="../_images/a719a62d1e0f091793dfd48a92c7d8598eac4168a6422af61001e4fdf15c3543.png" />
 </div>
 </div>
 <p>Where is the transition? If I squint, maybe at 6? 3? 4? 7? Let’s choose 4 because it sounds nice and is plausible based on the data. The last task is to get some insight into what the clusters actually are. We can extract the most centered data points (closest to cluster center) and consider them to be representative of the cluster.</p>
@@ -1727,7 +1470,8 @@ like <a class="reference external" href="https://scikit-learn.org/stable/modules
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/introduction_51_0.svg" src="../_images/introduction_51_0.svg" /></div>
+<img alt="../_images/c1bbb97be63f12806d884a263acdec335fb4136dddae9372cd1656716717d581.svg" src="../_images/c1bbb97be63f12806d884a263acdec335fb4136dddae9372cd1656716717d581.svg" />
+</div>
 </div>
 <p>So what exactly are these classes? Unclear. We intentionally did not reveal solubility (unsupervised learning) so there is not necessarily any connection with solubility. These classes are more a result of which features were chosen for the dataset. You could make a hypothesis, like class 1 is all negatively charged or class 0 is aliphatic, and investigate. Ultimately though there is no <em>best</em> clustering and often unsupervised learning is more about finding insight or patterns and not about producing a highly-accurate model.</p>
 <p>The elbow plot method is one of many approaches to selecting cluster number <span id="id7">[<a class="reference internal" href="#id33" title="Duc Truong Pham, Stefan S Dimov, and Chi D Nguyen. Selection of k in k-means clustering. Proceedings of the Institution of Mechanical Engineers, Part C: Journal of Mechanical Engineering Science, 219(1):103–119, 2005.">PDN05</a>]</span>. I prefer it because it’s quite clear that you are using intuition. More sophisticated methods sort-of conceal the fact that there is no right or wrong answer in clustering.</p>
@@ -1738,7 +1482,7 @@ like <a class="reference external" href="https://scikit-learn.org/stable/modules
 </section>
 </section>
 <section id="chapter-summary">
-<h2><span class="section-number">2.5. </span>Chapter Summary<a class="headerlink" href="#chapter-summary" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">2.5. </span>Chapter Summary<a class="headerlink" href="#chapter-summary" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Supervised machine learning is building models that can predict labels <span class="math notranslate nohighlight">\(y\)</span> from input features <span class="math notranslate nohighlight">\(\vec{x}\)</span>.</p></li>
 <li><p>Data can be labeled or unlabeled.</p></li>
@@ -1748,32 +1492,32 @@ like <a class="reference external" href="https://scikit-learn.org/stable/modules
 </ul>
 </section>
 <section id="exercises">
-<h2><span class="section-number">2.6. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">2.6. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
 <section id="data">
-<h3><span class="section-number">2.6.1. </span>Data<a class="headerlink" href="#data" title="Permalink to this headline">#</a></h3>
-<ol class="simple">
+<h3><span class="section-number">2.6.1. </span>Data<a class="headerlink" href="#data" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
 <li><p>Using <code class="docutils literal notranslate"><span class="pre">numpy</span></code> reductions <code class="docutils literal notranslate"><span class="pre">np.amin</span></code>, <code class="docutils literal notranslate"><span class="pre">np.std</span></code>, etc. (not <code class="docutils literal notranslate"><span class="pre">pandas</span></code>!), compute the mean, min, max, and standard deviation for each feature across all data points.</p></li>
 <li><p>Use rdkit to draw the 2 highest molecular weight molecules. Note they look strange.</p></li>
 </ol>
 </section>
 <section id="linear-models">
-<h3><span class="section-number">2.6.2. </span>Linear Models<a class="headerlink" href="#linear-models" title="Permalink to this headline">#</a></h3>
-<ol class="simple">
+<h3><span class="section-number">2.6.2. </span>Linear Models<a class="headerlink" href="#linear-models" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
 <li><p>Prove that a nonlinear model like <span class="math notranslate nohighlight">\(y = \vec{w_1} \cdot \sin\left(\vec{x}\right) + \vec{w_2} \cdot \vec{x} + b\)</span> could be represented as a linear model.</p></li>
 <li><p>Write out the linear model equation in Einstein notation in batched form. <strong>Batched form</strong> means we explicitly have an index indicating batch. For example, the features will be <span class="math notranslate nohighlight">\(x_{bi}\)</span>  where <span class="math notranslate nohighlight">\(b\)</span> indicates the index in the batch and <span class="math notranslate nohighlight">\(i\)</span> indicates the feature.</p></li>
 </ol>
 </section>
 <section id="minimizing-loss">
-<h3><span class="section-number">2.6.3. </span>Minimizing Loss<a class="headerlink" href="#minimizing-loss" title="Permalink to this headline">#</a></h3>
-<ol class="simple">
+<h3><span class="section-number">2.6.3. </span>Minimizing Loss<a class="headerlink" href="#minimizing-loss" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
 <li><p>We standardized the features, but not the labels. Would standardizing the labels affect our choice of learning rate? Prove your answer.</p></li>
 <li><p>Implement a loss that is mean absolute error, instead of mean squared error. Compute its gradient using <code class="docutils literal notranslate"><span class="pre">jax</span></code>.</p></li>
 <li><p>Using the standardized features, show what effect batch size has on training. Use batch sizes of 1, 8, 32, 256, 1024. Make sure you re-initialize your weights in between each run. Plot the log-loss for each batch size on the same plot. Describe your results.</p></li>
 </ol>
 </section>
 <section id="id8">
-<h3><span class="section-number">2.6.4. </span>Clustering<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h3>
-<ol class="simple">
+<h3><span class="section-number">2.6.4. </span>Clustering<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
 <li><p>We say that clustering is a type of unsupervised learning and that it predicts the labels. What exactly are the predicted labels in clustering? Write down what the predicted labels might look like for a few data points.</p></li>
 <li><p>In clustering, we predict labels from features. You can still cluster if you have labels, by just pretending they are features. Give two reasons why it would not be a good idea to do clustering in this manner, where we treat the labels as features and try to predict new labels that represent class.</p></li>
 <li><p>On the isomap plot (reduced dimension plot), color the points by which group they fall in (G1, G2, etc.). Is there any relationship between this and the clustering?</p></li>
@@ -1781,34 +1525,42 @@ like <a class="reference external" href="https://scikit-learn.org/stable/modules
 </section>
 </section>
 <section id="cited-references">
-<h2><span class="section-number">2.7. </span>Cited References<a class="headerlink" href="#cited-references" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">2.7. </span>Cited References<a class="headerlink" href="#cited-references" title="Link to this heading">#</a></h2>
 <div class="docutils container" id="id9">
-<dl class="citation">
-<dt class="label" id="id14"><span class="brackets"><a class="fn-backref" href="#id1">Alp20</a></span></dt>
-<dd><p>Ethem Alpaydin. <em>Introduction to machine learning</em>. MIT press, 2020.</p>
-</dd>
-<dt class="label" id="id20"><span class="brackets"><a class="fn-backref" href="#id2">FZJS21</a></span></dt>
-<dd><p>Victor Fung, Jiaxin Zhang, Eric Juarez, and Bobby G. Sumpter. Benchmarking graph neural networks for materials chemistry. <em>npj Computational Materials</em>, June 2021. URL: <a class="reference external" href="https://doi.org/10.1038/s41524-021-00554-0">https://doi.org/10.1038/s41524-021-00554-0</a>, <a class="reference external" href="https://doi.org/10.1038/s41524-021-00554-0">doi:10.1038/s41524-021-00554-0</a>.</p>
-</dd>
-<dt class="label" id="id15"><span class="brackets"><a class="fn-backref" href="#id2">Bal19</a></span></dt>
-<dd><p>Prasanna V Balachandran. Machine learning guided design of functional materials with targeted properties. <em>Computational Materials Science</em>, 164:82–90, 2019.</p>
-</dd>
-<dt class="label" id="id21"><span class="brackets"><a class="fn-backref" href="#id3">GomezBAG20</a></span></dt>
-<dd><p>Rafael Gómez-Bombarelli and Alán Aspuru-Guzik. Machine learning and big-data in computational chemistry. <em>Handbook of Materials Modeling: Methods: Theory and Modeling</em>, pages 1939–1962, 2020.</p>
-</dd>
-<dt class="label" id="id23"><span class="brackets"><a class="fn-backref" href="#id4">NDJ+18</a></span></dt>
-<dd><p>Aditya Nandy, Chenru Duan, Jon Paul Janet, Stefan Gugler, and Heather J Kulik. Strategies and software for machine learning accelerated discovery in transition metal chemistry. <em>Industrial &amp; Engineering Chemistry Research</em>, 57(42):13973–13986, 2018.</p>
-</dd>
-<dt class="label" id="id117"><span class="brackets"><a class="fn-backref" href="#id5">Wei88</a></span></dt>
-<dd><p>David Weininger. Smiles, a chemical language and information system. 1. introduction to methodology and encoding rules. <em>Journal of chemical information and computer sciences</em>, 28(1):31–36, 1988.</p>
-</dd>
-<dt class="label" id="id26"><span class="brackets"><a class="fn-backref" href="#id6">SKE19</a></span></dt>
-<dd><p>Murat Cihan Sorkun, Abhishek Khetan, and Süleyman Er. AqSolDB, a curated reference set of aqueous solubility and 2D descriptors for a diverse set of compounds. <em>Sci. Data</em>, 6(1):143, 2019. <a class="reference external" href="https://doi.org/10.1038/s41597-019-0151-1">doi:10.1038/s41597-019-0151-1</a>.</p>
-</dd>
-<dt class="label" id="id33"><span class="brackets"><a class="fn-backref" href="#id7">PDN05</a></span></dt>
-<dd><p>Duc Truong Pham, Stefan S Dimov, and Chi D Nguyen. Selection of k in k-means clustering. <em>Proceedings of the Institution of Mechanical Engineers, Part C: Journal of Mechanical Engineering Science</em>, 219(1):103–119, 2005.</p>
-</dd>
-</dl>
+<div role="list" class="citation-list">
+<div class="citation" id="id14" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">Alp20</a><span class="fn-bracket">]</span></span>
+<p>Ethem Alpaydin. <em>Introduction to machine learning</em>. MIT press, 2020.</p>
+</div>
+<div class="citation" id="id20" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">FZJS21</a><span class="fn-bracket">]</span></span>
+<p>Victor Fung, Jiaxin Zhang, Eric Juarez, and Bobby G. Sumpter. Benchmarking graph neural networks for materials chemistry. <em>npj Computational Materials</em>, June 2021. URL: <a class="reference external" href="https://doi.org/10.1038/s41524-021-00554-0">https://doi.org/10.1038/s41524-021-00554-0</a>, <a class="reference external" href="https://doi.org/10.1038/s41524-021-00554-0">doi:10.1038/s41524-021-00554-0</a>.</p>
+</div>
+<div class="citation" id="id15" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">Bal19</a><span class="fn-bracket">]</span></span>
+<p>Prasanna V Balachandran. Machine learning guided design of functional materials with targeted properties. <em>Computational Materials Science</em>, 164:82–90, 2019.</p>
+</div>
+<div class="citation" id="id21" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">GomezBAG20</a><span class="fn-bracket">]</span></span>
+<p>Rafael Gómez-Bombarelli and Alán Aspuru-Guzik. Machine learning and big-data in computational chemistry. <em>Handbook of Materials Modeling: Methods: Theory and Modeling</em>, pages 1939–1962, 2020.</p>
+</div>
+<div class="citation" id="id23" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">NDJ+18</a><span class="fn-bracket">]</span></span>
+<p>Aditya Nandy, Chenru Duan, Jon Paul Janet, Stefan Gugler, and Heather J Kulik. Strategies and software for machine learning accelerated discovery in transition metal chemistry. <em>Industrial &amp; Engineering Chemistry Research</em>, 57(42):13973–13986, 2018.</p>
+</div>
+<div class="citation" id="id117" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">Wei88</a><span class="fn-bracket">]</span></span>
+<p>David Weininger. Smiles, a chemical language and information system. 1. introduction to methodology and encoding rules. <em>Journal of chemical information and computer sciences</em>, 28(1):31–36, 1988.</p>
+</div>
+<div class="citation" id="id26" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id6">SKE19</a><span class="fn-bracket">]</span></span>
+<p>Murat Cihan Sorkun, Abhishek Khetan, and Süleyman Er. AqSolDB, a curated reference set of aqueous solubility and 2D descriptors for a diverse set of compounds. <em>Sci. Data</em>, 6(1):143, 2019. <a class="reference external" href="https://doi.org/10.1038/s41597-019-0151-1">doi:10.1038/s41597-019-0151-1</a>.</p>
+</div>
+<div class="citation" id="id33" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id7">PDN05</a><span class="fn-bracket">]</span></span>
+<p>Duc Truong Pham, Stefan S Dimov, and Chi D Nguyen. Selection of k in k-means clustering. <em>Proceedings of the Institution of Mechanical Engineers, Part C: Journal of Mechanical Engineering Science</em>, 219(1):103–119, 2005.</p>
+</div>
+</div>
 </div>
 </section>
 </section>
@@ -1825,7 +1577,7 @@ like <a class="reference external" href="https://scikit-learn.org/stable/modules
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./ml"
         },
         predefinedOutput: true
@@ -1833,53 +1585,133 @@ like <a class="reference external" href="https://scikit-learn.org/stable/modules
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../math/tensors-and-shapes.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">1. </span>Tensors and Shapes</p>
-        </div>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../math/tensors-and-shapes.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>Tensors and Shapes</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="regression.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="regression.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title"><span class="section-number">3. </span>Regression &amp; Model Assessment</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-ingredients">2.1. The Ingredients</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#supervised-learning">2.2. Supervised Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-this-notebook">2.3. Running This Notebook</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-data">2.3.1. Load Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-exploration">2.3.2. Data Exploration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-correlation">2.3.3. Feature Correlation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-model">2.3.4. Linear Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-descent">2.3.5. Gradient Descent</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-curve">2.3.6. Training Curve</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#batching">2.3.7. Batching</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#standardize-features">2.3.8. Standardize features</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analyzing-model-performance">2.3.9. Analyzing Model Performance</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unsupervised-learning">2.4. Unsupervised Learning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering">2.4.1. Clustering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-cluster-number">2.4.2. Choosing Cluster Number</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-summary">2.5. Chapter Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">2.6. Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data">2.6.1. Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-models">2.6.2. Linear Models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minimizing-loss">2.6.3. Minimizing Loss</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">2.6.4. Clustering</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cited-references">2.7. Cited References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-    By Andrew D. White<br/>
-  
-      &copy; Copyright 2022.<br/>
-    <div class="extra_footer">
-      <a href="http://thewhitelab.org">thewhitelab.org</a> <div id="wh-modal"> <button class="wh-venti-button" aria-label="close modal" id="wh-modal-close">✕</button> <img id="wh-modal-img"> </div>
-    </div>
-</p>
-        </footer>
-    </div>
+  <div class="footer-item">
     
+<p class="component-author">
+By Andrew D. White
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <a href="http://thewhitelab.org">thewhitelab.org</a> <div id="wh-modal"> <button class="wh-venti-button" aria-label="close modal" id="wh-modal-close">✕</button> <img id="wh-modal-img"> </div>
 </div>
+  </div>
+  
+</div>
+          </footer>
+        
 
-
-      </div>
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

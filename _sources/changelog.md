@@ -1,5 +1,15 @@
 # Changelog
 
+## Version 2.0.0 (2026-02-19)
+
+* Ported book from TensorFlow/Keras to PyTorch as the primary deep learning framework
+* Ported chapters: introduction, layers, GNN, XAI, NLP, flows, QM9
+* Replaced Haiku with Flax Linen and Keras models with PyTorch in XAI chapter
+* Replaced TensorFlow Probability with normflows in flows chapter
+* Updated framework discussion in index to reflect PyTorch as leading framework
+* Fixed Shapley coalition sampling bug in XAI chapter
+* Fixed moviepy compatibility issues for notebook builds
+
 ## Version 1.3.1 (2022-12-17)
 
 * Added `linkify` to dependencies
