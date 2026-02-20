@@ -523,9 +523,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2026-02-20 07:33:53.125895: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
-2026-02-20 07:33:53.974646: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
-To enable the following instructions: AVX2 AVX512F AVX512_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2026-02-20 14:00:55.346392: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
 </pre></div>
 </div>
 </div>
@@ -759,7 +758,7 @@ ints2selfes: [C][C@@H1][C][C][Branch2][Ring1][Ring2][N][C][=C][N][=C][C][Branch1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2026-02-20 07:34:58.994786: E external/local_xla/xla/stream_executor/cuda/cuda_platform.cc:51] failed call to cuInit: INTERNAL: CUDA error: Failed call to cuInit: UNKNOWN ERROR (303)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2026-02-20 14:02:11.096418: E external/local_xla/xla/stream_executor/cuda/cuda_platform.cc:51] failed call to cuInit: INTERNAL: CUDA error: Failed call to cuInit: UNKNOWN ERROR (303)
 </pre></div>
 </div>
 </div>
@@ -810,9 +809,6 @@ ints2selfes: [C][C@@H1][C][C][Branch2][Ring1][Ring2][N][C][=C][N][=C][C][Branch1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2026-02-20 07:34:59.430979: E tensorflow/core/util/util.cc:131] oneDNN supports DT_BOOL only on platforms with AVX-512. Falling back to the default Eigen-based implementation if present.
-</pre></div>
-</div>
 <div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">Model: "functional"</span>
 </pre>
 </div><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┏━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┓
@@ -891,7 +887,7 @@ ints2selfes: [C][C@@H1][C][C][Branch2][Ring1][Ring2][N][C][=C][N][=C][C][Branch1
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/76d950a2d6e7423fd4ed0296df516d19932834deb8e5015f1b380759610e421c.png" src="../_images/76d950a2d6e7423fd4ed0296df516d19932834deb8e5015f1b380759610e421c.png" />
+<img alt="../_images/4fa76d7b856496aea7fe36e47faa4e13ea0c47f8f94e8a963131a5cabc635da6.png" src="../_images/4fa76d7b856496aea7fe36e47faa4e13ea0c47f8f94e8a963131a5cabc635da6.png" />
 </div>
 </div>
 <p>This is the logit probability for each token. We need to sample from this to get our prediction for the first token. We’ll sample it with an adjustable parameter called <strong>temperature</strong>. Temperature controls how close we are to sampling the maximum. <span class="math notranslate nohighlight">\(T = 0\)</span> means we sampling the max only, <span class="math notranslate nohighlight">\(T = 1\)</span> means we sample according to the logits, and <span class="math notranslate nohighlight">\(T = \infty\)</span> means we sample randomly.</p>
@@ -907,7 +903,7 @@ ints2selfes: [C][C@@H1][C][C][Branch2][Ring1][Ring2][N][C][=C][N][=C][C][Branch1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tf.Tensor([[40]], shape=(1, 1), dtype=int64)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tf.Tensor([[10]], shape=(1, 1), dtype=int64)
 </pre></div>
 </div>
 </div>
@@ -940,7 +936,7 @@ ints2selfes: [C][C@@H1][C][C][Branch2][Ring1][Ring2][N][C][=C][N][=C][C][Branch1
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/c8df53b264a868704b3bcc0bcc9c5deb37e67d7d2ca12d2b8b18fcd24180d4a8.svg" src="../_images/c8df53b264a868704b3bcc0bcc9c5deb37e67d7d2ca12d2b8b18fcd24180d4a8.svg" />
+<img alt="../_images/0d31570ec41e36e47122439e55d36d732b8efda26f7d03ebbe99fa5d6b2bfb3f.svg" src="../_images/0d31570ec41e36e47122439e55d36d732b8efda26f7d03ebbe99fa5d6b2bfb3f.svg" />
 </div>
 </div>
 <p>These are better still! Now we can try adjusting the temperature to see more unusual or more common molecules</p>
@@ -952,7 +948,7 @@ ints2selfes: [C][C@@H1][C][C][Branch2][Ring1][Ring2][N][C][=C][N][=C][C][Branch1
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/d110cfd9c6f9599202aff92cf351d30660190454d05c591cf61d356ef8c1d262.svg" src="../_images/d110cfd9c6f9599202aff92cf351d30660190454d05c591cf61d356ef8c1d262.svg" />
+<img alt="../_images/52ce07616f10418c7d77bd23398fa98281edf720e34e80c47a0e771d7927b1e3.svg" src="../_images/52ce07616f10418c7d77bd23398fa98281edf720e34e80c47a0e771d7927b1e3.svg" />
 </div>
 </div>
 <p><span class="math notranslate nohighlight">\(T = 100\)</span></p>
@@ -963,7 +959,7 @@ ints2selfes: [C][C@@H1][C][C][Branch2][Ring1][Ring2][N][C][=C][N][=C][C][Branch1
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/622bd64a46b503cf4d9ef22772d08f0a5f3cf7e6f54f0b8bf8167043f9d78f4b.svg" src="../_images/622bd64a46b503cf4d9ef22772d08f0a5f3cf7e6f54f0b8bf8167043f9d78f4b.svg" />
+<img alt="../_images/adc0b30299b59b24fc81009055a9ab59a6320b7f47ab2298479855d4c9ce366c.svg" src="../_images/adc0b30299b59b24fc81009055a9ab59a6320b7f47ab2298479855d4c9ce366c.svg" />
 </div>
 </div>
 <p>You can see that the <span class="math notranslate nohighlight">\(T = 0.5\)</span> case seems to works the best of the three.</p>

@@ -514,8 +514,8 @@ document.write(`
 <section id="flow-equation">
 <h2><span class="section-number">15.1. </span>Flow Equation<a class="headerlink" href="#flow-equation" title="Link to this heading">#</a></h2>
 <p>Recall for the VAE decoder, we had an explicit formula for <span class="math notranslate nohighlight">\(p(x | z)\)</span>. This allowed us to compute <span class="math notranslate nohighlight">\(p(x) = \int\,dz p(x | z)p(z)\)</span> which is the quantity of interest. The VAE decoder is a conditional probability density function. In the normalizing flow, we do not use probability density functions. We use bijective functions. So we cannot just compute an integral to change variables. We can use the change of variable formula. Consider our normalizing flow to be defined by our bijector <span class="math notranslate nohighlight">\(x = f(z)\)</span>, its inverse <span class="math notranslate nohighlight">\(z = g(x)\)</span>, and the starting probability distribution <span class="math notranslate nohighlight">\(P_z(z)\)</span>. Then the formula for probability of <span class="math notranslate nohighlight">\(x\)</span> is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1e899aaa-3590-4f0a-b5ef-e595a64192ee">
-<span class="eqno">(15.1)<a class="headerlink" href="#equation-1e899aaa-3590-4f0a-b5ef-e595a64192ee" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-feded3dc-e3dd-4182-af2d-72cbd3b6f9df">
+<span class="eqno">(15.1)<a class="headerlink" href="#equation-feded3dc-e3dd-4182-af2d-72cbd3b6f9df" title="Permalink to this equation">#</a></span>\[\begin{equation}
 P(x) = P_z\left(g(x)\right) \,\left| \textrm{det}\left[\mathbf{J}_g\right]\right|
 \end{equation}\]</div>
 <p>where the term on the right is the absolute value of the determinant of the Jacobian of <span class="math notranslate nohighlight">\(g\)</span>. <a class="reference external" href="https://en.wikipedia.org/wiki/Jacobian_matrix_and_determinant">Jacobians</a> are matrices that describe how infinitesimal changes in each domain dimension change each range dimension. This term corrects for the volume change of the distribution. For example, if <span class="math notranslate nohighlight">\(f(z) = 2z\)</span>, then <span class="math notranslate nohighlight">\(g(x) = x / 2\)</span>, and the Jacobian determinant is <span class="math notranslate nohighlight">\(1 / 2\)</span>. The intuition is that we are stretching out <span class="math notranslate nohighlight">\(z\)</span> by 2, so we need to account for the increase in volume to keep the probability normalized. You can read more about the change of variable formula for <a class="reference external" href="https://cranmer.github.io/stats-ds-book/distributions/change-of-variables.html">probability distributions here</a></p>
@@ -528,8 +528,8 @@ P(x) = P_z\left(g(x)\right) \,\left| \textrm{det}\left[\mathbf{J}_g\right]\right
 <section id="bijector-chains">
 <h3><span class="section-number">15.2.1. </span>Bijector Chains<a class="headerlink" href="#bijector-chains" title="Link to this heading">#</a></h3>
 <p>Just like in deep neural networks, multiple bijectors are chained together to increase how complex of the final fit distribution <span class="math notranslate nohighlight">\(\hat{P}(x)\)</span> can be. The change of variable equation can be repeatedly applied:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-568185f4-95bc-477c-963b-013144627514">
-<span class="eqno">(15.2)<a class="headerlink" href="#equation-568185f4-95bc-477c-963b-013144627514" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-351d345d-04ec-4f8a-a196-61a9141b853e">
+<span class="eqno">(15.2)<a class="headerlink" href="#equation-351d345d-04ec-4f8a-a196-61a9141b853e" title="Permalink to this equation">#</a></span>\[\begin{equation}
 P(x) = P_z\left[g_1\left(g_0(x)\right)\right] \,\left| \textrm{det}\left[\mathbf{J}_{g_1}\right]\right|  \left|\textrm{det}\left[\mathbf{J}_{g_0}\right]\right|
 \end{equation}\]</div>
 <p>where we would compute <span class="math notranslate nohighlight">\(x\)</span> with <span class="math notranslate nohighlight">\(f_0\left(f_1(z)\right)\)</span>. One critical point is that you should also include a <strong>permute bijector</strong> that swaps the order of dimensions. Since the bijectors typically have triangular Jacobians, certain output dimensions will depend on many input dimensions and others will only depend on a single one. By applying a permutation, you allow each dimension to influence each other.</p>
@@ -538,8 +538,8 @@ P(x) = P_z\left[g_1\left(g_0(x)\right)\right] \,\left| \textrm{det}\left[\mathbf
 <section id="training">
 <h2><span class="section-number">15.3. </span>Training<a class="headerlink" href="#training" title="Link to this heading">#</a></h2>
 <p>At this point, you may be wondering how you could possibly train a normalizing flow. The trainable parameters appear in the bijectors. They have adjustable parameters. The loss equation is quite simple: the negative log-likelihood (negative to make it minimization). Explicitly:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b5849064-c131-4bdc-94a9-a79ca015532b">
-<span class="eqno">(15.3)<a class="headerlink" href="#equation-b5849064-c131-4bdc-94a9-a79ca015532b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-44ecea81-9ecd-45cd-ae17-f57e05656ad9">
+<span class="eqno">(15.3)<a class="headerlink" href="#equation-44ecea81-9ecd-45cd-ae17-f57e05656ad9" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathcal{l} = -\log P_z\left[g_1\left(g_0(x)\right)\right] - \sum_i \log\left| \textrm{det}\left[\mathbf{J}_{g_i}\right]\right|
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(x\)</span> is the training point and when you take the gradient of the loss, it is with respect to the parameters of the bijectors.</p>
@@ -584,7 +584,7 @@ P(x) = P_z\left[g_1\left(g_0(x)\right)\right] \,\left| \textrm{det}\left[\mathbf
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;torch._C.Generator at 0x7f4364be0690&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;torch._C.Generator at 0x7f6e10be8650&gt;
 </pre></div>
 </div>
 </div>
@@ -613,7 +613,7 @@ P(x) = P_z\left[g_1\left(g_0(x)\right)\right] \,\left| \textrm{det}\left[\mathbf
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f420f518cd0&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f6cb3fc4e10&gt;]
 </pre></div>
 </div>
 <img alt="../_images/ee04abbbaf32f0db4e451faaa06c3d4e27125591f02677d5e10817496dd8cb2d.png" src="../_images/ee04abbbaf32f0db4e451faaa06c3d4e27125591f02677d5e10817496dd8cb2d.png" />
@@ -800,7 +800,7 @@ x = \vec{z} \times (1, 0.5)^T + (0.5, 0.25)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/dac032ea304deb793d5e5794ff8219882059ac7d2d13270f9771ac64bddc64ad.png" src="../_images/dac032ea304deb793d5e5794ff8219882059ac7d2d13270f9771ac64bddc64ad.png" />
+<img alt="../_images/360d658b99727f3b0ad5ae9fdb79e8112eab5dd57caa5cb8f65c976c33a9faf2.png" src="../_images/360d658b99727f3b0ad5ae9fdb79e8112eab5dd57caa5cb8f65c976c33a9faf2.png" />
 </div>
 </div>
 <p>Training looks reasonable. Let’s now see our distribution.</p>
@@ -822,7 +822,7 @@ x = \vec{z} \times (1, 0.5)^T + (0.5, 0.25)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/f6a7381ba963c28644406ea99f49aeeab7e14be8e387b1a16799a82340648c1c.png" src="../_images/f6a7381ba963c28644406ea99f49aeeab7e14be8e387b1a16799a82340648c1c.png" />
+<img alt="../_images/010e5b639e86c27a1bd69dfc48db8f6759a5a282e1d078eddf18b3f08ff2d5d6.png" src="../_images/010e5b639e86c27a1bd69dfc48db8f6759a5a282e1d078eddf18b3f08ff2d5d6.png" />
 </div>
 </div>
 <p>Wow! We now can compute the probability of any point in this distribution. You can see there are some oddities that could be fixed with further training. One issue that cannot be overcome is the connection between the two curves – it is not possible to get fully disconnected densities. This is because of our requirement that the bijectors are invertible and volume preserving – you can only squeeze volume so far but cannot completely disconnect. Some work has been done on addressing this issue by adding sampling to the flow and this gives more expressive normalizing flows <span id="id11">[<a class="reference internal" href="#id90" title="Hao Wu, Jonas Köhler, and Frank Noé. Stochastic normalizing flows. arXiv preprint arXiv:2002.06707, 2020.">WKohlerNoe20</a>]</span>.</p>
@@ -838,7 +838,7 @@ x = \vec{z} \times (1, 0.5)^T + (0.5, 0.25)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/5d72f3dab0e8f3107510261e0e863fb28c5f8f6ef5c7dd069fb22c2689015576.png" src="../_images/5d72f3dab0e8f3107510261e0e863fb28c5f8f6ef5c7dd069fb22c2689015576.png" />
+<img alt="../_images/649672fdc1b9290caba8cb3f4259fc3300eb15c6bd6c01791bc039caad546195.png" src="../_images/649672fdc1b9290caba8cb3f4259fc3300eb15c6bd6c01791bc039caad546195.png" />
 </div>
 </div>
 </section>

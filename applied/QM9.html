@@ -813,23 +813,23 @@ Label: -40.475117
 <h2><span class="section-number">17.5. </span>Example GNN Model<a class="headerlink" href="#example-gnn-model" title="Link to this heading">#</a></h2>
 <p>We now can work with this data to build a model. Let’s build a simple model that can model energy and obeys the invariances required of the problem. We will use a graph neural network (GNN) because it obeys permutation invariance. We will create a <em>graph</em> from the coordinates/element vector by joining all atoms to all other atoms and using their inverse pairwise distance as the edge weight. The choice of pairwise distance gives us translation and rotation invariance. The choice of inverse distance means that atoms which are far away naturally have low edge weights.</p>
 <p>I will now define our model using the Battaglia equations <span id="id2">[<a class="reference internal" href="../dl/gnn.html#id75" title="Peter W Battaglia, Jessica B Hamrick, Victor Bapst, Alvaro Sanchez-Gonzalez, Vinicius Zambaldi, Mateusz Malinowski, Andrea Tacchetti, David Raposo, Adam Santoro, Ryan Faulkner, and others. Relational inductive biases, deep learning, and graph networks. arXiv preprint arXiv:1806.01261, 2018.">BHB+18</a>]</span>. As opposed to most examples we’ve seen in class, I will use the graph level feature vector <span class="math notranslate nohighlight">\(\vec{u}\)</span> which will ultimately be our estimate of energy. The edge update will only consider the sender and the edge weight with trainable parameters:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-cf76a344-f069-4410-9d04-71bf63ff1b9f">
-<span class="eqno">(17.1)<a class="headerlink" href="#equation-cf76a344-f069-4410-9d04-71bf63ff1b9f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-76ccfb5f-9c8a-4770-bf7d-ca1a6974cc26">
+<span class="eqno">(17.1)<a class="headerlink" href="#equation-76ccfb5f-9c8a-4770-bf7d-ca1a6974cc26" title="Permalink to this equation">#</a></span>\[\begin{equation}
       \vec{e}^{'}_k = \phi^e\left( \vec{e}_k, \vec{v}_{rk}, \vec{v}_{sk}, \vec{u}\right) = \sigma\left(\vec{v}_{sk}\vec{w}_ee_k + \vec{b}_e\right)
 \end{equation}\]</div>
 <p>where the input edge <span class="math notranslate nohighlight">\(e_k\)</span> will be a single number (inverse pairwise distance) and <span class="math notranslate nohighlight">\(\vec{b}_e\)</span> is a trainable bias vector. We will use a sum aggregation for edges (not shown). <span class="math notranslate nohighlight">\(\sigma\)</span> is a leaky ReLU. The leaky just prevents vanishing gradients, which I found empirically to reduce performance here. The node update will be</p>
-<div class="amsmath math notranslate nohighlight" id="equation-bb921837-4e03-40d8-aab8-166181bdc58d">
-<span class="eqno">(17.2)<a class="headerlink" href="#equation-bb921837-4e03-40d8-aab8-166181bdc58d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-fe335b32-bee4-45cf-865a-289bfc2ce437">
+<span class="eqno">(17.2)<a class="headerlink" href="#equation-fe335b32-bee4-45cf-865a-289bfc2ce437" title="Permalink to this equation">#</a></span>\[\begin{equation}
    \vec{v}^{'}_i = \phi^v\left( \bar{e}^{'}_i, \vec{v}_i, \vec{u}\right) = \sigma\left(\mathbf{W}_v \bar{e}^{'}_i\right) + \vec{v}_i
 \end{equation}\]</div>
 <p>The global node aggregation will also be a sum. Finally, we have our graph feature vector update:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7ab8f913-4cab-446c-9866-55702b96ba93">
-<span class="eqno">(17.3)<a class="headerlink" href="#equation-7ab8f913-4cab-446c-9866-55702b96ba93" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-0c75af77-dac5-41ac-b425-805b09232496">
+<span class="eqno">(17.3)<a class="headerlink" href="#equation-0c75af77-dac5-41ac-b425-805b09232496" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \vec{u}^{'} = \phi^u\left( \bar{e}^{'},\bar{v}^{'}, \vec{u}\right) = \sigma\left(\mathbf{W}_u\bar{v}^{'}\right) + \vec{u}
 \end{equation}\]</div>
 <p>To compute the final energy, we’ll use our regression equation:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1ca5d8b6-3aaa-41cd-9e6a-3fcf0d872a74">
-<span class="eqno">(17.4)<a class="headerlink" href="#equation-1ca5d8b6-3aaa-41cd-9e6a-3fcf0d872a74" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-882a59a5-49d8-40b5-88dd-5fa92bf86441">
+<span class="eqno">(17.4)<a class="headerlink" href="#equation-882a59a5-49d8-40b5-88dd-5fa92bf86441" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \hat{E} = \vec{w}\cdot \vec{u} + b
 \end{equation}\]</div>
 <p>One final detail is that we will pass on <span class="math notranslate nohighlight">\(\vec{u}\)</span> and the nodes, but we will keep the edges the same at each GNN layer. Remember this is an example model: there are many changes that could be made to the above. Also, it is not kernel learning which is the favorite for this domain. Let’s implement it though and see if it works.</p>
@@ -904,8 +904,8 @@ Label: -40.475117
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>input feautres [0. 0. 0. 0. 0. 0. 0. 0.]
-output features [ 4.824003    2.9230251  -0.03714166  1.5885082   1.3875259  -0.01814961
-  0.14334989  1.3859779 ]
+output features [ 4.824003    2.9230251  -0.03714166  1.5885084   1.3875256  -0.01814961
+  0.14335021  1.385978  ]
 </pre></div>
 </div>
 </div>
@@ -979,7 +979,7 @@ output features [ 4.824003    2.9230251  -0.03714166  1.5885082   1.3875259  -0.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/3ae838b05917d83ae9ee3ec179118aafb9e426f701368303697fec73542ffe0d.png" src="../_images/3ae838b05917d83ae9ee3ec179118aafb9e426f701368303697fec73542ffe0d.png" />
+<img alt="../_images/ff931f13503423db570d33a2bd6891a19924ac502815d79145825a52f83e4857.png" src="../_images/ff931f13503423db570d33a2bd6891a19924ac502815d79145825a52f83e4857.png" />
 </div>
 </div>
 <p>This is a large dataset and we’re under training, but hopefully you get the principles of this process! Finally, we’ll examine our parity plot.</p>
@@ -1003,7 +1003,7 @@ output features [ 4.824003    2.9230251  -0.03714166  1.5885082   1.3875259  -0.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/38f4877b31df532067df927f163177e5fb8e9e3b8667f08048e26c2cba6851fd.png" src="../_images/38f4877b31df532067df927f163177e5fb8e9e3b8667f08048e26c2cba6851fd.png" />
+<img alt="../_images/1d9595fb18e4b744485501eb02c2e687a101d13a178bf10df5f92368e76e01c5.png" src="../_images/1d9595fb18e4b744485501eb02c2e687a101d13a178bf10df5f92368e76e01c5.png" />
 </div>
 </div>
 <p>The clusters are molecule types/sizes. You can see we’re starting to get the correct trend within the clusters, but a lot of work needs to be done to move some of them. Additional learning required!</p>

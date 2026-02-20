@@ -845,14 +845,14 @@ In this case, class is element.</p>
 <section id="a-simple-gnn">
 <h3><span class="section-number">8.3.1. </span>A simple GNN<a class="headerlink" href="#a-simple-gnn" title="Link to this heading">#</a></h3>
 <p>We will often mention a GNN when we really mean a layer from a GNN. Most GNNs implement a specific layer that can deal with graphs, and so usually we are only concerned with this layer. Let’s see an example of a simple layer for a GNN:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-889ced70-39aa-4000-9a3d-8dd16d7d41cf">
-<span class="eqno">(8.1)<a class="headerlink" href="#equation-889ced70-39aa-4000-9a3d-8dd16d7d41cf" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-afffdeb8-46f7-46a1-9eb2-e12dcac07192">
+<span class="eqno">(8.1)<a class="headerlink" href="#equation-afffdeb8-46f7-46a1-9eb2-e12dcac07192" title="Permalink to this equation">#</a></span>\[\begin{equation}
 f_k = \sigma\left( \sum_i \sum_j v_{ij}w_{jk}  \right)
 \end{equation}\]</div>
 <p>This equation shows that we first multiply every node (<span class="math notranslate nohighlight">\(v_{ij}\)</span>) feature by trainable weights <span class="math notranslate nohighlight">\(w_{jk}\)</span>, sum over all node features, and then apply an activation. This will yield a single feature vector for the graph. Is this equation permutation invariant? Yes, because the node index in our expression is index <span class="math notranslate nohighlight">\(i\)</span> which can be re-ordered without affecting the output.</p>
 <p>Let’s see an example that is similar, but not permutation invariant:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-574a3666-d5e1-4b91-8619-cdf8afcb1243">
-<span class="eqno">(8.2)<a class="headerlink" href="#equation-574a3666-d5e1-4b91-8619-cdf8afcb1243" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-dcfac3a3-9c64-4769-9226-ce41f23e994d">
+<span class="eqno">(8.2)<a class="headerlink" href="#equation-dcfac3a3-9c64-4769-9226-ce41f23e994d" title="Permalink to this equation">#</a></span>\[\begin{equation}
 f_k = \sigma\left( \sum_i v_{ij}w_{ik}  \right)
 \end{equation}\]</div>
 <p>This is a small change. We have one weight vector per node now. This makes the trainable weights depend on the ordering of the nodes. Then if we swap the node ordering, our weights will no longer align. So if we were to input two methanol molecules, which should have the same output, but we switched two atom numbers, we would get different answers. These simple examples differ from real GNNs in two important ways: (i) they give a single feature vector output, which throws away per-node information, and (ii) they do not use the adjacency matrix. Let’s see a real GNN that has these properties while maintaining permutation invariance — or equivariance (swapping inputs swaps outputs the same way).</p>
@@ -977,12 +977,12 @@ We must first compute our rank 2 adjacency matrix. The <code class="docutils lit
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(tensor([[[0.0000, 0.0000, 0.0065],
-          [0.0027, 0.0000, 0.0000],
-          [0.0000, 0.0000, 0.0000],
-          [0.0000, 0.0000, 0.0000],
-          [0.0000, 0.0000, 0.0000],
-          [0.0000, 0.0923, 0.2769]]], grad_fn=&lt;ReluBackward0&gt;),
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(tensor([[[0.0217, 0.4690, 0.0000],
+          [0.4052, 0.3526, 0.0000],
+          [0.1907, 0.5080, 0.0000],
+          [0.1907, 0.5080, 0.0000],
+          [0.1907, 0.5080, 0.0000],
+          [0.1404, 0.3427, 0.0000]]], grad_fn=&lt;ReluBackward0&gt;),
  tensor([[[1., 1., 1., 1., 1., 0.],
           [1., 1., 0., 0., 0., 1.],
           [1., 0., 1., 0., 0., 0.],
@@ -1005,12 +1005,12 @@ We must first compute our rank 2 adjacency matrix. The <code class="docutils lit
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[[0.0000, 0.0000, 0.0000],
-         [0.0000, 0.0000, 0.0312],
-         [0.0000, 0.0000, 0.0008],
-         [0.0000, 0.0000, 0.0008],
-         [0.0000, 0.0000, 0.0008],
-         [0.0000, 0.0000, 0.0461]]], grad_fn=&lt;ReluBackward0&gt;)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[[0.5781, 0.0941, 0.0000],
+         [0.5005, 0.0867, 0.0000],
+         [0.5068, 0.0600, 0.0000],
+         [0.5068, 0.0600, 0.0000],
+         [0.5068, 0.0600, 0.0000],
+         [0.5450, 0.1162, 0.0334]]], grad_fn=&lt;ReluBackward0&gt;)
 </pre></div>
 </div>
 </div>
@@ -1116,7 +1116,7 @@ We must first compute our rank 2 adjacency matrix. The <code class="docutils lit
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.1682]], grad_fn=&lt;AddmmBackward0&gt;)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[-0.1548]], grad_fn=&lt;AddmmBackward0&gt;)
 </pre></div>
 </div>
 </div>
@@ -1213,7 +1213,7 @@ We must first compute our rank 2 adjacency matrix. The <code class="docutils lit
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/13a2f58d0a206bd202b1260406eaea50e264c2db1f553a9cbe6aaff4435e56f0.png" src="../_images/13a2f58d0a206bd202b1260406eaea50e264c2db1f553a9cbe6aaff4435e56f0.png" />
+<img alt="../_images/3c6d0b6bc9b28709a1682687da70c527471c0485b0ed973281da93cb18b8b679.png" src="../_images/3c6d0b6bc9b28709a1682687da70c527471c0485b0ed973281da93cb18b8b679.png" />
 </div>
 </div>
 <p>This model is definitely underfit. One reason is that our batch size is 1. This is a side-effect of making the number of atoms variable, because otherwise we have trouble batching together our data if there are two unknown dimensions. A standard trick is to group together multiple molecules into one graph, but making sure they are disconnected (no bonds between the molecules). That allows you to batch molecules without increasing the rank of your model/data.</p>
@@ -1249,25 +1249,25 @@ We must first compute our rank 2 adjacency matrix. The <code class="docutils lit
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/bc383d47a719d57990ea18d35a315a19668a3bb55b053152040d40d813196a0d.png" src="../_images/bc383d47a719d57990ea18d35a315a19668a3bb55b053152040d40d813196a0d.png" />
+<img alt="../_images/9d7344924a682d294ea266d626c17dfb8a1aca67b7b22029066bafeffde49b5d.png" src="../_images/9d7344924a682d294ea266d626c17dfb8a1aca67b7b22029066bafeffde49b5d.png" />
 </div>
 </div>
 </section>
 <section id="message-passing-viewpoint">
 <h2><span class="section-number">8.6. </span>Message Passing Viewpoint<a class="headerlink" href="#message-passing-viewpoint" title="Link to this heading">#</a></h2>
 <p>One way to more broadly view a GCN layer is that it is a kind of “message-passing” layer. You first compute a message coming from each neighboring node:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ad3d0160-7c03-450a-a7fa-8ec97963a701">
-<span class="eqno">(8.4)<a class="headerlink" href="#equation-ad3d0160-7c03-450a-a7fa-8ec97963a701" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-cd40868b-cb91-403c-81ee-1f5736d98601">
+<span class="eqno">(8.4)<a class="headerlink" href="#equation-cd40868b-cb91-403c-81ee-1f5736d98601" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \vec{e}_{{s_i}j} = \vec{v}_{{s_i}j} \mathbf{W}
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(v_{{s_i}j}\)</span> means the <span class="math notranslate nohighlight">\(j\)</span>th neighbor of node <span class="math notranslate nohighlight">\(i\)</span>. The <span class="math notranslate nohighlight">\(s_i\)</span> means senders to <span class="math notranslate nohighlight">\(i\)</span>. This is how a GCN computes the messages, it’s just a weight matrix times each neighbor node features. After getting the messages that will go to node <span class="math notranslate nohighlight">\(i\)</span>, <span class="math notranslate nohighlight">\(\vec{e}_{{s_i}j}\)</span>, we aggregate them using a function which is permutation invariant to the order of neighbors:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0875ecee-1d53-4f8f-995e-74cdbca50b4f">
-<span class="eqno">(8.5)<a class="headerlink" href="#equation-0875ecee-1d53-4f8f-995e-74cdbca50b4f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-c0096d82-066f-4c54-9a1b-cd5b07be5b65">
+<span class="eqno">(8.5)<a class="headerlink" href="#equation-c0096d82-066f-4c54-9a1b-cd5b07be5b65" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \vec{e}_{i} = \frac{1}{|\vec{e}_{{s_i}j}|}\sum \vec{e}_{{s_i}j} 
 \end{equation}\]</div>
 <p>In the GCN this aggregation is just a mean, but it can be any permutation invariant (possibly trainable) function. Finally, we update our node using the aggregated message in the GCN:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-abf3ea2e-1c10-41c2-a06a-ccff3895a639">
-<span class="eqno">(8.6)<a class="headerlink" href="#equation-abf3ea2e-1c10-41c2-a06a-ccff3895a639" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-4a2874a8-ffbd-4e68-8e24-51027ac3d027">
+<span class="eqno">(8.6)<a class="headerlink" href="#equation-4a2874a8-ffbd-4e68-8e24-51027ac3d027" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \vec{v}^{'}_{i} = \sigma(\vec{e}_i)
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(v^{'}\)</span> indicates the new node features. This is simply the activated aggregated message. Writing it out this way, you can see how it is possible to make small changes. One important paper by Gilmer et al. explored some of these choices and described how this general idea of message passing layers does well in learning to predict molecular energies from quantum mechanics <span id="id10">[<a class="reference internal" href="#id78" title="Justin Gilmer, Samuel S Schoenholz, Patrick F Riley, Oriol Vinyals, and George E Dahl. Neural message passing for quantum chemistry. arXiv preprint arXiv:1704.01212, 2017.">GSR+17</a>]</span>. Examples of changes to the above GCN equations are to include edge information when computing the neighbor messages or use a dense neural network layer in place of <span class="math notranslate nohighlight">\(\sigma\)</span>. You can think of the GCN as one type of a broader class of message passing graph neural networks, sometimes abbreviated as MPNN.</p>
@@ -1275,8 +1275,8 @@ We must first compute our rank 2 adjacency matrix. The <code class="docutils lit
 <section id="gated-graph-neural-network">
 <h2><span class="section-number">8.7. </span>Gated Graph Neural Network<a class="headerlink" href="#gated-graph-neural-network" title="Link to this heading">#</a></h2>
 <p>One common variant of the message passing layer is the <strong>gated graph neural network</strong> (GGN) <span id="id11">[<a class="reference internal" href="#id76" title="Yujia Li, Daniel Tarlow, Marc Brockschmidt, and Richard Zemel. Gated graph sequence neural networks. arXiv preprint arXiv:1511.05493, 2015.">LTBZ15</a>]</span>. It replaces the last equation, the node update, with</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1a29526e-252b-4e34-a6c3-25b2a8296a2f">
-<span class="eqno">(8.7)<a class="headerlink" href="#equation-1a29526e-252b-4e34-a6c3-25b2a8296a2f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-40151683-f887-495d-abd1-a3a508822555">
+<span class="eqno">(8.7)<a class="headerlink" href="#equation-40151683-f887-495d-abd1-a3a508822555" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \vec{v}^{'}_{i} = \textrm{GRU}(\vec{v}_i, \vec{e}_i)
 \end{equation}\]</div>
 <p>where the <span class="math notranslate nohighlight">\(\textrm{GRU}(\cdot, \cdot)\)</span> is a gated recurrent unit<span id="id12">[<a class="reference internal" href="#id77" title="Junyoung Chung, Caglar Gulcehre, KyungHyun Cho, and Yoshua Bengio. Empirical evaluation of gated recurrent neural networks on sequence modeling. arXiv preprint arXiv:1412.3555, 2014.">CGCB14</a>]</span>. A GRU is a binary (two input arguments) neural network that is typically used in sequence modeling. The interesting property of a GGN relative to a GCN is that it has trainable parameters in the node update (from the GRU), giving the model a bit more flexibility. In a GGN, the GRU parameters are kept the same at each layer, like how a GRU is used to model sequences. What’s nice about this is that you can stack infinite GGN layers without increasing the number of trainable parameters (assuming you make <span class="math notranslate nohighlight">\(\mathbf{W}\)</span> the same at each layer). Thus GGNs are suited for large graphs, like a large protein or large unit cell.</p>
@@ -1626,7 +1626,7 @@ h(\vec{x}) = \sigma\left(Wx + b\right)
 first node, first edge features: [3.3756149e-01 3.7093274e-02 3.3091463e-10 2.3967226e-25 0.0000000e+00
  0.0000000e+00 0.0000000e+00 0.0000000e+00]
 first node, all neighbors [ 28 668   7  25 617   4   2 627 658 661 670  24 642 683   3   0]
-label 2
+label 0
 </pre></div>
 </div>
 </div>
@@ -1738,9 +1738,9 @@ label 2
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[-0.19703917  0.68457025  0.01801534  0.03983526 -0.02088743 -0.28792837
- -0.09716305  0.33919474 -0.09216317 -0.07206874  0.18653984 -0.02857015
-  0.13689627  0.07001522  0.41101408 -0.26236162  0.09009453]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[-0.18179372 -0.14892134  0.05300668  0.12772353  0.14966832  0.0089551
+  0.31591463  0.48676962  0.09079578 -0.0287794  -0.19539286 -0.10041086
+  0.59356403 -0.3134705  -0.3283564   0.09811525  0.25720033]
 </pre></div>
 </div>
 </div>
@@ -1753,9 +1753,9 @@ label 2
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>predicted class [0.04435413 0.10710561 0.054996   0.0562092  0.05289758 0.0405006
- 0.04901283 0.07582589 0.0492585  0.05025833 0.06509091 0.05249274
- 0.06193846 0.05793144 0.08147198 0.04154942 0.05910642]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>predicted class [0.0450528  0.0465584  0.0569763  0.06139646 0.06275869 0.05452089
+ 0.07410948 0.08791745 0.05917058 0.0525019  0.04444426 0.04887265
+ 0.09782623 0.03949437 0.03891082 0.05960527 0.06988347]
 </pre></div>
 </div>
 </div>
@@ -1818,7 +1818,7 @@ label 2
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/12cebe01e4f3c5bb9adb9591f0ed6afd867299e94764e6a23abe2981f41325f1.png" src="../_images/12cebe01e4f3c5bb9adb9591f0ed6afd867299e94764e6a23abe2981f41325f1.png" />
+<img alt="../_images/e4a9a2583344897b2e5f974edfdd7037e2241459a318acaafe640f64e0b160e3.png" src="../_images/e4a9a2583344897b2e5f974edfdd7037e2241459a318acaafe640f64e0b160e3.png" />
 </div>
 </div>
 <p>The accuracy is not great, but it looks like we could keep training. We have a very small SchNet here. Standard SchNet described in <span id="id23">[<a class="reference internal" href="#id225" title="Kristof T Schütt, Huziel E Sauceda, P-J Kindermans, Alexandre Tkatchenko, and K-R Müller. Schnet–a deep learning architecture for molecules and materials. The Journal of Chemical Physics, 148(24):241722, 2018.">SchuttSK+18</a>]</span> uses 6 layers and 64 channels and 300 edge features. We have 3 layers and 32 channels. Nevertheless, we’re able to get some learning. Let’s visually see what’s going on with the trained model on some test data</p>
@@ -1843,7 +1843,7 @@ label 2
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/abe69d6957067f3261badfc55d750cdb1ad362b4ead9164fc6a0fadc7ac867af.png" src="../_images/abe69d6957067f3261badfc55d750cdb1ad362b4ead9164fc6a0fadc7ac867af.png" />
+<img alt="../_images/d06e32878deac35db570192db66e8a03376bae2de0c5437b360008d7d2700414.png" src="../_images/d06e32878deac35db570192db66e8a03376bae2de0c5437b360008d7d2700414.png" />
 </div>
 </div>
 <p>We’ll revisit this example later! One unique fact about this dataset is that it is <em>synthetic</em>, meaning there is no label noise. As discussed in <a class="reference internal" href="../ml/regression.html"><span class="doc">Regression &amp; Model Assessment</span></a>, that removes the possibility of overfitting and leads us to favor high variance models. The goal of teaching a model to predict space groups is to apply it on real simulations or microscopy data, which will certainly have noise. We could have mimicked this by adding noise to the labels in the data and/or by randomly removing atoms to simulate defects. This would better help our model work in a real setting.</p>

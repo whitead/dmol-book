@@ -971,8 +971,8 @@ Q 189.9 126.9, 190.7 126.9
 <section id="linear-perceptron">
 <h3><span class="section-number">4.4.1. </span>Linear Perceptron<a class="headerlink" href="#linear-perceptron" title="Link to this heading">#</a></h3>
 <p>We are able to predict single values from regression. How can we go from a predicted value to a class? The simplest answer is to use the same linear regression equation from chapter <a class="reference internal" href="regression.html"><span class="doc">Regression &amp; Model Assessment</span></a> <span class="math notranslate nohighlight">\(\hat{f}(\vec{x})\)</span> and assign <span class="math notranslate nohighlight">\(\hat{y} = 1\)</span> when <span class="math notranslate nohighlight">\(\hat{f}(\vec{x}) &gt; 0\)</span>,  <span class="math notranslate nohighlight">\(\hat{y} = 0\)</span> otherwise. Our model equation is then:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-26dc3ef0-f1b3-41a3-b354-39b5f10aea16">
-<span class="eqno">(4.1)<a class="headerlink" href="#equation-26dc3ef0-f1b3-41a3-b354-39b5f10aea16" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-5637ed2b-b88e-4ac6-a8f2-641380334fc6">
+<span class="eqno">(4.1)<a class="headerlink" href="#equation-5637ed2b-b88e-4ac6-a8f2-641380334fc6" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \hat{f}(\vec{x}) = \begin{cases} 
       1 &amp; \vec{w}\cdot \vec{x} + b &gt; 0 \\
       0 &amp; \textrm{otherwise}\\
@@ -991,8 +991,8 @@ Q 189.9 126.9, 190.7 126.9
 </div>
 <p>This particular model is called a <strong>perceptron</strong> and is the first neural network for classification. It was invented in 1958 by Frank Rosenblatt, a psychologist at Cornell University. It was not the first neural network, but is often the first one that students learn. The perceptron is an example of a <strong>hard</strong> classifier; it does not predict probability of the class and instead predicts exactly one class.</p>
 <p>Now that we have a model, we must choose a loss function. We haven’t learned about many loss functions yet. We’ve only seen mean squared error. Let us begin with a related loss called mean absolute error (MAE). MAE measures disagreement between our class and the predicted class. This is like an accuracy – what percentage of the time we’re correct.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-25d80450-8b0d-42da-b60a-8aad77a97f94">
-<span class="eqno">(4.2)<a class="headerlink" href="#equation-25d80450-8b0d-42da-b60a-8aad77a97f94" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-0d163573-8682-4ef3-a5fb-3321794540e5">
+<span class="eqno">(4.2)<a class="headerlink" href="#equation-0d163573-8682-4ef3-a5fb-3321794540e5" title="Permalink to this equation">#</a></span>\[\begin{equation}
     L = \frac{1}{N} \sum_i  \left|y_i - \hat{y}_i\right|
 \end{equation}\]</div>
 <div class="cell docutils container">
@@ -1075,8 +1075,8 @@ Q 189.9 126.9, 190.7 126.9
 </div>
 <p>It’s all zeros! Why is that? It’s because our <a class="reference external" href="https://docs.jax.dev/en/latest/_autosummary/jax.numpy.where.html#jax.numpy.where" title="(in JAX)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">jnp.where</span></code></a> statement above is not differentiable, nor are any inequalities where the result is a constant (<code class="docutils literal notranslate"><span class="pre">1</span></code> or <code class="docutils literal notranslate"><span class="pre">0</span></code> in our case). The perceptron actually has a special training procedure that is not related to its derivatives. One of the motivating reasons that deep learning is popular is that we do not need to construct a special training process for each model we construct – like the training procedure for the perceptron.</p>
 <p>Rather than teach and discuss the special perceptron training procedure, we’ll move to a more modern related classifier called a softmax binary classifier. This is a tiny change, the softmax binary classifier is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e8fa4f46-dde0-4380-b33b-f6a92f3a439d">
-<span class="eqno">(4.3)<a class="headerlink" href="#equation-e8fa4f46-dde0-4380-b33b-f6a92f3a439d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-47c26e2e-3482-482d-9fcc-2c5d6bb1f6ce">
+<span class="eqno">(4.3)<a class="headerlink" href="#equation-47c26e2e-3482-482d-9fcc-2c5d6bb1f6ce" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \hat{f}(\vec{x}) = \sigma\left(\vec{w}\cdot \vec{x} + b\right)
 \end{equation}\]</div>
 <figure class="align-default" id="simgoid">
@@ -1090,8 +1090,8 @@ Q 189.9 126.9, 190.7 126.9
 <p>Softmax is the generalization of sigmoid to multiple classes. Although we call our binary classifier a softmax classifier, it doesn’t use the softmax function.</p>
 </aside>
 <p>where <span class="math notranslate nohighlight">\(\sigma\)</span> is the <strong>sigmoid</strong> function. The sigmoid has a domain of <span class="math notranslate nohighlight">\((-\infty, \infty)\)</span> and outputs a probability <span class="math notranslate nohighlight">\((0, 1)\)</span>. The input to the sigmoid can be viewed as log-odds, called <strong>logits</strong> for short. Odds are ratios of probability – odds of 1 means the probability of the class 1 is 0.5 and class 0 is 0.5. Odds of 2 means the probability of class 1 is 0.67 and class 0 is 0.33. Log-odds is the natural logarithm of that, so that log-odds of 0 means the odds are 1 and the output probability should be 0.5. One definition of the sigmoid is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-944bd928-e512-4c7e-846d-8925347536a9">
-<span class="eqno">(4.4)<a class="headerlink" href="#equation-944bd928-e512-4c7e-846d-8925347536a9" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-c0d36244-a5be-4967-b239-9606e9e2225c">
+<span class="eqno">(4.4)<a class="headerlink" href="#equation-c0d36244-a5be-4967-b239-9606e9e2225c" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \sigma(x) = \frac{1}{1 + e^{-x}}
 \end{equation}\]</div>
 <p>however in practice there are some complexities to implementing sigmoids to make sure they’re numerically stable. This type of binary classifier is sometimes called <strong>logistic regression</strong> because we’re regressing logits.</p>
@@ -1099,23 +1099,23 @@ Q 189.9 126.9, 190.7 126.9
 <p>There is a different loss function that works better with classification called <strong>cross-entropy</strong>. You can experiment with mean absolute error or mean squared error with classification, but you’ll find they are almost always worse than cross-entropy.</p>
 <p>Cross-entropy is a loss function that describes distance between two probability distributions. When minimized, the two probability distributions are identical. Cross-entropy is a simplification of the <a class="reference external" href="https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence">Kullback–Leibler divergence</a> which is a way to measure distance between two probability distributions. Technically it is not a distance since it’s not symmetric with respect to its arguments. But in practice it is close enough to a distance that we treat it as one.</p>
 <p>How is comparing predicted values <span class="math notranslate nohighlight">\(\hat{y}\)</span> and <span class="math notranslate nohighlight">\(y\)</span> like comparing two probability distributions? Even though these are both 1s and 0s in the case of hard classification, they do sum to 1, and so we consider them probability distributions. Cross-entropy is defined as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-5ce3df4e-d832-459b-ac6c-f160b9c6674c">
-<span class="eqno">(4.5)<a class="headerlink" href="#equation-5ce3df4e-d832-459b-ac6c-f160b9c6674c" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-6d1af86f-7980-448c-af9d-60ad733b754a">
+<span class="eqno">(4.5)<a class="headerlink" href="#equation-6d1af86f-7980-448c-af9d-60ad733b754a" title="Permalink to this equation">#</a></span>\[\begin{equation}
     L = -\sum_c^K y_c \log \hat{y_c}
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(c\)</span> indicates which class of the <span class="math notranslate nohighlight">\(K\)</span> we’re considering, and it’s assumed that <span class="math notranslate nohighlight">\(\sum_c^K y_c = 1\)</span> and <span class="math notranslate nohighlight">\(\sum_c^K \hat{y}_c = 1\)</span> like probabilities (and they are positive). In the case of binary classification (only two classes), this becomes:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1471d305-72ed-406d-b934-3017b299ba00">
-<span class="eqno">(4.6)<a class="headerlink" href="#equation-1471d305-72ed-406d-b934-3017b299ba00" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-c0edb572-ff4a-488d-b2f0-5b90d2b6bbac">
+<span class="eqno">(4.6)<a class="headerlink" href="#equation-c0edb572-ff4a-488d-b2f0-5b90d2b6bbac" title="Permalink to this equation">#</a></span>\[\begin{equation}
     L = -\left[ y_0 \log \hat{y_0} + y_1 \log \hat{y_1} \right]
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(y_0\)</span> is for the first class and <span class="math notranslate nohighlight">\(y_1\)</span> is for the second class. However, we also know that because these are probabilities that <span class="math notranslate nohighlight">\(y_1 = 1 - y_0\)</span>. We can rewrite to:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-6470abeb-cea2-400d-b9e6-9e24f9405abe">
-<span class="eqno">(4.7)<a class="headerlink" href="#equation-6470abeb-cea2-400d-b9e6-9e24f9405abe" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-bdd9a05d-8ef1-4d0e-9635-8970a114a2ca">
+<span class="eqno">(4.7)<a class="headerlink" href="#equation-bdd9a05d-8ef1-4d0e-9635-8970a114a2ca" title="Permalink to this equation">#</a></span>\[\begin{equation}
     L = -\left[ y_0 \log \hat{y_0} + (1 - y_0) \log ( 1- \hat{y_0}) \right]
 \end{equation}\]</div>
 <p>Finally, we can drop the indication of the class:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2ddb8ce7-6f65-4824-b586-8b828a3fa8e6">
-<span class="eqno">(4.8)<a class="headerlink" href="#equation-2ddb8ce7-6f65-4824-b586-8b828a3fa8e6" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e6c2a8f9-9558-4235-8da5-d73dc1219e7d">
+<span class="eqno">(4.8)<a class="headerlink" href="#equation-e6c2a8f9-9558-4235-8da5-d73dc1219e7d" title="Permalink to this equation">#</a></span>\[\begin{equation}
     L = -\left[ y \log \hat{y} + (1 - y) \log ( 1- \hat{y}) \right]
 \end{equation}\]</div>
 <aside class="margin sidebar">
@@ -1336,7 +1336,7 @@ Threshold 0.99 (np.int64(3), np.int64(203))
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/628a3d207bbb910ec70eec2b3be1afa2afc10f08efa2b1cdeababee37662f257.png" src="../_images/628a3d207bbb910ec70eec2b3be1afa2afc10f08efa2b1cdeababee37662f257.png" />
+<img alt="../_images/0b9e9260524d4e4c57df449b55e48608f2ee66caf83c15f2c9a1c64a0821b14a.png" src="../_images/0b9e9260524d4e4c57df449b55e48608f2ee66caf83c15f2c9a1c64a0821b14a.png" />
 </div>
 </div>
 <p>This plot nicely shows how our trained model is actually sensitive to threshold, so that we could choose to more carefully screen for false negative or false positives. The best curves fall to the top-left of this plot. Our naive classifier is where we return a fixed percentage of examples randomly as positive or negative. You can plot the area under this curve with an integration and this is a good way to measure classifier performance and correctly capture the effect of both false negatives and false positives. The area under the ROC curve is known as the <strong>ROC AUC score</strong> and is preferred to accuracy because it captures the balance of Type I and II errors.</p>
@@ -1495,7 +1495,7 @@ Weighted Classifier (np.int64(7), np.int64(121))
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/f8acbc9cf491432417b3dd1d8fe1133c1b5ba95437019448736fb2cb7fbf7e60.png" src="../_images/f8acbc9cf491432417b3dd1d8fe1133c1b5ba95437019448736fb2cb7fbf7e60.png" />
+<img alt="../_images/804d5719a18937ef6d024ddc3e7f49aad094e5a9ee47d5225d6d026a1a45c665.png" src="../_images/804d5719a18937ef6d024ddc3e7f49aad094e5a9ee47d5225d6d026a1a45c665.png" />
 </div>
 </div>
 <p>It appears our weighted training actually did not improve model performance, except in a small range between 0.25-0.4 false positive rate. It is even worse in the low false positive rate, which is where we would like to operate. In conclusion, we can modify the balance of false positive and false negative through modifications to training. However, we can also modify this after training by affecting the threshold for classification. This post-training procedure gives similar or even slightly better performance in our example.</p>

@@ -567,8 +567,8 @@ document.write(`
 <p>String is a synonym for sequence here. Character and symbol are synonyms for token (single element of the string).</p>
 </aside>
 <p>Recurrent neural networks (RNN) have been by far the most popular approach to working with molecular strings. RNNs have a critical property that they can have different length input sequences, making it appropriate for SMILES or SELFIES which both have variable length. RNNs have recurrent layers that consume an input sequence element-by-element. Consider an input sequence <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> which is composed of a series of vectors (recall that characters or words can be represented with one-hot or embedding vectors) <span class="math notranslate nohighlight">\(\mathbf{X} = \left[\vec{x}_0, \vec{x}_1,\ldots,\vec{x}_L\right]\)</span>. The RNN layer function is binary and takes as input the <span class="math notranslate nohighlight">\(i\)</span>th element of the input sequence and the output from the <span class="math notranslate nohighlight">\(i - 1\)</span> layer function. You can write it as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c3566a4c-b3a3-475f-8ec1-00697836004a">
-<span class="eqno">(13.1)<a class="headerlink" href="#equation-c3566a4c-b3a3-475f-8ec1-00697836004a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-383ccf92-c15f-439a-b295-e32d970f4a42">
+<span class="eqno">(13.1)<a class="headerlink" href="#equation-383ccf92-c15f-439a-b295-e32d970f4a42" title="Permalink to this equation">#</a></span>\[\begin{equation}
 f(f\ldots f(\vec{x}_0,\vec{0}), \vec{x}_1), \vec{x}_2)\ldots \vec{x}_L)
 \end{equation}\]</div>
 <p>Commonly we would like to actually see and look at the these intermediate outputs from the layer function <span class="math notranslate nohighlight">\(f_4(\vec{x}_4, f_3(\ldots)) = \vec{h}_4\)</span>. These <span class="math notranslate nohighlight">\(\vec{h}\)</span>s are called the hidden state because of the connection between RNNs and Markov State Models. We can <strong>unroll</strong> our picture of an RNN to be:</p>
@@ -589,8 +589,8 @@ f(f\ldots f(\vec{x}_0,\vec{0}), \vec{x}_1), \vec{x}_2)\ldots \vec{x}_L)
 <section id="generative-rnns">
 <h3><span class="section-number">13.3.1. </span>Generative RNNs<a class="headerlink" href="#generative-rnns" title="Link to this heading">#</a></h3>
 <p>An interesting use case for an RNN is in unsupervised generative models, where we try to predict new examples. This means that we’re trying to learn <span class="math notranslate nohighlight">\(P(\mathbf{X})\)</span> <span id="id11">[<a class="reference internal" href="#id137" title="Marwin HS Segler, Thierry Kogej, Christian Tyrchan, and Mark P Waller. Generating focused molecule libraries for drug discovery with recurrent neural networks. ACS central science, 4(1):120–131, 2018.">SKTW18</a>]</span>. With a generative RNN, we predict the sequence one symbol at a time by conditioning on a growing sequence. This is called <strong>autoregressive</strong> generation.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-347cc953-31b6-4fd9-9e9b-ed16b6859d94">
-<span class="eqno">(13.2)<a class="headerlink" href="#equation-347cc953-31b6-4fd9-9e9b-ed16b6859d94" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-01a4be54-114b-4bd8-8a86-c62fa96ad9d3">
+<span class="eqno">(13.2)<a class="headerlink" href="#equation-01a4be54-114b-4bd8-8a86-c62fa96ad9d3" title="Permalink to this equation">#</a></span>\[\begin{equation}
 P(\mathbf{X}) = \prod P(\vec{x}_L | \vec{x}_{L - 1}, \vec{x}_{L - 2}, \ldots,\vec{x}_0)\ldots P(\vec{x}_1 | \vec{x}_0) P(\vec{x}_0))
 \end{equation}\]</div>
 <aside class="margin sidebar">
@@ -943,7 +943,7 @@ P(\mathbf{X}) = \prod P(\vec{x}_L | \vec{x}_{L - 1}, \vec{x}_{L - 2}, \ldots,\ve
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/451c19e8da4f97d10c5785640e30528392c125e2cd7808686692c00004475326.png" src="../_images/451c19e8da4f97d10c5785640e30528392c125e2cd7808686692c00004475326.png" />
+<img alt="../_images/90181f11ba1086054bf06bc17da87295255c476da6f2daf457c4bfeb4dd50d0c.png" src="../_images/90181f11ba1086054bf06bc17da87295255c476da6f2daf457c4bfeb4dd50d0c.png" />
 </div>
 </div>
 <p>As usual, we could keep training and I encourage you to explore adding regularization or modifying the architecture. Let’s now see how the test data looks.</p>
@@ -984,7 +984,7 @@ P(\mathbf{X}) = \prod P(\vec{x}_L | \vec{x}_{L - 1}, \vec{x}_{L - 2}, \ldots,\ve
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/cf7ea192a1445ac3fc1ba678543d38644cbb5bb30f61dc3f2f06b6935ebff08a.png" src="../_images/cf7ea192a1445ac3fc1ba678543d38644cbb5bb30f61dc3f2f06b6935ebff08a.png" />
+<img alt="../_images/c676cbc63e4510c129716078a6df06bfa70065175879e6cc6609ef0eed6e691a.png" src="../_images/c676cbc63e4510c129716078a6df06bfa70065175879e6cc6609ef0eed6e691a.png" />
 </div>
 </div>
 <p>Linear regression from <a class="reference internal" href="../ml/regression.html"><span class="doc">Regression &amp; Model Assessment</span></a> still wins, but this demonstrates the use of an RNN for this task.</p>

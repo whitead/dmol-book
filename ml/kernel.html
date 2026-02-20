@@ -483,13 +483,13 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="kernel-learning">
 <h1><span class="section-number">5. </span>Kernel Learning<a class="headerlink" href="#kernel-learning" title="Link to this heading">#</a></h1>
 <p>Kernel learning is a way to transform features in either classification or regression problems. Recall in regression, we have the following model equation:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8dc98734-87bd-4a55-bd26-f5c3a7a426db">
-<span class="eqno">(5.1)<a class="headerlink" href="#equation-8dc98734-87bd-4a55-bd26-f5c3a7a426db" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b48b4e0b-76c3-48f3-aaf9-7506ec587a12">
+<span class="eqno">(5.1)<a class="headerlink" href="#equation-b48b4e0b-76c3-48f3-aaf9-7506ec587a12" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \hat{y} = \vec{w}\vec{x} + b
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\vec{x}\)</span> is our feature vector of dimension <span class="math notranslate nohighlight">\(D\)</span>. In kernel learning, we transform our feature vector from dimension <span class="math notranslate nohighlight">\(D\)</span> features to <em>distances to training data points</em> of dimension <span class="math notranslate nohighlight">\(N\)</span>, where <span class="math notranslate nohighlight">\(N\)</span> is the number of training data points:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d85c2b15-5dda-436b-a474-9ba28513626d">
-<span class="eqno">(5.2)<a class="headerlink" href="#equation-d85c2b15-5dda-436b-a474-9ba28513626d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ede7b599-81e9-4a2c-9219-e40095baa2a7">
+<span class="eqno">(5.2)<a class="headerlink" href="#equation-ede7b599-81e9-4a2c-9219-e40095baa2a7" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \hat{y} = \sum_i^N w_i \left&lt;\vec{x}, \vec{x}_i\right&gt;+ b
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\left&lt;\cdot\right&gt;\)</span> is the distance between two feature vectors and <span class="math notranslate nohighlight">\(\vec{x}_i\)</span> is the <span class="math notranslate nohighlight">\(i\)</span>th training data point. <span class="math notranslate nohighlight">\(\vec{x}\)</span> is the function argument whereas <span class="math notranslate nohighlight">\(\vec{x}_i\)</span> are known values.</p>
