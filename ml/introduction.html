@@ -511,7 +511,7 @@ document.write(`
 <p>I hope you learn from these sources about how machine learning is a method of modeling data, typically with predictive functions. Machine learning includes many techniques, but here we will focus on only those necessary to transition into deep learning. For example, random forests, support vector machines, and nearest neighbor are widely-used machine learning techniques that are effective but not covered here.</p>
 <div class="admonition-audience-objectives admonition">
 <p class="admonition-title">Audience &amp; Objectives</p>
-<p>This chapter is intended for novices of machine learning with familiarity of chemistry and python. It is recommended that you look over one of the above recommended introductory articles. This specific article assumes a very small amount of knowledge of the <code class="docutils literal notranslate"><span class="pre">pandas</span></code> library (loading and selecting a column), awareness of <code class="docutils literal notranslate"><span class="pre">rdkit</span></code> (how we draw molecules), and that we store/retrieve molecules as <a class="reference external" href="https://en.wikipedia.org/wiki/Simplified_molecular-input_line-entry_system">SMILES</a> <span id="id5">[<a class="reference internal" href="#id117" title="David Weininger. Smiles, a chemical language and information system. 1. introduction to methodology and encoding rules. Journal of chemical information and computer sciences, 28(1):31–36, 1988.">Wei88</a>]</span>. After reading this, you should be able to:</p>
+<p>This chapter is intended for novices of machine learning with familiarity of chemistry and python. It is recommended that you look over one of the above recommended introductory articles. This specific article assumes a very small amount of knowledge of the <code class="docutils literal notranslate"><span class="pre">pandas</span></code> library (loading and selecting a column), awareness of <code class="docutils literal notranslate"><span class="pre">rdkit</span></code> (how we draw molecules), and that we store/retrieve molecules as <a class="reference external" href="https://en.wikipedia.org/wiki/Simplified_molecular-input_line-entry_system">SMILES</a> <span id="id5">[<a class="reference internal" href="#id118" title="David Weininger. Smiles, a chemical language and information system. 1. introduction to methodology and encoding rules. Journal of chemical information and computer sciences, 28(1):31–36, 1988.">Wei88</a>]</span>. After reading this, you should be able to:</p>
 <ul class="simple">
 <li><p>Define features, labels</p></li>
 <li><p>Distinguish between supervised and unsupervised learning</p></li>
@@ -541,7 +541,7 @@ document.write(`
 <section id="supervised-learning">
 <h2><span class="section-number">2.2. </span>Supervised Learning<a class="headerlink" href="#supervised-learning" title="Link to this heading">#</a></h2>
 <p>Our first task will be <strong>supervised learning</strong>. Supervised learning means predicting <span class="math notranslate nohighlight">\(y\)</span> from <span class="math notranslate nohighlight">\(\vec{x}\)</span> with a model trained on data. It is <em>supervised</em> because we tell the algorithm what the labels are in our dataset. Another method we’ll explore is <strong>unsupervised learning</strong> where we do not tell the algorithm the labels. We’ll see this supervised/unsupervised distinction can be more subtle later on, but this is a great definition for now.</p>
-<p>To see an example, we will use a dataset called AqSolDB<span id="id6">[<a class="reference internal" href="regression.html#id26" title="Murat Cihan Sorkun, Abhishek Khetan, and Süleyman Er. AqSolDB, a curated reference set of aqueous solubility and 2D descriptors for a diverse set of compounds. Sci. Data, 6(1):143, 2019. doi:10.1038/s41597-019-0151-1.">SKE19</a>]</span> that is about 10,000 unique compounds with measured solubility in water (label). The dataset also includes molecular properties (features) that we can use for machine learning. The solubility measurement is solubility of the compound in water in units of log molarity.</p>
+<p>To see an example, we will use a dataset called AqSolDB<span id="id6">[<a class="reference internal" href="regression.html#id28" title="Murat Cihan Sorkun, Abhishek Khetan, and Süleyman Er. AqSolDB, a curated reference set of aqueous solubility and 2D descriptors for a diverse set of compounds. Sci. Data, 6(1):143, 2019. doi:10.1038/s41597-019-0151-1.">SKE19</a>]</span> that is about 10,000 unique compounds with measured solubility in water (label). The dataset also includes molecular properties (features) that we can use for machine learning. The solubility measurement is solubility of the compound in water in units of log molarity.</p>
 </section>
 <section id="running-this-notebook">
 <h2><span class="section-number">2.3. </span>Running This Notebook<a class="headerlink" href="#running-this-notebook" title="Link to this heading">#</a></h2>
@@ -986,8 +986,8 @@ L 210.7 45.6
 that can compute analytical gradients with respect to two variables in a program.</p>
 </aside>
 <p>Our model will be defined by this equation:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-90869a11-d757-4568-b265-aaae73e4987f">
-<span class="eqno">(2.1)<a class="headerlink" href="#equation-90869a11-d757-4568-b265-aaae73e4987f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-872f011e-d285-4dd5-b962-f5da38fe0eb7">
+<span class="eqno">(2.1)<a class="headerlink" href="#equation-872f011e-d285-4dd5-b962-f5da38fe0eb7" title="Permalink to this equation">#</a></span>\[\begin{equation}
     y = \vec{w} \cdot \vec{x} + b
 \end{equation}\]</div>
 <p>which is defined for a single data point. The shape of a single feature vector,  <span class="math notranslate nohighlight">\(\vec{x}\)</span>, is 17 in our case (for the 17 features). <span class="math notranslate nohighlight">\(\vec{w}\)</span> is a vector of adjustable parameters of length 17 and <span class="math notranslate nohighlight">\(b\)</span> is an adjustable scalar (called <strong>bias</strong>).</p>
@@ -1056,8 +1056,8 @@ Our goal is to minimize loss.</p>
 <section id="gradient-descent">
 <h3><span class="section-number">2.3.5. </span>Gradient Descent<a class="headerlink" href="#gradient-descent" title="Link to this heading">#</a></h3>
 <p>We will now try to reduce loss by using information about how it changes with respect to the adjustable parameters. If we write our loss as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-5c4d7563-0f6b-4942-947d-78e99bd28396">
-<span class="eqno">(2.2)<a class="headerlink" href="#equation-5c4d7563-0f6b-4942-947d-78e99bd28396" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b9717a3a-21fe-40c7-82d2-4d11b5c7a5e1">
+<span class="eqno">(2.2)<a class="headerlink" href="#equation-b9717a3a-21fe-40c7-82d2-4d11b5c7a5e1" title="Permalink to this equation">#</a></span>\[\begin{equation}
     L = \frac{1}{N}\sum_i^N \left[y_i - f(\vec{x}_i, \vec{w}, b)\right]^2
 \end{equation}\]</div>
 <p>This loss is called <strong>mean squared error</strong>, often abbreviated MSE. We can compute our loss gradients with respect to the adjustable parameters:</p>
@@ -1069,13 +1069,13 @@ take the derivative of. For example, consider <code class="docutils literal notr
 gives <span class="math notranslate nohighlight">\(\frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}\)</span>. Note too that
 <span class="math notranslate nohighlight">\(x\)</span> may be a tensor.</p>
 </aside>
-<div class="amsmath math notranslate nohighlight" id="equation-f81b4f4f-fab2-4840-a43f-7c569d9ad3ad">
-<span class="eqno">(2.3)<a class="headerlink" href="#equation-f81b4f4f-fab2-4840-a43f-7c569d9ad3ad" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-7ef42bbb-ce01-4b3b-94e5-dc6693bd6ca0">
+<span class="eqno">(2.3)<a class="headerlink" href="#equation-7ef42bbb-ce01-4b3b-94e5-dc6693bd6ca0" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \frac{\partial L}{\partial w_i}, \frac{\partial L}{\partial b}
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(w_i\)</span> is the <span class="math notranslate nohighlight">\(i\)</span>th element of the weight vector <span class="math notranslate nohighlight">\(\vec{w}\)</span>. We can reduce the loss by taking a step in the direction of its negative gradient:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-24b213ed-31a4-4381-9a74-8bd56fc4da4f">
-<span class="eqno">(2.4)<a class="headerlink" href="#equation-24b213ed-31a4-4381-9a74-8bd56fc4da4f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-12b8a771-e460-415a-b9fa-42532905b839">
+<span class="eqno">(2.4)<a class="headerlink" href="#equation-12b8a771-e460-415a-b9fa-42532905b839" title="Permalink to this equation">#</a></span>\[\begin{equation}
     (w_i, b') = \left(w_i - \eta \frac{\partial L}{\partial w_i}, b - \eta\frac{\partial L}{\partial b}\right)
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\eta\)</span> is <strong>learning rate</strong>, which an adjustable but not trained parameter (an example of a <strong>hyperparameter</strong>) which we just guess to be <span class="math notranslate nohighlight">\(1\times10^{-6}\)</span> in this example. Typically, it’s chosen to be some power of 10 that is at most 0.1. Values higher than that cause stability problems. Let’s try this procedure, which is called <strong>gradient descent</strong>.</p>
@@ -1202,8 +1202,8 @@ Having random batches of data is how gradient descent becomes stochastic gradien
 <section id="standardize-features">
 <h3><span class="section-number">2.3.8. </span>Standardize features<a class="headerlink" href="#standardize-features" title="Link to this heading">#</a></h3>
 <p>It seems we cannot get past a certain loss. If you examine the gradients you’ll see some of them are very large and some are very small. Each of the features have different magnitudes. For example, molecular weights are large numbers. The number of rings in a molecule is a small number. Each of these must use the same learning rate, <span class="math notranslate nohighlight">\(\eta\)</span>, and that is ok for some but too small for others. If we increase <span class="math notranslate nohighlight">\(\eta\)</span>, our training procedure will explode because of these larger feature gradients. A standard trick we can do is make all the features have the same magnitude, using the equation for standardization you might see in your statistics textbook:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9b8e309e-318a-46eb-85f9-1bddd626149a">
-<span class="eqno">(2.5)<a class="headerlink" href="#equation-9b8e309e-318a-46eb-85f9-1bddd626149a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-f28f4724-6b6d-45cb-84c9-ada975081661">
+<span class="eqno">(2.5)<a class="headerlink" href="#equation-f28f4724-6b6d-45cb-84c9-ada975081661" title="Permalink to this equation">#</a></span>\[\begin{equation}
     x_{ij} = \frac{x_{ij} - \bar{x_j}}{\sigma_{x_j}}
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\bar{x_j}\)</span> is column mean and <span class="math notranslate nohighlight">\(\sigma_{x_j}\)</span> is column standard deviation. To be careful about contaminating training data with test data – leaking information between train and test data – we should only use training data in computing the mean and standard deviation. We want our test data to approximate how we’ll use our model on unseen data, so we cannot know what these unseen features means/standard deviations might be and thus cannot use them at training time for standardization.</p>
@@ -1299,7 +1299,7 @@ Having random batches of data is how gradient descent becomes stochastic gradien
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.6475304399016176)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.6475304399016175)
 </pre></div>
 </div>
 </div>
@@ -1474,7 +1474,7 @@ like <a class="reference external" href="https://scikit-learn.org/stable/modules
 </div>
 </div>
 <p>So what exactly are these classes? Unclear. We intentionally did not reveal solubility (unsupervised learning) so there is not necessarily any connection with solubility. These classes are more a result of which features were chosen for the dataset. You could make a hypothesis, like class 1 is all negatively charged or class 0 is aliphatic, and investigate. Ultimately though there is no <em>best</em> clustering and often unsupervised learning is more about finding insight or patterns and not about producing a highly-accurate model.</p>
-<p>The elbow plot method is one of many approaches to selecting cluster number <span id="id7">[<a class="reference internal" href="#id33" title="Duc Truong Pham, Stefan S Dimov, and Chi D Nguyen. Selection of k in k-means clustering. Proceedings of the Institution of Mechanical Engineers, Part C: Journal of Mechanical Engineering Science, 219(1):103–119, 2005.">PDN05</a>]</span>. I prefer it because it’s quite clear that you are using intuition. More sophisticated methods sort-of conceal the fact that there is no right or wrong answer in clustering.</p>
+<p>The elbow plot method is one of many approaches to selecting cluster number <span id="id7">[<a class="reference internal" href="#id34" title="Duc Truong Pham, Stefan S Dimov, and Chi D Nguyen. Selection of k in k-means clustering. Proceedings of the Institution of Mechanical Engineers, Part C: Journal of Mechanical Engineering Science, 219(1):103–119, 2005.">PDN05</a>]</span>. I prefer it because it’s quite clear that you are using intuition. More sophisticated methods sort-of conceal the fact that there is no right or wrong answer in clustering.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This process does not result in a function that predicts solubility. We might try to gain insight about predicting solubility with our predicted classes, but that is not the goal of clustering.</p>
@@ -1548,7 +1548,7 @@ like <a class="reference external" href="https://scikit-learn.org/stable/modules
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">NDJ+18</a><span class="fn-bracket">]</span></span>
 <p>Aditya Nandy, Chenru Duan, Jon Paul Janet, Stefan Gugler, and Heather J Kulik. Strategies and software for machine learning accelerated discovery in transition metal chemistry. <em>Industrial &amp; Engineering Chemistry Research</em>, 57(42):13973–13986, 2018.</p>
 </div>
-<div class="citation" id="id117" role="doc-biblioentry">
+<div class="citation" id="id118" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">Wei88</a><span class="fn-bracket">]</span></span>
 <p>David Weininger. Smiles, a chemical language and information system. 1. introduction to methodology and encoding rules. <em>Journal of chemical information and computer sciences</em>, 28(1):31–36, 1988.</p>
 </div>
@@ -1556,7 +1556,7 @@ like <a class="reference external" href="https://scikit-learn.org/stable/modules
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id6">SKE19</a><span class="fn-bracket">]</span></span>
 <p>Murat Cihan Sorkun, Abhishek Khetan, and Süleyman Er. AqSolDB, a curated reference set of aqueous solubility and 2D descriptors for a diverse set of compounds. <em>Sci. Data</em>, 6(1):143, 2019. <a class="reference external" href="https://doi.org/10.1038/s41597-019-0151-1">doi:10.1038/s41597-019-0151-1</a>.</p>
 </div>
-<div class="citation" id="id33" role="doc-biblioentry">
+<div class="citation" id="id34" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id7">PDN05</a><span class="fn-bracket">]</span></span>
 <p>Duc Truong Pham, Stefan S Dimov, and Chi D Nguyen. Selection of k in k-means clustering. <em>Proceedings of the Institution of Mechanical Engineers, Part C: Journal of Mechanical Engineering Science</em>, 219(1):103–119, 2005.</p>
 </div>

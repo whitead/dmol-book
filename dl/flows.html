@@ -510,12 +510,12 @@ document.write(`
 <li><p>Sample from a normalizing flow and compute sample probabilities</p></li>
 </ul>
 </div>
-<p>You can find a recent review of normalizing <a class="reference external" href="https://arxiv.org/pdf/1908.09257.pdf">flows here</a> <span id="id1">[<a class="reference internal" href="#id74" title="Ivan Kobyzev, Simon Prince, and Marcus Brubaker. Normalizing flows: an introduction and review of current methods. IEEE Transactions on Pattern Analysis and Machine Intelligence, 2020.">KPB20</a>]</span> and <a class="reference external" href="https://arxiv.org/abs/1912.02762">here</a><span id="id2">[<a class="reference internal" href="#id91" title="George Papamakarios, Eric Nalisnick, Danilo Jimenez Rezende, Shakir Mohamed, and Balaji Lakshminarayanan. Normalizing flows for probabilistic modeling and inference. arXiv preprint arXiv:1912.02762, 2019.">PNR+19</a>]</span>. Although generating images and sound is the most popular application of normalizing flows, some of their biggest scientific impact has been on more efficient sampling from posteriors or likelihoods and other complex probability distributions <span id="id3">[<a class="reference internal" href="#id90" title="George Papamakarios, David Sterratt, and Iain Murray. Sequential neural likelihood: fast likelihood-free inference with autoregressive flows. In The 22nd International Conference on Artificial Intelligence and Statistics, 837–848. PMLR, 2019.">PSM19</a>]</span>. You find details on how to do normalizing flows on categorical (discrete) data in Hoogeboom et al. <span id="id4">[<a class="reference internal" href="#id108" title="Emiel Hoogeboom, Didrik Nielsen, Priyank Jaini, Patrick Forré, and Max Welling. Argmax flows: learning categorical distributions with normalizing flows. In Third Symposium on Advances in Approximate Bayesian Inference. 2021. URL: https://openreview.net/forum?id=fdsXhAy5Cp.">HNJ+21</a>]</span>.</p>
+<p>You can find a recent review of normalizing <a class="reference external" href="https://arxiv.org/pdf/1908.09257.pdf">flows here</a> <span id="id1">[<a class="reference internal" href="#id75" title="Ivan Kobyzev, Simon Prince, and Marcus Brubaker. Normalizing flows: an introduction and review of current methods. IEEE Transactions on Pattern Analysis and Machine Intelligence, 2020.">KPB20</a>]</span> and <a class="reference external" href="https://arxiv.org/abs/1912.02762">here</a><span id="id2">[<a class="reference internal" href="#id92" title="George Papamakarios, Eric Nalisnick, Danilo Jimenez Rezende, Shakir Mohamed, and Balaji Lakshminarayanan. Normalizing flows for probabilistic modeling and inference. arXiv preprint arXiv:1912.02762, 2019.">PNR+19</a>]</span>. Although generating images and sound is the most popular application of normalizing flows, some of their biggest scientific impact has been on more efficient sampling from posteriors or likelihoods and other complex probability distributions <span id="id3">[<a class="reference internal" href="#id91" title="George Papamakarios, David Sterratt, and Iain Murray. Sequential neural likelihood: fast likelihood-free inference with autoregressive flows. In The 22nd International Conference on Artificial Intelligence and Statistics, 837–848. PMLR, 2019.">PSM19</a>]</span>. You find details on how to do normalizing flows on categorical (discrete) data in Hoogeboom et al. <span id="id4">[<a class="reference internal" href="#id109" title="Emiel Hoogeboom, Didrik Nielsen, Priyank Jaini, Patrick Forré, and Max Welling. Argmax flows: learning categorical distributions with normalizing flows. In Third Symposium on Advances in Approximate Bayesian Inference. 2021. URL: https://openreview.net/forum?id=fdsXhAy5Cp.">HNJ+21</a>]</span>.</p>
 <section id="flow-equation">
 <h2><span class="section-number">15.1. </span>Flow Equation<a class="headerlink" href="#flow-equation" title="Link to this heading">#</a></h2>
 <p>Recall for the VAE decoder, we had an explicit formula for <span class="math notranslate nohighlight">\(p(x | z)\)</span>. This allowed us to compute <span class="math notranslate nohighlight">\(p(x) = \int\,dz p(x | z)p(z)\)</span> which is the quantity of interest. The VAE decoder is a conditional probability density function. In the normalizing flow, we do not use probability density functions. We use bijective functions. So we cannot just compute an integral to change variables. We can use the change of variable formula. Consider our normalizing flow to be defined by our bijector <span class="math notranslate nohighlight">\(x = f(z)\)</span>, its inverse <span class="math notranslate nohighlight">\(z = g(x)\)</span>, and the starting probability distribution <span class="math notranslate nohighlight">\(P_z(z)\)</span>. Then the formula for probability of <span class="math notranslate nohighlight">\(x\)</span> is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2d20ba7d-8cda-4228-819d-c427fac44003">
-<span class="eqno">(15.1)<a class="headerlink" href="#equation-2d20ba7d-8cda-4228-819d-c427fac44003" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-1e899aaa-3590-4f0a-b5ef-e595a64192ee">
+<span class="eqno">(15.1)<a class="headerlink" href="#equation-1e899aaa-3590-4f0a-b5ef-e595a64192ee" title="Permalink to this equation">#</a></span>\[\begin{equation}
 P(x) = P_z\left(g(x)\right) \,\left| \textrm{det}\left[\mathbf{J}_g\right]\right|
 \end{equation}\]</div>
 <p>where the term on the right is the absolute value of the determinant of the Jacobian of <span class="math notranslate nohighlight">\(g\)</span>. <a class="reference external" href="https://en.wikipedia.org/wiki/Jacobian_matrix_and_determinant">Jacobians</a> are matrices that describe how infinitesimal changes in each domain dimension change each range dimension. This term corrects for the volume change of the distribution. For example, if <span class="math notranslate nohighlight">\(f(z) = 2z\)</span>, then <span class="math notranslate nohighlight">\(g(x) = x / 2\)</span>, and the Jacobian determinant is <span class="math notranslate nohighlight">\(1 / 2\)</span>. The intuition is that we are stretching out <span class="math notranslate nohighlight">\(z\)</span> by 2, so we need to account for the increase in volume to keep the probability normalized. You can read more about the change of variable formula for <a class="reference external" href="https://cranmer.github.io/stats-ds-book/distributions/change-of-variables.html">probability distributions here</a></p>
@@ -528,8 +528,8 @@ P(x) = P_z\left(g(x)\right) \,\left| \textrm{det}\left[\mathbf{J}_g\right]\right
 <section id="bijector-chains">
 <h3><span class="section-number">15.2.1. </span>Bijector Chains<a class="headerlink" href="#bijector-chains" title="Link to this heading">#</a></h3>
 <p>Just like in deep neural networks, multiple bijectors are chained together to increase how complex of the final fit distribution <span class="math notranslate nohighlight">\(\hat{P}(x)\)</span> can be. The change of variable equation can be repeatedly applied:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d5ce7f5d-6954-417c-9067-6c6a699aa3fc">
-<span class="eqno">(15.2)<a class="headerlink" href="#equation-d5ce7f5d-6954-417c-9067-6c6a699aa3fc" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-568185f4-95bc-477c-963b-013144627514">
+<span class="eqno">(15.2)<a class="headerlink" href="#equation-568185f4-95bc-477c-963b-013144627514" title="Permalink to this equation">#</a></span>\[\begin{equation}
 P(x) = P_z\left[g_1\left(g_0(x)\right)\right] \,\left| \textrm{det}\left[\mathbf{J}_{g_1}\right]\right|  \left|\textrm{det}\left[\mathbf{J}_{g_0}\right]\right|
 \end{equation}\]</div>
 <p>where we would compute <span class="math notranslate nohighlight">\(x\)</span> with <span class="math notranslate nohighlight">\(f_0\left(f_1(z)\right)\)</span>. One critical point is that you should also include a <strong>permute bijector</strong> that swaps the order of dimensions. Since the bijectors typically have triangular Jacobians, certain output dimensions will depend on many input dimensions and others will only depend on a single one. By applying a permutation, you allow each dimension to influence each other.</p>
@@ -538,15 +538,15 @@ P(x) = P_z\left[g_1\left(g_0(x)\right)\right] \,\left| \textrm{det}\left[\mathbf
 <section id="training">
 <h2><span class="section-number">15.3. </span>Training<a class="headerlink" href="#training" title="Link to this heading">#</a></h2>
 <p>At this point, you may be wondering how you could possibly train a normalizing flow. The trainable parameters appear in the bijectors. They have adjustable parameters. The loss equation is quite simple: the negative log-likelihood (negative to make it minimization). Explicitly:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-84a66001-686c-40fe-8a2a-0fc2467d4923">
-<span class="eqno">(15.3)<a class="headerlink" href="#equation-84a66001-686c-40fe-8a2a-0fc2467d4923" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b5849064-c131-4bdc-94a9-a79ca015532b">
+<span class="eqno">(15.3)<a class="headerlink" href="#equation-b5849064-c131-4bdc-94a9-a79ca015532b" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathcal{l} = -\log P_z\left[g_1\left(g_0(x)\right)\right] - \sum_i \log\left| \textrm{det}\left[\mathbf{J}_{g_i}\right]\right|
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(x\)</span> is the training point and when you take the gradient of the loss, it is with respect to the parameters of the bijectors.</p>
 </section>
 <section id="common-bijectors">
 <h2><span class="section-number">15.4. </span>Common Bijectors<a class="headerlink" href="#common-bijectors" title="Link to this heading">#</a></h2>
-<p>The choice of bijector functions is a fast changing area. I will thus only mention a few. You can of course use any bijective function or matrix, but these become inefficient at high-dimension due to the Jacobian calculation. One class of efficient bijectors are autoregressive bijectors. These have triangular Jacobians because each output dimension can only depend on the dimensions with a lower index. There are two variants: masked autoregressive flows (MAF)<span id="id5">[<a class="reference internal" href="#id75" title="George Papamakarios, Theo Pavlakou, and Iain Murray. Masked autoregressive flow for density estimation. In Advances in Neural Information Processing Systems, 2338–2347. 2017.">PPM17</a>]</span> and inverse autoregressive flows (IAF) <span id="id6">[<a class="reference internal" href="#id76" title="Durk P Kingma, Tim Salimans, Rafal Jozefowicz, Xi Chen, Ilya Sutskever, and Max Welling. Improved variational inference with inverse autoregressive flow. In Advances in neural information processing systems, 4743–4751. 2016.">KSJ+16</a>]</span>. MAFs are efficient at training and computing probabilities, but are slow for sampling from <span class="math notranslate nohighlight">\(P(x)\)</span>. IAFs are slow at training and computing probabilities but efficient for sampling. Wavenets combine the advantages of both <span id="id7">[<a class="reference internal" href="#id77" title="Sungwon Kim, Sang-gil Lee, Jongyoon Song, Jaehyeon Kim, and Sungroh Yoon. Flowavenet: a generative flow for raw audio. arXiv preprint arXiv:1811.02155, 2018.">KLS+18</a>]</span>. I’ll mention one other common bijector which is not autoregressive: real non-volume preserving (RealNVPs) <span id="id8">[<a class="reference internal" href="#id78" title="Laurent Dinh, Jascha Sohl-Dickstein, and Samy Bengio. Density estimation using real nvp. arXiv preprint arXiv:1605.08803, 2016.">DSDB16</a>]</span>. RealNVPs are less expressive than IAFs/MAFs, meaning they have trouble replicating complex distributions, but are efficient at all three tasks: training, sampling, and computing probabilities. Another interesting variant is the Glow bijector,which is able to expand the rank of the normalizing flow, for example going from a matrix to an RGB image <span id="id9">[<a class="reference internal" href="#id79" title="Hari Prasanna Das, Pieter Abbeel, and Costas J Spanos. Dimensionality reduction flows. arXiv preprint arXiv:1908.01686, 2019.">DAS19</a>]</span>. What are the equations for all these bijectors? Most are variants of standard neural network layers but with special rules about which outputs depend on which inputs.</p>
+<p>The choice of bijector functions is a fast changing area. I will thus only mention a few. You can of course use any bijective function or matrix, but these become inefficient at high-dimension due to the Jacobian calculation. One class of efficient bijectors are autoregressive bijectors. These have triangular Jacobians because each output dimension can only depend on the dimensions with a lower index. There are two variants: masked autoregressive flows (MAF)<span id="id5">[<a class="reference internal" href="#id76" title="George Papamakarios, Theo Pavlakou, and Iain Murray. Masked autoregressive flow for density estimation. In Advances in Neural Information Processing Systems, 2338–2347. 2017.">PPM17</a>]</span> and inverse autoregressive flows (IAF) <span id="id6">[<a class="reference internal" href="#id77" title="Durk P Kingma, Tim Salimans, Rafal Jozefowicz, Xi Chen, Ilya Sutskever, and Max Welling. Improved variational inference with inverse autoregressive flow. In Advances in neural information processing systems, 4743–4751. 2016.">KSJ+16</a>]</span>. MAFs are efficient at training and computing probabilities, but are slow for sampling from <span class="math notranslate nohighlight">\(P(x)\)</span>. IAFs are slow at training and computing probabilities but efficient for sampling. Wavenets combine the advantages of both <span id="id7">[<a class="reference internal" href="#id78" title="Sungwon Kim, Sang-gil Lee, Jongyoon Song, Jaehyeon Kim, and Sungroh Yoon. Flowavenet: a generative flow for raw audio. arXiv preprint arXiv:1811.02155, 2018.">KLS+18</a>]</span>. I’ll mention one other common bijector which is not autoregressive: real non-volume preserving (RealNVPs) <span id="id8">[<a class="reference internal" href="#id79" title="Laurent Dinh, Jascha Sohl-Dickstein, and Samy Bengio. Density estimation using real nvp. arXiv preprint arXiv:1605.08803, 2016.">DSDB16</a>]</span>. RealNVPs are less expressive than IAFs/MAFs, meaning they have trouble replicating complex distributions, but are efficient at all three tasks: training, sampling, and computing probabilities. Another interesting variant is the Glow bijector,which is able to expand the rank of the normalizing flow, for example going from a matrix to an RGB image <span id="id9">[<a class="reference internal" href="#id80" title="Hari Prasanna Das, Pieter Abbeel, and Costas J Spanos. Dimensionality reduction flows. arXiv preprint arXiv:1908.01686, 2019.">DAS19</a>]</span>. What are the equations for all these bijectors? Most are variants of standard neural network layers but with special rules about which outputs depend on which inputs.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Remember to add permute bijectors between autoregressive bijectors to ensure the dependence between dimensions is well-mixed.</p>
@@ -584,7 +584,7 @@ P(x) = P_z\left[g_1\left(g_0(x)\right)\right] \,\left| \textrm{det}\left[\mathbf
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;torch._C.Generator at 0x7f11ccbd0650&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;torch._C.Generator at 0x7f4364be0690&gt;
 </pre></div>
 </div>
 </div>
@@ -613,7 +613,7 @@ P(x) = P_z\left[g_1\left(g_0(x)\right)\right] \,\left| \textrm{det}\left[\mathbf
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f1065a88e10&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f420f518cd0&gt;]
 </pre></div>
 </div>
 <img alt="../_images/ee04abbbaf32f0db4e451faaa06c3d4e27125591f02677d5e10817496dd8cb2d.png" src="../_images/ee04abbbaf32f0db4e451faaa06c3d4e27125591f02677d5e10817496dd8cb2d.png" />
@@ -800,7 +800,7 @@ x = \vec{z} \times (1, 0.5)^T + (0.5, 0.25)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/360d658b99727f3b0ad5ae9fdb79e8112eab5dd57caa5cb8f65c976c33a9faf2.png" src="../_images/360d658b99727f3b0ad5ae9fdb79e8112eab5dd57caa5cb8f65c976c33a9faf2.png" />
+<img alt="../_images/dac032ea304deb793d5e5794ff8219882059ac7d2d13270f9771ac64bddc64ad.png" src="../_images/dac032ea304deb793d5e5794ff8219882059ac7d2d13270f9771ac64bddc64ad.png" />
 </div>
 </div>
 <p>Training looks reasonable. Let’s now see our distribution.</p>
@@ -822,10 +822,10 @@ x = \vec{z} \times (1, 0.5)^T + (0.5, 0.25)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/010e5b639e86c27a1bd69dfc48db8f6759a5a282e1d078eddf18b3f08ff2d5d6.png" src="../_images/010e5b639e86c27a1bd69dfc48db8f6759a5a282e1d078eddf18b3f08ff2d5d6.png" />
+<img alt="../_images/f6a7381ba963c28644406ea99f49aeeab7e14be8e387b1a16799a82340648c1c.png" src="../_images/f6a7381ba963c28644406ea99f49aeeab7e14be8e387b1a16799a82340648c1c.png" />
 </div>
 </div>
-<p>Wow! We now can compute the probability of any point in this distribution. You can see there are some oddities that could be fixed with further training. One issue that cannot be overcome is the connection between the two curves – it is not possible to get fully disconnected densities. This is because of our requirement that the bijectors are invertible and volume preserving – you can only squeeze volume so far but cannot completely disconnect. Some work has been done on addressing this issue by adding sampling to the flow and this gives more expressive normalizing flows <span id="id11">[<a class="reference internal" href="#id89" title="Hao Wu, Jonas Köhler, and Frank Noé. Stochastic normalizing flows. arXiv preprint arXiv:2002.06707, 2020.">WKohlerNoe20</a>]</span>.</p>
+<p>Wow! We now can compute the probability of any point in this distribution. You can see there are some oddities that could be fixed with further training. One issue that cannot be overcome is the connection between the two curves – it is not possible to get fully disconnected densities. This is because of our requirement that the bijectors are invertible and volume preserving – you can only squeeze volume so far but cannot completely disconnect. Some work has been done on addressing this issue by adding sampling to the flow and this gives more expressive normalizing flows <span id="id11">[<a class="reference internal" href="#id90" title="Hao Wu, Jonas Köhler, and Frank Noé. Stochastic normalizing flows. arXiv preprint arXiv:2002.06707, 2020.">WKohlerNoe20</a>]</span>.</p>
 <p>Finally, we’ll sample from our model just to show that indeed it is generative.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -838,7 +838,7 @@ x = \vec{z} \times (1, 0.5)^T + (0.5, 0.25)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/649672fdc1b9290caba8cb3f4259fc3300eb15c6bd6c01791bc039caad546195.png" src="../_images/649672fdc1b9290caba8cb3f4259fc3300eb15c6bd6c01791bc039caad546195.png" />
+<img alt="../_images/5d72f3dab0e8f3107510261e0e863fb28c5f8f6ef5c7dd069fb22c2689015576.png" src="../_images/5d72f3dab0e8f3107510261e0e863fb28c5f8f6ef5c7dd069fb22c2689015576.png" />
 </div>
 </div>
 </section>
@@ -863,43 +863,43 @@ x = \vec{z} \times (1, 0.5)^T + (0.5, 0.25)
 <h2><span class="section-number">15.9. </span>Cited References<a class="headerlink" href="#cited-references" title="Link to this heading">#</a></h2>
 <div class="docutils container" id="id12">
 <div role="list" class="citation-list">
-<div class="citation" id="id74" role="doc-biblioentry">
+<div class="citation" id="id75" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">KPB20</a><span class="fn-bracket">]</span></span>
 <p>Ivan Kobyzev, Simon Prince, and Marcus Brubaker. Normalizing flows: an introduction and review of current methods. <em>IEEE Transactions on Pattern Analysis and Machine Intelligence</em>, 2020.</p>
 </div>
-<div class="citation" id="id91" role="doc-biblioentry">
+<div class="citation" id="id92" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">PNR+19</a><span class="fn-bracket">]</span></span>
 <p>George Papamakarios, Eric Nalisnick, Danilo Jimenez Rezende, Shakir Mohamed, and Balaji Lakshminarayanan. Normalizing flows for probabilistic modeling and inference. <em>arXiv preprint arXiv:1912.02762</em>, 2019.</p>
 </div>
-<div class="citation" id="id90" role="doc-biblioentry">
+<div class="citation" id="id91" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">PSM19</a><span class="fn-bracket">]</span></span>
 <p>George Papamakarios, David Sterratt, and Iain Murray. Sequential neural likelihood: fast likelihood-free inference with autoregressive flows. In <em>The 22nd International Conference on Artificial Intelligence and Statistics</em>, 837–848. PMLR, 2019.</p>
 </div>
-<div class="citation" id="id108" role="doc-biblioentry">
+<div class="citation" id="id109" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">HNJ+21</a><span class="fn-bracket">]</span></span>
 <p>Emiel Hoogeboom, Didrik Nielsen, Priyank Jaini, Patrick Forré, and Max Welling. Argmax flows: learning categorical distributions with normalizing flows. In <em>Third Symposium on Advances in Approximate Bayesian Inference</em>. 2021. URL: <a class="reference external" href="https://openreview.net/forum?id=fdsXhAy5Cp">https://openreview.net/forum?id=fdsXhAy5Cp</a>.</p>
 </div>
-<div class="citation" id="id75" role="doc-biblioentry">
+<div class="citation" id="id76" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">PPM17</a><span class="fn-bracket">]</span></span>
 <p>George Papamakarios, Theo Pavlakou, and Iain Murray. Masked autoregressive flow for density estimation. In <em>Advances in Neural Information Processing Systems</em>, 2338–2347. 2017.</p>
 </div>
-<div class="citation" id="id76" role="doc-biblioentry">
+<div class="citation" id="id77" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id6">KSJ+16</a><span class="fn-bracket">]</span></span>
 <p>Durk P Kingma, Tim Salimans, Rafal Jozefowicz, Xi Chen, Ilya Sutskever, and Max Welling. Improved variational inference with inverse autoregressive flow. In <em>Advances in neural information processing systems</em>, 4743–4751. 2016.</p>
 </div>
-<div class="citation" id="id77" role="doc-biblioentry">
+<div class="citation" id="id78" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id7">KLS+18</a><span class="fn-bracket">]</span></span>
 <p>Sungwon Kim, Sang-gil Lee, Jongyoon Song, Jaehyeon Kim, and Sungroh Yoon. Flowavenet: a generative flow for raw audio. <em>arXiv preprint arXiv:1811.02155</em>, 2018.</p>
 </div>
-<div class="citation" id="id78" role="doc-biblioentry">
+<div class="citation" id="id79" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id8">DSDB16</a><span class="fn-bracket">]</span></span>
 <p>Laurent Dinh, Jascha Sohl-Dickstein, and Samy Bengio. Density estimation using real nvp. <em>arXiv preprint arXiv:1605.08803</em>, 2016.</p>
 </div>
-<div class="citation" id="id79" role="doc-biblioentry">
+<div class="citation" id="id80" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id9">DAS19</a><span class="fn-bracket">]</span></span>
 <p>Hari Prasanna Das, Pieter Abbeel, and Costas J Spanos. Dimensionality reduction flows. <em>arXiv preprint arXiv:1908.01686</em>, 2019.</p>
 </div>
-<div class="citation" id="id89" role="doc-biblioentry">
+<div class="citation" id="id90" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id11">WKohlerNoe20</a><span class="fn-bracket">]</span></span>
 <p>Hao Wu, Jonas Köhler, and Frank Noé. Stochastic normalizing flows. <em>arXiv preprint arXiv:2002.06707</em>, 2020.</p>
 </div>

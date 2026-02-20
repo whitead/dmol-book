@@ -530,8 +530,8 @@ document.write(`
 <li><p>Formulate a GNN into edge-updates, node-updates, and aggregation steps</p></li>
 </ul>
 </div>
-<p>GNNs are specific layers that input a graph and output a graph. You can find reviews of GNNs in Dwivedi <em>et al.</em><span id="id1">[<a class="reference internal" href="#id94" title="Vijay Prakash Dwivedi, Chaitanya K Joshi, Thomas Laurent, Yoshua Bengio, and Xavier Bresson. Benchmarking graph neural networks. arXiv preprint arXiv:2003.00982, 2020.">DJL+20</a>]</span>, Bronstein <em>et al.</em><span id="id2">[<a class="reference internal" href="#id95" title="Michael M Bronstein, Joan Bruna, Yann LeCun, Arthur Szlam, and Pierre Vandergheynst. Geometric deep learning: going beyond euclidean data. IEEE Signal Processing Magazine, 34(4):18–42, 2017.">BBL+17</a>]</span>, and  Wu <em>et al.</em><span id="id3">[<a class="reference internal" href="#id96" title="Zonghan Wu, Shirui Pan, Fengwen Chen, Guodong Long, Chengqi Zhang, and S Yu Philip. A comprehensive survey on graph neural networks. IEEE Transactions on Neural Networks and Learning Systems, 2020.">WPC+20</a>]</span>. GNNs can be used for everything from coarse-grained molecular dynamics <span id="id4">[<a class="reference internal" href="#id108" title="Zhiheng Li, Geemi P Wellawatte, Maghesree Chakraborty, Heta A Gandhi, Chenliang Xu, and Andrew D White. Graph neural network based coarse-grained mapping prediction. Chemical Science, 11(35):9524–9531, 2020.">LWC+20</a>]</span> to predicting NMR chemical shifts <span id="id5">[<a class="reference internal" href="#id109" title="Ziyue Yang, Maghesree Chakraborty, and Andrew D White. Predicting chemical shifts with graph neural networks. bioRxiv, 2020.">YCW20</a>]</span> to modeling dynamics of solids <span id="id6">[<a class="reference internal" href="#id56" title="Tian Xie, Arthur France-Lanord, Yanming Wang, Yang Shao-Horn, and Jeffrey C Grossman. Graph dynamical networks for unsupervised learning of atomic scale dynamics in materials. Nature communications, 10(1):1–9, 2019.">XFLW+19</a>]</span>. Before we dive too deep into them, we must first understand how a graph is represented in a computer and how molecules are converted into graphs.</p>
-<p>You can find an interactive introductory article on graphs and graph neural networks at <a class="reference external" href="https://distill.pub/2021/gnn-intro/">distill.pub</a> <span id="id7">[<a class="reference internal" href="#id192" title="Benjamin Sanchez-Lengeling, Emily Reif, Adam Pearce, and Alex Wiltschko. A gentle introduction to graph neural networks. Distill, 2021. https://distill.pub/2021/gnn-intro. doi:10.23915/distill.00033.">SLRPW21</a>]</span>. Most current research in GNNs is done with specialized deep learning libraries for graphs. As of 2022, the most common are <a class="reference external" href="https://pytorch-geometric.readthedocs.io/en/latest/">PyTorch Geometric</a>, <a class="reference external" href="https://www.dgl.ai/">Deep Graph library</a>, <a class="reference external" href="https://github.com/divelab/DIG">DIG</a>, and <a class="reference external" href="https://graphneural.network/">Spektral</a>.</p>
+<p>GNNs are specific layers that input a graph and output a graph. You can find reviews of GNNs in Dwivedi <em>et al.</em><span id="id1">[<a class="reference internal" href="#id95" title="Vijay Prakash Dwivedi, Chaitanya K Joshi, Thomas Laurent, Yoshua Bengio, and Xavier Bresson. Benchmarking graph neural networks. arXiv preprint arXiv:2003.00982, 2020.">DJL+20</a>]</span>, Bronstein <em>et al.</em><span id="id2">[<a class="reference internal" href="#id96" title="Michael M Bronstein, Joan Bruna, Yann LeCun, Arthur Szlam, and Pierre Vandergheynst. Geometric deep learning: going beyond euclidean data. IEEE Signal Processing Magazine, 34(4):18–42, 2017.">BBL+17</a>]</span>, and  Wu <em>et al.</em><span id="id3">[<a class="reference internal" href="#id97" title="Zonghan Wu, Shirui Pan, Fengwen Chen, Guodong Long, Chengqi Zhang, and S Yu Philip. A comprehensive survey on graph neural networks. IEEE Transactions on Neural Networks and Learning Systems, 2020.">WPC+20</a>]</span>. GNNs can be used for everything from coarse-grained molecular dynamics <span id="id4">[<a class="reference internal" href="#id109" title="Zhiheng Li, Geemi P Wellawatte, Maghesree Chakraborty, Heta A Gandhi, Chenliang Xu, and Andrew D White. Graph neural network based coarse-grained mapping prediction. Chemical Science, 11(35):9524–9531, 2020.">LWC+20</a>]</span> to predicting NMR chemical shifts <span id="id5">[<a class="reference internal" href="#id110" title="Ziyue Yang, Maghesree Chakraborty, and Andrew D White. Predicting chemical shifts with graph neural networks. bioRxiv, 2020.">YCW20</a>]</span> to modeling dynamics of solids <span id="id6">[<a class="reference internal" href="#id57" title="Tian Xie, Arthur France-Lanord, Yanming Wang, Yang Shao-Horn, and Jeffrey C Grossman. Graph dynamical networks for unsupervised learning of atomic scale dynamics in materials. Nature communications, 10(1):1–9, 2019.">XFLW+19</a>]</span>. Before we dive too deep into them, we must first understand how a graph is represented in a computer and how molecules are converted into graphs.</p>
+<p>You can find an interactive introductory article on graphs and graph neural networks at <a class="reference external" href="https://distill.pub/2021/gnn-intro/">distill.pub</a> <span id="id7">[<a class="reference internal" href="#id193" title="Benjamin Sanchez-Lengeling, Emily Reif, Adam Pearce, and Alex Wiltschko. A gentle introduction to graph neural networks. Distill, 2021. https://distill.pub/2021/gnn-intro. doi:10.23915/distill.00033.">SLRPW21</a>]</span>. Most current research in GNNs is done with specialized deep learning libraries for graphs. As of 2022, the most common are <a class="reference external" href="https://pytorch-geometric.readthedocs.io/en/latest/">PyTorch Geometric</a>, <a class="reference external" href="https://www.dgl.ai/">Deep Graph library</a>, <a class="reference external" href="https://github.com/divelab/DIG">DIG</a>, and <a class="reference external" href="https://graphneural.network/">Spektral</a>.</p>
 <section id="representing-a-graph">
 <h2><span class="section-number">8.1. </span>Representing a Graph<a class="headerlink" href="#representing-a-graph" title="Link to this heading">#</a></h2>
 <p>A graph <span class="math notranslate nohighlight">\(\mathbf{G}\)</span> is a set of nodes <span class="math notranslate nohighlight">\(\mathbf{V}\)</span> and edges <span class="math notranslate nohighlight">\(\mathbf{E}\)</span>. In our setting, node <span class="math notranslate nohighlight">\(i\)</span> is defined by a vector <span class="math notranslate nohighlight">\(\vec{v}_i\)</span>, so that the set of nodes can be written as a rank 2 tensor. The edges can be represented as an adjacency matrix <span class="math notranslate nohighlight">\(\mathbf{E}\)</span>, where if <span class="math notranslate nohighlight">\(e_{ij} = 1\)</span> then nodes <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span> are connected by an edge. In many fields, graphs are often immediately simplified to be directed and acyclic, which simplifies things. Molecules are instead undirected and have cycles (rings). Thus, our adjacency matrices are always symmetric <span class="math notranslate nohighlight">\(e_{ij} = e_{ji}\)</span> because there is no concept of direction in chemical bonds. Often our edges themselves have features, so that <span class="math notranslate nohighlight">\(e_{ij}\)</span> is itself a vector. Then the adjacency matrix becomes a rank 3 tensor. Examples of edge features might be covalent bond order or distance between two nodes.</p>
@@ -657,7 +657,7 @@ In this case, class is element.</p>
 </table>
 </div>
 <p>Take a moment to understand these two. For example, notice that rows 1, 2, and 3 only have the 4th column as non-zero. That’s because atoms 1-3 are bonded only to carbon (atom 4). Also, the diagonal is always 0 because atoms cannot be bonded with themselves.</p>
-<p>You can find a similar process for converting crystals into graphs in Xie et al. <span id="id8">[<a class="reference internal" href="#id132" title="Tian Xie and Jeffrey C. Grossman. Crystal graph convolutional neural networks for an accurate and interpretable prediction of material properties. Phys. Rev. Lett., 120:145301, Apr 2018. URL: https://link.aps.org/doi/10.1103/PhysRevLett.120.145301, doi:10.1103/PhysRevLett.120.145301.">XG18</a>]</span>. We’ll now begin with a function which can convert a smiles string into this representation.</p>
+<p>You can find a similar process for converting crystals into graphs in Xie et al. <span id="id8">[<a class="reference internal" href="#id133" title="Tian Xie and Jeffrey C. Grossman. Crystal graph convolutional neural networks for an accurate and interpretable prediction of material properties. Phys. Rev. Lett., 120:145301, Apr 2018. URL: https://link.aps.org/doi/10.1103/PhysRevLett.120.145301, doi:10.1103/PhysRevLett.120.145301.">XG18</a>]</span>. We’ll now begin with a function which can convert a smiles string into this representation.</p>
 </section>
 <section id="running-this-notebook">
 <h2><span class="section-number">8.2. </span>Running This Notebook<a class="headerlink" href="#running-this-notebook" title="Link to this heading">#</a></h2>
@@ -845,14 +845,14 @@ In this case, class is element.</p>
 <section id="a-simple-gnn">
 <h3><span class="section-number">8.3.1. </span>A simple GNN<a class="headerlink" href="#a-simple-gnn" title="Link to this heading">#</a></h3>
 <p>We will often mention a GNN when we really mean a layer from a GNN. Most GNNs implement a specific layer that can deal with graphs, and so usually we are only concerned with this layer. Let’s see an example of a simple layer for a GNN:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-6efbd853-c0e7-4522-9b3e-4aaf5ca507ef">
-<span class="eqno">(8.1)<a class="headerlink" href="#equation-6efbd853-c0e7-4522-9b3e-4aaf5ca507ef" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-889ced70-39aa-4000-9a3d-8dd16d7d41cf">
+<span class="eqno">(8.1)<a class="headerlink" href="#equation-889ced70-39aa-4000-9a3d-8dd16d7d41cf" title="Permalink to this equation">#</a></span>\[\begin{equation}
 f_k = \sigma\left( \sum_i \sum_j v_{ij}w_{jk}  \right)
 \end{equation}\]</div>
 <p>This equation shows that we first multiply every node (<span class="math notranslate nohighlight">\(v_{ij}\)</span>) feature by trainable weights <span class="math notranslate nohighlight">\(w_{jk}\)</span>, sum over all node features, and then apply an activation. This will yield a single feature vector for the graph. Is this equation permutation invariant? Yes, because the node index in our expression is index <span class="math notranslate nohighlight">\(i\)</span> which can be re-ordered without affecting the output.</p>
 <p>Let’s see an example that is similar, but not permutation invariant:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-5a0d727b-eadd-4988-98a3-5a0b77dc40bd">
-<span class="eqno">(8.2)<a class="headerlink" href="#equation-5a0d727b-eadd-4988-98a3-5a0b77dc40bd" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-574a3666-d5e1-4b91-8619-cdf8afcb1243">
+<span class="eqno">(8.2)<a class="headerlink" href="#equation-574a3666-d5e1-4b91-8619-cdf8afcb1243" title="Permalink to this equation">#</a></span>\[\begin{equation}
 f_k = \sigma\left( \sum_i v_{ij}w_{ik}  \right)
 \end{equation}\]</div>
 <p>This is a small change. We have one weight vector per node now. This makes the trainable weights depend on the ordering of the nodes. Then if we swap the node ordering, our weights will no longer align. So if we were to input two methanol molecules, which should have the same output, but we switched two atom numbers, we would get different answers. These simple examples differ from real GNNs in two important ways: (i) they give a single feature vector output, which throws away per-node information, and (ii) they do not use the adjacency matrix. Let’s see a real GNN that has these properties while maintaining permutation invariance — or equivariance (swapping inputs swaps outputs the same way).</p>
@@ -860,7 +860,7 @@ f_k = \sigma\left( \sum_i v_{ij}w_{ik}  \right)
 </section>
 <section id="kipf-welling-gcn">
 <h2><span class="section-number">8.4. </span>Kipf &amp; Welling GCN<a class="headerlink" href="#kipf-welling-gcn" title="Link to this heading">#</a></h2>
-<p>One of the first popular GNNs was the Kipf &amp; Welling graph convolutional network (GCN) <span id="id9">[<a class="reference internal" href="#id73" title="Thomas N Kipf and Max Welling. Semi-supervised classification with graph convolutional networks. arXiv preprint arXiv:1609.02907, 2016.">KW16</a>]</span>. Although some people consider GCNs to be a broad class of GNNs, we’ll use GCNs to refer specifically the Kipf &amp; Welling GCN.
+<p>One of the first popular GNNs was the Kipf &amp; Welling graph convolutional network (GCN) <span id="id9">[<a class="reference internal" href="#id74" title="Thomas N Kipf and Max Welling. Semi-supervised classification with graph convolutional networks. arXiv preprint arXiv:1609.02907, 2016.">KW16</a>]</span>. Although some people consider GCNs to be a broad class of GNNs, we’ll use GCNs to refer specifically the Kipf &amp; Welling GCN.
 Thomas Kipf has written an <a class="reference external" href="https://tkipf.github.io/graph-convolutional-networks/">excellent article introducing the GCN</a>.</p>
 <p>The input to a GCN layer is <span class="math notranslate nohighlight">\(\mathbf{V}\)</span>, <span class="math notranslate nohighlight">\(\mathbf{E}\)</span> and it outputs an updated <span class="math notranslate nohighlight">\(\mathbf{V}'\)</span>. Each node feature vector is updated. The way it updates a node feature vector is by averaging the feature vectors of its neighbors, as determined by <span class="math notranslate nohighlight">\(\mathbf{E}\)</span>. The choice of averaging over neighbors is what makes a GCN layer permutation equivariant. Averaging over neighbors is not trainable, so we must add trainable parameters. We multiply the neighbor features by a trainable matrix before the averaging, which gives the GCN the ability to learn. In Einstein notation, this process is:</p>
 <div class="math notranslate nohighlight" id="equation-gcn">
@@ -977,12 +977,12 @@ We must first compute our rank 2 adjacency matrix. The <code class="docutils lit
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(tensor([[[0.0000, 0.5439, 0.4607],
-          [0.0000, 0.5944, 0.2443],
-          [0.0000, 0.4776, 0.6456],
-          [0.0000, 0.4776, 0.6456],
-          [0.0000, 0.4776, 0.6456],
-          [0.0000, 0.6480, 0.1135]]], grad_fn=&lt;ReluBackward0&gt;),
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(tensor([[[0.0000, 0.0000, 0.0065],
+          [0.0027, 0.0000, 0.0000],
+          [0.0000, 0.0000, 0.0000],
+          [0.0000, 0.0000, 0.0000],
+          [0.0000, 0.0000, 0.0000],
+          [0.0000, 0.0923, 0.2769]]], grad_fn=&lt;ReluBackward0&gt;),
  tensor([[[1., 1., 1., 1., 1., 0.],
           [1., 1., 0., 0., 0., 1.],
           [1., 0., 1., 0., 0., 0.],
@@ -1005,12 +1005,12 @@ We must first compute our rank 2 adjacency matrix. The <code class="docutils lit
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[[0.0000, 0.6731, 0.1278],
-         [0.0452, 0.6207, 0.0000],
-         [0.0000, 0.6818, 0.1493],
-         [0.0000, 0.6818, 0.1493],
-         [0.0000, 0.6818, 0.1493],
-         [0.1158, 0.5980, 0.0000]]], grad_fn=&lt;ReluBackward0&gt;)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[[0.0000, 0.0000, 0.0000],
+         [0.0000, 0.0000, 0.0312],
+         [0.0000, 0.0000, 0.0008],
+         [0.0000, 0.0000, 0.0008],
+         [0.0000, 0.0000, 0.0008],
+         [0.0000, 0.0000, 0.0461]]], grad_fn=&lt;ReluBackward0&gt;)
 </pre></div>
 </div>
 </div>
@@ -1116,7 +1116,7 @@ We must first compute our rank 2 adjacency matrix. The <code class="docutils lit
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[-0.0454]], grad_fn=&lt;AddmmBackward0&gt;)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.1682]], grad_fn=&lt;AddmmBackward0&gt;)
 </pre></div>
 </div>
 </div>
@@ -1213,7 +1213,7 @@ We must first compute our rank 2 adjacency matrix. The <code class="docutils lit
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1a45a0c5a59311b8127bd649dea95325cbb411704b3ba5cdbd867cc2772966cb.png" src="../_images/1a45a0c5a59311b8127bd649dea95325cbb411704b3ba5cdbd867cc2772966cb.png" />
+<img alt="../_images/13a2f58d0a206bd202b1260406eaea50e264c2db1f553a9cbe6aaff4435e56f0.png" src="../_images/13a2f58d0a206bd202b1260406eaea50e264c2db1f553a9cbe6aaff4435e56f0.png" />
 </div>
 </div>
 <p>This model is definitely underfit. One reason is that our batch size is 1. This is a side-effect of making the number of atoms variable, because otherwise we have trouble batching together our data if there are two unknown dimensions. A standard trick is to group together multiple molecules into one graph, but making sure they are disconnected (no bonds between the molecules). That allows you to batch molecules without increasing the rank of your model/data.</p>
@@ -1249,37 +1249,37 @@ We must first compute our rank 2 adjacency matrix. The <code class="docutils lit
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/091dca712cccdf409e679ea91e1497c564cafd77df001915b62e29ee4c344e57.png" src="../_images/091dca712cccdf409e679ea91e1497c564cafd77df001915b62e29ee4c344e57.png" />
+<img alt="../_images/bc383d47a719d57990ea18d35a315a19668a3bb55b053152040d40d813196a0d.png" src="../_images/bc383d47a719d57990ea18d35a315a19668a3bb55b053152040d40d813196a0d.png" />
 </div>
 </div>
 </section>
 <section id="message-passing-viewpoint">
 <h2><span class="section-number">8.6. </span>Message Passing Viewpoint<a class="headerlink" href="#message-passing-viewpoint" title="Link to this heading">#</a></h2>
 <p>One way to more broadly view a GCN layer is that it is a kind of “message-passing” layer. You first compute a message coming from each neighboring node:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7eb60c20-edcc-417a-80b4-799585db2e95">
-<span class="eqno">(8.4)<a class="headerlink" href="#equation-7eb60c20-edcc-417a-80b4-799585db2e95" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ad3d0160-7c03-450a-a7fa-8ec97963a701">
+<span class="eqno">(8.4)<a class="headerlink" href="#equation-ad3d0160-7c03-450a-a7fa-8ec97963a701" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \vec{e}_{{s_i}j} = \vec{v}_{{s_i}j} \mathbf{W}
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(v_{{s_i}j}\)</span> means the <span class="math notranslate nohighlight">\(j\)</span>th neighbor of node <span class="math notranslate nohighlight">\(i\)</span>. The <span class="math notranslate nohighlight">\(s_i\)</span> means senders to <span class="math notranslate nohighlight">\(i\)</span>. This is how a GCN computes the messages, it’s just a weight matrix times each neighbor node features. After getting the messages that will go to node <span class="math notranslate nohighlight">\(i\)</span>, <span class="math notranslate nohighlight">\(\vec{e}_{{s_i}j}\)</span>, we aggregate them using a function which is permutation invariant to the order of neighbors:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ca919143-d868-4d2c-93df-146a7d7d7d9d">
-<span class="eqno">(8.5)<a class="headerlink" href="#equation-ca919143-d868-4d2c-93df-146a7d7d7d9d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-0875ecee-1d53-4f8f-995e-74cdbca50b4f">
+<span class="eqno">(8.5)<a class="headerlink" href="#equation-0875ecee-1d53-4f8f-995e-74cdbca50b4f" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \vec{e}_{i} = \frac{1}{|\vec{e}_{{s_i}j}|}\sum \vec{e}_{{s_i}j} 
 \end{equation}\]</div>
 <p>In the GCN this aggregation is just a mean, but it can be any permutation invariant (possibly trainable) function. Finally, we update our node using the aggregated message in the GCN:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9b0d105d-aa65-4317-a96f-b2ac964caeda">
-<span class="eqno">(8.6)<a class="headerlink" href="#equation-9b0d105d-aa65-4317-a96f-b2ac964caeda" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-abf3ea2e-1c10-41c2-a06a-ccff3895a639">
+<span class="eqno">(8.6)<a class="headerlink" href="#equation-abf3ea2e-1c10-41c2-a06a-ccff3895a639" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \vec{v}^{'}_{i} = \sigma(\vec{e}_i)
 \end{equation}\]</div>
-<p>where <span class="math notranslate nohighlight">\(v^{'}\)</span> indicates the new node features. This is simply the activated aggregated message. Writing it out this way, you can see how it is possible to make small changes. One important paper by Gilmer et al. explored some of these choices and described how this general idea of message passing layers does well in learning to predict molecular energies from quantum mechanics <span id="id10">[<a class="reference internal" href="#id77" title="Justin Gilmer, Samuel S Schoenholz, Patrick F Riley, Oriol Vinyals, and George E Dahl. Neural message passing for quantum chemistry. arXiv preprint arXiv:1704.01212, 2017.">GSR+17</a>]</span>. Examples of changes to the above GCN equations are to include edge information when computing the neighbor messages or use a dense neural network layer in place of <span class="math notranslate nohighlight">\(\sigma\)</span>. You can think of the GCN as one type of a broader class of message passing graph neural networks, sometimes abbreviated as MPNN.</p>
+<p>where <span class="math notranslate nohighlight">\(v^{'}\)</span> indicates the new node features. This is simply the activated aggregated message. Writing it out this way, you can see how it is possible to make small changes. One important paper by Gilmer et al. explored some of these choices and described how this general idea of message passing layers does well in learning to predict molecular energies from quantum mechanics <span id="id10">[<a class="reference internal" href="#id78" title="Justin Gilmer, Samuel S Schoenholz, Patrick F Riley, Oriol Vinyals, and George E Dahl. Neural message passing for quantum chemistry. arXiv preprint arXiv:1704.01212, 2017.">GSR+17</a>]</span>. Examples of changes to the above GCN equations are to include edge information when computing the neighbor messages or use a dense neural network layer in place of <span class="math notranslate nohighlight">\(\sigma\)</span>. You can think of the GCN as one type of a broader class of message passing graph neural networks, sometimes abbreviated as MPNN.</p>
 </section>
 <section id="gated-graph-neural-network">
 <h2><span class="section-number">8.7. </span>Gated Graph Neural Network<a class="headerlink" href="#gated-graph-neural-network" title="Link to this heading">#</a></h2>
-<p>One common variant of the message passing layer is the <strong>gated graph neural network</strong> (GGN) <span id="id11">[<a class="reference internal" href="#id75" title="Yujia Li, Daniel Tarlow, Marc Brockschmidt, and Richard Zemel. Gated graph sequence neural networks. arXiv preprint arXiv:1511.05493, 2015.">LTBZ15</a>]</span>. It replaces the last equation, the node update, with</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e5c0dc6b-fa9e-4fe7-a9de-1ba6a3e572bb">
-<span class="eqno">(8.7)<a class="headerlink" href="#equation-e5c0dc6b-fa9e-4fe7-a9de-1ba6a3e572bb" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<p>One common variant of the message passing layer is the <strong>gated graph neural network</strong> (GGN) <span id="id11">[<a class="reference internal" href="#id76" title="Yujia Li, Daniel Tarlow, Marc Brockschmidt, and Richard Zemel. Gated graph sequence neural networks. arXiv preprint arXiv:1511.05493, 2015.">LTBZ15</a>]</span>. It replaces the last equation, the node update, with</p>
+<div class="amsmath math notranslate nohighlight" id="equation-1a29526e-252b-4e34-a6c3-25b2a8296a2f">
+<span class="eqno">(8.7)<a class="headerlink" href="#equation-1a29526e-252b-4e34-a6c3-25b2a8296a2f" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \vec{v}^{'}_{i} = \textrm{GRU}(\vec{v}_i, \vec{e}_i)
 \end{equation}\]</div>
-<p>where the <span class="math notranslate nohighlight">\(\textrm{GRU}(\cdot, \cdot)\)</span> is a gated recurrent unit<span id="id12">[<a class="reference internal" href="#id76" title="Junyoung Chung, Caglar Gulcehre, KyungHyun Cho, and Yoshua Bengio. Empirical evaluation of gated recurrent neural networks on sequence modeling. arXiv preprint arXiv:1412.3555, 2014.">CGCB14</a>]</span>. A GRU is a binary (two input arguments) neural network that is typically used in sequence modeling. The interesting property of a GGN relative to a GCN is that it has trainable parameters in the node update (from the GRU), giving the model a bit more flexibility. In a GGN, the GRU parameters are kept the same at each layer, like how a GRU is used to model sequences. What’s nice about this is that you can stack infinite GGN layers without increasing the number of trainable parameters (assuming you make <span class="math notranslate nohighlight">\(\mathbf{W}\)</span> the same at each layer). Thus GGNs are suited for large graphs, like a large protein or large unit cell.</p>
+<p>where the <span class="math notranslate nohighlight">\(\textrm{GRU}(\cdot, \cdot)\)</span> is a gated recurrent unit<span id="id12">[<a class="reference internal" href="#id77" title="Junyoung Chung, Caglar Gulcehre, KyungHyun Cho, and Yoshua Bengio. Empirical evaluation of gated recurrent neural networks on sequence modeling. arXiv preprint arXiv:1412.3555, 2014.">CGCB14</a>]</span>. A GRU is a binary (two input arguments) neural network that is typically used in sequence modeling. The interesting property of a GGN relative to a GCN is that it has trainable parameters in the node update (from the GRU), giving the model a bit more flexibility. In a GGN, the GRU parameters are kept the same at each layer, like how a GRU is used to model sequences. What’s nice about this is that you can stack infinite GGN layers without increasing the number of trainable parameters (assuming you make <span class="math notranslate nohighlight">\(\mathbf{W}\)</span> the same at each layer). Thus GGNs are suited for large graphs, like a large protein or large unit cell.</p>
 <aside class="margin sidebar">
 <p class="sidebar-title"></p>
 <p>You’ll often see the prefix “gated” on GNNs and that means that the nodes are updated according to a GRU.</p>
@@ -1287,13 +1287,13 @@ We must first compute our rank 2 adjacency matrix. The <code class="docutils lit
 </section>
 <section id="pooling">
 <h2><span class="section-number">8.8. </span>Pooling<a class="headerlink" href="#pooling" title="Link to this heading">#</a></h2>
-<p>Within the message passing viewpoint, and in general for GNNS, the way that messages from neighbors are combined is a key step. This is sometimes called <strong>pooling</strong>, since it’s similar to the pooling layer used in convolutional neural networks. Just like in pooling for convolutional neural networks, there are multiple reduction operations you can use. Typically you see a sum or mean reduction in GNNs, but you can be quite sophisticated like in the Graph Isomorphism Networks <span id="id13">[<a class="reference internal" href="#id90" title="Keyulu Xu, Weihua Hu, Jure Leskovec, and Stefanie Jegelka. How powerful are graph neural networks? In International Conference on Learning Representations. 2018.">XHLJ18</a>]</span>. We’ll see an example in our attention chapter of using self-attention, which can also be used for pooling. It can be tempting to focus on this step, but it’s been empirically found that the choice of pooling is not so important<span id="id14">[<a class="reference internal" href="#id89" title="Enxhell Luzhnica, Ben Day, and Pietro Liò. On graph classification networks, datasets and baselines. arXiv preprint arXiv:1905.04682, 2019.">LDLio19</a>, <a class="reference internal" href="#id88" title="Diego Mesquita, Amauri Souza, and Samuel Kaski. Rethinking pooling in graph neural networks. Advances in Neural Information Processing Systems, 2020.">MSK20</a>]</span>. The key property of the pooling is permutation <em>invariance</em> - we want the aggregation operation to not depend on order of nodes (or edges if pooling over them). You can find a recent review of pooling methods in Grattarola et al. <span id="id15">[<a class="reference internal" href="#id196" title="Daniele Grattarola, Daniele Zambon, Filippo Maria Bianchi, and Cesare Alippi. Understanding pooling in graph neural networks. arXiv preprint arXiv:2110.05292, 2021.">GZBA21</a>]</span>.</p>
-<p>You can see a more visual comparison and overview of the various pooling strategies in this distill article by Daigavane et al. <span id="id16">[<a class="reference internal" href="#id198" title="Ameya Daigavane, Balaraman Ravindran, and Gaurav Aggarwal. Understanding convolutions on graphs. Distill, 2021. https://distill.pub/2021/understanding-gnns. doi:10.23915/distill.00032.">DRA21</a>]</span>.</p>
+<p>Within the message passing viewpoint, and in general for GNNS, the way that messages from neighbors are combined is a key step. This is sometimes called <strong>pooling</strong>, since it’s similar to the pooling layer used in convolutional neural networks. Just like in pooling for convolutional neural networks, there are multiple reduction operations you can use. Typically you see a sum or mean reduction in GNNs, but you can be quite sophisticated like in the Graph Isomorphism Networks <span id="id13">[<a class="reference internal" href="#id91" title="Keyulu Xu, Weihua Hu, Jure Leskovec, and Stefanie Jegelka. How powerful are graph neural networks? In International Conference on Learning Representations. 2018.">XHLJ18</a>]</span>. We’ll see an example in our attention chapter of using self-attention, which can also be used for pooling. It can be tempting to focus on this step, but it’s been empirically found that the choice of pooling is not so important<span id="id14">[<a class="reference internal" href="#id90" title="Enxhell Luzhnica, Ben Day, and Pietro Liò. On graph classification networks, datasets and baselines. arXiv preprint arXiv:1905.04682, 2019.">LDLio19</a>, <a class="reference internal" href="#id89" title="Diego Mesquita, Amauri Souza, and Samuel Kaski. Rethinking pooling in graph neural networks. Advances in Neural Information Processing Systems, 2020.">MSK20</a>]</span>. The key property of the pooling is permutation <em>invariance</em> - we want the aggregation operation to not depend on order of nodes (or edges if pooling over them). You can find a recent review of pooling methods in Grattarola et al. <span id="id15">[<a class="reference internal" href="#id197" title="Daniele Grattarola, Daniele Zambon, Filippo Maria Bianchi, and Cesare Alippi. Understanding pooling in graph neural networks. arXiv preprint arXiv:2110.05292, 2021.">GZBA21</a>]</span>.</p>
+<p>You can see a more visual comparison and overview of the various pooling strategies in this distill article by Daigavane et al. <span id="id16">[<a class="reference internal" href="#id199" title="Ameya Daigavane, Balaraman Ravindran, and Gaurav Aggarwal. Understanding convolutions on graphs. Distill, 2021. https://distill.pub/2021/understanding-gnns. doi:10.23915/distill.00032.">DRA21</a>]</span>.</p>
 </section>
 <section id="readout-function">
 <h2><span class="section-number">8.9. </span>Readout Function<a class="headerlink" href="#readout-function" title="Link to this heading">#</a></h2>
 <p>GNNs output a graph by design. It is rare that our labels are graphs – typically we have node labels or a single graph label. An example of a node label is partial charge of atoms. An example of a graph label would be the energy of the molecule. The process of converting the graph output from the GNN into our predicted node labels or graph label is called the <strong>readout</strong>. If we have node labels, we can simply discard the edges and use our output node feature vectors from the GNN as the prediction, perhaps with a few dense layers before our predicted output label.</p>
-<p>If we’re trying to predict a graph-level label like energy of the molecule or net charge, we need to be careful when converting from node/edge features to a graph label. If we simply put the node features into a dense layer to get to the desired shape graph label, we will lose permutation equivariance (technically it’s permutation invariance now since our output is graph label, not node labels). The readout we did above in the solubility example was a reduction over the node features to get a graph feature. Then we used this graph feature in dense layers. It turns out this is the only way <span id="id17">[<a class="reference internal" href="#id115" title="Manzil Zaheer, Satwik Kottur, Siamak Ravanbakhsh, Barnabas Poczos, Russ R Salakhutdinov, and Alexander J Smola. Deep sets. In Advances in neural information processing systems, 3391–3401. 2017.">ZKR+17</a>]</span> to do a graph feature readout: a reduction over nodes to get graph feature and then dense layers to get predicted graph label from those graph features. You can also do some dense layers on the node features individually, but that already happens in GNN so I do not recommend it. This readout is sometimes called DeepSets because it is the same form as the DeepSets architecture, which is a permutation invariant architecture for features that are sets<span id="id18">[<a class="reference internal" href="#id115" title="Manzil Zaheer, Satwik Kottur, Siamak Ravanbakhsh, Barnabas Poczos, Russ R Salakhutdinov, and Alexander J Smola. Deep sets. In Advances in neural information processing systems, 3391–3401. 2017.">ZKR+17</a>]</span>.</p>
+<p>If we’re trying to predict a graph-level label like energy of the molecule or net charge, we need to be careful when converting from node/edge features to a graph label. If we simply put the node features into a dense layer to get to the desired shape graph label, we will lose permutation equivariance (technically it’s permutation invariance now since our output is graph label, not node labels). The readout we did above in the solubility example was a reduction over the node features to get a graph feature. Then we used this graph feature in dense layers. It turns out this is the only way <span id="id17">[<a class="reference internal" href="#id116" title="Manzil Zaheer, Satwik Kottur, Siamak Ravanbakhsh, Barnabas Poczos, Russ R Salakhutdinov, and Alexander J Smola. Deep sets. In Advances in neural information processing systems, 3391–3401. 2017.">ZKR+17</a>]</span> to do a graph feature readout: a reduction over nodes to get graph feature and then dense layers to get predicted graph label from those graph features. You can also do some dense layers on the node features individually, but that already happens in GNN so I do not recommend it. This readout is sometimes called DeepSets because it is the same form as the DeepSets architecture, which is a permutation invariant architecture for features that are sets<span id="id18">[<a class="reference internal" href="#id116" title="Manzil Zaheer, Satwik Kottur, Siamak Ravanbakhsh, Barnabas Poczos, Russ R Salakhutdinov, and Alexander J Smola. Deep sets. In Advances in neural information processing systems, 3391–3401. 2017.">ZKR+17</a>]</span>.</p>
 <p>You may notice that the pooling and readouts both use permutation invariant functions. Thus, DeepSets can be used for pooling and attention could be used for readouts.</p>
 <section id="intensive-vs-extensive">
 <h3><span class="section-number">8.9.1. </span>Intensive vs Extensive<a class="headerlink" href="#intensive-vs-extensive" title="Link to this heading">#</a></h3>
@@ -1302,7 +1302,7 @@ We must first compute our rank 2 adjacency matrix. The <code class="docutils lit
 </section>
 <section id="battaglia-general-equations">
 <h2><span class="section-number">8.10. </span>Battaglia General Equations<a class="headerlink" href="#battaglia-general-equations" title="Link to this heading">#</a></h2>
-<p>As you can see, message passing layers is a general way to view GNN layers. Battaglia <em>et al.</em> <span id="id19">[<a class="reference internal" href="#id74" title="Peter W Battaglia, Jessica B Hamrick, Victor Bapst, Alvaro Sanchez-Gonzalez, Vinicius Zambaldi, Mateusz Malinowski, Andrea Tacchetti, David Raposo, Adam Santoro, Ryan Faulkner, and others. Relational inductive biases, deep learning, and graph networks. arXiv preprint arXiv:1806.01261, 2018.">BHB+18</a>]</span> went further and created a general set of equations which captures nearly all GNNs. They broke the GNN layer equations down into 3 update equations, like the node update equation we saw in the message passing layer equations, and 3 aggregation equations (6 total equations). There is a new concept in these equations: graph feature vectors. Instead of having two parts to your network (GNN then readout), a graph level feature is updated at every GNN layer. The graph feature vector is a set of features which represent the whole graph or molecule. For example, when computing solubility it may have been useful to build up a per-molecule feature vector that is eventually used to compute solubility instead of having the readout. Any kind of per-molecule quantity, like energy, should be predicted with the graph-level feature vector.</p>
+<p>As you can see, message passing layers is a general way to view GNN layers. Battaglia <em>et al.</em> <span id="id19">[<a class="reference internal" href="#id75" title="Peter W Battaglia, Jessica B Hamrick, Victor Bapst, Alvaro Sanchez-Gonzalez, Vinicius Zambaldi, Mateusz Malinowski, Andrea Tacchetti, David Raposo, Adam Santoro, Ryan Faulkner, and others. Relational inductive biases, deep learning, and graph networks. arXiv preprint arXiv:1806.01261, 2018.">BHB+18</a>]</span> went further and created a general set of equations which captures nearly all GNNs. They broke the GNN layer equations down into 3 update equations, like the node update equation we saw in the message passing layer equations, and 3 aggregation equations (6 total equations). There is a new concept in these equations: graph feature vectors. Instead of having two parts to your network (GNN then readout), a graph level feature is updated at every GNN layer. The graph feature vector is a set of features which represent the whole graph or molecule. For example, when computing solubility it may have been useful to build up a per-molecule feature vector that is eventually used to compute solubility instead of having the readout. Any kind of per-molecule quantity, like energy, should be predicted with the graph-level feature vector.</p>
 <p>The first step in these equations is updating the edge feature vectors, written as <span class="math notranslate nohighlight">\(\vec{e}_k\)</span>, which we haven’t seen yet:</p>
 <div class="math notranslate nohighlight" id="equation-edge-update">
 <span class="eqno">(8.8)<a class="headerlink" href="#equation-edge-update" title="Link to this equation">#</a></span>\[
@@ -1362,7 +1362,7 @@ the edge features. We only care edges for defining the connectivity of the graph
 </section>
 <section id="the-schnet-architecture">
 <h2><span class="section-number">8.11. </span>The SchNet Architecture<a class="headerlink" href="#the-schnet-architecture" title="Link to this heading">#</a></h2>
-<p>One of the earliest and most popular GNNs is the SchNet network <span id="id20">[<a class="reference internal" href="#id224" title="Kristof T Schütt, Huziel E Sauceda, P-J Kindermans, Alexandre Tkatchenko, and K-R Müller. Schnet–a deep learning architecture for molecules and materials. The Journal of Chemical Physics, 148(24):241722, 2018.">SchuttSK+18</a>]</span>. It wasn’t really recognized at publication time as a GNN, but its now recognized as one and you’ll see it often used as a baseline model. A <strong>baseline</strong> model is a well-accepted and accurate model that is compared with.</p>
+<p>One of the earliest and most popular GNNs is the SchNet network <span id="id20">[<a class="reference internal" href="#id225" title="Kristof T Schütt, Huziel E Sauceda, P-J Kindermans, Alexandre Tkatchenko, and K-R Müller. Schnet–a deep learning architecture for molecules and materials. The Journal of Chemical Physics, 148(24):241722, 2018.">SchuttSK+18</a>]</span>. It wasn’t really recognized at publication time as a GNN, but its now recognized as one and you’ll see it often used as a baseline model. A <strong>baseline</strong> model is a well-accepted and accurate model that is compared with.</p>
 <aside class="margin sidebar">
 <p class="sidebar-title">Baseline Models</p>
 <p>A common piece of wisdom is if you want to solve a real problem with deep learning, you should read the most recent popular paper in an area and use the baseline they compare against instead of their proposed model. The reason is that a baseline model usually must be easy, fast, and well-tested, which is generally more important than being the most accurate</p>
@@ -1440,7 +1440,7 @@ h(\vec{x}) = \sigma\left(Wx + b\right)
 \vec{v}^{'}_i = \vec{v}_i + h_3\left(\bar{e}^{'}_i\right)
 \]</div>
 </div>
-<p>All the other details about how to featurize the edges, how deep <span class="math notranslate nohighlight">\(h_i\)</span> is, what activation to choose, how to readout, and how to convert point clouds to graphs are about the specific SchNet model in <span id="id21">[<a class="reference internal" href="#id224" title="Kristof T Schütt, Huziel E Sauceda, P-J Kindermans, Alexandre Tkatchenko, and K-R Müller. Schnet–a deep learning architecture for molecules and materials. The Journal of Chemical Physics, 148(24):241722, 2018.">SchuttSK+18</a>]</span>.</p>
+<p>All the other details about how to featurize the edges, how deep <span class="math notranslate nohighlight">\(h_i\)</span> is, what activation to choose, how to readout, and how to convert point clouds to graphs are about the specific SchNet model in <span id="id21">[<a class="reference internal" href="#id225" title="Kristof T Schütt, Huziel E Sauceda, P-J Kindermans, Alexandre Tkatchenko, and K-R Müller. Schnet–a deep learning architecture for molecules and materials. The Journal of Chemical Physics, 148(24):241722, 2018.">SchuttSK+18</a>]</span>.</p>
 </section>
 <section id="schnet-example-predicting-space-groups">
 <h2><span class="section-number">8.12. </span>SchNet Example: Predicting Space Groups<a class="headerlink" href="#schnet-example-predicting-space-groups" title="Link to this heading">#</a></h2>
@@ -1491,7 +1491,7 @@ h(\vec{x}) = \sigma\left(Wx + b\right)
 <p>Let’s take a look at a few examples from the dataset</p>
 <div class="dropdown admonition">
 <p class="admonition-title">The Data</p>
-<p>This data was generated from <span id="id22">[<a class="reference internal" href="#id225" title="Sam Cox and Andrew D White. Symmetric molecular dynamics. arXiv preprint arXiv:2204.01114, 2022.">CW22</a>]</span> and all points are constrained to match the space group exactly during a molecular dynamics simulation. The trajectories were NPT with a positive pressure and followed the procedure in that paper for Figure 2. The force field is Lennard-Jones with <span class="math notranslate nohighlight">\(\sigma=1\)</span> and <span class="math notranslate nohighlight">\(\epsilon=1\)</span></p>
+<p>This data was generated from <span id="id22">[<a class="reference internal" href="#id226" title="Sam Cox and Andrew D White. Symmetric molecular dynamics. arXiv preprint arXiv:2204.01114, 2022.">CW22</a>]</span> and all points are constrained to match the space group exactly during a molecular dynamics simulation. The trajectories were NPT with a positive pressure and followed the procedure in that paper for Figure 2. The force field is Lennard-Jones with <span class="math notranslate nohighlight">\(\sigma=1\)</span> and <span class="math notranslate nohighlight">\(\epsilon=1\)</span></p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1626,7 +1626,7 @@ h(\vec{x}) = \sigma\left(Wx + b\right)
 first node, first edge features: [3.3756149e-01 3.7093274e-02 3.3091463e-10 2.3967226e-25 0.0000000e+00
  0.0000000e+00 0.0000000e+00 0.0000000e+00]
 first node, all neighbors [ 28 668   7  25 617   4   2 627 658 661 670  24 642 683   3   0]
-label 9
+label 2
 </pre></div>
 </div>
 </div>
@@ -1738,9 +1738,9 @@ label 9
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[-0.16262668  0.3210656  -0.18927772  0.128477   -0.396763   -0.2641469
- -0.2666793   0.50030893 -0.19778118  0.09642879  0.30490717  0.3627329
-  0.06934723  0.10021915  0.55601794 -0.1350755   0.6621694 ]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[-0.19703917  0.68457025  0.01801534  0.03983526 -0.02088743 -0.28792837
+ -0.09716305  0.33919474 -0.09216317 -0.07206874  0.18653984 -0.02857015
+  0.13689627  0.07001522  0.41101408 -0.26236162  0.09009453]
 </pre></div>
 </div>
 </div>
@@ -1753,9 +1753,9 @@ label 9
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>predicted class [0.04359003 0.07070532 0.04244365 0.05831924 0.03449078 0.03938198
- 0.03928237 0.0845856  0.04208427 0.05647985 0.06957201 0.07371365
- 0.05497081 0.05669433 0.0894315  0.04480768 0.09944697]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>predicted class [0.04435413 0.10710561 0.054996   0.0562092  0.05289758 0.0405006
+ 0.04901283 0.07582589 0.0492585  0.05025833 0.06509091 0.05249274
+ 0.06193846 0.05793144 0.08147198 0.04154942 0.05910642]
 </pre></div>
 </div>
 </div>
@@ -1818,10 +1818,10 @@ label 9
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/332722545f249c45af065b763270a48e7b963a782d2ec0d47d9cc3498a082ef9.png" src="../_images/332722545f249c45af065b763270a48e7b963a782d2ec0d47d9cc3498a082ef9.png" />
+<img alt="../_images/12cebe01e4f3c5bb9adb9591f0ed6afd867299e94764e6a23abe2981f41325f1.png" src="../_images/12cebe01e4f3c5bb9adb9591f0ed6afd867299e94764e6a23abe2981f41325f1.png" />
 </div>
 </div>
-<p>The accuracy is not great, but it looks like we could keep training. We have a very small SchNet here. Standard SchNet described in <span id="id23">[<a class="reference internal" href="#id224" title="Kristof T Schütt, Huziel E Sauceda, P-J Kindermans, Alexandre Tkatchenko, and K-R Müller. Schnet–a deep learning architecture for molecules and materials. The Journal of Chemical Physics, 148(24):241722, 2018.">SchuttSK+18</a>]</span> uses 6 layers and 64 channels and 300 edge features. We have 3 layers and 32 channels. Nevertheless, we’re able to get some learning. Let’s visually see what’s going on with the trained model on some test data</p>
+<p>The accuracy is not great, but it looks like we could keep training. We have a very small SchNet here. Standard SchNet described in <span id="id23">[<a class="reference internal" href="#id225" title="Kristof T Schütt, Huziel E Sauceda, P-J Kindermans, Alexandre Tkatchenko, and K-R Müller. Schnet–a deep learning architecture for molecules and materials. The Journal of Chemical Physics, 148(24):241722, 2018.">SchuttSK+18</a>]</span> uses 6 layers and 64 channels and 300 edge features. We have 3 layers and 32 channels. Nevertheless, we’re able to get some learning. Let’s visually see what’s going on with the trained model on some test data</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
@@ -1843,7 +1843,7 @@ label 9
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/a54f2e04f5ecb9b995c9f0ce9d2acf60ce122178c33f240595db58bca6e8e7cc.png" src="../_images/a54f2e04f5ecb9b995c9f0ce9d2acf60ce122178c33f240595db58bca6e8e7cc.png" />
+<img alt="../_images/abe69d6957067f3261badfc55d750cdb1ad362b4ead9164fc6a0fadc7ac867af.png" src="../_images/abe69d6957067f3261badfc55d750cdb1ad362b4ead9164fc6a0fadc7ac867af.png" />
 </div>
 </div>
 <p>We’ll revisit this example later! One unique fact about this dataset is that it is <em>synthetic</em>, meaning there is no label noise. As discussed in <a class="reference internal" href="../ml/regression.html"><span class="doc">Regression &amp; Model Assessment</span></a>, that removes the possibility of overfitting and leads us to favor high variance models. The goal of teaching a model to predict space groups is to apply it on real simulations or microscopy data, which will certainly have noise. We could have mimicked this by adding noise to the labels in the data and/or by randomly removing atoms to simulate defects. This would better help our model work in a real setting.</p>
@@ -1853,17 +1853,17 @@ label 9
 <h2><span class="section-number">8.13. </span>Current Research Directions<a class="headerlink" href="#current-research-directions" title="Link to this heading">#</a></h2>
 <section id="common-architecture-motifs-and-comparisons">
 <h3><span class="section-number">8.13.1. </span>Common Architecture Motifs and Comparisons<a class="headerlink" href="#common-architecture-motifs-and-comparisons" title="Link to this heading">#</a></h3>
-<p>We’ve now seen message passing layer GNNs, GCNs, GGNs, and the generalized Battaglia equations. You’ll find common motifs in the architectures, like gating, <a class="reference internal" href="attention.html"><span class="doc">Attention Layers</span></a>, and pooling strategies. For example, Gated GNNS (GGNs) can be combined with attention pooling to create Gated Attention GNNs (GAANs)<span id="id24">[<a class="reference internal" href="#id80" title="Jiani Zhang, Xingjian Shi, Junyuan Xie, Hao Ma, Irwin King, and Dit-Yan Yeung. Gaan: gated attention networks for learning on large and spatiotemporal graphs. arXiv preprint arXiv:1803.07294, 2018.">ZSX+18</a>]</span>. GraphSAGE is similar to a GCN but it explores different pooling strategies like LSTMs and max-pooling<span id="id25">[<a class="reference internal" href="#id91" title="Will Hamilton, Zhitao Ying, and Jure Leskovec. Inductive representation learning on large graphs. In Advances in neural information processing systems, 1024–1034. 2017.">HYL17</a>]</span>. It also introduced sampling neighbors to make updates of fixed dimension. So you’ll see the suffix “sage” when you sample over neighbors while pooling. These can all be represented in the Battaglia equations, but you should be aware of these names.</p>
-<p>The enormous variety of architectures has led to work on identifying the “best” or most general GNN architecture <span id="id26">[<a class="reference internal" href="#id94" title="Vijay Prakash Dwivedi, Chaitanya K Joshi, Thomas Laurent, Yoshua Bengio, and Xavier Bresson. Benchmarking graph neural networks. arXiv preprint arXiv:2003.00982, 2020.">DJL+20</a>, <a class="reference internal" href="#id93" title="Federico Errica, Marco Podda, Davide Bacciu, and Alessio Micheli. A fair comparison of graph neural networks for graph classification. In International Conference on Learning Representations. 2019.">EPBM19</a>, <a class="reference internal" href="#id92" title="Oleksandr Shchur, Maximilian Mumme, Aleksandar Bojchevski, and Stephan Günnemann. Pitfalls of graph neural network evaluation. arXiv preprint arXiv:1811.05868, 2018.">SMBGunnemann18</a>]</span>. Unfortunately, the question of which GNN architecture is best is as difficult as “what benchmark problems are best?” Thus there are no agreed-upon conclusions on the best architecture. However, those papers are great resources on training, hyperparameters, and reasonable starting guesses and I highly recommend reading them before designing your own GNN. There has been some theoretical work to show that simple architectures, like GCNs, cannot distinguish between certain simple graphs <span id="id27">[<a class="reference internal" href="#id90" title="Keyulu Xu, Weihua Hu, Jure Leskovec, and Stefanie Jegelka. How powerful are graph neural networks? In International Conference on Learning Representations. 2018.">XHLJ18</a>]</span>. How much this practically matters depends on your data. Ultimately, there is so much variety in hyperparameters, data equivariances, and training decisions that you should think carefully about how much the GNN architecture matters before exploring it with too much depth.</p>
+<p>We’ve now seen message passing layer GNNs, GCNs, GGNs, and the generalized Battaglia equations. You’ll find common motifs in the architectures, like gating, <a class="reference internal" href="attention.html"><span class="doc">Attention Layers</span></a>, and pooling strategies. For example, Gated GNNS (GGNs) can be combined with attention pooling to create Gated Attention GNNs (GAANs)<span id="id24">[<a class="reference internal" href="#id81" title="Jiani Zhang, Xingjian Shi, Junyuan Xie, Hao Ma, Irwin King, and Dit-Yan Yeung. Gaan: gated attention networks for learning on large and spatiotemporal graphs. arXiv preprint arXiv:1803.07294, 2018.">ZSX+18</a>]</span>. GraphSAGE is similar to a GCN but it explores different pooling strategies like LSTMs and max-pooling<span id="id25">[<a class="reference internal" href="#id92" title="Will Hamilton, Zhitao Ying, and Jure Leskovec. Inductive representation learning on large graphs. In Advances in neural information processing systems, 1024–1034. 2017.">HYL17</a>]</span>. It also introduced sampling neighbors to make updates of fixed dimension. So you’ll see the suffix “sage” when you sample over neighbors while pooling. These can all be represented in the Battaglia equations, but you should be aware of these names.</p>
+<p>The enormous variety of architectures has led to work on identifying the “best” or most general GNN architecture <span id="id26">[<a class="reference internal" href="#id95" title="Vijay Prakash Dwivedi, Chaitanya K Joshi, Thomas Laurent, Yoshua Bengio, and Xavier Bresson. Benchmarking graph neural networks. arXiv preprint arXiv:2003.00982, 2020.">DJL+20</a>, <a class="reference internal" href="#id94" title="Federico Errica, Marco Podda, Davide Bacciu, and Alessio Micheli. A fair comparison of graph neural networks for graph classification. In International Conference on Learning Representations. 2019.">EPBM19</a>, <a class="reference internal" href="#id93" title="Oleksandr Shchur, Maximilian Mumme, Aleksandar Bojchevski, and Stephan Günnemann. Pitfalls of graph neural network evaluation. arXiv preprint arXiv:1811.05868, 2018.">SMBGunnemann18</a>]</span>. Unfortunately, the question of which GNN architecture is best is as difficult as “what benchmark problems are best?” Thus there are no agreed-upon conclusions on the best architecture. However, those papers are great resources on training, hyperparameters, and reasonable starting guesses and I highly recommend reading them before designing your own GNN. There has been some theoretical work to show that simple architectures, like GCNs, cannot distinguish between certain simple graphs <span id="id27">[<a class="reference internal" href="#id91" title="Keyulu Xu, Weihua Hu, Jure Leskovec, and Stefanie Jegelka. How powerful are graph neural networks? In International Conference on Learning Representations. 2018.">XHLJ18</a>]</span>. How much this practically matters depends on your data. Ultimately, there is so much variety in hyperparameters, data equivariances, and training decisions that you should think carefully about how much the GNN architecture matters before exploring it with too much depth.</p>
 </section>
 <section id="nodes-edges-and-features">
 <h3><span class="section-number">8.13.2. </span>Nodes, Edges, and Features<a class="headerlink" href="#nodes-edges-and-features" title="Link to this heading">#</a></h3>
-<p>You’ll find that most GNNs use the node-update equation in the Battaglia equations but do not update edges. For example, the GCN will update nodes at each layer but the edges are constant. Some recent work has shown that updating edges can be important for learning when the edges have geometric information, like if the input graph is a molecule and the edges are distance between the atoms <span id="id28">[<a class="reference internal" href="#id106" title="Johannes Klicpera, Janek Groß, and Stephan Günnemann. Directional message passing for molecular graphs. In International Conference on Learning Representations. 2020.">KGrossGunnemann20</a>]</span>. As we’ll see in the chapter on equivariances (<a class="reference internal" href="data.html"><span class="doc">Input Data &amp; Equivariances</span></a>), one of the key properties of neural networks with point clouds (i.e., Cartesian xyz coordinates) is to have rotation equivariance. <span id="id29">[<a class="reference internal" href="#id106" title="Johannes Klicpera, Janek Groß, and Stephan Günnemann. Directional message passing for molecular graphs. In International Conference on Learning Representations. 2020.">KGrossGunnemann20</a>]</span> showed that you can achieve this if you do edge updates and encode the edge vectors using a rotation equivariant basis set with spherical harmonics and Bessel functions. These kind of edge updating GNNs can be used to predict protein structure <span id="id30">[<a class="reference internal" href="#id107" title="Bowen Jing, Stephan Eismann, Patricia Suriana, Raphael JL Townshend, and Ron Dror. Learning from protein structure with geometric vector perceptrons. arXiv preprint arXiv:2009.01411, 2020.">JES+20</a>]</span>.</p>
-<p>Another common variation on node features is to pack more into node features than just element identity. In many examples, you will see people inserting valence, elemental mass, electronegativity, a bit indicating if the atom is in a ring, a bit indicating if the atom is aromatic, etc. Typically these are unnecessary, since a model should be able to learn any of these features which are computed from the graph and node elements. However, we and others have empirically found that some can help, specifically indicating if an atom is in a ring <span id="id31">[<a class="reference internal" href="#id108" title="Zhiheng Li, Geemi P Wellawatte, Maghesree Chakraborty, Heta A Gandhi, Chenliang Xu, and Andrew D White. Graph neural network based coarse-grained mapping prediction. Chemical Science, 11(35):9524–9531, 2020.">LWC+20</a>]</span>. Choosing extra features to include though should be at the bottom of your list of things to explore when designing and using GNNs.</p>
+<p>You’ll find that most GNNs use the node-update equation in the Battaglia equations but do not update edges. For example, the GCN will update nodes at each layer but the edges are constant. Some recent work has shown that updating edges can be important for learning when the edges have geometric information, like if the input graph is a molecule and the edges are distance between the atoms <span id="id28">[<a class="reference internal" href="#id107" title="Johannes Klicpera, Janek Groß, and Stephan Günnemann. Directional message passing for molecular graphs. In International Conference on Learning Representations. 2020.">KGrossGunnemann20</a>]</span>. As we’ll see in the chapter on equivariances (<a class="reference internal" href="data.html"><span class="doc">Input Data &amp; Equivariances</span></a>), one of the key properties of neural networks with point clouds (i.e., Cartesian xyz coordinates) is to have rotation equivariance. <span id="id29">[<a class="reference internal" href="#id107" title="Johannes Klicpera, Janek Groß, and Stephan Günnemann. Directional message passing for molecular graphs. In International Conference on Learning Representations. 2020.">KGrossGunnemann20</a>]</span> showed that you can achieve this if you do edge updates and encode the edge vectors using a rotation equivariant basis set with spherical harmonics and Bessel functions. These kind of edge updating GNNs can be used to predict protein structure <span id="id30">[<a class="reference internal" href="#id108" title="Bowen Jing, Stephan Eismann, Patricia Suriana, Raphael JL Townshend, and Ron Dror. Learning from protein structure with geometric vector perceptrons. arXiv preprint arXiv:2009.01411, 2020.">JES+20</a>]</span>.</p>
+<p>Another common variation on node features is to pack more into node features than just element identity. In many examples, you will see people inserting valence, elemental mass, electronegativity, a bit indicating if the atom is in a ring, a bit indicating if the atom is aromatic, etc. Typically these are unnecessary, since a model should be able to learn any of these features which are computed from the graph and node elements. However, we and others have empirically found that some can help, specifically indicating if an atom is in a ring <span id="id31">[<a class="reference internal" href="#id109" title="Zhiheng Li, Geemi P Wellawatte, Maghesree Chakraborty, Heta A Gandhi, Chenliang Xu, and Andrew D White. Graph neural network based coarse-grained mapping prediction. Chemical Science, 11(35):9524–9531, 2020.">LWC+20</a>]</span>. Choosing extra features to include though should be at the bottom of your list of things to explore when designing and using GNNs.</p>
 </section>
 <section id="beyond-message-passing">
 <h3><span class="section-number">8.13.3. </span>Beyond Message Passing<a class="headerlink" href="#beyond-message-passing" title="Link to this heading">#</a></h3>
-<p>One of the common themes of GNN research is moving “beyond message passing,” where message passing is the message construction, aggregation, and node update with messages. Some view this as impossible – claiming that all GNNs can be recast as message passing <span id="id32">[<a class="reference internal" href="#id226" title="Petar Veličković. Message passing all the way up. arXiv preprint arXiv:2202.11097, 2022.">Velivckovic22</a>]</span>. Another direction is on disconnecting the underlying graph being input to the GNN and the graph used to compute updates. We sort of saw this above with SchNet, where we restricted the maximum degree for the message passing. More useful are ideas like “lifting” the graphs into more structured objects like simplicial complexes <span id="id33">[<a class="reference internal" href="#id228" title="Cristian Bodnar, Fabrizio Frasca, Nina Otter, Yuguang Wang, Pietro Lio, Guido F Montufar, and Michael Bronstein. Weisfeiler and lehman go cellular: cw networks. Advances in Neural Information Processing Systems, 34:2625–2640, 2021.">BFO+21</a>]</span>. Finally, you can also choose where to send the messages beyond just neighbors <span id="id34">[<a class="reference internal" href="#id227" title="Erik Thiede, Wenda Zhou, and Risi Kondor. Autobahn: automorphism-based graph neural nets. Advances in Neural Information Processing Systems, 2021.">TZK21</a>]</span>. For example, all nodes on a path could communicate messages or all nodes in a clique.</p>
+<p>One of the common themes of GNN research is moving “beyond message passing,” where message passing is the message construction, aggregation, and node update with messages. Some view this as impossible – claiming that all GNNs can be recast as message passing <span id="id32">[<a class="reference internal" href="#id227" title="Petar Veličković. Message passing all the way up. arXiv preprint arXiv:2202.11097, 2022.">Velivckovic22</a>]</span>. Another direction is on disconnecting the underlying graph being input to the GNN and the graph used to compute updates. We sort of saw this above with SchNet, where we restricted the maximum degree for the message passing. More useful are ideas like “lifting” the graphs into more structured objects like simplicial complexes <span id="id33">[<a class="reference internal" href="#id229" title="Cristian Bodnar, Fabrizio Frasca, Nina Otter, Yuguang Wang, Pietro Lio, Guido F Montufar, and Michael Bronstein. Weisfeiler and lehman go cellular: cw networks. Advances in Neural Information Processing Systems, 34:2625–2640, 2021.">BFO+21</a>]</span>. Finally, you can also choose where to send the messages beyond just neighbors <span id="id34">[<a class="reference internal" href="#id228" title="Erik Thiede, Wenda Zhou, and Risi Kondor. Autobahn: automorphism-based graph neural nets. Advances in Neural Information Processing Systems, 2021.">TZK21</a>]</span>. For example, all nodes on a path could communicate messages or all nodes in a clique.</p>
 </section>
 <section id="do-we-need-graphs">
 <h3><span class="section-number">8.13.4. </span>Do we need graphs?<a class="headerlink" href="#do-we-need-graphs" title="Link to this heading">#</a></h3>
@@ -1944,129 +1944,129 @@ v_{il}' = \sigma\left(\frac{1}{d_i}e_{ij}v_{jk}w_{ilk}\right)
 <h2><span class="section-number">8.17. </span>Cited References<a class="headerlink" href="#cited-references" title="Link to this heading">#</a></h2>
 <div class="docutils container" id="id35">
 <div role="list" class="citation-list">
-<div class="citation" id="id94" role="doc-biblioentry">
+<div class="citation" id="id95" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>DJL+20<span class="fn-bracket">]</span></span>
 <span class="backrefs">(<a role="doc-backlink" href="#id1">1</a>,<a role="doc-backlink" href="#id26">2</a>)</span>
 <p>Vijay Prakash Dwivedi, Chaitanya K Joshi, Thomas Laurent, Yoshua Bengio, and Xavier Bresson. Benchmarking graph neural networks. <em>arXiv preprint arXiv:2003.00982</em>, 2020.</p>
 </div>
-<div class="citation" id="id95" role="doc-biblioentry">
+<div class="citation" id="id96" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">BBL+17</a><span class="fn-bracket">]</span></span>
 <p>Michael M Bronstein, Joan Bruna, Yann LeCun, Arthur Szlam, and Pierre Vandergheynst. Geometric deep learning: going beyond euclidean data. <em>IEEE Signal Processing Magazine</em>, 34(4):18–42, 2017.</p>
 </div>
-<div class="citation" id="id96" role="doc-biblioentry">
+<div class="citation" id="id97" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">WPC+20</a><span class="fn-bracket">]</span></span>
 <p>Zonghan Wu, Shirui Pan, Fengwen Chen, Guodong Long, Chengqi Zhang, and S Yu Philip. A comprehensive survey on graph neural networks. <em>IEEE Transactions on Neural Networks and Learning Systems</em>, 2020.</p>
 </div>
-<div class="citation" id="id108" role="doc-biblioentry">
+<div class="citation" id="id109" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>LWC+20<span class="fn-bracket">]</span></span>
 <span class="backrefs">(<a role="doc-backlink" href="#id4">1</a>,<a role="doc-backlink" href="#id31">2</a>)</span>
 <p>Zhiheng Li, Geemi P Wellawatte, Maghesree Chakraborty, Heta A Gandhi, Chenliang Xu, and Andrew D White. Graph neural network based coarse-grained mapping prediction. <em>Chemical Science</em>, 11(35):9524–9531, 2020.</p>
 </div>
-<div class="citation" id="id109" role="doc-biblioentry">
+<div class="citation" id="id110" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">YCW20</a><span class="fn-bracket">]</span></span>
 <p>Ziyue Yang, Maghesree Chakraborty, and Andrew D White. Predicting chemical shifts with graph neural networks. <em>bioRxiv</em>, 2020.</p>
 </div>
-<div class="citation" id="id56" role="doc-biblioentry">
+<div class="citation" id="id57" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id6">XFLW+19</a><span class="fn-bracket">]</span></span>
 <p>Tian Xie, Arthur France-Lanord, Yanming Wang, Yang Shao-Horn, and Jeffrey C Grossman. Graph dynamical networks for unsupervised learning of atomic scale dynamics in materials. <em>Nature communications</em>, 10(1):1–9, 2019.</p>
 </div>
-<div class="citation" id="id192" role="doc-biblioentry">
+<div class="citation" id="id193" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id7">SLRPW21</a><span class="fn-bracket">]</span></span>
 <p>Benjamin Sanchez-Lengeling, Emily Reif, Adam Pearce, and Alex Wiltschko. A gentle introduction to graph neural networks. <em>Distill</em>, 2021. https://distill.pub/2021/gnn-intro. <a class="reference external" href="https://doi.org/10.23915/distill.00033">doi:10.23915/distill.00033</a>.</p>
 </div>
-<div class="citation" id="id132" role="doc-biblioentry">
+<div class="citation" id="id133" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id8">XG18</a><span class="fn-bracket">]</span></span>
 <p>Tian Xie and Jeffrey C. Grossman. Crystal graph convolutional neural networks for an accurate and interpretable prediction of material properties. <em>Phys. Rev. Lett.</em>, 120:145301, Apr 2018. URL: <a class="reference external" href="https://link.aps.org/doi/10.1103/PhysRevLett.120.145301">https://link.aps.org/doi/10.1103/PhysRevLett.120.145301</a>, <a class="reference external" href="https://doi.org/10.1103/PhysRevLett.120.145301">doi:10.1103/PhysRevLett.120.145301</a>.</p>
 </div>
-<div class="citation" id="id73" role="doc-biblioentry">
+<div class="citation" id="id74" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id9">KW16</a><span class="fn-bracket">]</span></span>
 <p>Thomas N Kipf and Max Welling. Semi-supervised classification with graph convolutional networks. <em>arXiv preprint arXiv:1609.02907</em>, 2016.</p>
 </div>
-<div class="citation" id="id77" role="doc-biblioentry">
+<div class="citation" id="id78" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id10">GSR+17</a><span class="fn-bracket">]</span></span>
 <p>Justin Gilmer, Samuel S Schoenholz, Patrick F Riley, Oriol Vinyals, and George E Dahl. Neural message passing for quantum chemistry. <em>arXiv preprint arXiv:1704.01212</em>, 2017.</p>
 </div>
-<div class="citation" id="id75" role="doc-biblioentry">
+<div class="citation" id="id76" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id11">LTBZ15</a><span class="fn-bracket">]</span></span>
 <p>Yujia Li, Daniel Tarlow, Marc Brockschmidt, and Richard Zemel. Gated graph sequence neural networks. <em>arXiv preprint arXiv:1511.05493</em>, 2015.</p>
 </div>
-<div class="citation" id="id76" role="doc-biblioentry">
+<div class="citation" id="id77" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id12">CGCB14</a><span class="fn-bracket">]</span></span>
 <p>Junyoung Chung, Caglar Gulcehre, KyungHyun Cho, and Yoshua Bengio. Empirical evaluation of gated recurrent neural networks on sequence modeling. <em>arXiv preprint arXiv:1412.3555</em>, 2014.</p>
 </div>
-<div class="citation" id="id90" role="doc-biblioentry">
+<div class="citation" id="id91" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>XHLJ18<span class="fn-bracket">]</span></span>
 <span class="backrefs">(<a role="doc-backlink" href="#id13">1</a>,<a role="doc-backlink" href="#id27">2</a>)</span>
 <p>Keyulu Xu, Weihua Hu, Jure Leskovec, and Stefanie Jegelka. How powerful are graph neural networks? In <em>International Conference on Learning Representations</em>. 2018.</p>
 </div>
-<div class="citation" id="id89" role="doc-biblioentry">
+<div class="citation" id="id90" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id14">LDLio19</a><span class="fn-bracket">]</span></span>
 <p>Enxhell Luzhnica, Ben Day, and Pietro Liò. On graph classification networks, datasets and baselines. <em>arXiv preprint arXiv:1905.04682</em>, 2019.</p>
 </div>
-<div class="citation" id="id88" role="doc-biblioentry">
+<div class="citation" id="id89" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id14">MSK20</a><span class="fn-bracket">]</span></span>
 <p>Diego Mesquita, Amauri Souza, and Samuel Kaski. Rethinking pooling in graph neural networks. <em>Advances in Neural Information Processing Systems</em>, 2020.</p>
 </div>
-<div class="citation" id="id196" role="doc-biblioentry">
+<div class="citation" id="id197" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id15">GZBA21</a><span class="fn-bracket">]</span></span>
 <p>Daniele Grattarola, Daniele Zambon, Filippo Maria Bianchi, and Cesare Alippi. Understanding pooling in graph neural networks. <em>arXiv preprint arXiv:2110.05292</em>, 2021.</p>
 </div>
-<div class="citation" id="id198" role="doc-biblioentry">
+<div class="citation" id="id199" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id16">DRA21</a><span class="fn-bracket">]</span></span>
 <p>Ameya Daigavane, Balaraman Ravindran, and Gaurav Aggarwal. Understanding convolutions on graphs. <em>Distill</em>, 2021. https://distill.pub/2021/understanding-gnns. <a class="reference external" href="https://doi.org/10.23915/distill.00032">doi:10.23915/distill.00032</a>.</p>
 </div>
-<div class="citation" id="id115" role="doc-biblioentry">
+<div class="citation" id="id116" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>ZKR+17<span class="fn-bracket">]</span></span>
 <span class="backrefs">(<a role="doc-backlink" href="#id17">1</a>,<a role="doc-backlink" href="#id18">2</a>)</span>
 <p>Manzil Zaheer, Satwik Kottur, Siamak Ravanbakhsh, Barnabas Poczos, Russ R Salakhutdinov, and Alexander J Smola. Deep sets. In <em>Advances in neural information processing systems</em>, 3391–3401. 2017.</p>
 </div>
-<div class="citation" id="id74" role="doc-biblioentry">
+<div class="citation" id="id75" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id19">BHB+18</a><span class="fn-bracket">]</span></span>
 <p>Peter W Battaglia, Jessica B Hamrick, Victor Bapst, Alvaro Sanchez-Gonzalez, Vinicius Zambaldi, Mateusz Malinowski, Andrea Tacchetti, David Raposo, Adam Santoro, Ryan Faulkner, and others. Relational inductive biases, deep learning, and graph networks. <em>arXiv preprint arXiv:1806.01261</em>, 2018.</p>
 </div>
-<div class="citation" id="id224" role="doc-biblioentry">
+<div class="citation" id="id225" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>SchuttSK+18<span class="fn-bracket">]</span></span>
 <span class="backrefs">(<a role="doc-backlink" href="#id20">1</a>,<a role="doc-backlink" href="#id21">2</a>,<a role="doc-backlink" href="#id23">3</a>)</span>
 <p>Kristof T Schütt, Huziel E Sauceda, P-J Kindermans, Alexandre Tkatchenko, and K-R Müller. Schnet–a deep learning architecture for molecules and materials. <em>The Journal of Chemical Physics</em>, 148(24):241722, 2018.</p>
 </div>
-<div class="citation" id="id225" role="doc-biblioentry">
+<div class="citation" id="id226" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id22">CW22</a><span class="fn-bracket">]</span></span>
 <p>Sam Cox and Andrew D White. Symmetric molecular dynamics. <em>arXiv preprint arXiv:2204.01114</em>, 2022.</p>
 </div>
-<div class="citation" id="id80" role="doc-biblioentry">
+<div class="citation" id="id81" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id24">ZSX+18</a><span class="fn-bracket">]</span></span>
 <p>Jiani Zhang, Xingjian Shi, Junyuan Xie, Hao Ma, Irwin King, and Dit-Yan Yeung. Gaan: gated attention networks for learning on large and spatiotemporal graphs. <em>arXiv preprint arXiv:1803.07294</em>, 2018.</p>
 </div>
-<div class="citation" id="id91" role="doc-biblioentry">
+<div class="citation" id="id92" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id25">HYL17</a><span class="fn-bracket">]</span></span>
 <p>Will Hamilton, Zhitao Ying, and Jure Leskovec. Inductive representation learning on large graphs. In <em>Advances in neural information processing systems</em>, 1024–1034. 2017.</p>
 </div>
-<div class="citation" id="id93" role="doc-biblioentry">
+<div class="citation" id="id94" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id26">EPBM19</a><span class="fn-bracket">]</span></span>
 <p>Federico Errica, Marco Podda, Davide Bacciu, and Alessio Micheli. A fair comparison of graph neural networks for graph classification. In <em>International Conference on Learning Representations</em>. 2019.</p>
 </div>
-<div class="citation" id="id92" role="doc-biblioentry">
+<div class="citation" id="id93" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id26">SMBGunnemann18</a><span class="fn-bracket">]</span></span>
 <p>Oleksandr Shchur, Maximilian Mumme, Aleksandar Bojchevski, and Stephan Günnemann. Pitfalls of graph neural network evaluation. <em>arXiv preprint arXiv:1811.05868</em>, 2018.</p>
 </div>
-<div class="citation" id="id106" role="doc-biblioentry">
+<div class="citation" id="id107" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>KGrossGunnemann20<span class="fn-bracket">]</span></span>
 <span class="backrefs">(<a role="doc-backlink" href="#id28">1</a>,<a role="doc-backlink" href="#id29">2</a>)</span>
 <p>Johannes Klicpera, Janek Groß, and Stephan Günnemann. Directional message passing for molecular graphs. In <em>International Conference on Learning Representations</em>. 2020.</p>
 </div>
-<div class="citation" id="id107" role="doc-biblioentry">
+<div class="citation" id="id108" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id30">JES+20</a><span class="fn-bracket">]</span></span>
 <p>Bowen Jing, Stephan Eismann, Patricia Suriana, Raphael JL Townshend, and Ron Dror. Learning from protein structure with geometric vector perceptrons. <em>arXiv preprint arXiv:2009.01411</em>, 2020.</p>
 </div>
-<div class="citation" id="id226" role="doc-biblioentry">
+<div class="citation" id="id227" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id32">Velivckovic22</a><span class="fn-bracket">]</span></span>
 <p>Petar Veličković. Message passing all the way up. <em>arXiv preprint arXiv:2202.11097</em>, 2022.</p>
 </div>
-<div class="citation" id="id228" role="doc-biblioentry">
+<div class="citation" id="id229" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id33">BFO+21</a><span class="fn-bracket">]</span></span>
 <p>Cristian Bodnar, Fabrizio Frasca, Nina Otter, Yuguang Wang, Pietro Lio, Guido F Montufar, and Michael Bronstein. Weisfeiler and lehman go cellular: cw networks. <em>Advances in Neural Information Processing Systems</em>, 34:2625–2640, 2021.</p>
 </div>
-<div class="citation" id="id227" role="doc-biblioentry">
+<div class="citation" id="id228" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id34">TZK21</a><span class="fn-bracket">]</span></span>
 <p>Erik Thiede, Wenda Zhou, and Risi Kondor. Autobahn: automorphism-based graph neural nets. <em>Advances in Neural Information Processing Systems</em>, 2021.</p>
 </div>

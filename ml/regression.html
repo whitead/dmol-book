@@ -484,12 +484,13 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-data-distribution">3.8. Training Data Distribution</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#leave-one-class-out-cross-validation">3.8.1. Leave One Class Out Cross-Validation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scaffold-splits">3.8.2. Scaffold splits</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-summary">3.9. Chapter Summary</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">3.10. Exercises</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">3.10.1. Overfitting</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">3.10.2. Regularization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">3.10.1. Overfitting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">3.10.2. Regularization</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-assessment">3.10.3. Model Assessment</a></li>
 </ul>
 </li>
@@ -507,7 +508,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="regression-model-assessment">
 <h1><span class="section-number">3. </span>Regression &amp; Model Assessment<a class="headerlink" href="#regression-model-assessment" title="Link to this heading">#</a></h1>
-<p>Regression is supervised learning with continuous (or sometimes discrete) labels. You are given labeled data consisting of features and labels <span class="math notranslate nohighlight">\(\{\vec{x}_i, y_i\}\)</span>. The goal is to find a function that describes their relationship, <span class="math notranslate nohighlight">\(\hat{f}(\vec{x}) = \hat{y}\)</span>. A more formal discussion of the concepts discussed here can be found in Chapter 3 of Bishop’s Pattern Recognition and Machine Learning<span id="id1">[<a class="reference internal" href="#id18" title="Christopher M Bishop. Pattern recognition and machine learning. springer, 2006.">Bis06</a>]</span>.</p>
+<p>Regression is supervised learning with continuous (or sometimes discrete) labels. You are given labeled data consisting of features and labels <span class="math notranslate nohighlight">\(\{\vec{x}_i, y_i\}\)</span>. The goal is to find a function that describes their relationship, <span class="math notranslate nohighlight">\(\hat{f}(\vec{x}) = \hat{y}\)</span>. A more formal discussion of the concepts discussed here can be found in Chapter 3 of Bishop’s Pattern Recognition and Machine Learning<span id="id1">[<a class="reference internal" href="#id20" title="Christopher M Bishop. Pattern recognition and machine learning. springer, 2006.">Bis06</a>]</span>.</p>
 <div class="admonition-audience-objectives admonition">
 <p class="admonition-title">Audience &amp; Objectives</p>
 <p>This lecture introduces some probability theory, especially expectations. You can get a refresher of <a class="reference external" href="https://whitead.github.io/numerical_stats/">probability of random variables</a> and/or <a class="reference external" href="https://whitead.github.io/numerical_stats/unit_4/lectures/lecture_2.pdf">expectations</a>. Recall an expectation is <span class="math notranslate nohighlight">\(E[x] = \sum P(x)x\)</span> and variance is <span class="math notranslate nohighlight">\(E[\left(x - E[x]\right)^2]\)</span>. We also use and discuss <a class="reference external" href="https://nbviewer.jupyter.org/github/whitead/numerical_stats/blob/master/unit_12/lectures/lecture_1.ipynb#Extending-Least-Squares-to-Multiple-Dimensions-in-Domain---OLS-ND">linear regression techniques</a>. After completing this chapter, you should be able to:</p>
@@ -539,6 +540,8 @@ document.write(`
 <span class="kn">import</span><span class="w"> </span><span class="nn">jax.numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">jnp</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">jax.example_libraries</span><span class="w"> </span><span class="kn">import</span> <span class="n">optimizers</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">jax</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">rdkit</span><span class="o">,</span><span class="w"> </span><span class="nn">rdkit.Chem</span><span class="o">,</span><span class="w"> </span><span class="nn">rdkit.Chem.Draw</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rdkit.Chem.Scaffolds</span><span class="w"> </span><span class="kn">import</span> <span class="n">MurckoScaffold</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">dmol</span>
 </pre></div>
 </div>
@@ -559,7 +562,7 @@ document.write(`
 </section>
 <section id="overfitting">
 <h2><span class="section-number">3.2. </span>Overfitting<a class="headerlink" href="#overfitting" title="Link to this heading">#</a></h2>
-<p>We’ll be working again with the AqSolDB<span id="id2">[<a class="reference internal" href="#id26" title="Murat Cihan Sorkun, Abhishek Khetan, and Süleyman Er. AqSolDB, a curated reference set of aqueous solubility and 2D descriptors for a diverse set of compounds. Sci. Data, 6(1):143, 2019. doi:10.1038/s41597-019-0151-1.">SKE19</a>]</span> dataset. It has about 10,000 unique compounds with measured solubility in water (label) and 17 molecular descriptors (features). We need to create a better assessment of our supervised ML models. The goal of our ML model is to predict solubility of new unseen molecules. Therefore, to assess we should test on unseen molecules. We will split our data into two subsets: <strong>training data</strong> and <strong>testing data</strong>. Typically this is done with an 80%/20%, so that you train on 80% of your data and test on the remaining 20%. In our case, we’ll just do 50%/50% because we have plenty of data and thus do not need to take 80% for training. We’ll be using a subset, 50 molecules chosen randomly, rather than the whole dataset. So we’ll have 25 training molecules and 25 testing molecules.</p>
+<p>We’ll be working again with the AqSolDB<span id="id2">[<a class="reference internal" href="#id28" title="Murat Cihan Sorkun, Abhishek Khetan, and Süleyman Er. AqSolDB, a curated reference set of aqueous solubility and 2D descriptors for a diverse set of compounds. Sci. Data, 6(1):143, 2019. doi:10.1038/s41597-019-0151-1.">SKE19</a>]</span> dataset. It has about 10,000 unique compounds with measured solubility in water (label) and 17 molecular descriptors (features). We need to create a better assessment of our supervised ML models. The goal of our ML model is to predict solubility of new unseen molecules. Therefore, to assess we should test on unseen molecules. We will split our data into two subsets: <strong>training data</strong> and <strong>testing data</strong>. Typically this is done with an 80%/20%, so that you train on 80% of your data and test on the remaining 20%. In our case, we’ll just do 50%/50% because we have plenty of data and thus do not need to take 80% for training. We’ll be using a subset, 50 molecules chosen randomly, rather than the whole dataset. So we’ll have 25 training molecules and 25 testing molecules.</p>
 <p>Let’s begin by seeing what effect the split of train/test has on our linear model introduced in the previous chapter.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -701,8 +704,8 @@ it in parallel, and timing its execution.</p>
 <p>We’ve plotted above the loss on our training data and testing data. The loss on training goes down after each step, as we would expect for gradient descent. However, the testing loss goes down and then starts to go back up. This is called <strong>overfitting</strong>. This is one of the key challenges in ML and we’ll often be discussing it.</p>
 <p>Overfitting is a result of training for too many steps or with too many parameters, resulting in our model learning the <strong>noise</strong> in the training data. The noise is specific for the training data and when computing loss on the test data there is poor performance.</p>
 <p>To understand this, let’s first define noise. Assume that there is a “perfect” function <span class="math notranslate nohighlight">\(f(\vec{x})\)</span> that can compute labels from features. Our model is an estimate <span class="math notranslate nohighlight">\(\hat{f}(\vec{x})\)</span> of that function. Even <span class="math notranslate nohighlight">\(f(\vec{x})\)</span> will not reproduce the data exactly because our features do not capture everything that goes into solubility and/or there is error in the solubility measurements themselves. Mathematically,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c1adeee8-89a2-4d9d-b781-3ea30fff42bc">
-<span class="eqno">(3.1)<a class="headerlink" href="#equation-c1adeee8-89a2-4d9d-b781-3ea30fff42bc" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-68dc7e82-ac1a-4a59-97eb-c4815e25b3ed">
+<span class="eqno">(3.1)<a class="headerlink" href="#equation-68dc7e82-ac1a-4a59-97eb-c4815e25b3ed" title="Permalink to this equation">#</a></span>\[\begin{equation}
     y = f(\vec{x}) + \epsilon
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\epsilon\)</span> is a random number with mean 0 and unknown standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span>. <span class="math notranslate nohighlight">\(\epsilon\)</span> is the noise. When fitting our function, <span class="math notranslate nohighlight">\(\hat{f}(\vec{x})\)</span>, the noise is fixed because our labels <span class="math notranslate nohighlight">\(y\)</span> are fixed. That means we can accidentally learn to approximate the sum of <span class="math notranslate nohighlight">\(f(\vec{x})\)</span> and the noise <span class="math notranslate nohighlight">\({\epsilon_i}\)</span> instead of only capturing <span class="math notranslate nohighlight">\(f(\vec{x})\)</span>. The noise is random and uncorrelated with solubility. When we move to our testing dataset, this noise changes because we have new data and our model’s effort to reproduce noise is useless because the new data has new noise. This leads to worse performance.</p>
@@ -710,13 +713,13 @@ it in parallel, and timing its execution.</p>
 <section id="overfitting-with-synthetic-data">
 <h3><span class="section-number">3.2.1. </span>Overfitting with Synthetic Data<a class="headerlink" href="#overfitting-with-synthetic-data" title="Link to this heading">#</a></h3>
 <p>We’ll explore overfitting in a synthetic example. Our real function we’re trying to learn will be:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-370bf079-04f4-4b76-8d2b-21439eb9e7ab">
-<span class="eqno">(3.2)<a class="headerlink" href="#equation-370bf079-04f4-4b76-8d2b-21439eb9e7ab" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-622a122c-d678-4836-98e4-c0c8c36860aa">
+<span class="eqno">(3.2)<a class="headerlink" href="#equation-622a122c-d678-4836-98e4-c0c8c36860aa" title="Permalink to this equation">#</a></span>\[\begin{equation}
  f(x) = x^3 - x^2 + x - 1
 \end{equation}\]</div>
 <p>which we can rewrite as a linear model:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f23acc73-5367-4cf5-98f6-4636171933fe">
-<span class="eqno">(3.3)<a class="headerlink" href="#equation-f23acc73-5367-4cf5-98f6-4636171933fe" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e1e9700b-0c4e-450b-9e11-c248f4aa7432">
+<span class="eqno">(3.3)<a class="headerlink" href="#equation-e1e9700b-0c4e-450b-9e11-c248f4aa7432" title="Permalink to this equation">#</a></span>\[\begin{equation}
   f(\vec{x}) = \vec{w}\cdot\vec{x} = [1, -1, 1, -1]\cdot[x^3, x^2, x, 1]
 \end{equation}\]</div>
 <p>where our features are <span class="math notranslate nohighlight">\([x^3, x^2, x, 1]\)</span>. To do our split, we’ll take the positive points as training data and the negative as testing data. To avoid the issue of convergence, we will use least squares to fit these models instead of gradient descent.</p>
@@ -910,14 +913,14 @@ it in parallel, and timing its execution.</p>
 </aside>
 <p>We are now working with a real dataset, which means there is randomness from which features we choose, which training data we choose, and randomness in the labels themselves. In the results below, they are averaged over possible features and possible training data splits to deal with this. Thus the code is complex. You can see it on <a class="reference external" href="https://github.com/whitead/dmol-book/blob/main/ml/regression.ipynb">the Github repository</a>, but I’ve omitted it here for simplicity.</p>
 <figure class="align-default" id="small-feature-number">
-<img alt="../_images/b87a19e28316efc6d2f4ceb2c4c915843e58c7c70acd94769bf7a3e42140e53c.png" src="../_images/b87a19e28316efc6d2f4ceb2c4c915843e58c7c70acd94769bf7a3e42140e53c.png" />
+<img alt="../_images/93b2cb1a6d6141714957d921f9e1fa5788fbaec6c9993b3d2e244911c7d029f2.png" src="../_images/93b2cb1a6d6141714957d921f9e1fa5788fbaec6c9993b3d2e244911c7d029f2.png" />
 <figcaption>
 <p><span class="caption-number">Fig. 3.1 </span><span class="caption-text">Effect of feature number on 25 training data points averaged over 10 data samples/feature choices combinations. Notice there is not a significant change when the number of features crosses the number of data points.</span><a class="headerlink" href="#small-feature-number" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p><a class="reference internal" href="#small-feature-number"><span class="std std-numref">Fig. 3.1</span></a> shows the effect of choosing different features on both the loss on training data and the loss on test data. There are three regimes in this plot. At 1-3 features, we are <strong>underfit</strong> meaning both the training and testing losses could be improved with more features or more training. In this case, it is because there are too few features. Until about 10 features, we see that adding new features slightly improves training data but doesn’t help test data meaning we’re probably slightly overfitting. Then at 10, there is a large increase as we move to the overfit regime. Finally at about 30 features, our model is no longer converging and training loss rises because it is too difficult to train the increasingly complex model. “Difficult” here is a relative term; you can easily train for more time on this simple model but this is meant as an example.</p>
 <figure class="align-default" id="large-feature-number">
-<img alt="../_images/ce2b2aac8f8c0dc00960e0c994d67331652bbcbbbc5cd2ff7d02c28460f34abd.png" src="../_images/ce2b2aac8f8c0dc00960e0c994d67331652bbcbbbc5cd2ff7d02c28460f34abd.png" />
+<img alt="../_images/2bac2f24927f873d8feceba78d7814f072416e0751f3588c362ed5d5e4d7c22a.png" src="../_images/2bac2f24927f873d8feceba78d7814f072416e0751f3588c362ed5d5e4d7c22a.png" />
 <figcaption>
 <p><span class="caption-number">Fig. 3.2 </span><span class="caption-text">Effect of feature number on 250 training data points averaged over 10 data samples/feature choices combinations.</span><a class="headerlink" href="#large-feature-number" title="Link to this image">#</a></p>
 </figcaption>
@@ -933,12 +936,12 @@ it in parallel, and timing its execution.</p>
 <div class="math notranslate nohighlight" id="equation-exp-error">
 <span class="eqno">(3.4)<a class="headerlink" href="#equation-exp-error" title="Link to this equation">#</a></span>\[    E\left[\left(y - \hat{f}(\vec{x})\right)^2\right]\]</div>
 <p>What is the expectation over? For now, let’s just assume the only source of randomness is in the noise from the label (recall <span class="math notranslate nohighlight">\(y = f(\vec{x}) + \epsilon\)</span>). Then our expression becomes:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b35618e7-4e65-41f3-9fee-2aab66a77f35">
-<span class="eqno">(3.5)<a class="headerlink" href="#equation-b35618e7-4e65-41f3-9fee-2aab66a77f35" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-48e65860-617d-4d28-8156-9e9ee895cbb3">
+<span class="eqno">(3.5)<a class="headerlink" href="#equation-48e65860-617d-4d28-8156-9e9ee895cbb3" title="Permalink to this equation">#</a></span>\[\begin{equation}
     E\left[\left(y - \hat{f}(\vec{x})\right)^2\right] =  E\left[y^2\right] + E\left[\hat{f}(\vec{x})^2\right] - 2 E\left[y\hat{f}(\vec{x})\right]
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-f3b334a1-eac2-4852-8d0e-5727ae20d7ef">
-<span class="eqno">(3.6)<a class="headerlink" href="#equation-f3b334a1-eac2-4852-8d0e-5727ae20d7ef" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-82823a94-2db8-4f9f-9b90-96781456e082">
+<span class="eqno">(3.6)<a class="headerlink" href="#equation-82823a94-2db8-4f9f-9b90-96781456e082" title="Permalink to this equation">#</a></span>\[\begin{equation}
     E\left[\left(y - \hat{f}(\vec{x})\right)^2\right] =  E\left[\left(f(\vec{x}) - \epsilon\right)^2\right] + \hat{f}(\vec{x})^2 - 2 E\left[\left(f(\vec{x}) - \epsilon\right)\right]\hat{f}(\vec{x})
 \end{equation}\]</div>
 <p>I have dropped the expectations over deterministic expression <span class="math notranslate nohighlight">\(\hat{f}\)</span>. You can continue this, again dropping any <span class="math notranslate nohighlight">\(E[f(\vec{x})]\)</span> terms and using the definition of <span class="math notranslate nohighlight">\(\epsilon\)</span>, a zero mean normal distribution with standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span>. You will arrive at:</p>
@@ -979,7 +982,7 @@ it in parallel, and timing its execution.</p>
 <p><span class="caption-number">Fig. 3.5 </span><span class="caption-text">The bias, variance, and fit on test values for the polynomial example averaged across 2,500 train/test splits. As the number of features increases, variance increases and bias decreases. There is a minimum at 4 features. The plot stops at 5 because the variance becomes very large beyond 5.</span><a class="headerlink" href="#bv" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>The way to change bias and variance is through <strong>model complexity</strong>, which is feature number in our linear models. Increasing model complexity reduces bias and increases variance. There is an optimum for our polynomial example, shown in <a class="reference internal" href="#bv"><span class="std std-numref">Fig. 3.5</span></a>. Indeed this is true of most ML models, although it can be difficult to cleanly increase model complexity and keep training converged. However, this is <a class="reference external" href="https://www.bradyneal.com/bias-variance-tradeoff-textbooks-update">not typically true in deep learning with neural networks</a><span id="id3">[<a class="reference internal" href="#id45" title="Brady Neal, Sarthak Mittal, Aristide Baratin, Vinayak Tantia, Matthew Scicluna, Simon Lacoste-Julien, and Ioannis Mitliagkas. A modern take on the bias-variance tradeoff in neural networks. arXiv preprint arXiv:1810.08591, 2018.">NMB+18</a>]</span>.</p>
+<p>The way to change bias and variance is through <strong>model complexity</strong>, which is feature number in our linear models. Increasing model complexity reduces bias and increases variance. There is an optimum for our polynomial example, shown in <a class="reference internal" href="#bv"><span class="std std-numref">Fig. 3.5</span></a>. Indeed this is true of most ML models, although it can be difficult to cleanly increase model complexity and keep training converged. However, this is <a class="reference external" href="https://www.bradyneal.com/bias-variance-tradeoff-textbooks-update">not typically true in deep learning with neural networks</a><span id="id3">[<a class="reference internal" href="#id48" title="Brady Neal, Sarthak Mittal, Aristide Baratin, Vinayak Tantia, Matthew Scicluna, Simon Lacoste-Julien, and Ioannis Mitliagkas. A modern take on the bias-variance tradeoff in neural networks. arXiv preprint arXiv:1810.08591, 2018.">NMB+18</a>]</span>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The bias–variance tradeoff for model complexity is based on experience. The decomposition above does not prove a tradeoff, just that you can split these two terms. Intentionally underfitting, adding noise, and exchanging one feature for another are all ways to affect bias and variance without adjusting complexity. Also, sometimes you can just improve both with better models.</p>
@@ -997,25 +1000,25 @@ it in parallel, and timing its execution.</p>
 only be done if you have some prior belief that the bias should be 0 – like if it represents some physical quantity that should be minimized. Otherwise minimizing <span class="math notranslate nohighlight">\(b\)</span> has no effect on overfitting and so is not part of regularization.</p>
 </aside>
 <p>Our first example is the magnitude of fit coefficients. The magnitude of the coefficients is <span class="math notranslate nohighlight">\(\sum_k w_k^2\)</span> where <span class="math notranslate nohighlight">\(w_k\)</span> the index of a single coefficient. We add this to our loss function:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-fb05c639-828a-4fe7-8763-cea4b6ba98bd">
-<span class="eqno">(3.9)<a class="headerlink" href="#equation-fb05c639-828a-4fe7-8763-cea4b6ba98bd" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e2022287-4226-4d24-942e-dd81df94865c">
+<span class="eqno">(3.9)<a class="headerlink" href="#equation-e2022287-4226-4d24-942e-dd81df94865c" title="Permalink to this equation">#</a></span>\[\begin{equation}
     L = \frac{1}{N}\sum_i^N \left[y_i - \hat{f}(\vec{x}_i, \vec{w}, b)\right]^2 + \lambda \sum_k w_k^2
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\lambda\)</span> is our strength of regularization. By changing <span class="math notranslate nohighlight">\(\lambda\)</span>, we control how large the magnitude of our parameters are and that directly reduces the variance. You can see the result in <a class="reference internal" href="#l2"><span class="std std-numref">Fig. 3.6</span></a> for our polynomial example. Increasing the strength of regularization decreases variance at the cost of increasing model bias. Remember in deep learning there isn’t as much of a tradeoff and often you just get a reduction in variance with no degradation in bias. Adding L2 regularization with a linear model has a specific name: <strong>Ridge Regression</strong>.</p>
 <figure class="align-default" id="l2">
-<img alt="../_images/ddfae54a2c0dcb4d5fedb1869f2b72fdce03239399bb5d6445c7e1532359c767.png" src="../_images/ddfae54a2c0dcb4d5fedb1869f2b72fdce03239399bb5d6445c7e1532359c767.png" />
+<img alt="../_images/b0eb7398a5b64e2eb9e924fd741df110070737d55bc63fab8c3872e9bb3e4e63.png" src="../_images/b0eb7398a5b64e2eb9e924fd741df110070737d55bc63fab8c3872e9bb3e4e63.png" />
 <figcaption>
 <p><span class="caption-number">Fig. 3.6 </span><span class="caption-text">A 7 feature fit to the polynomial model example above with increasing strength of regularization. The vertical bars indicate standard deviation of model at each point.</span><a class="headerlink" href="#l2" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Why does this work? Look at the gradient of a particular weight of our new loss function:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b55f8211-bf41-4e9e-9d9a-d317647a9ee7">
-<span class="eqno">(3.10)<a class="headerlink" href="#equation-b55f8211-bf41-4e9e-9d9a-d317647a9ee7" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-2ae67b64-c4c1-46db-91bf-1199482fdc7d">
+<span class="eqno">(3.10)<a class="headerlink" href="#equation-2ae67b64-c4c1-46db-91bf-1199482fdc7d" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \frac{\partial L}{\partial w_4} = \frac{2}{N}\sum_i^N \left[y_i - \hat{f}(\vec{x}_i, \vec{w}, b)\right]\frac{\partial \hat{f}(\vec{x}_i, \vec{w}, b)}{\partial w_4} + 2\lambda w_4
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(w_4\)</span> is one of our weights. The first term on the right-hand side accounts for how <span class="math notranslate nohighlight">\(w_4\)</span> affects our accuracy, like usual. The second term is from the regularization. You can see that the gradient is just the value of weight times a constant. Let’s contract the first term into a variable called <span class="math notranslate nohighlight">\(g_{w_4}\)</span> and look at how this new gradient affects our updates to <span class="math notranslate nohighlight">\(w_4\)</span>. Our gradient descent update of <span class="math notranslate nohighlight">\(w_4\)</span> becomes:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ae4a8dbb-bd03-4c65-b473-cf1c1019ab2a">
-<span class="eqno">(3.11)<a class="headerlink" href="#equation-ae4a8dbb-bd03-4c65-b473-cf1c1019ab2a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-fdae5582-a73b-4699-b02d-301dd0a1e58a">
+<span class="eqno">(3.11)<a class="headerlink" href="#equation-fdae5582-a73b-4699-b02d-301dd0a1e58a" title="Permalink to this equation">#</a></span>\[\begin{equation}
     w_4' = w_4 -\eta g_{w_4} - 2\eta\lambda w_4
 \end{equation}\]</div>
 <p>So our regularization pushes <span class="math notranslate nohighlight">\(w_4'\)</span> to always have a lower magnitude. If <span class="math notranslate nohighlight">\(w_4' = 2.5\)</span>, the update will include a term of <span class="math notranslate nohighlight">\(-2\eta \lambda 2.5\)</span>, pushing our weight value closer to zero. This means our weights always are pushed towards zero. Of course the term coming from model error (<span class="math notranslate nohighlight">\(g_{w_4}\)</span>) also has an effect so that we end up at a balance of lower magnitude weights and model error. We control that balance through the <span class="math notranslate nohighlight">\(\lambda\)</span> term.</p>
@@ -1028,8 +1031,8 @@ used in the norm: <span class="math notranslate nohighlight">\((\sum_i x_i^p)^{1
 <section id="l1-regularization">
 <h3><span class="section-number">3.5.2. </span>L1 Regularization<a class="headerlink" href="#l1-regularization" title="Link to this heading">#</a></h3>
 <p>L1 regularization changes our loss to be the following:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-5bf87722-131c-4d14-878c-6c8934fcddf1">
-<span class="eqno">(3.12)<a class="headerlink" href="#equation-5bf87722-131c-4d14-878c-6c8934fcddf1" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-62ab6b6d-82d4-4835-8f64-a08022d29b17">
+<span class="eqno">(3.12)<a class="headerlink" href="#equation-62ab6b6d-82d4-4835-8f64-a08022d29b17" title="Permalink to this equation">#</a></span>\[\begin{equation}
     L = \frac{1}{N}\sum_i^N \left[y_i - \hat{f}(\vec{x}_i, \vec{w}, b)\right]^2 + \lambda \sum_k \left|w_k\right|
 \end{equation}\]</div>
 <p>It may appear at first that this is identical to L2. In fact, the L1 regularization has a powerful benefit: it induces sparsity. L2 just causes regression coefficients to be on average lower, but L1 forces some coefficients to be 0. This gives us a kind of “automatic” feature selection. This is called <strong>Lasso Regression</strong> when you combine L1 regularization with linear regression.</p>
@@ -1247,19 +1250,19 @@ used in the norm: <span class="math notranslate nohighlight">\((\sum_i x_i^p)^{1
 <p class="sidebar-title"></p>
 <p>There is a method called Jacknife, which does not compute multiple predictions. It computes the residuals as mentioned above, but it trains one final model on all data. Since it requires you to compute all <span class="math notranslate nohighlight">\(N\)</span> models to get the residuals, it is preferred to just use Jacknife+ which is more robust.</p>
 </aside>
-<p>An alternative approach that accounts for model variance like the bootstrap method and model bias like the k-fold cross-validation method is called <strong>Jacknife+</strong> <span id="id4">[<a class="reference internal" href="#id16" title="Rina Foygel Barber, Emmanuel J Candes, Aaditya Ramdas, and Ryan J Tibshirani. Predictive inference with the jackknife+. arXiv preprint arXiv:1905.02928, 2019.">BCRT19</a>]</span>.  Jacknife+ carries strong guarantees about accuracy of the confidence intervals generated, regardless of the underlying data or model. The change now is that we use LOOCV to create an ensemble of models (although you can subsample down if you do not want N of them) and also compute the models’ test error on the withheld test data. The final quantile estimates incorporate the variance from the variety of models (model variance) and also each models’ individual test error (model bias).
+<p>An alternative approach that accounts for model variance like the bootstrap method and model bias like the k-fold cross-validation method is called <strong>Jacknife+</strong> <span id="id4">[<a class="reference internal" href="#id18" title="Rina Foygel Barber, Emmanuel J Candes, Aaditya Ramdas, and Ryan J Tibshirani. Predictive inference with the jackknife+. arXiv preprint arXiv:1905.02928, 2019.">BCRT19</a>]</span>.  Jacknife+ carries strong guarantees about accuracy of the confidence intervals generated, regardless of the underlying data or model. The change now is that we use LOOCV to create an ensemble of models (although you can subsample down if you do not want N of them) and also compute the models’ test error on the withheld test data. The final quantile estimates incorporate the variance from the variety of models (model variance) and also each models’ individual test error (model bias).
 Specifically, we compute:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4ea68b88-9df1-4890-9ff3-41f225ade977">
-<span class="eqno">(3.13)<a class="headerlink" href="#equation-4ea68b88-9df1-4890-9ff3-41f225ade977" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-9cc31bb2-a0a4-4b36-a894-9bc34caa6fca">
+<span class="eqno">(3.13)<a class="headerlink" href="#equation-9cc31bb2-a0a4-4b36-a894-9bc34caa6fca" title="Permalink to this equation">#</a></span>\[\begin{equation}
 R_i = \left|y_i - \hat{f}(\vec{x}_i;\,\mathbf{X} \setminus \vec{x}_i )\right|
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\mathbf{X} \setminus \vec{x}_i\)</span> is the dataset to train the <span class="math notranslate nohighlight">\(i\)</span>th model and is the dataset excluding point <span class="math notranslate nohighlight">\((\vec{x}_i, y_i)\)</span>, <span class="math notranslate nohighlight">\(\hat{f}(\vec{x}_i;\,\mathbf{X} \setminus \vec{x}_i ) \)</span> is the <span class="math notranslate nohighlight">\(i\)</span>th model evaluated on point <span class="math notranslate nohighlight">\(\vec{x}_i\)</span>, and <span class="math notranslate nohighlight">\(R_i\)</span> is the residual of model <span class="math notranslate nohighlight">\(i\)</span> computed by taking the difference between the label and prediction on point <span class="math notranslate nohighlight">\(i\)</span>. <span class="math notranslate nohighlight">\(R_i\)</span> encodes how good the <span class="math notranslate nohighlight">\(i\)</span>th model is. We then combine it with the predictions on our new test point <span class="math notranslate nohighlight">\((\vec{x}', y')\)</span> to make our set for quantiling</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3e6bcec1-38c2-4b2f-9766-c0edbf07ca0d">
-<span class="eqno">(3.14)<a class="headerlink" href="#equation-3e6bcec1-38c2-4b2f-9766-c0edbf07ca0d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a71ca004-7b69-4170-b84a-0110712c75c4">
+<span class="eqno">(3.14)<a class="headerlink" href="#equation-a71ca004-7b69-4170-b84a-0110712c75c4" title="Permalink to this equation">#</a></span>\[\begin{equation}
 q_1 = \left\{ \hat{f}(\vec{x}';\,\mathbf{X} \setminus \vec{x}_i ) - R_i\right\}
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-78831ed9-1c52-4f0e-966f-2f760ae04280">
-<span class="eqno">(3.15)<a class="headerlink" href="#equation-78831ed9-1c52-4f0e-966f-2f760ae04280" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-1fd1cca1-bcc7-4dbd-9f66-53a3c93387cd">
+<span class="eqno">(3.15)<a class="headerlink" href="#equation-1fd1cca1-bcc7-4dbd-9f66-53a3c93387cd" title="Permalink to this equation">#</a></span>\[\begin{equation}
 q_2 = \left\{\hat{f}(\vec{x}';\,\mathbf{X} \setminus \vec{x}_i ) + R_i\right\}
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(q\)</span> means quantile. The first quantile <span class="math notranslate nohighlight">\(q_1\)</span>, with <span class="math notranslate nohighlight">\( - R_i\)</span>, is how low below the estimate from the <span class="math notranslate nohighlight">\(i\)</span>th model we could expect to see our prediction based on how the <span class="math notranslate nohighlight">\(i\)</span>th model did on its test point. The second set, with <span class="math notranslate nohighlight">\( + R_i\)</span>, is how high above the estimate from the <span class="math notranslate nohighlight">\(i\)</span>th model we could expect to see our prediction based on how the <span class="math notranslate nohighlight">\(i\)</span>th model did on its test point. To compute our final value, we take the median of <span class="math notranslate nohighlight">\(\hat{f}(\vec{x}';\,\mathbf{X} \setminus \vec{x}_i )\)</span> and report the lower end of the interval as the 5% quantile of <span class="math notranslate nohighlight">\(q_1\)</span> and the top as the 95% quantile of <span class="math notranslate nohighlight">\(q_2\)</span>. You can see that this method combines the ensemble of prediction models given by bootstrap resampling with the error estimates from LOOCV. Let’s see an example.</p>
@@ -1367,7 +1370,153 @@ Length: 5, dtype: str
 </div>
 </div>
 </div>
-<p>We computed above what the 5-fold cross-validation is for this data, <span class="pasted-text">3.16</span>. You can see the LOCOCV test error (<span class="pasted-text">50.33</span>) is similar, which means our different data sources agree well. So perhaps on new unseen data we can expect similar (not so great) accuracy. There may be other ways to group this data into classes, like based on molecular weight or which atoms are contained in the molecule. It depends on what you believe to be important. Breaking it down into the constituent datasets, like we did above, is a reasonable approach because it captures how different research groups would measure solubility. It is not always obvious or possible to use LOCOCV, but it should be something you consider to assess out of training data distribution. You can read more about the issue of leaving training data distribution for materials in this recent article <span id="id5">[<a class="reference internal" href="#id28" title="Christopher Sutton, Mario Boley, Luca M Ghiringhelli, Matthias Rupp, Jilles Vreeken, and Matthias Scheffler. Identifying domains of applicability of machine learning models for materials science. Nature Communications, 11(1):1–9, 2020.">SBG+20</a>]</span>. You can read more about model selection in general in this recent tutorial article <span id="id6">[<a class="reference internal" href="#id34" title="Sebastian Raschka. Model evaluation, model selection, and algorithm selection in machine learning. arXiv preprint arXiv:1811.12808, 2018.">Ras18</a>]</span>.</p>
+<p>We computed above what the 5-fold cross-validation is for this data, <span class="pasted-text">3.16</span>. You can see the LOCOCV test error (<span class="pasted-text">50.33</span>) is similar, which means our different data sources agree well. So perhaps on new unseen data we can expect similar (not so great) accuracy. There may be other ways to group this data into classes, like based on molecular weight or which atoms are contained in the molecule. It depends on what you believe to be important. Breaking it down into the constituent datasets, like we did above, is a reasonable approach because it captures how different research groups would measure solubility. It is not always obvious or possible to use LOCOCV, but it should be something you consider to assess out of training data distribution. You can read more about the issue of leaving training data distribution for materials in this recent article <span id="id5">[<a class="reference internal" href="#id30" title="Christopher Sutton, Mario Boley, Luca M Ghiringhelli, Matthias Rupp, Jilles Vreeken, and Matthias Scheffler. Identifying domains of applicability of machine learning models for materials science. Nature Communications, 11(1):1–9, 2020.">SBG+20</a>]</span>. You can read more about model selection in general in this recent tutorial article <span id="id6">[<a class="reference internal" href="#id37" title="Sebastian Raschka. Model evaluation, model selection, and algorithm selection in machine learning. arXiv preprint arXiv:1811.12808, 2018.">Ras18</a>]</span>.</p>
+</section>
+<section id="scaffold-splits">
+<h3><span class="section-number">3.8.2. </span>Scaffold splits<a class="headerlink" href="#scaffold-splits" title="Link to this heading">#</a></h3>
+<p>For molecular problems, a random train/test split can still leak structural similarity between train and test molecules. A <strong>scaffold split</strong> groups molecules by their core scaffold, often the Bemis-Murcko scaffold <span id="id7">[<a class="reference internal" href="#id32" title="Guy W Bemis and Mark A Murcko. The properties of known drugs. 1. molecular frameworks. Journal of Medicinal Chemistry, 39(15):2887–2893, 1996.">BM96</a>]</span> and puts whole scaffold groups into either train or test. This usually gives a harder but more realistic estimate of performance on novel chemistry. Scaffold splits were popularized as a standard benchmark by the MoleculeNet suite<span id="id8">[<a class="reference internal" href="#id31" title="Zhenqin Wu, Bharath Ramsundar, Evan N Feinberg, Joseph Gomes, Caleb Geniesse, Aneesh S Pappu, Karl Leswing, and Vijay Pande. Moleculenet: a benchmark for molecular machine learning. Chemical science, 9(2):513–530, 2018.">WRF+18</a>]</span>.</p>
+<p>The standard approach places the <strong>rarest</strong> scaffolds into the test set, since those represent the most novel chemistry. The demo below builds Murcko scaffolds from SMILES, accumulates the least-common scaffolds into the test set until we reach about 20% of molecules, and compares that error with a random split of the same size.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">smiles_col</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span>
+    <span class="p">(</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;SMILES&quot;</span><span class="p">,</span> <span class="s2">&quot;smiles&quot;</span><span class="p">,</span> <span class="s2">&quot;CanonicalSMILES&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">soldata</span><span class="o">.</span><span class="n">columns</span><span class="p">),</span> <span class="kc">None</span>
+<span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">murcko_scaffold</span><span class="p">(</span><span class="n">smiles</span><span class="p">):</span>
+    <span class="n">mol</span> <span class="o">=</span> <span class="n">rdkit</span><span class="o">.</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="n">smiles</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">mol</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">return</span> <span class="n">MurckoScaffold</span><span class="o">.</span><span class="n">MurckoScaffoldSmiles</span><span class="p">(</span><span class="n">mol</span><span class="o">=</span><span class="n">mol</span><span class="p">)</span>
+
+
+<span class="n">scaffold_data</span> <span class="o">=</span> <span class="n">soldata</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="n">smiles_col</span><span class="p">])</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">scaffold_data</span><span class="p">[</span><span class="s2">&quot;Scaffold&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">scaffold_data</span><span class="p">[</span><span class="n">smiles_col</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">murcko_scaffold</span><span class="p">)</span>
+<span class="n">scaffold_data</span> <span class="o">=</span> <span class="n">scaffold_data</span><span class="p">[</span><span class="n">scaffold_data</span><span class="p">[</span><span class="s2">&quot;Scaffold&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">notna</span><span class="p">()]</span>
+
+<span class="n">scaffold_counts</span> <span class="o">=</span> <span class="n">scaffold_data</span><span class="p">[</span><span class="s2">&quot;Scaffold&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<span class="n">test_target</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">0.2</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">scaffold_data</span><span class="p">))</span>
+<span class="n">test_scaffolds</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="n">running</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="c1"># iterate from rarest to most common</span>
+<span class="k">for</span> <span class="n">scaffold</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="n">scaffold_counts</span><span class="o">.</span><span class="n">iloc</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">running</span> <span class="o">&gt;=</span> <span class="n">test_target</span><span class="p">:</span>
+        <span class="k">break</span>
+    <span class="n">test_scaffolds</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">scaffold</span><span class="p">)</span>
+    <span class="n">running</span> <span class="o">+=</span> <span class="n">count</span>
+
+<span class="n">test</span> <span class="o">=</span> <span class="n">scaffold_data</span><span class="p">[</span><span class="n">scaffold_data</span><span class="p">[</span><span class="s2">&quot;Scaffold&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">test_scaffolds</span><span class="p">)]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">train</span> <span class="o">=</span> <span class="n">scaffold_data</span><span class="p">[</span><span class="o">~</span><span class="n">scaffold_data</span><span class="p">[</span><span class="s2">&quot;Scaffold&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">test_scaffolds</span><span class="p">)]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="n">train_mean</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="n">feature_names</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">train_std</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="n">feature_names</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+<span class="n">train</span><span class="p">[</span><span class="n">feature_names</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">train</span><span class="p">[</span><span class="n">feature_names</span><span class="p">]</span> <span class="o">-</span> <span class="n">train_mean</span><span class="p">)</span> <span class="o">/</span> <span class="n">train_std</span>
+<span class="n">test</span><span class="p">[</span><span class="n">feature_names</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="n">feature_names</span><span class="p">]</span> <span class="o">-</span> <span class="n">train_mean</span><span class="p">)</span> <span class="o">/</span> <span class="n">train_std</span>
+
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="n">feature_names</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">train</span><span class="p">[</span><span class="s2">&quot;Solubility&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">test_x</span><span class="p">,</span> <span class="n">test_y</span> <span class="o">=</span> <span class="n">test</span><span class="p">[</span><span class="n">feature_names</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">test</span><span class="p">[</span><span class="s2">&quot;Solubility&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">w</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="p">))</span>
+<span class="n">scaffold_mse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">test_x</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span> <span class="o">-</span> <span class="n">test_y</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">idx</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">scaffold_data</span><span class="p">))</span>
+<span class="n">rand_test_idx</span> <span class="o">=</span> <span class="n">idx</span><span class="p">[:</span> <span class="nb">len</span><span class="p">(</span><span class="n">test</span><span class="p">)]</span>
+<span class="n">rand_train_idx</span> <span class="o">=</span> <span class="n">idx</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">test</span><span class="p">)</span> <span class="p">:]</span>
+
+<span class="n">random_train</span> <span class="o">=</span> <span class="n">scaffold_data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">rand_train_idx</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">random_test</span> <span class="o">=</span> <span class="n">scaffold_data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">rand_test_idx</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">rand_mean</span> <span class="o">=</span> <span class="n">random_train</span><span class="p">[</span><span class="n">feature_names</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">rand_std</span> <span class="o">=</span> <span class="n">random_train</span><span class="p">[</span><span class="n">feature_names</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+<span class="n">random_train</span><span class="p">[</span><span class="n">feature_names</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">random_train</span><span class="p">[</span><span class="n">feature_names</span><span class="p">]</span> <span class="o">-</span> <span class="n">rand_mean</span><span class="p">)</span> <span class="o">/</span> <span class="n">rand_std</span>
+<span class="n">random_test</span><span class="p">[</span><span class="n">feature_names</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">random_test</span><span class="p">[</span><span class="n">feature_names</span><span class="p">]</span> <span class="o">-</span> <span class="n">rand_mean</span><span class="p">)</span> <span class="o">/</span> <span class="n">rand_std</span>
+
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">random_train</span><span class="p">[</span><span class="n">feature_names</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">random_train</span><span class="p">[</span><span class="s2">&quot;Solubility&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">test_x</span><span class="p">,</span> <span class="n">test_y</span> <span class="o">=</span> <span class="n">random_test</span><span class="p">[</span><span class="n">feature_names</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">random_test</span><span class="p">[</span><span class="s2">&quot;Solubility&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">w</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="p">))</span>
+<span class="n">random_mse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">test_x</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span> <span class="o">-</span> <span class="n">test_y</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Scaffold split test MSE: </span><span class="si">{</span><span class="n">scaffold_mse</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Random split test MSE:   </span><span class="si">{</span><span class="n">random_mse</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unique scaffolds in test: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">test_scaffolds</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Test molecules: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">test</span><span class="p">)</span><span class="si">}</span><span class="s2">, Train molecules: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">train</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Scaffold split test MSE: 5.48
+Random split test MSE:   2.83
+Unique scaffolds in test: 1650
+Test molecules: 1996, Train molecules: 7984
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># show some common train scaffolds and rare test scaffolds</span>
+<span class="n">train_scaffolds</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">scaffold_counts</span><span class="o">.</span><span class="n">index</span><span class="p">)</span> <span class="o">-</span> <span class="n">test_scaffolds</span>
+<span class="n">train_scaffold_counts</span> <span class="o">=</span> <span class="n">scaffold_counts</span><span class="p">[</span><span class="n">scaffold_counts</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">train_scaffolds</span><span class="p">)]</span>
+<span class="n">test_scaffold_counts</span> <span class="o">=</span> <span class="n">scaffold_counts</span><span class="p">[</span><span class="n">scaffold_counts</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">test_scaffolds</span><span class="p">)]</span>
+
+<span class="n">common_train</span> <span class="o">=</span> <span class="n">train_scaffold_counts</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">rare_test</span> <span class="o">=</span> <span class="n">test_scaffold_counts</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="n">scaffold_smiles</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">common_train</span><span class="o">.</span><span class="n">index</span><span class="p">)</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">rare_test</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<span class="n">scaffold_mols</span> <span class="o">=</span> <span class="p">[</span><span class="n">rdkit</span><span class="o">.</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">scaffold_smiles</span><span class="p">]</span>
+<span class="n">legends</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;Train (n=</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">)&quot;</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">common_train</span><span class="o">.</span><span class="n">values</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span>
+    <span class="sa">f</span><span class="s2">&quot;Test (n=</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">)&quot;</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">rare_test</span><span class="o">.</span><span class="n">values</span>
+<span class="p">]</span>
+
+<span class="c1"># filter out any scaffolds that failed to parse</span>
+<span class="n">valid</span> <span class="o">=</span> <span class="p">[(</span><span class="n">m</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span> <span class="k">for</span> <span class="n">m</span><span class="p">,</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">scaffold_mols</span><span class="p">,</span> <span class="n">legends</span><span class="p">)</span> <span class="k">if</span> <span class="n">m</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]</span>
+<span class="n">scaffold_mols</span><span class="p">,</span> <span class="n">legends</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">valid</span><span class="p">)</span> <span class="k">if</span> <span class="n">valid</span> <span class="k">else</span> <span class="p">([],</span> <span class="p">[])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Top train scaffolds (most common) vs test scaffolds:&quot;</span><span class="p">)</span>
+<span class="n">rdkit</span><span class="o">.</span><span class="n">Chem</span><span class="o">.</span><span class="n">Draw</span><span class="o">.</span><span class="n">MolsToGridImage</span><span class="p">(</span>
+    <span class="n">scaffold_mols</span><span class="p">,</span> <span class="n">molsPerRow</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">subImgSize</span><span class="o">=</span><span class="p">(</span><span class="mi">250</span><span class="p">,</span> <span class="mi">250</span><span class="p">),</span> <span class="n">legends</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">legends</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Top train scaffolds (most common) vs test scaffolds:
+</pre></div>
+</div>
+<img alt="../_images/bab45ef151d3d1513b86503d76ba2c9746b8fcb35d9fc04b90cbf41df0093dd8.svg" src="../_images/bab45ef151d3d1513b86503d76ba2c9746b8fcb35d9fc04b90cbf41df0093dd8.svg" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># show example molecules from train and test splits</span>
+<span class="n">train_examples</span> <span class="o">=</span> <span class="n">train</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">test_examples</span> <span class="o">=</span> <span class="n">test</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">example_smiles</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">train_examples</span><span class="p">[</span><span class="n">smiles_col</span><span class="p">])</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">test_examples</span><span class="p">[</span><span class="n">smiles_col</span><span class="p">])</span>
+<span class="n">example_labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Train&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_examples</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;Test&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">test_examples</span><span class="p">)</span>
+<span class="n">example_pairs</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="n">rdkit</span><span class="o">.</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">l</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">example_smiles</span><span class="p">,</span> <span class="n">example_labels</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">rdkit</span><span class="o">.</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+<span class="p">]</span>
+<span class="n">example_mols</span><span class="p">,</span> <span class="n">example_legends</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">example_pairs</span><span class="p">)</span> <span class="k">if</span> <span class="n">example_pairs</span> <span class="k">else</span> <span class="p">([],</span> <span class="p">[])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Example molecules from each split:&quot;</span><span class="p">)</span>
+<span class="n">rdkit</span><span class="o">.</span><span class="n">Chem</span><span class="o">.</span><span class="n">Draw</span><span class="o">.</span><span class="n">MolsToGridImage</span><span class="p">(</span>
+    <span class="n">example_mols</span><span class="p">,</span> <span class="n">molsPerRow</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">subImgSize</span><span class="o">=</span><span class="p">(</span><span class="mi">250</span><span class="p">,</span> <span class="mi">250</span><span class="p">),</span> <span class="n">legends</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">example_legends</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Example molecules from each split:
+</pre></div>
+</div>
+<img alt="../_images/33b5134c77c0a2150c2e5d23db065f1c5bbf80ee32e74a1e00f9095392929b58.svg" src="../_images/33b5134c77c0a2150c2e5d23db065f1c5bbf80ee32e74a1e00f9095392929b58.svg" />
+</div>
+</div>
+<p>In many chemistry datasets, the scaffold-split error is higher than the random-split error. That gap is useful: it quantifies how much your model depends on seeing closely related chemotypes during training.</p>
 </section>
 </section>
 <section id="chapter-summary">
@@ -1381,19 +1530,20 @@ Length: 5, dtype: str
 <li><p>Regularization is a strategy to decrease model variance. L2 is a good first choice</p></li>
 <li><p>More rigorous assessment of models can be done via k-fold cross-validation or Jacknife+ when the training data is small enough that we can train multiple models</p></li>
 <li><p>Much of our model assessments depends on the testing data being from the same distribution as the training data (similar values). This is often not true and can be measured with leave-one-class-out cross-validation.</p></li>
+<li><p>Scaffold split is one way to predict a realistic test error</p></li>
 </ul>
 </section>
 <section id="exercises">
 <h2><span class="section-number">3.10. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
-<section id="id7">
-<h3><span class="section-number">3.10.1. </span>Overfitting<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<section id="id9">
+<h3><span class="section-number">3.10.1. </span>Overfitting<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
 <li><p>What happens if we have redundant features but no noise? Is it possible to overfit?</p></li>
 <li><p>We said that increasing dataset size reduces model variance. Show this by using k-fold cross-validation on a few different dataset sizes.</p></li>
 </ol>
 </section>
-<section id="id8">
-<h3><span class="section-number">3.10.2. </span>Regularization<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<section id="id10">
+<h3><span class="section-number">3.10.2. </span>Regularization<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
 <li><p>Implement L1 regularization on the solubility data with <span class="math notranslate nohighlight">\(N = 35\)</span> data points. Increase the strength until some feature coefficients (<span class="math notranslate nohighlight">\(w_i\)</span>) go to zero. Which ones are they? Why do you think they go to zero first?</p></li>
 <li><p>Repeat 1 with a few different sets of training data. Are your results consistent on which features disappear? Based on your results, do you think there is meaning to the features which go to zero?</p></li>
@@ -1409,31 +1559,39 @@ Length: 5, dtype: str
 </section>
 <section id="cited-references">
 <h2><span class="section-number">3.11. </span>Cited References<a class="headerlink" href="#cited-references" title="Link to this heading">#</a></h2>
-<div class="docutils container" id="id9">
+<div class="docutils container" id="id11">
 <div role="list" class="citation-list">
-<div class="citation" id="id26" role="doc-biblioentry">
+<div class="citation" id="id28" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">SKE19</a><span class="fn-bracket">]</span></span>
 <p>Murat Cihan Sorkun, Abhishek Khetan, and Süleyman Er. AqSolDB, a curated reference set of aqueous solubility and 2D descriptors for a diverse set of compounds. <em>Sci. Data</em>, 6(1):143, 2019. <a class="reference external" href="https://doi.org/10.1038/s41597-019-0151-1">doi:10.1038/s41597-019-0151-1</a>.</p>
 </div>
-<div class="citation" id="id18" role="doc-biblioentry">
+<div class="citation" id="id20" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">Bis06</a><span class="fn-bracket">]</span></span>
 <p>Christopher M Bishop. <em>Pattern recognition and machine learning</em>. springer, 2006.</p>
 </div>
-<div class="citation" id="id45" role="doc-biblioentry">
+<div class="citation" id="id48" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">NMB+18</a><span class="fn-bracket">]</span></span>
 <p>Brady Neal, Sarthak Mittal, Aristide Baratin, Vinayak Tantia, Matthew Scicluna, Simon Lacoste-Julien, and Ioannis Mitliagkas. A modern take on the bias-variance tradeoff in neural networks. <em>arXiv preprint arXiv:1810.08591</em>, 2018.</p>
 </div>
-<div class="citation" id="id16" role="doc-biblioentry">
+<div class="citation" id="id18" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">BCRT19</a><span class="fn-bracket">]</span></span>
 <p>Rina Foygel Barber, Emmanuel J Candes, Aaditya Ramdas, and Ryan J Tibshirani. Predictive inference with the jackknife+. <em>arXiv preprint arXiv:1905.02928</em>, 2019.</p>
 </div>
-<div class="citation" id="id28" role="doc-biblioentry">
+<div class="citation" id="id30" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">SBG+20</a><span class="fn-bracket">]</span></span>
 <p>Christopher Sutton, Mario Boley, Luca M Ghiringhelli, Matthias Rupp, Jilles Vreeken, and Matthias Scheffler. Identifying domains of applicability of machine learning models for materials science. <em>Nature Communications</em>, 11(1):1–9, 2020.</p>
 </div>
-<div class="citation" id="id34" role="doc-biblioentry">
+<div class="citation" id="id37" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id6">Ras18</a><span class="fn-bracket">]</span></span>
 <p>Sebastian Raschka. Model evaluation, model selection, and algorithm selection in machine learning. <em>arXiv preprint arXiv:1811.12808</em>, 2018.</p>
+</div>
+<div class="citation" id="id32" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id7">BM96</a><span class="fn-bracket">]</span></span>
+<p>Guy W Bemis and Mark A Murcko. The properties of known drugs. 1. molecular frameworks. <em>Journal of Medicinal Chemistry</em>, 39(15):2887–2893, 1996.</p>
+</div>
+<div class="citation" id="id31" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id8">WRF+18</a><span class="fn-bracket">]</span></span>
+<p>Zhenqin Wu, Bharath Ramsundar, Evan N Feinberg, Joseph Gomes, Caleb Geniesse, Aneesh S Pappu, Karl Leswing, and Vijay Pande. Moleculenet: a benchmark for molecular machine learning. <em>Chemical science</em>, 9(2):513–530, 2018.</p>
 </div>
 </div>
 </div>
@@ -1529,12 +1687,13 @@ Length: 5, dtype: str
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-data-distribution">3.8. Training Data Distribution</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#leave-one-class-out-cross-validation">3.8.1. Leave One Class Out Cross-Validation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scaffold-splits">3.8.2. Scaffold splits</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-summary">3.9. Chapter Summary</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">3.10. Exercises</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">3.10.1. Overfitting</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">3.10.2. Regularization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">3.10.1. Overfitting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">3.10.2. Regularization</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-assessment">3.10.3. Model Assessment</a></li>
 </ul>
 </li>

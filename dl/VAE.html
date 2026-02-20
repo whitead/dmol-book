@@ -512,7 +512,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="variational-autoencoder">
 <h1><span class="section-number">14. </span>Variational Autoencoder<a class="headerlink" href="#variational-autoencoder" title="Link to this heading">#</a></h1>
-<p>A variational autoencoder (VAE) is a kind of <strong>generative</strong> deep learning model that is capable of <strong>unsupervised learning</strong> <span id="id1">[<a class="reference internal" href="#id173" title="Diederik P Kingma and Max Welling. Auto-encoding variational bayes. arXiv preprint arXiv:1312.6114, 2013.">KW13</a>]</span>. Unsupervised learning is the process of fitting models to unlabeled data. A generative model is a specific kind of unsupervised learning model that is capable of <em>generating</em> new data points that were not seen in training. Generative models can be viewed as a trained probability distribution over that data: <span class="math notranslate nohighlight">\(\hat{\textrm{P}}(x)\)</span>. You can then draw samples from this distribution. It is generally too difficult to construct <span class="math notranslate nohighlight">\(\hat{\textrm{P}}(x)\)</span> directly, and so most generative models make some changes to the structure.</p>
+<p>A variational autoencoder (VAE) is a kind of <strong>generative</strong> deep learning model that is capable of <strong>unsupervised learning</strong> <span id="id1">[<a class="reference internal" href="#id174" title="Diederik P Kingma and Max Welling. Auto-encoding variational bayes. arXiv preprint arXiv:1312.6114, 2013.">KW13</a>]</span>. Unsupervised learning is the process of fitting models to unlabeled data. A generative model is a specific kind of unsupervised learning model that is capable of <em>generating</em> new data points that were not seen in training. Generative models can be viewed as a trained probability distribution over that data: <span class="math notranslate nohighlight">\(\hat{\textrm{P}}(x)\)</span>. You can then draw samples from this distribution. It is generally too difficult to construct <span class="math notranslate nohighlight">\(\hat{\textrm{P}}(x)\)</span> directly, and so most generative models make some changes to the structure.</p>
 <div class="admonition-audience-objectives admonition">
 <p class="admonition-title">Audience &amp; Objectives</p>
 <p>This chapter builds on <a class="reference internal" href="layers.html"><span class="doc">Standard Layers</span></a> and <a class="reference internal" href="data.html"><span class="doc">Input Data &amp; Equivariances</span></a>. It also assumes a good knowledge of probability theory, including conditional probabilities. You can read <a class="reference external" href="https://raw.githubusercontent.com/whitead/numerical_stats/master/unit_2/lectures/lecture_3.pdf">my notes</a> or any introductory probability text to get an overview. After completing this chapter, you should be able to</p>
@@ -524,11 +524,11 @@ document.write(`
 </ul>
 </div>
 <p>A VAE approaches this problem by introducing a dummy random variable <span class="math notranslate nohighlight">\(z\)</span>, which we define to have a known distribution (e.g., normal). We can then rewrite <span class="math notranslate nohighlight">\(\hat{\textrm{P}}(x)\)</span> as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f2d76af9-e605-478b-bd1c-dfeb64c3d830">
-<span class="eqno">(14.1)<a class="headerlink" href="#equation-f2d76af9-e605-478b-bd1c-dfeb64c3d830" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ad916f97-f2e0-4714-a536-3ce838bd45b7">
+<span class="eqno">(14.1)<a class="headerlink" href="#equation-ad916f97-f2e0-4714-a536-3ce838bd45b7" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \hat{\textrm{P}}(x) = \int\,\hat{\textrm{P}}\left(x | z \right) \textrm{P}(z)\,dz
 \end{equation}\]</div>
-<p>using the definition of a marginal and conditional probability. Training <span class="math notranslate nohighlight">\(\hat{\textrm{P}}\left(x | z \right)\)</span> directly is not really possible either, but we can create a symmetric distribution <span class="math notranslate nohighlight">\(\hat{\textrm{P}}\left(z | x \right)\)</span> and train both simultaneously. This symmetric distribution only is created to help us train; our end goal is to find <span class="math notranslate nohighlight">\(\hat{\textrm{P}}\left(x | z \right)\)</span> so that we can obtain <span class="math notranslate nohighlight">\(\hat{\textrm{P}}(x)\)</span>. VAEs were first introduced in <span id="id2">[<a class="reference internal" href="#id173" title="Diederik P Kingma and Max Welling. Auto-encoding variational bayes. arXiv preprint arXiv:1312.6114, 2013.">KW13</a>]</span>.</p>
+<p>using the definition of a marginal and conditional probability. Training <span class="math notranslate nohighlight">\(\hat{\textrm{P}}\left(x | z \right)\)</span> directly is not really possible either, but we can create a symmetric distribution <span class="math notranslate nohighlight">\(\hat{\textrm{P}}\left(z | x \right)\)</span> and train both simultaneously. This symmetric distribution only is created to help us train; our end goal is to find <span class="math notranslate nohighlight">\(\hat{\textrm{P}}\left(x | z \right)\)</span> so that we can obtain <span class="math notranslate nohighlight">\(\hat{\textrm{P}}(x)\)</span>. VAEs were first introduced in <span id="id2">[<a class="reference internal" href="#id174" title="Diederik P Kingma and Max Welling. Auto-encoding variational bayes. arXiv preprint arXiv:1312.6114, 2013.">KW13</a>]</span>.</p>
 <p>A VAE is thus a set of two trained conditional probability distributions that operate on the data <span class="math notranslate nohighlight">\(x\)</span> and latent variables <span class="math notranslate nohighlight">\(z\)</span>. The first conditional is <span class="math notranslate nohighlight">\(p_\theta(x | z)\)</span>, where <span class="math notranslate nohighlight">\(\theta\)</span> indicates the trainable parameters that we will be fitting. <span class="math notranslate nohighlight">\(p_\theta(x | z)\)</span> is known as the “decoder” because it goes from the latent variable <span class="math notranslate nohighlight">\(z\)</span> to <span class="math notranslate nohighlight">\(x\)</span>. The decoder analogy is because you can view <span class="math notranslate nohighlight">\(z\)</span> as a kind of encoded compression of <span class="math notranslate nohighlight">\(x\)</span>. The other conditional is <span class="math notranslate nohighlight">\(q_\phi(z | x)\)</span> and is known as the encoder.</p>
 <p>Remember we always know <span class="math notranslate nohighlight">\(p(z)\)</span> because we chose it to be a defined distribution — that is the key idea. We’re grounding our encoder/decoder by having them communicate through <span class="math notranslate nohighlight">\(p(z)\)</span>, which we know. For the rest of this chapter we’ll take <span class="math notranslate nohighlight">\(p(z)\)</span> to be a <strong>standard normal distribution</strong>. <span class="math notranslate nohighlight">\(p(z)\)</span> can be other distributions though. It can even be trained using the techniques from the <a class="reference internal" href="flows.html"><span class="doc">Normalizing Flows</span></a>.</p>
 <section id="vae-loss-function">
@@ -545,8 +545,8 @@ document.write(`
 <p>The derivation below is a little unusual. Most derivations rely on Bayes’ theorem following a principle of evidence lower bound (ELBO). I thought I’d give a different derivation since you can readily find examples of <a class="reference external" href="https://www.cs.princeton.edu/courses/archive/fall11/cos597C/lectures/variational-inference-i.pdf">the ELBO in many places</a>.</p>
 </div>
 <p>Remember we do not have an expression for <span class="math notranslate nohighlight">\(\hat{\textrm{P}}(x_i)\)</span>. We have <span class="math notranslate nohighlight">\(p_\theta(x_i | z)\)</span>. To connect them we’ll use the following expression:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7c28215a-8e3f-49fe-832e-6c0c577fe05a">
-<span class="eqno">(14.2)<a class="headerlink" href="#equation-7c28215a-8e3f-49fe-832e-6c0c577fe05a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-32b11188-ce15-4376-8111-3aefc15f4fd6">
+<span class="eqno">(14.2)<a class="headerlink" href="#equation-32b11188-ce15-4376-8111-3aefc15f4fd6" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \log\left[\hat{\textrm{P}}(x_i)\right]= \log\left[\int\,p_\theta(x_i | z) \textrm{P}(z)\,dz\right] = \log \textrm{E}_z\left[p_\theta(x_i | z)\right]
 \end{equation}\]</div>
 <p>where we have rewritten the integral more compactly by using the definition of expectation. This expression requires integrating over the latent variable, which is not easy since as you can guess <span class="math notranslate nohighlight">\(p_\theta(x | z)\)</span> is a neural network and it’s not straightforward to integrate over the input (<span class="math notranslate nohighlight">\(z\)</span>) of a neural network. Instead, we can approximate this integral by sampling some <span class="math notranslate nohighlight">\(z\)</span>s from <span class="math notranslate nohighlight">\(P(z)\)</span></p>
@@ -554,42 +554,42 @@ document.write(`
 <p class="sidebar-title"></p>
 <p>We actually could just integrate over the latent variables. This is called a normalizing flow and is a class of generative models we’ll see later.</p>
 </aside>
-<div class="amsmath math notranslate nohighlight" id="equation-27e6ca75-37b2-4041-93c5-1abc472b1a96">
-<span class="eqno">(14.3)<a class="headerlink" href="#equation-27e6ca75-37b2-4041-93c5-1abc472b1a96" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e116a3fa-15fd-46be-8ae6-a5411a87fc8c">
+<span class="eqno">(14.3)<a class="headerlink" href="#equation-e116a3fa-15fd-46be-8ae6-a5411a87fc8c" title="Permalink to this equation">#</a></span>\[\begin{equation}
  \log\textrm{E}_z\left[ p_\theta(x_i | z)\right]\approx \log \left[\frac{1}{N}\sum_j^N  p_\theta(x_i | z_j)\right],\, z_j \sim P(z_j)
 \end{equation}\]</div>
 <p>You’ll find though that grabbing <span class="math notranslate nohighlight">\(z\)</span>’s from <span class="math notranslate nohighlight">\(P(z)\)</span> is not so efficient at approximating this integral, because you need the <span class="math notranslate nohighlight">\(z\)</span>’s to be likely to have led to the observed <span class="math notranslate nohighlight">\(x_i\)</span>. The integral is dominated by the <span class="math notranslate nohighlight">\(p_\theta(x_i | z_j)\)</span> terms. This is where we use <span class="math notranslate nohighlight">\(q(z | x)\)</span>: it can provide efficient guesses for <span class="math notranslate nohighlight">\(z_j\)</span>. To approximate <span class="math notranslate nohighlight">\(\log \textrm{E}_z\left[p_\theta(x_i | z)\right]\)</span> with samples from <span class="math notranslate nohighlight">\(q(z | x_i)\)</span>, we need to account for the fact that sampling from <span class="math notranslate nohighlight">\(q(z | x_i)\)</span> is not identical to sampling from <span class="math notranslate nohighlight">\(P(z)\)</span> by adding their ratio to the expression (<a class="reference external" href="https://en.wikipedia.org/wiki/Importance_sampling">importance sampling</a>).</p>
-<div class="amsmath math notranslate nohighlight" id="equation-395fb2b6-bf7b-4816-91df-abf12f3ce5ec">
-<span class="eqno">(14.4)<a class="headerlink" href="#equation-395fb2b6-bf7b-4816-91df-abf12f3ce5ec" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-8e78c676-5a99-4c4a-aca5-b476b63f16b1">
+<span class="eqno">(14.4)<a class="headerlink" href="#equation-8e78c676-5a99-4c4a-aca5-b476b63f16b1" title="Permalink to this equation">#</a></span>\[\begin{equation}
  \log\textrm{E}_z\left[ p_\theta(x_i | z)\right]\approx \log \left[\frac{1}{N}\sum^N_j  p_\theta(x_i | z_j) \frac{P(z_j)}{q_\phi(z_j | x_i)}\right],\, z_j \sim q_\phi(z_j | x_i)
 \end{equation}\]</div>
 <p>The ratio of <span class="math notranslate nohighlight">\(P(z) / q_\phi(z | x)\)</span> enables our numerical approximation of the expectation. For notational purposes though I’ll go back to the exact expression, with the understanding that when we go to implementation we’ll use the numerical approximation:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-6d5b6aab-f68b-4d64-85b0-e7dd9767dc2e">
-<span class="eqno">(14.5)<a class="headerlink" href="#equation-6d5b6aab-f68b-4d64-85b0-e7dd9767dc2e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-3ff0a092-f5d7-41ea-b05f-22ad7b8d7d3b">
+<span class="eqno">(14.5)<a class="headerlink" href="#equation-3ff0a092-f5d7-41ea-b05f-22ad7b8d7d3b" title="Permalink to this equation">#</a></span>\[\begin{equation}
  \log\textrm{E}_z\left[ p_\theta(x_i | z)\right] = \log\textrm{E}_{z \sim q_\phi(z | x_i)}\left[ p_\theta(x_i | z) \frac{P(z)}{q_\phi(z | x_i)}\right]
 \end{equation}\]</div>
 <p>Notice how the expectation now is wrt <span class="math notranslate nohighlight">\(z \sim q_\phi(z | x_i)\)</span> since we have that importance sampling ratio in the expression.</p>
 <p>Now if the log was on the inside of our expectation, we could simplify this. We can actually swap the order of expectation and the log using Jensen’s Inequality for the concave log function. The consequence is that our loss is no longer an exact estimate of the log likelihood, but a lower bound.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-fc3cf68b-3c07-47d5-9d80-1ccc1188a2a5">
-<span class="eqno">(14.6)<a class="headerlink" href="#equation-fc3cf68b-3c07-47d5-9d80-1ccc1188a2a5" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-70a485b6-3cf4-4c16-b2c9-2f843a81bef1">
+<span class="eqno">(14.6)<a class="headerlink" href="#equation-70a485b6-3cf4-4c16-b2c9-2f843a81bef1" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \log \textrm{E}\left[\ldots\right]\geq \textrm{E}\left[\log \ldots\right]
 \end{equation}\]</div>
 <p>We’ll use that and can now separate into two terms by properties of the log</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e23a4e46-2dc3-4d58-b1f6-b81ddd5ebfc0">
-<span class="eqno">(14.7)<a class="headerlink" href="#equation-e23a4e46-2dc3-4d58-b1f6-b81ddd5ebfc0" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ecb896c1-a78e-479b-bedc-b570591ff86f">
+<span class="eqno">(14.7)<a class="headerlink" href="#equation-ecb896c1-a78e-479b-bedc-b570591ff86f" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \textrm{E}_{z \sim q_\phi(z | x_i)}\left[ \log\left(p_\theta(x_i | z) \frac{P(z)}{q_\phi(z | x_i)}\right)\right] = \textrm{E}_{z \sim q_\phi(z | x_i)}\left[ \log p_\theta(x_i | z)\right] + \textrm{E}_{z \sim q_\phi(z | x_i)}\left[ \log \left(\frac{P(z)}{q_\phi(z | x_i)}\right)\right]
 \end{equation}\]</div>
 <p>Remember we always planned to re-introduce numerically approximate the expectation. However, the right-hand side does not involve <span class="math notranslate nohighlight">\(p_\theta(x | z)\)</span>, so we do not need to integrate over a neural network input. We just need to integrate over the output of <span class="math notranslate nohighlight">\(q_\phi(z | x)\)</span> and <span class="math notranslate nohighlight">\(P(z)\)</span>, which is a standard normal distribution. We’ll see later on that we can make the output of <span class="math notranslate nohighlight">\(q_\phi(z | x)\)</span> specifically be a normal distribution to make sure we can easily compute the integral. Finally, we can use an identity that relates the Kullback–Leibler divergence (KL divergence) (a binary functional of two probabilities) to the right-hand side term:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ff9a0052-8a5d-4e14-a770-f006cfe0ed99">
-<span class="eqno">(14.8)<a class="headerlink" href="#equation-ff9a0052-8a5d-4e14-a770-f006cfe0ed99" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-99e7202f-3f93-49f9-aecb-7fb5e80c50d1">
+<span class="eqno">(14.8)<a class="headerlink" href="#equation-99e7202f-3f93-49f9-aecb-7fb5e80c50d1" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \textrm{E}_{p(x)}\left[ \ln\left(\frac{q(x)}{p(x)}\right)\right] = -\textrm{KL}\left[p(x)|| q(x)\right]
 \end{equation}\]</div>
 <p>arriving at our final result:</p>
 </section>
 <section id="log-likelihood-approximation">
 <h3><span class="section-number">14.1.2. </span>Log-Likelihood Approximation<a class="headerlink" href="#log-likelihood-approximation" title="Link to this heading">#</a></h3>
-<div class="amsmath math notranslate nohighlight" id="equation-abd8cc43-93da-44d5-adac-8d0ac7bd53a0">
-<span class="eqno">(14.9)<a class="headerlink" href="#equation-abd8cc43-93da-44d5-adac-8d0ac7bd53a0" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-f97249b1-ddd7-4732-90a5-6ea835ed56c8">
+<span class="eqno">(14.9)<a class="headerlink" href="#equation-f97249b1-ddd7-4732-90a5-6ea835ed56c8" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \log\left[\hat{\textrm{P}}(x_i)\right] \geq \textrm{E}_{z \sim q_\phi(z | x_i)}\left[ \log p_\theta(x_i | z)\right] -\textrm{KL}\left[q_\phi(z | x_i)|| P(z)\right]
 \end{equation}\]</div>
 <p>The left term is called the <strong>reconstruction loss</strong> and assess how close we come after going from <span class="math notranslate nohighlight">\(x \rightarrow z \rightarrow x\)</span> in expectation. The right-hand term is the <strong>KL-divergence</strong> and measures how close our encoder is to our defined <span class="math notranslate nohighlight">\(P(z)\)</span> (normal distribution). The right-hand term involves an integral that can be computed analytically and no sampling is required to estimate it. Remember, in the derivation the KL-divergence term appeared as a correction term to account for the fact that our loss doesn’t use <span class="math notranslate nohighlight">\(P(z)\)</span> directly, but instead uses the encoder <span class="math notranslate nohighlight">\(q_\phi(z | x_i)\)</span> which generates <span class="math notranslate nohighlight">\(z\)</span>’s from our training data point <span class="math notranslate nohighlight">\(x_i\)</span>. The last step is that we want to minimize our loss, so we need to add a minus sign.</p>
@@ -597,8 +597,8 @@ document.write(`
 <p class="admonition-title">Note</p>
 <p>The log-likelihood equation we’ve derived for VAE training is also sometimes called the evidence lower bound (ELBO). ELBO is a general equation used in Bayesian modeling, which usually has nothing to do with VAEs.</p>
 </div>
-<div class="amsmath math notranslate nohighlight" id="equation-7bed1c43-b02a-4653-902b-1c1a66419c95">
-<span class="eqno">(14.10)<a class="headerlink" href="#equation-7bed1c43-b02a-4653-902b-1c1a66419c95" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e749cf39-eaea-40da-bae2-ef503f3c2979">
+<span class="eqno">(14.10)<a class="headerlink" href="#equation-e749cf39-eaea-40da-bae2-ef503f3c2979" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathcal{L}(x_i, \phi, \theta) =  -\textrm{E}_{z \sim q_\phi(z | x_i)}\left[ \log p_\theta(x_i | z)\right] +\textrm{KL}\left[q_\phi(z | x_i)|| P(z)\right]
 \end{equation}\]</div>
 <p>Remember that in practice, we will approximate the expectation in the reconstruction loss by sampling <span class="math notranslate nohighlight">\(z\)</span>’s from the decoder <span class="math notranslate nohighlight">\(q_\phi(z | x)\)</span>. We’ll only use a single sample.</p>
@@ -795,13 +795,13 @@ document.write(`
 l = -\textrm{E}_{z \sim q_\phi(z | x_i)}\left[\log p_{\theta}(x_i | z)\right] + \textrm{KL}\left[(q_\phi(z | x))|| P(z)\right]
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(P(z)\)</span> is the standard normal distribution and we approximate expectations using a single sample from the encoder. We need to expand the KL-divergence term to implement. Both <span class="math notranslate nohighlight">\(P(z)\)</span> and <span class="math notranslate nohighlight">\(q_\theta(z | x)\)</span> are normal. You can look-up the KL-divergence between two normal distributions:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9bd4657c-16a5-499c-a426-eecaf756381c">
-<span class="eqno">(14.11)<a class="headerlink" href="#equation-9bd4657c-16a5-499c-a426-eecaf756381c" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ba907447-818c-4a99-a8d2-1bd2cc5765d5">
+<span class="eqno">(14.11)<a class="headerlink" href="#equation-ba907447-818c-4a99-a8d2-1bd2cc5765d5" title="Permalink to this equation">#</a></span>\[\begin{equation}
 KL(q, p) = \log \frac{\sigma_p}{\sigma_q} + \frac{\sigma_q^2 + (\mu_q - \mu_p)^2}{2 \sigma_p^2} - \frac{1}{2}
 \end{equation}\]</div>
 <p>we can simplify because <span class="math notranslate nohighlight">\(P(z)\)</span> is standard normal (<span class="math notranslate nohighlight">\(\sigma = 1, \mu = 0\)</span>)</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7eb7e3b1-8d1d-42f5-860e-35f9d82c12df">
-<span class="eqno">(14.12)<a class="headerlink" href="#equation-7eb7e3b1-8d1d-42f5-860e-35f9d82c12df" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-8e1a6762-ce75-49ff-bd65-097aab9a58fe">
+<span class="eqno">(14.12)<a class="headerlink" href="#equation-8e1a6762-ce75-49ff-bd65-097aab9a58fe" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \textrm{KL}\left[(q_\theta(z | x_i))|| P(z)\right] = -\log \sigma_i + \frac{\sigma_i^2}{2} + \frac{\mu_i^2}{2} - \frac{1}{2}
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\mu_i, \sigma_i\)</span> are the output from <span class="math notranslate nohighlight">\(q_\phi(z | x_i)\)</span></p>
@@ -856,10 +856,10 @@ KL(q, p) = \log \frac{\sigma_p}{\sigma_q} + \frac{\sigma_q^2 + (\mu_q - \mu_p)^2
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Array([[18.420681, 19.19342 ],
-       [18.420681, 88.56061 ],
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Array([[18.420681, 19.193424],
+       [18.420681, 88.56056 ],
        [18.420681, 55.28206 ],
-       [18.420681, 19.19342 ]], dtype=float32)
+       [18.420681, 19.193424]], dtype=float32)
 </pre></div>
 </div>
 </div>
@@ -922,7 +922,7 @@ KL(q, p) = \log \frac{\sigma_p}{\sigma_q} + \frac{\sigma_q^2 + (\mu_q - \mu_p)^2
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/3aedfdc410de8a178053f8c9b8159f883519659659b3c4366aecd42c905f619b.png" src="../_images/3aedfdc410de8a178053f8c9b8159f883519659659b3c4366aecd42c905f619b.png" />
+<img alt="../_images/bf79bce3da6a7b7b573deea11d6dfb7697a27d899a09fa0c860c530572e3f2e9.png" src="../_images/bf79bce3da6a7b7b573deea11d6dfb7697a27d899a09fa0c860c530572e3f2e9.png" />
 </div>
 </div>
 <section id="evaluating-the-vae">
@@ -958,7 +958,7 @@ KL(q, p) = \log \frac{\sigma_p}{\sigma_q} + \frac{\sigma_q^2 + (\mu_q - \mu_p)^2
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Average mu =  0.0003063433 Average std dev =  0.99916595
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Average mu =  0.00030671438 Average std dev =  0.99916613
 </pre></div>
 </div>
 </div>
@@ -974,7 +974,7 @@ KL(q, p) = \log \frac{\sigma_p}{\sigma_q} + \frac{\sigma_q^2 + (\mu_q - \mu_p)^2
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/cb198e8e782475a85efc29712d43141edfb2042d2d7a7888753467a007bd48af.png" src="../_images/cb198e8e782475a85efc29712d43141edfb2042d2d7a7888753467a007bd48af.png" />
+<img alt="../_images/21b5218d92f63d4148a003fc79092cecb45d6f6464922b2118716ab6d631070c.png" src="../_images/21b5218d92f63d4148a003fc79092cecb45d6f6464922b2118716ab6d631070c.png" />
 </div>
 </div>
 <p>The reconstruction is not great, it puts a lot of probability mass on other points. In fact, the reconstruction seems to not use the encoder’s information at all – it looks like <span class="math notranslate nohighlight">\(P(x)\)</span>. The reason for this is that our KL-divergence term dominates. It has a very good fit.</p>
@@ -1047,7 +1047,7 @@ l = -\textrm{E}_{z \sim q_\phi(z | x_i)}\left[\log p_{\theta}(x_i | z)\right] + 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/81d59a9daf1ea3b1a5c5e100d3250ab231f9fd2de35591c36257ab9762259edf.png" src="../_images/81d59a9daf1ea3b1a5c5e100d3250ab231f9fd2de35591c36257ab9762259edf.png" />
+<img alt="../_images/20a0ce16e93f32ba163ef4c7c4fee5141b1dc78b6808a08452b01ec0595d12e6.png" src="../_images/20a0ce16e93f32ba163ef4c7c4fee5141b1dc78b6808a08452b01ec0595d12e6.png" />
 </div>
 </div>
 <p>You can see the error is higher, but let’s see how it did at our three metrics.</p>
@@ -1069,7 +1069,7 @@ l = -\textrm{E}_{z \sim q_\phi(z | x_i)}\left[\log p_{\theta}(x_i | z)\right] + 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1f1fcdb18de3b9cf03dc90d602c38d05f320cbbfc60c326383b45168556a5863.png" src="../_images/1f1fcdb18de3b9cf03dc90d602c38d05f320cbbfc60c326383b45168556a5863.png" />
+<img alt="../_images/3ee6a7652d71c8c4c9b4494d8114b82a7711317cdc826056158c9cc365058389.png" src="../_images/3ee6a7652d71c8c4c9b4494d8114b82a7711317cdc826056158c9cc365058389.png" />
 </div>
 </div>
 <p>A little bit worse on <span class="math notranslate nohighlight">\(P(x)\)</span>, but overall not bad. What about our goal, the reconstruction?</p>
@@ -1083,7 +1083,7 @@ l = -\textrm{E}_{z \sim q_\phi(z | x_i)}\left[\log p_{\theta}(x_i | z)\right] + 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/421ee428f7a1005e3dc1243aae5e5d4daee41c101c003225dfb10dde049e973d.png" src="../_images/421ee428f7a1005e3dc1243aae5e5d4daee41c101c003225dfb10dde049e973d.png" />
+<img alt="../_images/adfe02893027cd6650795aa8f92dde5e72e5199a624c720e4d47fc46989451cd.png" src="../_images/adfe02893027cd6650795aa8f92dde5e72e5199a624c720e4d47fc46989451cd.png" />
 </div>
 </div>
 <p>What about our encoder’s agreement with a standard normal?</p>
@@ -1095,7 +1095,7 @@ l = -\textrm{E}_{z \sim q_\phi(z | x_i)}\left[\log p_{\theta}(x_i | z)\right] + 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Average mu =  -0.10743177 Average std dev =  0.111233614
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Average mu =  -0.02217746 Average std dev =  0.11638635
 </pre></div>
 </div>
 </div>
@@ -1103,7 +1103,7 @@ l = -\textrm{E}_{z \sim q_\phi(z | x_i)}\left[\log p_{\theta}(x_i | z)\right] + 
 <p>The standard deviation is much smaller! So we squeezed our latent space a little at the cost of better reconstruction.</p>
 <section id="disentangling-beta-vae">
 <h3><span class="section-number">14.5.1. </span>Disentangling <span class="math notranslate nohighlight">\(\beta\)</span>-VAE<a class="headerlink" href="#disentangling-beta-vae" title="Link to this heading">#</a></h3>
-<p>You can adjust <span class="math notranslate nohighlight">\(\beta\)</span> the opposite direction, to value matching the prior Gaussian distribution more strongly. This can better condition the encoder so that each of the latent dimensions are truly independent. This can be important if you want to disengatngle your input features to arrive at an orthogonal projection. This of course comes at the loss of reconstruction accuracy, but can be more important if you’re interested in the latent space rather than generating new samples <span id="id3">[<a class="reference internal" href="#id79" title="Emile Mathieu, Tom Rainforth, N Siddharth, and Yee Whye Teh. Disentangling disentanglement in variational autoencoders. In International Conference on Machine Learning, 4402–4412. PMLR, 2019.">MRST19</a>]</span>.</p>
+<p>You can adjust <span class="math notranslate nohighlight">\(\beta\)</span> the opposite direction, to value matching the prior Gaussian distribution more strongly. This can better condition the encoder so that each of the latent dimensions are truly independent. This can be important if you want to disengatngle your input features to arrive at an orthogonal projection. This of course comes at the loss of reconstruction accuracy, but can be more important if you’re interested in the latent space rather than generating new samples <span id="id3">[<a class="reference internal" href="#id80" title="Emile Mathieu, Tom Rainforth, N Siddharth, and Yee Whye Teh. Disentangling disentanglement in variational autoencoders. In International Conference on Machine Learning, 4402–4412. PMLR, 2019.">MRST19</a>]</span>.</p>
 </section>
 </section>
 <section id="regression-vae">
@@ -1261,7 +1261,7 @@ l = -\textrm{E}_{z \sim q_\phi(z | x_i)}\left[\log p_{\theta}(x_i | z)\right] + 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/c6accb199a51437521aa7090e15990d1e39ac514ee14ce0cb29f9d557b82855a.png" src="../_images/c6accb199a51437521aa7090e15990d1e39ac514ee14ce0cb29f9d557b82855a.png" />
+<img alt="../_images/dc6406079c1b1777f3639eeaae40d60323ea2dab4bc250c07a6ed92d21b9ec03.png" src="../_images/dc6406079c1b1777f3639eeaae40d60323ea2dab4bc250c07a6ed92d21b9ec03.png" />
 </div>
 </div>
 <p>This model still has training to be done, but hopefully you get the idea for working with continuous numbers! We can examine the final result below. Note that I must sample from the output parameters to compare with the real training data.</p>
@@ -1290,7 +1290,7 @@ l = -\textrm{E}_{z \sim q_\phi(z | x_i)}\left[\log p_{\theta}(x_i | z)\right] + 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2c2f5e9a0ed15dab4baef68b770aa2d4deaba8a289648c39d6a720c73f4ec78d.png" src="../_images/2c2f5e9a0ed15dab4baef68b770aa2d4deaba8a289648c39d6a720c73f4ec78d.png" />
+<img alt="../_images/2fa3ad23c0c6e90351828126376f22c1ec57184a80fd50453e2e2a00a2ccd4ff.png" src="../_images/2fa3ad23c0c6e90351828126376f22c1ec57184a80fd50453e2e2a00a2ccd4ff.png" />
 </div>
 </div>
 <p>The distribution is alright, not great. Comparing reconstruction is a little different because we only compare the mean of the predicted <span class="math notranslate nohighlight">\(P(x)\)</span>. We’ll plot our predicted <span class="math notranslate nohighlight">\(\mu\)</span> from the decoder against the real <span class="math notranslate nohighlight">\(x\)</span> values.</p>
@@ -1309,7 +1309,7 @@ l = -\textrm{E}_{z \sim q_\phi(z | x_i)}\left[\log p_{\theta}(x_i | z)\right] + 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2ebb3943fa45486def0581d862402107046bc9a932de0d708b142c69beb4db89.png" src="../_images/2ebb3943fa45486def0581d862402107046bc9a932de0d708b142c69beb4db89.png" />
+<img alt="../_images/a713ac5c5b249dd18d3009883d45f4314f5d45c4637d0c837bc3e915f6347640.png" src="../_images/a713ac5c5b249dd18d3009883d45f4314f5d45c4637d0c837bc3e915f6347640.png" />
 </div>
 </div>
 <p>The reconstruction is actually quite good! There is some odd behavior near the top, but otherwise quite reasonable. Finally check how well we did with getting our latent space to be standard normal.</p>
@@ -1321,7 +1321,7 @@ l = -\textrm{E}_{z \sim q_\phi(z | x_i)}\left[\log p_{\theta}(x_i | z)\right] + 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Average mu =  -0.17657432 Average std dev =  0.13240603
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Average mu =  -0.18786085 Average std dev =  0.13066807
 </pre></div>
 </div>
 </div>
@@ -1602,7 +1602,7 @@ l = -\textrm{E}_{z \sim q_\phi(z | x_i)}\left[\log p_{\theta}(x_i | z)\right] + 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/7e6da865bbe58bb1f5260916bfb59ed97e7f871fcb6597ac8b5c99c6d6b78b25.png" src="../_images/7e6da865bbe58bb1f5260916bfb59ed97e7f871fcb6597ac8b5c99c6d6b78b25.png" />
+<img alt="../_images/30269c913f615167361e582d347208a739100a72c9c0473e3a33e14914dd8801.png" src="../_images/30269c913f615167361e582d347208a739100a72c9c0473e3a33e14914dd8801.png" />
 </div>
 </div>
 <p>As usual, this model is undertrained. A latent space of 2, which we chose for plotting convenience, is also probably a little too compressed. Let’s sample a few conformation and see how they look.</p>
@@ -1617,7 +1617,7 @@ l = -\textrm{E}_{z \sim q_\phi(z | x_i)}\left[\log p_{\theta}(x_i | z)\right] + 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/69de26ca5303b91a46efcb08a4025031fa0740850331f92265b92044378bc9c4.png" src="../_images/69de26ca5303b91a46efcb08a4025031fa0740850331f92265b92044378bc9c4.png" />
+<img alt="../_images/1fd9afcfeef2818cf8e4d553e4e528590080cd94c5998c607a67fa8b1ea59196.png" src="../_images/1fd9afcfeef2818cf8e4d553e4e528590080cd94c5998c607a67fa8b1ea59196.png" />
 </div>
 </div>
 <p>These look reasonable compared with the trajectory video showing the training conformations.</p>
@@ -1625,7 +1625,7 @@ l = -\textrm{E}_{z \sim q_\phi(z | x_i)}\left[\log p_{\theta}(x_i | z)\right] + 
 </section>
 <section id="using-vae-on-a-trajectory">
 <h2><span class="section-number">14.8. </span>Using VAE on  a Trajectory<a class="headerlink" href="#using-vae-on-a-trajectory" title="Link to this heading">#</a></h2>
-<p>There are three main things to do with a VAE on a trajectory. The first is to go from a trajectory in the feature dimension to the latent dimension. This can simplify analysis of dynamics or act as a reaction coordinate for free energy methods. The second is to generate new conformations. This could be used to fill-in under sampling or perhaps extrapolate to new regions of latent space. You can also use the VAE to examine marginals that are perhaps under-sampled. Finally, you can do optimization on the latent space. For example, you could try to find the most compact structure. We’ll examine these examples but there are many other things you could examine. For a more complete model example with attention and 3D coordinates, see Winter et al. <span id="id5">[<a class="reference internal" href="#id92" title="Robin Winter, Frank Noé, and Djork-Arné Clevert. Auto-encoding molecular conformations. arXiv preprint arXiv:2101.01618, 2021.">WNoeC21</a>]</span>. You can find applications of VAEs on trajectories for molecular design <span id="id6">[<a class="reference internal" href="#id130" title="Kirill Shmilovich, Rachael A Mansbach, Hythem Sidky, Olivia E Dunne, Sayak Subhra Panda, John D Tovar, and Andrew L Ferguson. Discovery of self-assembling π-conjugated peptides by active learning-directed coarse-grained molecular simulation. The Journal of Physical Chemistry B, 124(19):3873–3891, 2020.">SMS+20</a>]</span>, coarse-graining <span id="id7">[<a class="reference internal" href="#id131" title="Wujie Wang and Rafael Gómez-Bombarelli. Coarse-graining auto-encoders for molecular dynamics. npj Computational Materials, 5(1):1–9, 2019.">WGomezB19</a>]</span>, and identifying rare-events <span id="id8">[<a class="reference internal" href="#id132" title="João Marcelo Lamim Ribeiro, Pablo Bravo, Yihang Wang, and Pratyush Tiwary. Reweighted autoencoded variational bayes for enhanced sampling (rave). The Journal of chemical physics, 149(7):072301, 2018.">RBWT18</a>]</span>.</p>
+<p>There are three main things to do with a VAE on a trajectory. The first is to go from a trajectory in the feature dimension to the latent dimension. This can simplify analysis of dynamics or act as a reaction coordinate for free energy methods. The second is to generate new conformations. This could be used to fill-in under sampling or perhaps extrapolate to new regions of latent space. You can also use the VAE to examine marginals that are perhaps under-sampled. Finally, you can do optimization on the latent space. For example, you could try to find the most compact structure. We’ll examine these examples but there are many other things you could examine. For a more complete model example with attention and 3D coordinates, see Winter et al. <span id="id5">[<a class="reference internal" href="#id93" title="Robin Winter, Frank Noé, and Djork-Arné Clevert. Auto-encoding molecular conformations. arXiv preprint arXiv:2101.01618, 2021.">WNoeC21</a>]</span>. You can find applications of VAEs on trajectories for molecular design <span id="id6">[<a class="reference internal" href="#id131" title="Kirill Shmilovich, Rachael A Mansbach, Hythem Sidky, Olivia E Dunne, Sayak Subhra Panda, John D Tovar, and Andrew L Ferguson. Discovery of self-assembling π-conjugated peptides by active learning-directed coarse-grained molecular simulation. The Journal of Physical Chemistry B, 124(19):3873–3891, 2020.">SMS+20</a>]</span>, coarse-graining <span id="id7">[<a class="reference internal" href="#id132" title="Wujie Wang and Rafael Gómez-Bombarelli. Coarse-graining auto-encoders for molecular dynamics. npj Computational Materials, 5(1):1–9, 2019.">WGomezB19</a>]</span>, and identifying rare-events <span id="id8">[<a class="reference internal" href="#id133" title="João Marcelo Lamim Ribeiro, Pablo Bravo, Yihang Wang, and Pratyush Tiwary. Reweighted autoencoded variational bayes for enhanced sampling (rave). The Journal of chemical physics, 149(7):072301, 2018.">RBWT18</a>]</span>.</p>
 <section id="latent-trajectory">
 <h3><span class="section-number">14.8.1. </span>Latent Trajectory<a class="headerlink" href="#latent-trajectory" title="Link to this heading">#</a></h3>
 <p>Let’s start by computing a latent trajctory. I’m going to load a shorter trajectory which has the frames closer together in time.</p>
@@ -1646,7 +1646,7 @@ l = -\textrm{E}_{z \sim q_\phi(z | x_i)}\left[\log p_{\theta}(x_i | z)\right] + 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1715d6d19ed39f4b2a1f60b7365aa352f39aa060a671f406e77f48df224e313a.png" src="../_images/1715d6d19ed39f4b2a1f60b7365aa352f39aa060a671f406e77f48df224e313a.png" />
+<img alt="../_images/6290303c8dfce66e7c355dd020d385b6461c59d8ee324420b7a920518c7d50f2.png" src="../_images/6290303c8dfce66e7c355dd020d385b6461c59d8ee324420b7a920518c7d50f2.png" />
 </div>
 </div>
 <p>You can see that the trajectory is relatively continuous, except for a few wide jumps. We’ll see below that this is because the alignment process can have big jumps as our principle axis rapidly moves when the points rearrange. Let’s compare the video and the z-path side-by-side. You can find the code for this movie on the github repo.</p>
@@ -1679,7 +1679,7 @@ l = -\textrm{E}_{z \sim q_\phi(z | x_i)}\left[\log p_{\theta}(x_i | z)\right] + 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/b244314292151caa1813424af122f2b1e6cbd144334a9227277436f08e14f7bc.png" src="../_images/b244314292151caa1813424af122f2b1e6cbd144334a9227277436f08e14f7bc.png" />
+<img alt="../_images/e01781e790ca9e4e834f2af08e9ef892e944c9908236e31fdc677ffe23be0d20.png" src="../_images/e01781e790ca9e4e834f2af08e9ef892e944c9908236e31fdc677ffe23be0d20.png" />
 </div>
 </div>
 <p>The samples are not perfect, but we’re close. Let’s examine the marginals.</p>
@@ -1699,7 +1699,7 @@ l = -\textrm{E}_{z \sim q_\phi(z | x_i)}\left[\log p_{\theta}(x_i | z)\right] + 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/d7b4c5b761e84103621cc4647061def098fb8f356ad0d78e826d7f66591c0b34.png" src="../_images/d7b4c5b761e84103621cc4647061def098fb8f356ad0d78e826d7f66591c0b34.png" />
+<img alt="../_images/eddc5d7fe3ee3be8c47b161d5a518c2fa1d67c693b12ea805c5c2cd17b3d0aad.png" src="../_images/eddc5d7fe3ee3be8c47b161d5a518c2fa1d67c693b12ea805c5c2cd17b3d0aad.png" />
 </div>
 </div>
 <p>You can see that there are some issues here as well. Remember that our latent space is quite small: 2D. So we should not be that surprised that we’re losing information from our 24D input space.</p>
@@ -1707,8 +1707,8 @@ l = -\textrm{E}_{z \sim q_\phi(z | x_i)}\left[\log p_{\theta}(x_i | z)\right] + 
 <section id="optimization-on-latent-space">
 <h3><span class="section-number">14.8.3. </span>Optimization on Latent Space<a class="headerlink" href="#optimization-on-latent-space" title="Link to this heading">#</a></h3>
 <p>Finally, let us examine how we can optimize in the latent space. Let’s say I want to find the most compact structure. We’ll define our loss function as the radius of gyration and take its derivative with respect to <span class="math notranslate nohighlight">\(z\)</span>. Recall the definition of radius of gyration is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-bbdb41b4-a9a7-46d8-bd1c-486b0d64a391">
-<span class="eqno">(14.13)<a class="headerlink" href="#equation-bbdb41b4-a9a7-46d8-bd1c-486b0d64a391" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-5d982ff5-6e8f-4e53-b7da-60dcac1448f4">
+<span class="eqno">(14.13)<a class="headerlink" href="#equation-5d982ff5-6e8f-4e53-b7da-60dcac1448f4" title="Permalink to this equation">#</a></span>\[\begin{equation}
 R_g = \frac{1}{N}\sum_i r_i^2
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(r_i\)</span> is distance to center of mass. Our generated samples are, by definition, centered at the origin though so we do not need to worry about center of mass. We want to take derivatives in <span class="math notranslate nohighlight">\(z\)</span>, but need samples in <span class="math notranslate nohighlight">\(x\)</span> to compute radius of gyration. We use the decoder to get an <span class="math notranslate nohighlight">\(x\)</span> and can propagate derivatives through it, because it is a differentiable neural network.</p>
@@ -1743,7 +1743,7 @@ R_g = \frac{1}{N}\sum_i r_i^2
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/4aa12ab911414bc5f5720be1d4139c67bde9972fabadd3ccefe29a7ead527e29.png" src="../_images/4aa12ab911414bc5f5720be1d4139c67bde9972fabadd3ccefe29a7ead527e29.png" />
+<img alt="../_images/3735ff5f1261db5ae7ee48f0966c65d1262ed1ab41a8a3acce2410126e21284a.png" src="../_images/3735ff5f1261db5ae7ee48f0966c65d1262ed1ab41a8a3acce2410126e21284a.png" />
 </div>
 </div>
 <p>We have a <span class="math notranslate nohighlight">\(z\)</span> with a very low radius of gyration. How good is it? Well, we can also see what was the lowest radius of gyration <em>observed</em> structure in our trajectory. We compare them below.</p>
@@ -1765,7 +1765,7 @@ R_g = \frac{1}{N}\sum_i r_i^2
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/3e6bc0b71a48238d618fd4bf6cbee0432560d9583723368022c5555a7f2cfb8d.png" src="../_images/3e6bc0b71a48238d618fd4bf6cbee0432560d9583723368022c5555a7f2cfb8d.png" />
+<img alt="../_images/899333558a554228e7102ea58a437b9982a3734acb66583ebe535ecbcf200413.png" src="../_images/899333558a554228e7102ea58a437b9982a3734acb66583ebe535ecbcf200413.png" />
 </div>
 </div>
 <p>What is remarkable about this is that the optimized one has no overlaps and still reasonable bond-lengths. It is also more compact than the lowest radius of gyration found in the training example.</p>
@@ -1801,28 +1801,28 @@ R_g = \frac{1}{N}\sum_i r_i^2
 <h2><span class="section-number">14.11. </span>Cited References<a class="headerlink" href="#cited-references" title="Link to this heading">#</a></h2>
 <div class="docutils container" id="id9">
 <div role="list" class="citation-list">
-<div class="citation" id="id173" role="doc-biblioentry">
+<div class="citation" id="id174" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span>KW13<span class="fn-bracket">]</span></span>
 <span class="backrefs">(<a role="doc-backlink" href="#id1">1</a>,<a role="doc-backlink" href="#id2">2</a>)</span>
 <p>Diederik P Kingma and Max Welling. Auto-encoding variational bayes. <em>arXiv preprint arXiv:1312.6114</em>, 2013.</p>
 </div>
-<div class="citation" id="id79" role="doc-biblioentry">
+<div class="citation" id="id80" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">MRST19</a><span class="fn-bracket">]</span></span>
 <p>Emile Mathieu, Tom Rainforth, N Siddharth, and Yee Whye Teh. Disentangling disentanglement in variational autoencoders. In <em>International Conference on Machine Learning</em>, 4402–4412. PMLR, 2019.</p>
 </div>
-<div class="citation" id="id92" role="doc-biblioentry">
+<div class="citation" id="id93" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">WNoeC21</a><span class="fn-bracket">]</span></span>
 <p>Robin Winter, Frank Noé, and Djork-Arné Clevert. Auto-encoding molecular conformations. <em>arXiv preprint arXiv:2101.01618</em>, 2021.</p>
 </div>
-<div class="citation" id="id130" role="doc-biblioentry">
+<div class="citation" id="id131" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id6">SMS+20</a><span class="fn-bracket">]</span></span>
 <p>Kirill Shmilovich, Rachael A Mansbach, Hythem Sidky, Olivia E Dunne, Sayak Subhra Panda, John D Tovar, and Andrew L Ferguson. Discovery of self-assembling π-conjugated peptides by active learning-directed coarse-grained molecular simulation. <em>The Journal of Physical Chemistry B</em>, 124(19):3873–3891, 2020.</p>
 </div>
-<div class="citation" id="id131" role="doc-biblioentry">
+<div class="citation" id="id132" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id7">WGomezB19</a><span class="fn-bracket">]</span></span>
 <p>Wujie Wang and Rafael Gómez-Bombarelli. Coarse-graining auto-encoders for molecular dynamics. <em>npj Computational Materials</em>, 5(1):1–9, 2019.</p>
 </div>
-<div class="citation" id="id132" role="doc-biblioentry">
+<div class="citation" id="id133" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id8">RBWT18</a><span class="fn-bracket">]</span></span>
 <p>João Marcelo Lamim Ribeiro, Pablo Bravo, Yihang Wang, and Pratyush Tiwary. Reweighted autoencoded variational bayes for enhanced sampling (rave). <em>The Journal of chemical physics</em>, 149(7):072301, 2018.</p>
 </div>

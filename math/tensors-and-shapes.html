@@ -496,7 +496,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="tensors-and-shapes">
 <h1><span class="section-number">1. </span>Tensors and Shapes<a class="headerlink" href="#tensors-and-shapes" title="Link to this heading">#</a></h1>
-<p>This textbook will draw upon linear algebra, vector calculus, and probability theory. Each chapter states the expected background in an <code class="docutils literal notranslate"><span class="pre">Audience</span> <span class="pre">&amp;</span> <span class="pre">Objectives</span></code> admonition (see example below). This math review fills in details missing from those typical classes: working with tensors. If you would like a chemistry-focused background on those topics, you can read the online book <a class="reference external" href="https://unitcirclepress.com/"><em>Mathematical Methods for Molecule Sciences</em> by John Straub</a><span id="id1">[<a class="reference internal" href="#id191" title="J Straub. Mathematical methods for molecular science. 2020.">Str20</a>]</span>.</p>
+<p>This textbook will draw upon linear algebra, vector calculus, and probability theory. Each chapter states the expected background in an <code class="docutils literal notranslate"><span class="pre">Audience</span> <span class="pre">&amp;</span> <span class="pre">Objectives</span></code> admonition (see example below). This math review fills in details missing from those typical classes: working with tensors. If you would like a chemistry-focused background on those topics, you can read the online book <a class="reference external" href="https://unitcirclepress.com/"><em>Mathematical Methods for Molecule Sciences</em> by John Straub</a><span id="id1">[<a class="reference internal" href="#id192" title="J Straub. Mathematical methods for molecular science. 2020.">Str20</a>]</span>.</p>
 <p>Tensors are the generalization of vectors (rank 1) and matrices (rank 2) to arbitrary <strong>rank</strong>. Rank can be defined as the number of indices required to get individual elements of a tensor. A matrix requires two indices (row, column), and is thus a rank 2 tensor. We may say in normal conversation that a matrix is a “two-dimensional object” because it has rows and columns, but this is ambiguous because the row could be 6 dimensions and the columns could be 1 dimension. Always use the word rank to distinguish vectors, matrices, and higher-order tensors. The components that make up rank are called <strong>axes</strong> (plural of <strong>axis</strong>). The <strong>dimension</strong> is how many elements are in a particular axis. The <strong>shape</strong> of a tensor combines all of these. A shape is a tuple (ordered list of numbers) whose length is the rank and elements are the dimension of each axis.</p>
 <div class="admonition-audience-objectives admonition">
 <p class="admonition-title">Audience &amp; Objectives</p>
@@ -531,13 +531,13 @@ equivalent.</p>
 <p>Here are some examples of writing tensor operations in Einstein notation.</p>
 <p><strong>Total Sum</strong></p>
 <p>Sum all elements of a rank 4 tensor. In Einstein notation this is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8217af37-550e-4655-a5da-ff2ea88626d6">
-<span class="eqno">(1.1)<a class="headerlink" href="#equation-8217af37-550e-4655-a5da-ff2ea88626d6" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-663622e2-b003-48bd-8927-ab366fe62664">
+<span class="eqno">(1.1)<a class="headerlink" href="#equation-663622e2-b003-48bd-8927-ab366fe62664" title="Permalink to this equation">#</a></span>\[\begin{equation}
   a_{ijkl} = b
 \end{equation}\]</div>
 <p>in normal mathematic notation, this would be</p>
-<div class="amsmath math notranslate nohighlight" id="equation-096f59ca-bed3-47c2-bc96-4ff0733f1d91">
-<span class="eqno">(1.2)<a class="headerlink" href="#equation-096f59ca-bed3-47c2-bc96-4ff0733f1d91" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-eae62d9c-024d-480f-ac78-9c236d40b839">
+<span class="eqno">(1.2)<a class="headerlink" href="#equation-eae62d9c-024d-480f-ac78-9c236d40b839" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \sum_i \sum_j \sum_k \sum_l a_{ijkl} = b
 \end{equation}\]</div>
 <aside class="margin sidebar">
@@ -548,24 +548,24 @@ It is called <a class="reference external" href="https://einops.rocks/">einops</
 </aside>
 <p><strong>Sum Specific Axis</strong></p>
 <p>Sum over last axis</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b428bbda-ca44-45f7-b998-46129dfac141">
-<span class="eqno">(1.3)<a class="headerlink" href="#equation-b428bbda-ca44-45f7-b998-46129dfac141" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a5e22a25-2cf0-48f8-916b-d7e542bb7a93">
+<span class="eqno">(1.3)<a class="headerlink" href="#equation-a5e22a25-2cf0-48f8-916b-d7e542bb7a93" title="Permalink to this equation">#</a></span>\[\begin{equation}
   a_{ijkl} = b_{ijk}
 \end{equation}\]</div>
 <p>In normal notation:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7e19aef1-788b-4bb8-a31c-a35880bb3b26">
-<span class="eqno">(1.4)<a class="headerlink" href="#equation-7e19aef1-788b-4bb8-a31c-a35880bb3b26" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-90571fd8-548f-4269-9570-94c15f046422">
+<span class="eqno">(1.4)<a class="headerlink" href="#equation-90571fd8-548f-4269-9570-94c15f046422" title="Permalink to this equation">#</a></span>\[\begin{equation}
  \sum_l a_{ijkl} = b_{ijk}
 \end{equation}\]</div>
 <p><strong>Dot Product</strong></p>
 <p>In Einstein notation:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-cbe7acae-2d79-4dca-b55d-74f07fd1c974">
-<span class="eqno">(1.5)<a class="headerlink" href="#equation-cbe7acae-2d79-4dca-b55d-74f07fd1c974" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-2ceac0fe-8dac-469c-8777-5136fb19a50b">
+<span class="eqno">(1.5)<a class="headerlink" href="#equation-2ceac0fe-8dac-469c-8777-5136fb19a50b" title="Permalink to this equation">#</a></span>\[\begin{equation}
   a_{i} b_{i} = c
 \end{equation}\]</div>
 <p>In normal notation:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3944f987-9475-4413-be5e-d6e511db0396">
-<span class="eqno">(1.6)<a class="headerlink" href="#equation-3944f987-9475-4413-be5e-d6e511db0396" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-d9414dbd-d0b9-4883-b592-e433cebf8ba2">
+<span class="eqno">(1.6)<a class="headerlink" href="#equation-d9414dbd-d0b9-4883-b592-e433cebf8ba2" title="Permalink to this equation">#</a></span>\[\begin{equation}
   \sum_i a_{i} b_{i} = c
 \end{equation}\]</div>
 <p>Notice that <span class="math notranslate nohighlight">\(a_i\)</span> and <span class="math notranslate nohighlight">\(b_i\)</span> must have the same dimension in their 0th axis in order for the sum in the dot product to be valid. This makes sense, since to compute a dot product the vectors must be the same dimension. In general, if two tensors share the same index (<span class="math notranslate nohighlight">\(b_{ij}\)</span>, <span class="math notranslate nohighlight">\(a_{ik}\)</span>), then that axis must be the same dimension.</p>
@@ -574,8 +574,8 @@ It is called <a class="reference external" href="https://einops.rocks/">einops</
 <p>The matrix product of 2 tensors, where each tensor is rank 2.</p>
 <div class="dropdown admonition">
 <p class="admonition-title">Answer</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4e5e615a-eca3-4f53-abae-8953ca70820f">
-<span class="eqno">(1.7)<a class="headerlink" href="#equation-4e5e615a-eca3-4f53-abae-8953ca70820f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-8b0853b8-60b3-4e7c-b986-657a4abcfe87">
+<span class="eqno">(1.7)<a class="headerlink" href="#equation-8b0853b8-60b3-4e7c-b986-657a4abcfe87" title="Permalink to this equation">#</a></span>\[\begin{equation}
     a_{ij} b_{jk} = c_{ik}
 \end{equation}\]</div>
 </div>
@@ -583,8 +583,8 @@ It is called <a class="reference external" href="https://einops.rocks/">einops</
 <p>Apply matrix <span class="math notranslate nohighlight">\(a\)</span> to column vector <span class="math notranslate nohighlight">\(b\)</span> by multiplication. <span class="math notranslate nohighlight">\(\mathbf{A}\vec{b}\)</span> in linear algebra notation.</p>
 <div class="dropdown admonition">
 <p class="admonition-title">Answer</p>
-<div class="amsmath math notranslate nohighlight" id="equation-726adf5e-a466-4393-830e-3e03f0a6aa84">
-<span class="eqno">(1.8)<a class="headerlink" href="#equation-726adf5e-a466-4393-830e-3e03f0a6aa84" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-d01a9369-25d2-4a71-ad29-69b1837999b9">
+<span class="eqno">(1.8)<a class="headerlink" href="#equation-d01a9369-25d2-4a71-ad29-69b1837999b9" title="Permalink to this equation">#</a></span>\[\begin{equation}
     a_{ij} b_{j} = c_{i}
 \end{equation}\]</div>
 </div>
@@ -592,8 +592,8 @@ It is called <a class="reference external" href="https://einops.rocks/">einops</
 <p>Swap the values in a matrix to make it a transpose.</p>
 <div class="dropdown admonition">
 <p class="admonition-title">Answer</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9d4e9a28-4106-4b3c-b1d1-983f693e8395">
-<span class="eqno">(1.9)<a class="headerlink" href="#equation-9d4e9a28-4106-4b3c-b1d1-983f693e8395" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-9d8a20c9-cec7-4ac5-b859-5b162e12261f">
+<span class="eqno">(1.9)<a class="headerlink" href="#equation-9d8a20c9-cec7-4ac5-b859-5b162e12261f" title="Permalink to this equation">#</a></span>\[\begin{equation}
     a_{ij} = t_{ji}
 \end{equation}\]</div>
 </div>
@@ -609,19 +609,19 @@ Being able to understand how shape affects them
 is the key to understanding how algorithms work.</p>
 </aside>
 <p>Although you can specify operations in Einstein notation, it is typically not expressive enough. How would you write this operation: sum the last axis of a tensor? Without knowing the rank, you do not know how many indices you should indicate in the expression. Maybe like this?</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c18ff1b0-9870-4300-a4ea-640b71391dc1">
-<span class="eqno">(1.10)<a class="headerlink" href="#equation-c18ff1b0-9870-4300-a4ea-640b71391dc1" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-085e0b39-aee9-41c1-9cd0-02b307e86035">
+<span class="eqno">(1.10)<a class="headerlink" href="#equation-085e0b39-aee9-41c1-9cd0-02b307e86035" title="Permalink to this equation">#</a></span>\[\begin{equation}
 a_{i_0, i_1, \ldots i_N} = a_{i_0, i_1, \ldots i_{N - 1}}
 \end{equation}\]</div>
 <p>Well, that’s good but what if your operation has two arguments: which axis to sum and the tensor. That would also be clumsy to write. Einstein notation is useful and we’ll see it more, but we need to think about <strong>tensor operations</strong> as analogies to functions. Tensor operations take in 1 or more tensors and output 1 or more tensors and the output shape depends on the input shape.</p>
 <p>One of the difficult things about tensors is understanding how shape is treated in equations. For example, consider this equation:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-792b0491-391c-4ebe-bd1e-9448e770f85d">
-<span class="eqno">(1.11)<a class="headerlink" href="#equation-792b0491-391c-4ebe-bd1e-9448e770f85d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-0c3ab87c-c74b-4ab6-8e7c-c232d28aec85">
+<span class="eqno">(1.11)<a class="headerlink" href="#equation-0c3ab87c-c74b-4ab6-8e7c-c232d28aec85" title="Permalink to this equation">#</a></span>\[\begin{equation}
     g = \exp\left(a - b\right)^2
 \end{equation}\]</div>
 <p>Seems like a reasonable enough equation. But what if <span class="math notranslate nohighlight">\(a\)</span> is rank 3 and <span class="math notranslate nohighlight">\(b\)</span> is rank 1? Is <span class="math notranslate nohighlight">\(g\)</span> rank 1 or 3 then? Actually, this is taken from a real example where <span class="math notranslate nohighlight">\(g\)</span> was rank 4. You subtract each element of <span class="math notranslate nohighlight">\(b\)</span> from each element of <span class="math notranslate nohighlight">\(a\)</span>. You could write this in Einstein notation:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4f91c7a2-d336-42e7-b39e-1ffa33afed7a">
-<span class="eqno">(1.12)<a class="headerlink" href="#equation-4f91c7a2-d336-42e7-b39e-1ffa33afed7a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-77bb7d95-5b87-4511-a6f3-e8a6b3dd4d5d">
+<span class="eqno">(1.12)<a class="headerlink" href="#equation-77bb7d95-5b87-4511-a6f3-e8a6b3dd4d5d" title="Permalink to this equation">#</a></span>\[\begin{equation}
     g_{ijkl} = \exp\left(a_{ijk} - b_l\right)^2
 \end{equation}\]</div>
 <p>except this function should work on arbitrary ranked <span class="math notranslate nohighlight">\(a\)</span> and always output <span class="math notranslate nohighlight">\(g\)</span> being the rank of <span class="math notranslate nohighlight">\(a + 1\)</span>. Typically, the best way to express this is explicitly stating how rank and shape are treated.</p>
@@ -787,8 +787,8 @@ at the last axis gives a scalar (rank 0)
 no matter what rank. This makes it possible to
 copy to fill up axis to align shapes.</p>
 </aside>
-<div class="amsmath math notranslate nohighlight" id="equation-a12ef18f-bd48-4ed7-8fc8-4eb5da87a729">
-<span class="eqno">(1.13)<a class="headerlink" href="#equation-a12ef18f-bd48-4ed7-8fc8-4eb5da87a729" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-29572ec1-2835-4254-a950-a9b644157415">
+<span class="eqno">(1.13)<a class="headerlink" href="#equation-29572ec1-2835-4254-a950-a9b644157415" title="Permalink to this equation">#</a></span>\[\begin{equation}
     A + B
 \end{equation}\]</div>
 <p><strong>Input A</strong></p>
@@ -1057,8 +1057,8 @@ after squeeze: (32, 4)
 </ul>
 <hr class="docutils" />
 <p>Let’s see if we can put together our skills to implement the equation example from above,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a0e03b3a-c39d-48af-aa8c-eb86ef018135">
-<span class="eqno">(1.14)<a class="headerlink" href="#equation-a0e03b3a-c39d-48af-aa8c-eb86ef018135" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-8b511e5b-372f-421c-ab90-2984a08ae670">
+<span class="eqno">(1.14)<a class="headerlink" href="#equation-8b511e5b-372f-421c-ab90-2984a08ae670" title="Permalink to this equation">#</a></span>\[\begin{equation}
     g = \exp\left(a - b\right)^2
 \end{equation}\]</div>
 <p>for arbitrary rank <span class="math notranslate nohighlight">\(a\)</span>. Recall <span class="math notranslate nohighlight">\(b\)</span> is a rank 1 tensor and we want <span class="math notranslate nohighlight">\(g\)</span> to be the rank of <span class="math notranslate nohighlight">\(a + 1\)</span>.</p>
@@ -1158,7 +1158,7 @@ input a2: (4, 3, 2, 1) output: (4, 3, 2, 1, 4)
 <h2><span class="section-number">1.8. </span>Cited References<a class="headerlink" href="#cited-references" title="Link to this heading">#</a></h2>
 <div class="docutils container" id="id3">
 <div role="list" class="citation-list">
-<div class="citation" id="id191" role="doc-biblioentry">
+<div class="citation" id="id192" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">Str20</a><span class="fn-bracket">]</span></span>
 <p>J Straub. Mathematical methods for molecular science. 2020.</p>
 </div>

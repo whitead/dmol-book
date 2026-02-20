@@ -538,7 +538,7 @@ in multi-label classification this is not the case. Multi-label classification i
 <p>The classic application of classification in structure-activity relationship is in drug discovery, where we want to predict if a molecule will be active (positive class) as a function of structure. That dates back to the 1970s. Classification is widely used now in materials and chemistry. Many molecular design problems can be formulated as classification. For example, you can use it to design new organic photovoltaic materials <span id="id1">[<a class="reference internal" href="#id30" title="Wenbo Sun, Yujie Zheng, Ke Yang, Qi Zhang, Akeel A Shah, Zhou Wu, Yuyang Sun, Liang Feng, Dongyang Chen, Zeyun Xiao, and others. Machine learning–assisted molecular design and efficiency prediction for high-performance organic photovoltaic materials. Science advances, 5(11):eaay4275, 2019.">SZY+19</a>]</span> or antimicrobial peptides <span id="id2">[<a class="reference internal" href="#id20" title="Rainier Barrett, Shaoyi Jiang, and Andrew D White. Classifying antimicrobial and multifunctional peptides with bayesian network models. Peptide Science, 110(4):e24079, 2018.">BJW18</a>]</span>.</p>
 <section id="data">
 <h2><span class="section-number">4.1. </span>Data<a class="headerlink" href="#data" title="Link to this heading">#</a></h2>
-<p>The dataset for this lecture was prepared by the MoleculeNet group <span id="id3">[<a class="reference internal" href="#id32" title="Zhenqin Wu, Bharath Ramsundar, Evan N Feinberg, Joseph Gomes, Caleb Geniesse, Aneesh S Pappu, Karl Leswing, and Vijay Pande. Moleculenet: a benchmark for molecular machine learning. Chemical science, 9(2):513–530, 2018.">WRF+18</a>]</span>.  It is a collection of molecules that succeeded or failed in clinical trials. The development of a new drug can cost well over a $1 billion, so any way to predict if a molecule will fail during clinical trials is highly valuable. The reason molecules fail in clinical trials is often due to safety, so even though some of these drugs failed because they were not effective there may be something common to each of the failed ones that we can learn.</p>
+<p>The dataset for this lecture was prepared by the MoleculeNet group <span id="id3">[<a class="reference internal" href="regression.html#id31" title="Zhenqin Wu, Bharath Ramsundar, Evan N Feinberg, Joseph Gomes, Caleb Geniesse, Aneesh S Pappu, Karl Leswing, and Vijay Pande. Moleculenet: a benchmark for molecular machine learning. Chemical science, 9(2):513–530, 2018.">WRF+18</a>]</span>.  It is a collection of molecules that succeeded or failed in clinical trials. The development of a new drug can cost well over a $1 billion, so any way to predict if a molecule will fail during clinical trials is highly valuable. The reason molecules fail in clinical trials is often due to safety, so even though some of these drugs failed because they were not effective there may be something common to each of the failed ones that we can learn.</p>
 <p>The labels will be the FDA_Approved column which is a 1 or 0 indicating FDA approval status. This is an example of binary classification.</p>
 </section>
 <section id="running-this-notebook">
@@ -971,8 +971,8 @@ Q 189.9 126.9, 190.7 126.9
 <section id="linear-perceptron">
 <h3><span class="section-number">4.4.1. </span>Linear Perceptron<a class="headerlink" href="#linear-perceptron" title="Link to this heading">#</a></h3>
 <p>We are able to predict single values from regression. How can we go from a predicted value to a class? The simplest answer is to use the same linear regression equation from chapter <a class="reference internal" href="regression.html"><span class="doc">Regression &amp; Model Assessment</span></a> <span class="math notranslate nohighlight">\(\hat{f}(\vec{x})\)</span> and assign <span class="math notranslate nohighlight">\(\hat{y} = 1\)</span> when <span class="math notranslate nohighlight">\(\hat{f}(\vec{x}) &gt; 0\)</span>,  <span class="math notranslate nohighlight">\(\hat{y} = 0\)</span> otherwise. Our model equation is then:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f5c1598c-06ca-4c0b-8914-daebad9733d5">
-<span class="eqno">(4.1)<a class="headerlink" href="#equation-f5c1598c-06ca-4c0b-8914-daebad9733d5" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-26dc3ef0-f1b3-41a3-b354-39b5f10aea16">
+<span class="eqno">(4.1)<a class="headerlink" href="#equation-26dc3ef0-f1b3-41a3-b354-39b5f10aea16" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \hat{f}(\vec{x}) = \begin{cases} 
       1 &amp; \vec{w}\cdot \vec{x} + b &gt; 0 \\
       0 &amp; \textrm{otherwise}\\
@@ -991,8 +991,8 @@ Q 189.9 126.9, 190.7 126.9
 </div>
 <p>This particular model is called a <strong>perceptron</strong> and is the first neural network for classification. It was invented in 1958 by Frank Rosenblatt, a psychologist at Cornell University. It was not the first neural network, but is often the first one that students learn. The perceptron is an example of a <strong>hard</strong> classifier; it does not predict probability of the class and instead predicts exactly one class.</p>
 <p>Now that we have a model, we must choose a loss function. We haven’t learned about many loss functions yet. We’ve only seen mean squared error. Let us begin with a related loss called mean absolute error (MAE). MAE measures disagreement between our class and the predicted class. This is like an accuracy – what percentage of the time we’re correct.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-749cb154-af93-42f2-928d-d84e6a44d876">
-<span class="eqno">(4.2)<a class="headerlink" href="#equation-749cb154-af93-42f2-928d-d84e6a44d876" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-25d80450-8b0d-42da-b60a-8aad77a97f94">
+<span class="eqno">(4.2)<a class="headerlink" href="#equation-25d80450-8b0d-42da-b60a-8aad77a97f94" title="Permalink to this equation">#</a></span>\[\begin{equation}
     L = \frac{1}{N} \sum_i  \left|y_i - \hat{y}_i\right|
 \end{equation}\]</div>
 <div class="cell docutils container">
@@ -1075,8 +1075,8 @@ Q 189.9 126.9, 190.7 126.9
 </div>
 <p>It’s all zeros! Why is that? It’s because our <a class="reference external" href="https://docs.jax.dev/en/latest/_autosummary/jax.numpy.where.html#jax.numpy.where" title="(in JAX)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">jnp.where</span></code></a> statement above is not differentiable, nor are any inequalities where the result is a constant (<code class="docutils literal notranslate"><span class="pre">1</span></code> or <code class="docutils literal notranslate"><span class="pre">0</span></code> in our case). The perceptron actually has a special training procedure that is not related to its derivatives. One of the motivating reasons that deep learning is popular is that we do not need to construct a special training process for each model we construct – like the training procedure for the perceptron.</p>
 <p>Rather than teach and discuss the special perceptron training procedure, we’ll move to a more modern related classifier called a softmax binary classifier. This is a tiny change, the softmax binary classifier is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c84db91e-24c4-40ff-9171-50654996ae4d">
-<span class="eqno">(4.3)<a class="headerlink" href="#equation-c84db91e-24c4-40ff-9171-50654996ae4d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e8fa4f46-dde0-4380-b33b-f6a92f3a439d">
+<span class="eqno">(4.3)<a class="headerlink" href="#equation-e8fa4f46-dde0-4380-b33b-f6a92f3a439d" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \hat{f}(\vec{x}) = \sigma\left(\vec{w}\cdot \vec{x} + b\right)
 \end{equation}\]</div>
 <figure class="align-default" id="simgoid">
@@ -1090,8 +1090,8 @@ Q 189.9 126.9, 190.7 126.9
 <p>Softmax is the generalization of sigmoid to multiple classes. Although we call our binary classifier a softmax classifier, it doesn’t use the softmax function.</p>
 </aside>
 <p>where <span class="math notranslate nohighlight">\(\sigma\)</span> is the <strong>sigmoid</strong> function. The sigmoid has a domain of <span class="math notranslate nohighlight">\((-\infty, \infty)\)</span> and outputs a probability <span class="math notranslate nohighlight">\((0, 1)\)</span>. The input to the sigmoid can be viewed as log-odds, called <strong>logits</strong> for short. Odds are ratios of probability – odds of 1 means the probability of the class 1 is 0.5 and class 0 is 0.5. Odds of 2 means the probability of class 1 is 0.67 and class 0 is 0.33. Log-odds is the natural logarithm of that, so that log-odds of 0 means the odds are 1 and the output probability should be 0.5. One definition of the sigmoid is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3334ca9a-6e45-4875-8343-1438d640ff9f">
-<span class="eqno">(4.4)<a class="headerlink" href="#equation-3334ca9a-6e45-4875-8343-1438d640ff9f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-944bd928-e512-4c7e-846d-8925347536a9">
+<span class="eqno">(4.4)<a class="headerlink" href="#equation-944bd928-e512-4c7e-846d-8925347536a9" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \sigma(x) = \frac{1}{1 + e^{-x}}
 \end{equation}\]</div>
 <p>however in practice there are some complexities to implementing sigmoids to make sure they’re numerically stable. This type of binary classifier is sometimes called <strong>logistic regression</strong> because we’re regressing logits.</p>
@@ -1099,23 +1099,23 @@ Q 189.9 126.9, 190.7 126.9
 <p>There is a different loss function that works better with classification called <strong>cross-entropy</strong>. You can experiment with mean absolute error or mean squared error with classification, but you’ll find they are almost always worse than cross-entropy.</p>
 <p>Cross-entropy is a loss function that describes distance between two probability distributions. When minimized, the two probability distributions are identical. Cross-entropy is a simplification of the <a class="reference external" href="https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence">Kullback–Leibler divergence</a> which is a way to measure distance between two probability distributions. Technically it is not a distance since it’s not symmetric with respect to its arguments. But in practice it is close enough to a distance that we treat it as one.</p>
 <p>How is comparing predicted values <span class="math notranslate nohighlight">\(\hat{y}\)</span> and <span class="math notranslate nohighlight">\(y\)</span> like comparing two probability distributions? Even though these are both 1s and 0s in the case of hard classification, they do sum to 1, and so we consider them probability distributions. Cross-entropy is defined as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-42d1892a-71f2-46d7-865e-e6580398b433">
-<span class="eqno">(4.5)<a class="headerlink" href="#equation-42d1892a-71f2-46d7-865e-e6580398b433" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-5ce3df4e-d832-459b-ac6c-f160b9c6674c">
+<span class="eqno">(4.5)<a class="headerlink" href="#equation-5ce3df4e-d832-459b-ac6c-f160b9c6674c" title="Permalink to this equation">#</a></span>\[\begin{equation}
     L = -\sum_c^K y_c \log \hat{y_c}
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(c\)</span> indicates which class of the <span class="math notranslate nohighlight">\(K\)</span> we’re considering, and it’s assumed that <span class="math notranslate nohighlight">\(\sum_c^K y_c = 1\)</span> and <span class="math notranslate nohighlight">\(\sum_c^K \hat{y}_c = 1\)</span> like probabilities (and they are positive). In the case of binary classification (only two classes), this becomes:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-86ddecaa-c469-49d3-aef2-70eaf43aa1cb">
-<span class="eqno">(4.6)<a class="headerlink" href="#equation-86ddecaa-c469-49d3-aef2-70eaf43aa1cb" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-1471d305-72ed-406d-b934-3017b299ba00">
+<span class="eqno">(4.6)<a class="headerlink" href="#equation-1471d305-72ed-406d-b934-3017b299ba00" title="Permalink to this equation">#</a></span>\[\begin{equation}
     L = -\left[ y_0 \log \hat{y_0} + y_1 \log \hat{y_1} \right]
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(y_0\)</span> is for the first class and <span class="math notranslate nohighlight">\(y_1\)</span> is for the second class. However, we also know that because these are probabilities that <span class="math notranslate nohighlight">\(y_1 = 1 - y_0\)</span>. We can rewrite to:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-131b9942-7822-4606-8394-2d98902db18e">
-<span class="eqno">(4.7)<a class="headerlink" href="#equation-131b9942-7822-4606-8394-2d98902db18e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-6470abeb-cea2-400d-b9e6-9e24f9405abe">
+<span class="eqno">(4.7)<a class="headerlink" href="#equation-6470abeb-cea2-400d-b9e6-9e24f9405abe" title="Permalink to this equation">#</a></span>\[\begin{equation}
     L = -\left[ y_0 \log \hat{y_0} + (1 - y_0) \log ( 1- \hat{y_0}) \right]
 \end{equation}\]</div>
 <p>Finally, we can drop the indication of the class:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-89dea1d8-4c84-4ffc-9a00-9b2b5ef038ec">
-<span class="eqno">(4.8)<a class="headerlink" href="#equation-89dea1d8-4c84-4ffc-9a00-9b2b5ef038ec" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-2ddb8ce7-6f65-4824-b586-8b828a3fa8e6">
+<span class="eqno">(4.8)<a class="headerlink" href="#equation-2ddb8ce7-6f65-4824-b586-8b828a3fa8e6" title="Permalink to this equation">#</a></span>\[\begin{equation}
     L = -\left[ y \log \hat{y} + (1 - y) \log ( 1- \hat{y}) \right]
 \end{equation}\]</div>
 <aside class="margin sidebar">
@@ -1336,7 +1336,7 @@ Threshold 0.99 (np.int64(3), np.int64(203))
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/0b9e9260524d4e4c57df449b55e48608f2ee66caf83c15f2c9a1c64a0821b14a.png" src="../_images/0b9e9260524d4e4c57df449b55e48608f2ee66caf83c15f2c9a1c64a0821b14a.png" />
+<img alt="../_images/628a3d207bbb910ec70eec2b3be1afa2afc10f08efa2b1cdeababee37662f257.png" src="../_images/628a3d207bbb910ec70eec2b3be1afa2afc10f08efa2b1cdeababee37662f257.png" />
 </div>
 </div>
 <p>This plot nicely shows how our trained model is actually sensitive to threshold, so that we could choose to more carefully screen for false negative or false positives. The best curves fall to the top-left of this plot. Our naive classifier is where we return a fixed percentage of examples randomly as positive or negative. You can plot the area under this curve with an integration and this is a good way to measure classifier performance and correctly capture the effect of both false negatives and false positives. The area under the ROC curve is known as the <strong>ROC AUC score</strong> and is preferred to accuracy because it captures the balance of Type I and II errors.</p>
@@ -1382,7 +1382,7 @@ Threshold 0.99 (np.int64(3), np.int64(203))
 <h2><span class="section-number">4.6. </span>Class Imbalance<a class="headerlink" href="#class-imbalance" title="Link to this heading">#</a></h2>
 <p>The reason for this uneven amount of false positives and false negatives is that we have very few negative examples – molecules which failed FDA clinical trials. This also explains why just predicting success has a high accuracy. How can we address this problem?</p>
 <p>The first answer is do nothing. Is this imbalance a problem at all? Perhaps a drug in general will succeed at clinical trials and thus the imbalance in training data reflects what we expect to see in testing. This is clearly not the case, judging from the difficult and large expense of creating new drug molecules. However, this should be the first thing you ask yourself. If you’re creating a classifier to detect lung cancer from X-ray images, probably you will have imbalanced training data and at test time, when evaluating patients, you’ll also not have 50% of patients having lung cancer. This comes back to the discussion in the <a class="reference internal" href="regression.html"><span class="doc">Regression &amp; Model Assessment</span></a> about training data distribution. If your testing data is within your training data distribution, then the class imbalance does not need to be explicitly addressed.</p>
-<p>The second solution is to somehow weight your training data to appear more like your testing data when you think you do have <strong>label shift</strong>. There are two ways to accomplish this. You could “augment” your training data by repeating the minority class until the ratio of minority to majority examples matches the assumed testing data. There are research papers written on this topic, with intuitive results<span id="id5">[<a class="reference internal" href="#id22" title="Nitesh V Chawla, Kevin W Bowyer, Lawrence O Hall, and W Philip Kegelmeyer. Smote: synthetic minority over-sampling technique. Journal of artificial intelligence research, 16:321–357, 2002.">CBHK02</a>]</span>. You can over-sample minority class but that can lead to a large dataset, so you can also under-sample the majority class. This is a robust approach that is independent to how you train. It also is typically as good as more sophisticated methods <span id="id6">[<a class="reference internal" href="#id39" title="Badr Youbi Idrissi, Martin Arjovsky, Mohammad Pezeshki, and David Lopez-Paz. Simple data balancing achieves competitive worst-group-accuracy. arXiv e-prints, pages arXiv–2110, 2021.">YIAPLP21</a>]</span>.</p>
+<p>The second solution is to somehow weight your training data to appear more like your testing data when you think you do have <strong>label shift</strong>. There are two ways to accomplish this. You could “augment” your training data by repeating the minority class until the ratio of minority to majority examples matches the assumed testing data. There are research papers written on this topic, with intuitive results<span id="id5">[<a class="reference internal" href="#id22" title="Nitesh V Chawla, Kevin W Bowyer, Lawrence O Hall, and W Philip Kegelmeyer. Smote: synthetic minority over-sampling technique. Journal of artificial intelligence research, 16:321–357, 2002.">CBHK02</a>]</span>. You can over-sample minority class but that can lead to a large dataset, so you can also under-sample the majority class. This is a robust approach that is independent to how you train. It also is typically as good as more sophisticated methods <span id="id6">[<a class="reference internal" href="#id40" title="Badr Youbi Idrissi, Martin Arjovsky, Mohammad Pezeshki, and David Lopez-Paz. Simple data balancing achieves competitive worst-group-accuracy. arXiv e-prints, pages arXiv–2110, 2021.">YIAPLP21</a>]</span>.</p>
 <p>Another method of weighing data is to modify your loss function to increase the gradient updates applied to minority examples. This is equivalent to saying there is a difference in loss between a false positive vs a false negative. In our case, false positive are rarer and also more important in reality. We would rather skip a clinical trial (false negative) rather than start one and have it fail (false positive). We already tried minimizing false positives by changing the threshold on a trained model but let’s see how this works during training. We’ll create a weight vector that is high for negative labels so that if they are misclassified (false positive), there will be a bigger update.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1495,14 +1495,14 @@ Weighted Classifier (np.int64(7), np.int64(121))
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/804d5719a18937ef6d024ddc3e7f49aad094e5a9ee47d5225d6d026a1a45c665.png" src="../_images/804d5719a18937ef6d024ddc3e7f49aad094e5a9ee47d5225d6d026a1a45c665.png" />
+<img alt="../_images/f8acbc9cf491432417b3dd1d8fe1133c1b5ba95437019448736fb2cb7fbf7e60.png" src="../_images/f8acbc9cf491432417b3dd1d8fe1133c1b5ba95437019448736fb2cb7fbf7e60.png" />
 </div>
 </div>
 <p>It appears our weighted training actually did not improve model performance, except in a small range between 0.25-0.4 false positive rate. It is even worse in the low false positive rate, which is where we would like to operate. In conclusion, we can modify the balance of false positive and false negative through modifications to training. However, we can also modify this after training by affecting the threshold for classification. This post-training procedure gives similar or even slightly better performance in our example.</p>
-<p>This may not always be the case. An overview of methods are available in <span id="id7">[<a class="reference internal" href="#id38" title="Haibo He and Edwardo A Garcia. Learning from imbalanced data. IEEE Transactions on knowledge and data engineering, 21(9):1263–1284, 2009.">HG09</a>]</span> and you can find a more recent discussion of the effects of reweighting, including when combined with regularization, in Bryrd and Lipton <span id="id8">[<a class="reference internal" href="#id34" title="Jonathon Byrd and Zachary Lipton. What is the effect of importance weighting in deep learning? In International Conference on Machine Learning, 872–881. PMLR, 2019.">BL19</a>]</span>. Byrd and Lipton show that reweighting has little effect unless combined with L2 regularization and batch normalization, perhaps accounting for the small effect we observed.</p>
+<p>This may not always be the case. An overview of methods are available in <span id="id7">[<a class="reference internal" href="#id39" title="Haibo He and Edwardo A Garcia. Learning from imbalanced data. IEEE Transactions on knowledge and data engineering, 21(9):1263–1284, 2009.">HG09</a>]</span> and you can find a more recent discussion of the effects of reweighting, including when combined with regularization, in Bryrd and Lipton <span id="id8">[<a class="reference internal" href="#id35" title="Jonathon Byrd and Zachary Lipton. What is the effect of importance weighting in deep learning? In International Conference on Machine Learning, 872–881. PMLR, 2019.">BL19</a>]</span>. Byrd and Lipton show that reweighting has little effect unless combined with L2 regularization and batch normalization, perhaps accounting for the small effect we observed.</p>
 <section id="screening-no-negative-examples">
 <h3><span class="section-number">4.6.1. </span>Screening: no negative examples<a class="headerlink" href="#screening-no-negative-examples" title="Link to this heading">#</a></h3>
-<p>Class imbalance is common in peptide and drug discovery where screening is used to generate data. Screening typically only contains positive examples, meaning you have literally zero negative examples. This is an active topic of research in a field of <strong>positive-unlabeled learning</strong> <span id="id9">[<a class="reference internal" href="#id35" title="Hyebin Song, Bennett J Bremer, Emily C Hinds, Garvesh Raskutti, and Philip A Romero. Inferring protein sequence-function relationships with large-scale positive-unlabeled learning. Cell Systems, 12(1):92–101, 2021.">SBH+21</a>]</span></p>
+<p>Class imbalance is common in peptide and drug discovery where screening is used to generate data. Screening typically only contains positive examples, meaning you have literally zero negative examples. This is an active topic of research in a field of <strong>positive-unlabeled learning</strong> <span id="id9">[<a class="reference internal" href="#id36" title="Hyebin Song, Bennett J Bremer, Emily C Hinds, Garvesh Raskutti, and Philip A Romero. Inferring protein sequence-function relationships with large-scale positive-unlabeled learning. Cell Systems, 12(1):92–101, 2021.">SBH+21</a>]</span></p>
 </section>
 </section>
 <section id="overfitting">
@@ -1557,6 +1557,10 @@ Weighted Classifier (np.int64(7), np.int64(121))
 <h2><span class="section-number">4.10. </span>Cited References<a class="headerlink" href="#cited-references" title="Link to this heading">#</a></h2>
 <div class="docutils container" id="id12">
 <div role="list" class="citation-list">
+<div class="citation" id="id32" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">WRF+18</a><span class="fn-bracket">]</span></span>
+<p>Zhenqin Wu, Bharath Ramsundar, Evan N Feinberg, Joseph Gomes, Caleb Geniesse, Aneesh S Pappu, Karl Leswing, and Vijay Pande. Moleculenet: a benchmark for molecular machine learning. <em>Chemical science</em>, 9(2):513–530, 2018.</p>
+</div>
 <div class="citation" id="id30" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">SZY+19</a><span class="fn-bracket">]</span></span>
 <p>Wenbo Sun, Yujie Zheng, Ke Yang, Qi Zhang, Akeel A Shah, Zhou Wu, Yuyang Sun, Liang Feng, Dongyang Chen, Zeyun Xiao, and others. Machine learning–assisted molecular design and efficiency prediction for high-performance organic photovoltaic materials. <em>Science advances</em>, 5(11):eaay4275, 2019.</p>
@@ -1564,10 +1568,6 @@ Weighted Classifier (np.int64(7), np.int64(121))
 <div class="citation" id="id20" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">BJW18</a><span class="fn-bracket">]</span></span>
 <p>Rainier Barrett, Shaoyi Jiang, and Andrew D White. Classifying antimicrobial and multifunctional peptides with bayesian network models. <em>Peptide Science</em>, 110(4):e24079, 2018.</p>
-</div>
-<div class="citation" id="id32" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">WRF+18</a><span class="fn-bracket">]</span></span>
-<p>Zhenqin Wu, Bharath Ramsundar, Evan N Feinberg, Joseph Gomes, Caleb Geniesse, Aneesh S Pappu, Karl Leswing, and Vijay Pande. Moleculenet: a benchmark for molecular machine learning. <em>Chemical science</em>, 9(2):513–530, 2018.</p>
 </div>
 <div class="citation" id="id25" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">MTKT18</a><span class="fn-bracket">]</span></span>
@@ -1577,19 +1577,19 @@ Weighted Classifier (np.int64(7), np.int64(121))
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">CBHK02</a><span class="fn-bracket">]</span></span>
 <p>Nitesh V Chawla, Kevin W Bowyer, Lawrence O Hall, and W Philip Kegelmeyer. Smote: synthetic minority over-sampling technique. <em>Journal of artificial intelligence research</em>, 16:321–357, 2002.</p>
 </div>
-<div class="citation" id="id39" role="doc-biblioentry">
+<div class="citation" id="id40" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id6">YIAPLP21</a><span class="fn-bracket">]</span></span>
 <p>Badr Youbi Idrissi, Martin Arjovsky, Mohammad Pezeshki, and David Lopez-Paz. Simple data balancing achieves competitive worst-group-accuracy. <em>arXiv e-prints</em>, pages arXiv–2110, 2021.</p>
 </div>
-<div class="citation" id="id38" role="doc-biblioentry">
+<div class="citation" id="id39" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id7">HG09</a><span class="fn-bracket">]</span></span>
 <p>Haibo He and Edwardo A Garcia. Learning from imbalanced data. <em>IEEE Transactions on knowledge and data engineering</em>, 21(9):1263–1284, 2009.</p>
 </div>
-<div class="citation" id="id34" role="doc-biblioentry">
+<div class="citation" id="id35" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id8">BL19</a><span class="fn-bracket">]</span></span>
 <p>Jonathon Byrd and Zachary Lipton. What is the effect of importance weighting in deep learning? In <em>International Conference on Machine Learning</em>, 872–881. PMLR, 2019.</p>
 </div>
-<div class="citation" id="id35" role="doc-biblioentry">
+<div class="citation" id="id36" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id9">SBH+21</a><span class="fn-bracket">]</span></span>
 <p>Hyebin Song, Bennett J Bremer, Emily C Hinds, Garvesh Raskutti, and Philip A Romero. Inferring protein sequence-function relationships with large-scale positive-unlabeled learning. <em>Cell Systems</em>, 12(1):92–101, 2021.</p>
 </div>
