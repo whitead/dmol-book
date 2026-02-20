@@ -524,8 +524,8 @@ document.write(`
 </ul>
 </div>
 <p>A VAE approaches this problem by introducing a dummy random variable <span class="math notranslate nohighlight">\(z\)</span>, which we define to have a known distribution (e.g., normal). We can then rewrite <span class="math notranslate nohighlight">\(\hat{\textrm{P}}(x)\)</span> as:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-838261f1-cb9a-4040-9f47-1e83a0627250">
-<span class="eqno">(14.1)<a class="headerlink" href="#equation-838261f1-cb9a-4040-9f47-1e83a0627250" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-d8634cc7-a431-4bdb-a247-83f8baf59bda">
+<span class="eqno">(14.1)<a class="headerlink" href="#equation-d8634cc7-a431-4bdb-a247-83f8baf59bda" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \hat{\textrm{P}}(x) = \int\,\hat{\textrm{P}}\left(x | z \right) \textrm{P}(z)\,dz
 \end{equation}\]</div>
 <p>using the definition of a marginal and conditional probability. Training <span class="math notranslate nohighlight">\(\hat{\textrm{P}}\left(x | z \right)\)</span> directly is not really possible either, but we can create a symmetric distribution <span class="math notranslate nohighlight">\(\hat{\textrm{P}}\left(z | x \right)\)</span> and train both simultaneously. This symmetric distribution only is created to help us train; our end goal is to find <span class="math notranslate nohighlight">\(\hat{\textrm{P}}\left(x | z \right)\)</span> so that we can obtain <span class="math notranslate nohighlight">\(\hat{\textrm{P}}(x)\)</span>. VAEs were first introduced in <span id="id2">[<a class="reference internal" href="#id174" title="Diederik P Kingma and Max Welling. Auto-encoding variational bayes. arXiv preprint arXiv:1312.6114, 2013.">KW13</a>]</span>.</p>
@@ -545,8 +545,8 @@ document.write(`
 <p>The derivation below is a little unusual. Most derivations rely on Bayes’ theorem following a principle of evidence lower bound (ELBO). I thought I’d give a different derivation since you can readily find examples of <a class="reference external" href="https://www.cs.princeton.edu/courses/archive/fall11/cos597C/lectures/variational-inference-i.pdf">the ELBO in many places</a>.</p>
 </div>
 <p>Remember we do not have an expression for <span class="math notranslate nohighlight">\(\hat{\textrm{P}}(x_i)\)</span>. We have <span class="math notranslate nohighlight">\(p_\theta(x_i | z)\)</span>. To connect them we’ll use the following expression:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-bd93d5a5-4b69-4dc0-836b-de9351cbea11">
-<span class="eqno">(14.2)<a class="headerlink" href="#equation-bd93d5a5-4b69-4dc0-836b-de9351cbea11" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-4aefcac5-3e06-461d-8791-921ff125e62f">
+<span class="eqno">(14.2)<a class="headerlink" href="#equation-4aefcac5-3e06-461d-8791-921ff125e62f" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \log\left[\hat{\textrm{P}}(x_i)\right]= \log\left[\int\,p_\theta(x_i | z) \textrm{P}(z)\,dz\right] = \log \textrm{E}_z\left[p_\theta(x_i | z)\right]
 \end{equation}\]</div>
 <p>where we have rewritten the integral more compactly by using the definition of expectation. This expression requires integrating over the latent variable, which is not easy since as you can guess <span class="math notranslate nohighlight">\(p_\theta(x | z)\)</span> is a neural network and it’s not straightforward to integrate over the input (<span class="math notranslate nohighlight">\(z\)</span>) of a neural network. Instead, we can approximate this integral by sampling some <span class="math notranslate nohighlight">\(z\)</span>s from <span class="math notranslate nohighlight">\(P(z)\)</span></p>
@@ -554,42 +554,42 @@ document.write(`
 <p class="sidebar-title"></p>
 <p>We actually could just integrate over the latent variables. This is called a normalizing flow and is a class of generative models we’ll see later.</p>
 </aside>
-<div class="amsmath math notranslate nohighlight" id="equation-e08561c6-fc20-485d-ac68-81f4bd6ada08">
-<span class="eqno">(14.3)<a class="headerlink" href="#equation-e08561c6-fc20-485d-ac68-81f4bd6ada08" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-5c42e4af-5dba-4ede-8442-58e9b6fc2ef9">
+<span class="eqno">(14.3)<a class="headerlink" href="#equation-5c42e4af-5dba-4ede-8442-58e9b6fc2ef9" title="Permalink to this equation">#</a></span>\[\begin{equation}
  \log\textrm{E}_z\left[ p_\theta(x_i | z)\right]\approx \log \left[\frac{1}{N}\sum_j^N  p_\theta(x_i | z_j)\right],\, z_j \sim P(z_j)
 \end{equation}\]</div>
 <p>You’ll find though that grabbing <span class="math notranslate nohighlight">\(z\)</span>’s from <span class="math notranslate nohighlight">\(P(z)\)</span> is not so efficient at approximating this integral, because you need the <span class="math notranslate nohighlight">\(z\)</span>’s to be likely to have led to the observed <span class="math notranslate nohighlight">\(x_i\)</span>. The integral is dominated by the <span class="math notranslate nohighlight">\(p_\theta(x_i | z_j)\)</span> terms. This is where we use <span class="math notranslate nohighlight">\(q(z | x)\)</span>: it can provide efficient guesses for <span class="math notranslate nohighlight">\(z_j\)</span>. To approximate <span class="math notranslate nohighlight">\(\log \textrm{E}_z\left[p_\theta(x_i | z)\right]\)</span> with samples from <span class="math notranslate nohighlight">\(q(z | x_i)\)</span>, we need to account for the fact that sampling from <span class="math notranslate nohighlight">\(q(z | x_i)\)</span> is not identical to sampling from <span class="math notranslate nohighlight">\(P(z)\)</span> by adding their ratio to the expression (<a class="reference external" href="https://en.wikipedia.org/wiki/Importance_sampling">importance sampling</a>).</p>
-<div class="amsmath math notranslate nohighlight" id="equation-cbf5434e-0d39-4c2b-94dc-0f0217e41de8">
-<span class="eqno">(14.4)<a class="headerlink" href="#equation-cbf5434e-0d39-4c2b-94dc-0f0217e41de8" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-33eda9ae-44ba-44d9-8222-624d0c838b8e">
+<span class="eqno">(14.4)<a class="headerlink" href="#equation-33eda9ae-44ba-44d9-8222-624d0c838b8e" title="Permalink to this equation">#</a></span>\[\begin{equation}
  \log\textrm{E}_z\left[ p_\theta(x_i | z)\right]\approx \log \left[\frac{1}{N}\sum^N_j  p_\theta(x_i | z_j) \frac{P(z_j)}{q_\phi(z_j | x_i)}\right],\, z_j \sim q_\phi(z_j | x_i)
 \end{equation}\]</div>
 <p>The ratio of <span class="math notranslate nohighlight">\(P(z) / q_\phi(z | x)\)</span> enables our numerical approximation of the expectation. For notational purposes though I’ll go back to the exact expression, with the understanding that when we go to implementation we’ll use the numerical approximation:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1e4eaacd-5adf-4362-89b9-f7b207a78d06">
-<span class="eqno">(14.5)<a class="headerlink" href="#equation-1e4eaacd-5adf-4362-89b9-f7b207a78d06" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-d33e5f68-bce3-4f4c-8071-540c849e03bb">
+<span class="eqno">(14.5)<a class="headerlink" href="#equation-d33e5f68-bce3-4f4c-8071-540c849e03bb" title="Permalink to this equation">#</a></span>\[\begin{equation}
  \log\textrm{E}_z\left[ p_\theta(x_i | z)\right] = \log\textrm{E}_{z \sim q_\phi(z | x_i)}\left[ p_\theta(x_i | z) \frac{P(z)}{q_\phi(z | x_i)}\right]
 \end{equation}\]</div>
 <p>Notice how the expectation now is wrt <span class="math notranslate nohighlight">\(z \sim q_\phi(z | x_i)\)</span> since we have that importance sampling ratio in the expression.</p>
 <p>Now if the log was on the inside of our expectation, we could simplify this. We can actually swap the order of expectation and the log using Jensen’s Inequality for the concave log function. The consequence is that our loss is no longer an exact estimate of the log likelihood, but a lower bound.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ddecd5c5-c161-4a6c-bea2-fcfc9aea0ad6">
-<span class="eqno">(14.6)<a class="headerlink" href="#equation-ddecd5c5-c161-4a6c-bea2-fcfc9aea0ad6" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-2c1fe452-3850-40e0-8742-4d9d84e44c3c">
+<span class="eqno">(14.6)<a class="headerlink" href="#equation-2c1fe452-3850-40e0-8742-4d9d84e44c3c" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \log \textrm{E}\left[\ldots\right]\geq \textrm{E}\left[\log \ldots\right]
 \end{equation}\]</div>
 <p>We’ll use that and can now separate into two terms by properties of the log</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a1f59591-7aec-46b3-ba59-e8034d456ab9">
-<span class="eqno">(14.7)<a class="headerlink" href="#equation-a1f59591-7aec-46b3-ba59-e8034d456ab9" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-622fae6a-1e58-4839-ba2e-e8751150ab08">
+<span class="eqno">(14.7)<a class="headerlink" href="#equation-622fae6a-1e58-4839-ba2e-e8751150ab08" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \textrm{E}_{z \sim q_\phi(z | x_i)}\left[ \log\left(p_\theta(x_i | z) \frac{P(z)}{q_\phi(z | x_i)}\right)\right] = \textrm{E}_{z \sim q_\phi(z | x_i)}\left[ \log p_\theta(x_i | z)\right] + \textrm{E}_{z \sim q_\phi(z | x_i)}\left[ \log \left(\frac{P(z)}{q_\phi(z | x_i)}\right)\right]
 \end{equation}\]</div>
 <p>Remember we always planned to re-introduce numerically approximate the expectation. However, the right-hand side does not involve <span class="math notranslate nohighlight">\(p_\theta(x | z)\)</span>, so we do not need to integrate over a neural network input. We just need to integrate over the output of <span class="math notranslate nohighlight">\(q_\phi(z | x)\)</span> and <span class="math notranslate nohighlight">\(P(z)\)</span>, which is a standard normal distribution. We’ll see later on that we can make the output of <span class="math notranslate nohighlight">\(q_\phi(z | x)\)</span> specifically be a normal distribution to make sure we can easily compute the integral. Finally, we can use an identity that relates the Kullback–Leibler divergence (KL divergence) (a binary functional of two probabilities) to the right-hand side term:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-aca4a664-87e8-44bf-984a-bc4195320006">
-<span class="eqno">(14.8)<a class="headerlink" href="#equation-aca4a664-87e8-44bf-984a-bc4195320006" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-d4c4b3b6-77d5-4295-8930-28c5bcb0d94b">
+<span class="eqno">(14.8)<a class="headerlink" href="#equation-d4c4b3b6-77d5-4295-8930-28c5bcb0d94b" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \textrm{E}_{p(x)}\left[ \ln\left(\frac{q(x)}{p(x)}\right)\right] = -\textrm{KL}\left[p(x)|| q(x)\right]
 \end{equation}\]</div>
 <p>arriving at our final result:</p>
 </section>
 <section id="log-likelihood-approximation">
 <h3><span class="section-number">14.1.2. </span>Log-Likelihood Approximation<a class="headerlink" href="#log-likelihood-approximation" title="Link to this heading">#</a></h3>
-<div class="amsmath math notranslate nohighlight" id="equation-aece4375-29ab-4365-a68b-1ba864c6ae52">
-<span class="eqno">(14.9)<a class="headerlink" href="#equation-aece4375-29ab-4365-a68b-1ba864c6ae52" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-65b0d411-7618-45ce-9e10-8e9f33f45c8e">
+<span class="eqno">(14.9)<a class="headerlink" href="#equation-65b0d411-7618-45ce-9e10-8e9f33f45c8e" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \log\left[\hat{\textrm{P}}(x_i)\right] \geq \textrm{E}_{z \sim q_\phi(z | x_i)}\left[ \log p_\theta(x_i | z)\right] -\textrm{KL}\left[q_\phi(z | x_i)|| P(z)\right]
 \end{equation}\]</div>
 <p>The left term is called the <strong>reconstruction loss</strong> and assess how close we come after going from <span class="math notranslate nohighlight">\(x \rightarrow z \rightarrow x\)</span> in expectation. The right-hand term is the <strong>KL-divergence</strong> and measures how close our encoder is to our defined <span class="math notranslate nohighlight">\(P(z)\)</span> (normal distribution). The right-hand term involves an integral that can be computed analytically and no sampling is required to estimate it. Remember, in the derivation the KL-divergence term appeared as a correction term to account for the fact that our loss doesn’t use <span class="math notranslate nohighlight">\(P(z)\)</span> directly, but instead uses the encoder <span class="math notranslate nohighlight">\(q_\phi(z | x_i)\)</span> which generates <span class="math notranslate nohighlight">\(z\)</span>’s from our training data point <span class="math notranslate nohighlight">\(x_i\)</span>. The last step is that we want to minimize our loss, so we need to add a minus sign.</p>
@@ -597,8 +597,8 @@ document.write(`
 <p class="admonition-title">Note</p>
 <p>The log-likelihood equation we’ve derived for VAE training is also sometimes called the evidence lower bound (ELBO). ELBO is a general equation used in Bayesian modeling, which usually has nothing to do with VAEs.</p>
 </div>
-<div class="amsmath math notranslate nohighlight" id="equation-c5f8bc4a-6485-4e8f-8806-fcfba4a63a2e">
-<span class="eqno">(14.10)<a class="headerlink" href="#equation-c5f8bc4a-6485-4e8f-8806-fcfba4a63a2e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-9ddae867-bd28-4f49-adb9-2c8af0e1d8d6">
+<span class="eqno">(14.10)<a class="headerlink" href="#equation-9ddae867-bd28-4f49-adb9-2c8af0e1d8d6" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathcal{L}(x_i, \phi, \theta) =  -\textrm{E}_{z \sim q_\phi(z | x_i)}\left[ \log p_\theta(x_i | z)\right] +\textrm{KL}\left[q_\phi(z | x_i)|| P(z)\right]
 \end{equation}\]</div>
 <p>Remember that in practice, we will approximate the expectation in the reconstruction loss by sampling <span class="math notranslate nohighlight">\(z\)</span>’s from the decoder <span class="math notranslate nohighlight">\(q_\phi(z | x)\)</span>. We’ll only use a single sample.</p>
@@ -795,13 +795,13 @@ document.write(`
 l = -\textrm{E}_{z \sim q_\phi(z | x_i)}\left[\log p_{\theta}(x_i | z)\right] + \textrm{KL}\left[(q_\phi(z | x))|| P(z)\right]
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(P(z)\)</span> is the standard normal distribution and we approximate expectations using a single sample from the encoder. We need to expand the KL-divergence term to implement. Both <span class="math notranslate nohighlight">\(P(z)\)</span> and <span class="math notranslate nohighlight">\(q_\theta(z | x)\)</span> are normal. You can look-up the KL-divergence between two normal distributions:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0581d107-56b7-4c76-99e1-e03cef9a0137">
-<span class="eqno">(14.11)<a class="headerlink" href="#equation-0581d107-56b7-4c76-99e1-e03cef9a0137" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ce1ffba5-9284-4c59-bcb4-0d1656e695c9">
+<span class="eqno">(14.11)<a class="headerlink" href="#equation-ce1ffba5-9284-4c59-bcb4-0d1656e695c9" title="Permalink to this equation">#</a></span>\[\begin{equation}
 KL(q, p) = \log \frac{\sigma_p}{\sigma_q} + \frac{\sigma_q^2 + (\mu_q - \mu_p)^2}{2 \sigma_p^2} - \frac{1}{2}
 \end{equation}\]</div>
 <p>we can simplify because <span class="math notranslate nohighlight">\(P(z)\)</span> is standard normal (<span class="math notranslate nohighlight">\(\sigma = 1, \mu = 0\)</span>)</p>
-<div class="amsmath math notranslate nohighlight" id="equation-cc08b714-968d-40c8-a496-fc927581a379">
-<span class="eqno">(14.12)<a class="headerlink" href="#equation-cc08b714-968d-40c8-a496-fc927581a379" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-868d0e4d-2f9b-4db2-823c-c538842d3a43">
+<span class="eqno">(14.12)<a class="headerlink" href="#equation-868d0e4d-2f9b-4db2-823c-c538842d3a43" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \textrm{KL}\left[(q_\theta(z | x_i))|| P(z)\right] = -\log \sigma_i + \frac{\sigma_i^2}{2} + \frac{\mu_i^2}{2} - \frac{1}{2}
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\mu_i, \sigma_i\)</span> are the output from <span class="math notranslate nohighlight">\(q_\phi(z | x_i)\)</span></p>
@@ -1707,8 +1707,8 @@ l = -\textrm{E}_{z \sim q_\phi(z | x_i)}\left[\log p_{\theta}(x_i | z)\right] + 
 <section id="optimization-on-latent-space">
 <h3><span class="section-number">14.8.3. </span>Optimization on Latent Space<a class="headerlink" href="#optimization-on-latent-space" title="Link to this heading">#</a></h3>
 <p>Finally, let us examine how we can optimize in the latent space. Let’s say I want to find the most compact structure. We’ll define our loss function as the radius of gyration and take its derivative with respect to <span class="math notranslate nohighlight">\(z\)</span>. Recall the definition of radius of gyration is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c8a9e3ee-b809-4d14-9b83-6e5909427d3a">
-<span class="eqno">(14.13)<a class="headerlink" href="#equation-c8a9e3ee-b809-4d14-9b83-6e5909427d3a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-9c9a1582-7564-4951-8412-a292c9202b76">
+<span class="eqno">(14.13)<a class="headerlink" href="#equation-9c9a1582-7564-4951-8412-a292c9202b76" title="Permalink to this equation">#</a></span>\[\begin{equation}
 R_g = \frac{1}{N}\sum_i r_i^2
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(r_i\)</span> is distance to center of mass. Our generated samples are, by definition, centered at the origin though so we do not need to worry about center of mass. We want to take derivatives in <span class="math notranslate nohighlight">\(z\)</span>, but need samples in <span class="math notranslate nohighlight">\(x\)</span> to compute radius of gyration. We use the decoder to get an <span class="math notranslate nohighlight">\(x\)</span> and can propagate derivatives through it, because it is a differentiable neural network.</p>

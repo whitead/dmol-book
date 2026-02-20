@@ -531,13 +531,13 @@ equivalent.</p>
 <p>Here are some examples of writing tensor operations in Einstein notation.</p>
 <p><strong>Total Sum</strong></p>
 <p>Sum all elements of a rank 4 tensor. In Einstein notation this is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-39fb6073-2327-4c2b-a61a-2301ce9f58b6">
-<span class="eqno">(1.1)<a class="headerlink" href="#equation-39fb6073-2327-4c2b-a61a-2301ce9f58b6" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-eb8c7556-217d-410c-a373-a771c804ba17">
+<span class="eqno">(1.1)<a class="headerlink" href="#equation-eb8c7556-217d-410c-a373-a771c804ba17" title="Permalink to this equation">#</a></span>\[\begin{equation}
   a_{ijkl} = b
 \end{equation}\]</div>
 <p>in normal mathematic notation, this would be</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f5c41e3a-1c31-435d-b132-98b8e752026e">
-<span class="eqno">(1.2)<a class="headerlink" href="#equation-f5c41e3a-1c31-435d-b132-98b8e752026e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-fc8ee0bf-2a1c-4def-b8c1-451cd9b25c40">
+<span class="eqno">(1.2)<a class="headerlink" href="#equation-fc8ee0bf-2a1c-4def-b8c1-451cd9b25c40" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \sum_i \sum_j \sum_k \sum_l a_{ijkl} = b
 \end{equation}\]</div>
 <aside class="margin sidebar">
@@ -548,24 +548,24 @@ It is called <a class="reference external" href="https://einops.rocks/">einops</
 </aside>
 <p><strong>Sum Specific Axis</strong></p>
 <p>Sum over last axis</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d9e934a4-a77b-4a5c-9c6e-67b9ac16c5df">
-<span class="eqno">(1.3)<a class="headerlink" href="#equation-d9e934a4-a77b-4a5c-9c6e-67b9ac16c5df" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-7d625b1a-f93a-444b-9fa2-d1fbb779f325">
+<span class="eqno">(1.3)<a class="headerlink" href="#equation-7d625b1a-f93a-444b-9fa2-d1fbb779f325" title="Permalink to this equation">#</a></span>\[\begin{equation}
   a_{ijkl} = b_{ijk}
 \end{equation}\]</div>
 <p>In normal notation:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-653f6b09-df8e-4d8b-b36f-94debb6f12fa">
-<span class="eqno">(1.4)<a class="headerlink" href="#equation-653f6b09-df8e-4d8b-b36f-94debb6f12fa" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e882ca7e-0a6e-48db-9249-1981655a7b9c">
+<span class="eqno">(1.4)<a class="headerlink" href="#equation-e882ca7e-0a6e-48db-9249-1981655a7b9c" title="Permalink to this equation">#</a></span>\[\begin{equation}
  \sum_l a_{ijkl} = b_{ijk}
 \end{equation}\]</div>
 <p><strong>Dot Product</strong></p>
 <p>In Einstein notation:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-49a8fa27-0759-4673-8fa1-20833aa9f332">
-<span class="eqno">(1.5)<a class="headerlink" href="#equation-49a8fa27-0759-4673-8fa1-20833aa9f332" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-d3787f7e-b781-4e58-ad7d-ce0cddcc99ec">
+<span class="eqno">(1.5)<a class="headerlink" href="#equation-d3787f7e-b781-4e58-ad7d-ce0cddcc99ec" title="Permalink to this equation">#</a></span>\[\begin{equation}
   a_{i} b_{i} = c
 \end{equation}\]</div>
 <p>In normal notation:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b80bfab9-84d3-46b5-8738-950d7e358d76">
-<span class="eqno">(1.6)<a class="headerlink" href="#equation-b80bfab9-84d3-46b5-8738-950d7e358d76" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-51ec6534-ff5e-4c42-bf86-eb0ffb529381">
+<span class="eqno">(1.6)<a class="headerlink" href="#equation-51ec6534-ff5e-4c42-bf86-eb0ffb529381" title="Permalink to this equation">#</a></span>\[\begin{equation}
   \sum_i a_{i} b_{i} = c
 \end{equation}\]</div>
 <p>Notice that <span class="math notranslate nohighlight">\(a_i\)</span> and <span class="math notranslate nohighlight">\(b_i\)</span> must have the same dimension in their 0th axis in order for the sum in the dot product to be valid. This makes sense, since to compute a dot product the vectors must be the same dimension. In general, if two tensors share the same index (<span class="math notranslate nohighlight">\(b_{ij}\)</span>, <span class="math notranslate nohighlight">\(a_{ik}\)</span>), then that axis must be the same dimension.</p>
@@ -574,8 +574,8 @@ It is called <a class="reference external" href="https://einops.rocks/">einops</
 <p>The matrix product of 2 tensors, where each tensor is rank 2.</p>
 <div class="dropdown admonition">
 <p class="admonition-title">Answer</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e4aa866c-2c2a-4856-9884-34e86278e9fc">
-<span class="eqno">(1.7)<a class="headerlink" href="#equation-e4aa866c-2c2a-4856-9884-34e86278e9fc" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-7b24af7f-d2da-4526-9398-41361711b825">
+<span class="eqno">(1.7)<a class="headerlink" href="#equation-7b24af7f-d2da-4526-9398-41361711b825" title="Permalink to this equation">#</a></span>\[\begin{equation}
     a_{ij} b_{jk} = c_{ik}
 \end{equation}\]</div>
 </div>
@@ -583,8 +583,8 @@ It is called <a class="reference external" href="https://einops.rocks/">einops</
 <p>Apply matrix <span class="math notranslate nohighlight">\(a\)</span> to column vector <span class="math notranslate nohighlight">\(b\)</span> by multiplication. <span class="math notranslate nohighlight">\(\mathbf{A}\vec{b}\)</span> in linear algebra notation.</p>
 <div class="dropdown admonition">
 <p class="admonition-title">Answer</p>
-<div class="amsmath math notranslate nohighlight" id="equation-62a8f8cd-0fc8-41e5-a8da-c39bdacc9672">
-<span class="eqno">(1.8)<a class="headerlink" href="#equation-62a8f8cd-0fc8-41e5-a8da-c39bdacc9672" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-beeba1c4-9214-4927-ac06-f33f91a3fb82">
+<span class="eqno">(1.8)<a class="headerlink" href="#equation-beeba1c4-9214-4927-ac06-f33f91a3fb82" title="Permalink to this equation">#</a></span>\[\begin{equation}
     a_{ij} b_{j} = c_{i}
 \end{equation}\]</div>
 </div>
@@ -592,8 +592,8 @@ It is called <a class="reference external" href="https://einops.rocks/">einops</
 <p>Swap the values in a matrix to make it a transpose.</p>
 <div class="dropdown admonition">
 <p class="admonition-title">Answer</p>
-<div class="amsmath math notranslate nohighlight" id="equation-abff2ffe-7592-4abc-91f6-a3f392f385db">
-<span class="eqno">(1.9)<a class="headerlink" href="#equation-abff2ffe-7592-4abc-91f6-a3f392f385db" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-df15de92-1680-4e6a-a579-0c76b5327223">
+<span class="eqno">(1.9)<a class="headerlink" href="#equation-df15de92-1680-4e6a-a579-0c76b5327223" title="Permalink to this equation">#</a></span>\[\begin{equation}
     a_{ij} = t_{ji}
 \end{equation}\]</div>
 </div>
@@ -609,19 +609,19 @@ Being able to understand how shape affects them
 is the key to understanding how algorithms work.</p>
 </aside>
 <p>Although you can specify operations in Einstein notation, it is typically not expressive enough. How would you write this operation: sum the last axis of a tensor? Without knowing the rank, you do not know how many indices you should indicate in the expression. Maybe like this?</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a84ff404-a5b8-43a9-8435-17cc8568cb35">
-<span class="eqno">(1.10)<a class="headerlink" href="#equation-a84ff404-a5b8-43a9-8435-17cc8568cb35" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-d6828724-748a-4917-aede-303b6a135aae">
+<span class="eqno">(1.10)<a class="headerlink" href="#equation-d6828724-748a-4917-aede-303b6a135aae" title="Permalink to this equation">#</a></span>\[\begin{equation}
 a_{i_0, i_1, \ldots i_N} = a_{i_0, i_1, \ldots i_{N - 1}}
 \end{equation}\]</div>
 <p>Well, that’s good but what if your operation has two arguments: which axis to sum and the tensor. That would also be clumsy to write. Einstein notation is useful and we’ll see it more, but we need to think about <strong>tensor operations</strong> as analogies to functions. Tensor operations take in 1 or more tensors and output 1 or more tensors and the output shape depends on the input shape.</p>
 <p>One of the difficult things about tensors is understanding how shape is treated in equations. For example, consider this equation:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2d738bd6-da74-47fd-86ea-ae031ccf69e6">
-<span class="eqno">(1.11)<a class="headerlink" href="#equation-2d738bd6-da74-47fd-86ea-ae031ccf69e6" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-0fb6e94b-906e-46c9-86e9-1aaef4e7aba3">
+<span class="eqno">(1.11)<a class="headerlink" href="#equation-0fb6e94b-906e-46c9-86e9-1aaef4e7aba3" title="Permalink to this equation">#</a></span>\[\begin{equation}
     g = \exp\left(a - b\right)^2
 \end{equation}\]</div>
 <p>Seems like a reasonable enough equation. But what if <span class="math notranslate nohighlight">\(a\)</span> is rank 3 and <span class="math notranslate nohighlight">\(b\)</span> is rank 1? Is <span class="math notranslate nohighlight">\(g\)</span> rank 1 or 3 then? Actually, this is taken from a real example where <span class="math notranslate nohighlight">\(g\)</span> was rank 4. You subtract each element of <span class="math notranslate nohighlight">\(b\)</span> from each element of <span class="math notranslate nohighlight">\(a\)</span>. You could write this in Einstein notation:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-db50548e-9725-4f3f-9a44-91abe3c1c163">
-<span class="eqno">(1.12)<a class="headerlink" href="#equation-db50548e-9725-4f3f-9a44-91abe3c1c163" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-21782a70-3eff-4137-9019-0e26ea0118f9">
+<span class="eqno">(1.12)<a class="headerlink" href="#equation-21782a70-3eff-4137-9019-0e26ea0118f9" title="Permalink to this equation">#</a></span>\[\begin{equation}
     g_{ijkl} = \exp\left(a_{ijk} - b_l\right)^2
 \end{equation}\]</div>
 <p>except this function should work on arbitrary ranked <span class="math notranslate nohighlight">\(a\)</span> and always output <span class="math notranslate nohighlight">\(g\)</span> being the rank of <span class="math notranslate nohighlight">\(a + 1\)</span>. Typically, the best way to express this is explicitly stating how rank and shape are treated.</p>
@@ -787,8 +787,8 @@ at the last axis gives a scalar (rank 0)
 no matter what rank. This makes it possible to
 copy to fill up axis to align shapes.</p>
 </aside>
-<div class="amsmath math notranslate nohighlight" id="equation-9969a7b7-961a-416e-9103-3673a94af827">
-<span class="eqno">(1.13)<a class="headerlink" href="#equation-9969a7b7-961a-416e-9103-3673a94af827" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-78db87f7-aff3-4d67-a891-12087b49ac3f">
+<span class="eqno">(1.13)<a class="headerlink" href="#equation-78db87f7-aff3-4d67-a891-12087b49ac3f" title="Permalink to this equation">#</a></span>\[\begin{equation}
     A + B
 \end{equation}\]</div>
 <p><strong>Input A</strong></p>
@@ -1057,8 +1057,8 @@ after squeeze: (32, 4)
 </ul>
 <hr class="docutils" />
 <p>Let’s see if we can put together our skills to implement the equation example from above,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7a511eda-df78-46ae-a50f-d6f7816b8958">
-<span class="eqno">(1.14)<a class="headerlink" href="#equation-7a511eda-df78-46ae-a50f-d6f7816b8958" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a17f35ec-3f6c-42c4-b5b0-870b5199e268">
+<span class="eqno">(1.14)<a class="headerlink" href="#equation-a17f35ec-3f6c-42c4-b5b0-870b5199e268" title="Permalink to this equation">#</a></span>\[\begin{equation}
     g = \exp\left(a - b\right)^2
 \end{equation}\]</div>
 <p>for arbitrary rank <span class="math notranslate nohighlight">\(a\)</span>. Recall <span class="math notranslate nohighlight">\(b\)</span> is a rank 1 tensor and we want <span class="math notranslate nohighlight">\(g\)</span> to be the rank of <span class="math notranslate nohighlight">\(a + 1\)</span>.</p>
