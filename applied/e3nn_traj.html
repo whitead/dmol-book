@@ -1031,7 +1031,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/08e294c39ace16bfd5c599d4f75e5d6bdac44fa2145602cce6ae5c3622fb7bb9.png" src="../_images/08e294c39ace16bfd5c599d4f75e5d6bdac44fa2145602cce6ae5c3622fb7bb9.png" />
+<img alt="../_images/7852c8704b1d0eb521dcf415369e30fcb0f9329cbb0ca4ef92ab3bf97d7914fe.png" src="../_images/7852c8704b1d0eb521dcf415369e30fcb0f9329cbb0ca4ef92ab3bf97d7914fe.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1041,7 +1041,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>final loss value:  tensor(3.8809e-05)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>final loss value:  tensor(2.8517e-05)
 </pre></div>
 </div>
 </div>
@@ -1080,7 +1080,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/e1d9ac8af83f3f0fcefcca2cf97c4091ed0fd5c3401377f44824aa5d5bbada67.png" src="../_images/e1d9ac8af83f3f0fcefcca2cf97c4091ed0fd5c3401377f44824aa5d5bbada67.png" />
+<img alt="../_images/d8a12ad109d2ccd7a68d80a4b6897c2529e61db735970ba172b9809dae50b86e.png" src="../_images/d8a12ad109d2ccd7a68d80a4b6897c2529e61db735970ba172b9809dae50b86e.png" />
 </div>
 </div>
 <p>Wow! Clearly these parity plots look better than for the baseline model. Let’s again look at the trajectory versus the trajectory predictions, to see visually how they compare. We will look at the training and the validation data together, just note that because the colors represent time, we can look at the purple section to see just the validation data.</p>
@@ -1109,7 +1109,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/04b5e97fbe3ef2313385745784fd6b6c82319f4ea9daace91764fbc5ff977b09.png" src="../_images/04b5e97fbe3ef2313385745784fd6b6c82319f4ea9daace91764fbc5ff977b09.png" />
+<img alt="../_images/cb0d483ce3bb6680cb7ec6daa0f227e6263d515f7ffd8f6c853f561e1dad44a3.png" src="../_images/cb0d483ce3bb6680cb7ec6daa0f227e6263d515f7ffd8f6c853f561e1dad44a3.png" />
 </div>
 </div>
 <p>This looks pretty good!
@@ -1164,7 +1164,7 @@ Let’s run each model on the last frame to get an extrapolated frame. Remember 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/4f2eabefd9f9ab94cffc90326ca1158f8564d637b8f428f27652163349c162ac.png" src="../_images/4f2eabefd9f9ab94cffc90326ca1158f8564d637b8f428f27652163349c162ac.png" />
+<img alt="../_images/be1025555814d58d1d0f7151a0c133b9aa64e1ff0a025a52fa22038edf9f24d2.png" src="../_images/be1025555814d58d1d0f7151a0c133b9aa64e1ff0a025a52fa22038edf9f24d2.png" />
 </div>
 </div>
 <p>We can clearly see that the e3nn model predicts trajectories much closer to our data. Again, the baseline model has predicted poorly.</p>
@@ -1241,10 +1241,10 @@ Let’s run each model on the last frame to get an extrapolated frame. Remember 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">difference: </span> [0.00000000000000009884]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">difference: </span> [0.00000000000000000188]
 </pre></div>
 </div>
-<img alt="../_images/ecd1bbc2c4d25d18d660252f21b7d65ea008378e97292ee51fb89690d97ed5b4.png" src="../_images/ecd1bbc2c4d25d18d660252f21b7d65ea008378e97292ee51fb89690d97ed5b4.png" />
+<img alt="../_images/51bba826d0264c71dd0e9dbac28f83446137aeeb9ef95b8e17737765c8c99bfe.png" src="../_images/51bba826d0264c71dd0e9dbac28f83446137aeeb9ef95b8e17737765c8c99bfe.png" />
 </div>
 </div>
 <p>Great! Our random array, when rotated first, gives the same results as when we rotated last! Now we know we have rotational equivariances. I won’t go further to test translational equivariances; I will leave that as an exercise. The E3NN model outperforms the baseline significantly, and it is E(3)-equivariant, unlike our baseline model!</p>

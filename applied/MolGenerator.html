@@ -523,7 +523,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2026-02-19 19:14:29.100348: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2026-02-20 01:17:05.135437: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
 To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
 </pre></div>
 </div>
@@ -758,7 +758,7 @@ ints2selfes: [C][C@@H1][C][C][Branch2][Ring1][Ring2][N][C][=C][N][=C][C][Branch1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2026-02-19 19:15:44.690236: E external/local_xla/xla/stream_executor/cuda/cuda_platform.cc:51] failed call to cuInit: INTERNAL: CUDA error: Failed call to cuInit: UNKNOWN ERROR (303)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2026-02-20 01:18:10.859410: E external/local_xla/xla/stream_executor/cuda/cuda_platform.cc:51] failed call to cuInit: INTERNAL: CUDA error: Failed call to cuInit: UNKNOWN ERROR (303)
 </pre></div>
 </div>
 </div>
@@ -887,7 +887,7 @@ ints2selfes: [C][C@@H1][C][C][Branch2][Ring1][Ring2][N][C][=C][N][=C][C][Branch1
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/4194d1d4315f8779f683796e47beafa36454c24907e5307b230a1deaf26bf3b5.png" src="../_images/4194d1d4315f8779f683796e47beafa36454c24907e5307b230a1deaf26bf3b5.png" />
+<img alt="../_images/86bd5e80d13a2ee8115cadb4012ea3e88dc922e367f7afcd9c2bca525f6c9bb4.png" src="../_images/86bd5e80d13a2ee8115cadb4012ea3e88dc922e367f7afcd9c2bca525f6c9bb4.png" />
 </div>
 </div>
 <p>This is the logit probability for each token. We need to sample from this to get our prediction for the first token. We’ll sample it with an adjustable parameter called <strong>temperature</strong>. Temperature controls how close we are to sampling the maximum. <span class="math notranslate nohighlight">\(T = 0\)</span> means we sampling the max only, <span class="math notranslate nohighlight">\(T = 1\)</span> means we sample according to the logits, and <span class="math notranslate nohighlight">\(T = \infty\)</span> means we sample randomly.</p>
@@ -903,7 +903,7 @@ ints2selfes: [C][C@@H1][C][C][Branch2][Ring1][Ring2][N][C][=C][N][=C][C][Branch1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tf.Tensor([[53]], shape=(1, 1), dtype=int64)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tf.Tensor([[40]], shape=(1, 1), dtype=int64)
 </pre></div>
 </div>
 </div>
@@ -936,7 +936,7 @@ ints2selfes: [C][C@@H1][C][C][Branch2][Ring1][Ring2][N][C][=C][N][=C][C][Branch1
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/c8a485ee604bf98ad441a3f68dd696f63c4fd103fd591ee502cf3d22da37b24f.svg" src="../_images/c8a485ee604bf98ad441a3f68dd696f63c4fd103fd591ee502cf3d22da37b24f.svg" />
+<img alt="../_images/354e19432d76b0440110386566c8e186169e68fc0dda61cdc59bf98af04bb3cb.svg" src="../_images/354e19432d76b0440110386566c8e186169e68fc0dda61cdc59bf98af04bb3cb.svg" />
 </div>
 </div>
 <p>These are better still! Now we can try adjusting the temperature to see more unusual or more common molecules</p>
@@ -948,7 +948,7 @@ ints2selfes: [C][C@@H1][C][C][Branch2][Ring1][Ring2][N][C][=C][N][=C][C][Branch1
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/9f895a22805946afca71614a657d51460d329dca79273c58b9cf73a71409d8f4.svg" src="../_images/9f895a22805946afca71614a657d51460d329dca79273c58b9cf73a71409d8f4.svg" />
+<img alt="../_images/32b5fc98e03bb8ee26db8be0d08905f12f7ae3c996b1bd55240177cd025d3bdb.svg" src="../_images/32b5fc98e03bb8ee26db8be0d08905f12f7ae3c996b1bd55240177cd025d3bdb.svg" />
 </div>
 </div>
 <p><span class="math notranslate nohighlight">\(T = 100\)</span></p>
@@ -959,7 +959,7 @@ ints2selfes: [C][C@@H1][C][C][Branch2][Ring1][Ring2][N][C][=C][N][=C][C][Branch1
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/4a6864c52b4e72a2435169fa209fd0ac07c29fa3185be01a20e21cf69fb65b30.svg" src="../_images/4a6864c52b4e72a2435169fa209fd0ac07c29fa3185be01a20e21cf69fb65b30.svg" />
+<img alt="../_images/1612a7b4be25a8aefa69b8be4eb115f0fc20c5d4dafe199e24764eb1b4a8e7db.svg" src="../_images/1612a7b4be25a8aefa69b8be4eb115f0fc20c5d4dafe199e24764eb1b4a8e7db.svg" />
 </div>
 </div>
 <p>You can see that the <span class="math notranslate nohighlight">\(T = 0.5\)</span> case seems to works the best of the three.</p>
