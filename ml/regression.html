@@ -704,8 +704,8 @@ it in parallel, and timing its execution.</p>
 <p>We’ve plotted above the loss on our training data and testing data. The loss on training goes down after each step, as we would expect for gradient descent. However, the testing loss goes down and then starts to go back up. This is called <strong>overfitting</strong>. This is one of the key challenges in ML and we’ll often be discussing it.</p>
 <p>Overfitting is a result of training for too many steps or with too many parameters, resulting in our model learning the <strong>noise</strong> in the training data. The noise is specific for the training data and when computing loss on the test data there is poor performance.</p>
 <p>To understand this, let’s first define noise. Assume that there is a “perfect” function <span class="math notranslate nohighlight">\(f(\vec{x})\)</span> that can compute labels from features. Our model is an estimate <span class="math notranslate nohighlight">\(\hat{f}(\vec{x})\)</span> of that function. Even <span class="math notranslate nohighlight">\(f(\vec{x})\)</span> will not reproduce the data exactly because our features do not capture everything that goes into solubility and/or there is error in the solubility measurements themselves. Mathematically,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-83949e79-2d17-4d85-a898-f42431b701a4">
-<span class="eqno">(3.1)<a class="headerlink" href="#equation-83949e79-2d17-4d85-a898-f42431b701a4" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-5ce025eb-b75c-4f51-bf26-7a16fdae274c">
+<span class="eqno">(3.1)<a class="headerlink" href="#equation-5ce025eb-b75c-4f51-bf26-7a16fdae274c" title="Permalink to this equation">#</a></span>\[\begin{equation}
     y = f(\vec{x}) + \epsilon
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\epsilon\)</span> is a random number with mean 0 and unknown standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span>. <span class="math notranslate nohighlight">\(\epsilon\)</span> is the noise. When fitting our function, <span class="math notranslate nohighlight">\(\hat{f}(\vec{x})\)</span>, the noise is fixed because our labels <span class="math notranslate nohighlight">\(y\)</span> are fixed. That means we can accidentally learn to approximate the sum of <span class="math notranslate nohighlight">\(f(\vec{x})\)</span> and the noise <span class="math notranslate nohighlight">\({\epsilon_i}\)</span> instead of only capturing <span class="math notranslate nohighlight">\(f(\vec{x})\)</span>. The noise is random and uncorrelated with solubility. When we move to our testing dataset, this noise changes because we have new data and our model’s effort to reproduce noise is useless because the new data has new noise. This leads to worse performance.</p>
@@ -713,13 +713,13 @@ it in parallel, and timing its execution.</p>
 <section id="overfitting-with-synthetic-data">
 <h3><span class="section-number">3.2.1. </span>Overfitting with Synthetic Data<a class="headerlink" href="#overfitting-with-synthetic-data" title="Link to this heading">#</a></h3>
 <p>We’ll explore overfitting in a synthetic example. Our real function we’re trying to learn will be:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-bb1d46ba-e6c4-4b88-8bc5-4cc042f57537">
-<span class="eqno">(3.2)<a class="headerlink" href="#equation-bb1d46ba-e6c4-4b88-8bc5-4cc042f57537" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-5aeeccb3-0b9f-4906-bc20-b51c586321ab">
+<span class="eqno">(3.2)<a class="headerlink" href="#equation-5aeeccb3-0b9f-4906-bc20-b51c586321ab" title="Permalink to this equation">#</a></span>\[\begin{equation}
  f(x) = x^3 - x^2 + x - 1
 \end{equation}\]</div>
 <p>which we can rewrite as a linear model:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-dbdea525-a775-421c-b8fa-03f27dd4f713">
-<span class="eqno">(3.3)<a class="headerlink" href="#equation-dbdea525-a775-421c-b8fa-03f27dd4f713" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-c2b8b292-0b75-409a-b811-61d88d90a6ae">
+<span class="eqno">(3.3)<a class="headerlink" href="#equation-c2b8b292-0b75-409a-b811-61d88d90a6ae" title="Permalink to this equation">#</a></span>\[\begin{equation}
   f(\vec{x}) = \vec{w}\cdot\vec{x} = [1, -1, 1, -1]\cdot[x^3, x^2, x, 1]
 \end{equation}\]</div>
 <p>where our features are <span class="math notranslate nohighlight">\([x^3, x^2, x, 1]\)</span>. To do our split, we’ll take the positive points as training data and the negative as testing data. To avoid the issue of convergence, we will use least squares to fit these models instead of gradient descent.</p>
@@ -913,14 +913,14 @@ it in parallel, and timing its execution.</p>
 </aside>
 <p>We are now working with a real dataset, which means there is randomness from which features we choose, which training data we choose, and randomness in the labels themselves. In the results below, they are averaged over possible features and possible training data splits to deal with this. Thus the code is complex. You can see it on <a class="reference external" href="https://github.com/whitead/dmol-book/blob/main/ml/regression.ipynb">the Github repository</a>, but I’ve omitted it here for simplicity.</p>
 <figure class="align-default" id="small-feature-number">
-<img alt="../_images/b87a19e28316efc6d2f4ceb2c4c915843e58c7c70acd94769bf7a3e42140e53c.png" src="../_images/b87a19e28316efc6d2f4ceb2c4c915843e58c7c70acd94769bf7a3e42140e53c.png" />
+<img alt="../_images/93b2cb1a6d6141714957d921f9e1fa5788fbaec6c9993b3d2e244911c7d029f2.png" src="../_images/93b2cb1a6d6141714957d921f9e1fa5788fbaec6c9993b3d2e244911c7d029f2.png" />
 <figcaption>
 <p><span class="caption-number">Fig. 3.1 </span><span class="caption-text">Effect of feature number on 25 training data points averaged over 10 data samples/feature choices combinations. Notice there is not a significant change when the number of features crosses the number of data points.</span><a class="headerlink" href="#small-feature-number" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p><a class="reference internal" href="#small-feature-number"><span class="std std-numref">Fig. 3.1</span></a> shows the effect of choosing different features on both the loss on training data and the loss on test data. There are three regimes in this plot. At 1-3 features, we are <strong>underfit</strong> meaning both the training and testing losses could be improved with more features or more training. In this case, it is because there are too few features. Until about 10 features, we see that adding new features slightly improves training data but doesn’t help test data meaning we’re probably slightly overfitting. Then at 10, there is a large increase as we move to the overfit regime. Finally at about 30 features, our model is no longer converging and training loss rises because it is too difficult to train the increasingly complex model. “Difficult” here is a relative term; you can easily train for more time on this simple model but this is meant as an example.</p>
 <figure class="align-default" id="large-feature-number">
-<img alt="../_images/ce2b2aac8f8c0dc00960e0c994d67331652bbcbbbc5cd2ff7d02c28460f34abd.png" src="../_images/ce2b2aac8f8c0dc00960e0c994d67331652bbcbbbc5cd2ff7d02c28460f34abd.png" />
+<img alt="../_images/2bac2f24927f873d8feceba78d7814f072416e0751f3588c362ed5d5e4d7c22a.png" src="../_images/2bac2f24927f873d8feceba78d7814f072416e0751f3588c362ed5d5e4d7c22a.png" />
 <figcaption>
 <p><span class="caption-number">Fig. 3.2 </span><span class="caption-text">Effect of feature number on 250 training data points averaged over 10 data samples/feature choices combinations.</span><a class="headerlink" href="#large-feature-number" title="Link to this image">#</a></p>
 </figcaption>
@@ -936,12 +936,12 @@ it in parallel, and timing its execution.</p>
 <div class="math notranslate nohighlight" id="equation-exp-error">
 <span class="eqno">(3.4)<a class="headerlink" href="#equation-exp-error" title="Link to this equation">#</a></span>\[    E\left[\left(y - \hat{f}(\vec{x})\right)^2\right]\]</div>
 <p>What is the expectation over? For now, let’s just assume the only source of randomness is in the noise from the label (recall <span class="math notranslate nohighlight">\(y = f(\vec{x}) + \epsilon\)</span>). Then our expression becomes:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-80cee322-c25f-4cc8-8dfe-4af0091556c6">
-<span class="eqno">(3.5)<a class="headerlink" href="#equation-80cee322-c25f-4cc8-8dfe-4af0091556c6" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-6e9cead0-2e28-4240-861e-d8a899f392b9">
+<span class="eqno">(3.5)<a class="headerlink" href="#equation-6e9cead0-2e28-4240-861e-d8a899f392b9" title="Permalink to this equation">#</a></span>\[\begin{equation}
     E\left[\left(y - \hat{f}(\vec{x})\right)^2\right] =  E\left[y^2\right] + E\left[\hat{f}(\vec{x})^2\right] - 2 E\left[y\hat{f}(\vec{x})\right]
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-d303c4da-b16f-4fc2-bad1-ea970f5ebc61">
-<span class="eqno">(3.6)<a class="headerlink" href="#equation-d303c4da-b16f-4fc2-bad1-ea970f5ebc61" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-8ab5f409-3217-4c20-a1f7-3d44f3b134f6">
+<span class="eqno">(3.6)<a class="headerlink" href="#equation-8ab5f409-3217-4c20-a1f7-3d44f3b134f6" title="Permalink to this equation">#</a></span>\[\begin{equation}
     E\left[\left(y - \hat{f}(\vec{x})\right)^2\right] =  E\left[\left(f(\vec{x}) - \epsilon\right)^2\right] + \hat{f}(\vec{x})^2 - 2 E\left[\left(f(\vec{x}) - \epsilon\right)\right]\hat{f}(\vec{x})
 \end{equation}\]</div>
 <p>I have dropped the expectations over deterministic expression <span class="math notranslate nohighlight">\(\hat{f}\)</span>. You can continue this, again dropping any <span class="math notranslate nohighlight">\(E[f(\vec{x})]\)</span> terms and using the definition of <span class="math notranslate nohighlight">\(\epsilon\)</span>, a zero mean normal distribution with standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span>. You will arrive at:</p>
@@ -1000,25 +1000,25 @@ it in parallel, and timing its execution.</p>
 only be done if you have some prior belief that the bias should be 0 – like if it represents some physical quantity that should be minimized. Otherwise minimizing <span class="math notranslate nohighlight">\(b\)</span> has no effect on overfitting and so is not part of regularization.</p>
 </aside>
 <p>Our first example is the magnitude of fit coefficients. The magnitude of the coefficients is <span class="math notranslate nohighlight">\(\sum_k w_k^2\)</span> where <span class="math notranslate nohighlight">\(w_k\)</span> the index of a single coefficient. We add this to our loss function:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2396e2c8-65a4-4849-b54c-7cfe931e2687">
-<span class="eqno">(3.9)<a class="headerlink" href="#equation-2396e2c8-65a4-4849-b54c-7cfe931e2687" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-90dbbae3-30e3-4360-8776-d9534cdf9eed">
+<span class="eqno">(3.9)<a class="headerlink" href="#equation-90dbbae3-30e3-4360-8776-d9534cdf9eed" title="Permalink to this equation">#</a></span>\[\begin{equation}
     L = \frac{1}{N}\sum_i^N \left[y_i - \hat{f}(\vec{x}_i, \vec{w}, b)\right]^2 + \lambda \sum_k w_k^2
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\lambda\)</span> is our strength of regularization. By changing <span class="math notranslate nohighlight">\(\lambda\)</span>, we control how large the magnitude of our parameters are and that directly reduces the variance. You can see the result in <a class="reference internal" href="#l2"><span class="std std-numref">Fig. 3.6</span></a> for our polynomial example. Increasing the strength of regularization decreases variance at the cost of increasing model bias. Remember in deep learning there isn’t as much of a tradeoff and often you just get a reduction in variance with no degradation in bias. Adding L2 regularization with a linear model has a specific name: <strong>Ridge Regression</strong>.</p>
 <figure class="align-default" id="l2">
-<img alt="../_images/ddfae54a2c0dcb4d5fedb1869f2b72fdce03239399bb5d6445c7e1532359c767.png" src="../_images/ddfae54a2c0dcb4d5fedb1869f2b72fdce03239399bb5d6445c7e1532359c767.png" />
+<img alt="../_images/b0eb7398a5b64e2eb9e924fd741df110070737d55bc63fab8c3872e9bb3e4e63.png" src="../_images/b0eb7398a5b64e2eb9e924fd741df110070737d55bc63fab8c3872e9bb3e4e63.png" />
 <figcaption>
 <p><span class="caption-number">Fig. 3.6 </span><span class="caption-text">A 7 feature fit to the polynomial model example above with increasing strength of regularization. The vertical bars indicate standard deviation of model at each point.</span><a class="headerlink" href="#l2" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Why does this work? Look at the gradient of a particular weight of our new loss function:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ccc2ce64-d271-4bcb-bd54-9a802212a5c5">
-<span class="eqno">(3.10)<a class="headerlink" href="#equation-ccc2ce64-d271-4bcb-bd54-9a802212a5c5" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-aaea533b-c869-46f5-bcb5-f671802d2429">
+<span class="eqno">(3.10)<a class="headerlink" href="#equation-aaea533b-c869-46f5-bcb5-f671802d2429" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \frac{\partial L}{\partial w_4} = \frac{2}{N}\sum_i^N \left[y_i - \hat{f}(\vec{x}_i, \vec{w}, b)\right]\frac{\partial \hat{f}(\vec{x}_i, \vec{w}, b)}{\partial w_4} + 2\lambda w_4
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(w_4\)</span> is one of our weights. The first term on the right-hand side accounts for how <span class="math notranslate nohighlight">\(w_4\)</span> affects our accuracy, like usual. The second term is from the regularization. You can see that the gradient is just the value of weight times a constant. Let’s contract the first term into a variable called <span class="math notranslate nohighlight">\(g_{w_4}\)</span> and look at how this new gradient affects our updates to <span class="math notranslate nohighlight">\(w_4\)</span>. Our gradient descent update of <span class="math notranslate nohighlight">\(w_4\)</span> becomes:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-501567ac-1405-464e-83a9-6e9a284dd59e">
-<span class="eqno">(3.11)<a class="headerlink" href="#equation-501567ac-1405-464e-83a9-6e9a284dd59e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a5c90ccd-5a79-4cab-927a-cba7627ffa07">
+<span class="eqno">(3.11)<a class="headerlink" href="#equation-a5c90ccd-5a79-4cab-927a-cba7627ffa07" title="Permalink to this equation">#</a></span>\[\begin{equation}
     w_4' = w_4 -\eta g_{w_4} - 2\eta\lambda w_4
 \end{equation}\]</div>
 <p>So our regularization pushes <span class="math notranslate nohighlight">\(w_4'\)</span> to always have a lower magnitude. If <span class="math notranslate nohighlight">\(w_4' = 2.5\)</span>, the update will include a term of <span class="math notranslate nohighlight">\(-2\eta \lambda 2.5\)</span>, pushing our weight value closer to zero. This means our weights always are pushed towards zero. Of course the term coming from model error (<span class="math notranslate nohighlight">\(g_{w_4}\)</span>) also has an effect so that we end up at a balance of lower magnitude weights and model error. We control that balance through the <span class="math notranslate nohighlight">\(\lambda\)</span> term.</p>
@@ -1031,8 +1031,8 @@ used in the norm: <span class="math notranslate nohighlight">\((\sum_i x_i^p)^{1
 <section id="l1-regularization">
 <h3><span class="section-number">3.5.2. </span>L1 Regularization<a class="headerlink" href="#l1-regularization" title="Link to this heading">#</a></h3>
 <p>L1 regularization changes our loss to be the following:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b11e277c-e232-45a8-8e68-61e9b83289dc">
-<span class="eqno">(3.12)<a class="headerlink" href="#equation-b11e277c-e232-45a8-8e68-61e9b83289dc" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e70ad59c-8f27-4e05-a133-c0dcfa7f4a38">
+<span class="eqno">(3.12)<a class="headerlink" href="#equation-e70ad59c-8f27-4e05-a133-c0dcfa7f4a38" title="Permalink to this equation">#</a></span>\[\begin{equation}
     L = \frac{1}{N}\sum_i^N \left[y_i - \hat{f}(\vec{x}_i, \vec{w}, b)\right]^2 + \lambda \sum_k \left|w_k\right|
 \end{equation}\]</div>
 <p>It may appear at first that this is identical to L2. In fact, the L1 regularization has a powerful benefit: it induces sparsity. L2 just causes regression coefficients to be on average lower, but L1 forces some coefficients to be 0. This gives us a kind of “automatic” feature selection. This is called <strong>Lasso Regression</strong> when you combine L1 regularization with linear regression.</p>
@@ -1252,17 +1252,17 @@ used in the norm: <span class="math notranslate nohighlight">\((\sum_i x_i^p)^{1
 </aside>
 <p>An alternative approach that accounts for model variance like the bootstrap method and model bias like the k-fold cross-validation method is called <strong>Jacknife+</strong> <span id="id4">[<a class="reference internal" href="#id18" title="Rina Foygel Barber, Emmanuel J Candes, Aaditya Ramdas, and Ryan J Tibshirani. Predictive inference with the jackknife+. arXiv preprint arXiv:1905.02928, 2019.">BCRT19</a>]</span>.  Jacknife+ carries strong guarantees about accuracy of the confidence intervals generated, regardless of the underlying data or model. The change now is that we use LOOCV to create an ensemble of models (although you can subsample down if you do not want N of them) and also compute the models’ test error on the withheld test data. The final quantile estimates incorporate the variance from the variety of models (model variance) and also each models’ individual test error (model bias).
 Specifically, we compute:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4f1f2df5-3c27-4755-a5cc-1bdbbe90f305">
-<span class="eqno">(3.13)<a class="headerlink" href="#equation-4f1f2df5-3c27-4755-a5cc-1bdbbe90f305" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-06925a77-4248-4a3d-a063-4867e68ebc5c">
+<span class="eqno">(3.13)<a class="headerlink" href="#equation-06925a77-4248-4a3d-a063-4867e68ebc5c" title="Permalink to this equation">#</a></span>\[\begin{equation}
 R_i = \left|y_i - \hat{f}(\vec{x}_i;\,\mathbf{X} \setminus \vec{x}_i )\right|
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\mathbf{X} \setminus \vec{x}_i\)</span> is the dataset to train the <span class="math notranslate nohighlight">\(i\)</span>th model and is the dataset excluding point <span class="math notranslate nohighlight">\((\vec{x}_i, y_i)\)</span>, <span class="math notranslate nohighlight">\(\hat{f}(\vec{x}_i;\,\mathbf{X} \setminus \vec{x}_i ) \)</span> is the <span class="math notranslate nohighlight">\(i\)</span>th model evaluated on point <span class="math notranslate nohighlight">\(\vec{x}_i\)</span>, and <span class="math notranslate nohighlight">\(R_i\)</span> is the residual of model <span class="math notranslate nohighlight">\(i\)</span> computed by taking the difference between the label and prediction on point <span class="math notranslate nohighlight">\(i\)</span>. <span class="math notranslate nohighlight">\(R_i\)</span> encodes how good the <span class="math notranslate nohighlight">\(i\)</span>th model is. We then combine it with the predictions on our new test point <span class="math notranslate nohighlight">\((\vec{x}', y')\)</span> to make our set for quantiling</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ffd8ecd4-77db-4bbd-af4d-6e61be67bc3c">
-<span class="eqno">(3.14)<a class="headerlink" href="#equation-ffd8ecd4-77db-4bbd-af4d-6e61be67bc3c" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-d25375ab-fe9e-4b2e-a924-8d2bb35d6213">
+<span class="eqno">(3.14)<a class="headerlink" href="#equation-d25375ab-fe9e-4b2e-a924-8d2bb35d6213" title="Permalink to this equation">#</a></span>\[\begin{equation}
 q_1 = \left\{ \hat{f}(\vec{x}';\,\mathbf{X} \setminus \vec{x}_i ) - R_i\right\}
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-e52ca243-f6e6-4646-87db-01cfd76a33ae">
-<span class="eqno">(3.15)<a class="headerlink" href="#equation-e52ca243-f6e6-4646-87db-01cfd76a33ae" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-2027f1d5-916b-43f0-84bd-a7503bab3065">
+<span class="eqno">(3.15)<a class="headerlink" href="#equation-2027f1d5-916b-43f0-84bd-a7503bab3065" title="Permalink to this equation">#</a></span>\[\begin{equation}
 q_2 = \left\{\hat{f}(\vec{x}';\,\mathbf{X} \setminus \vec{x}_i ) + R_i\right\}
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(q\)</span> means quantile. The first quantile <span class="math notranslate nohighlight">\(q_1\)</span>, with <span class="math notranslate nohighlight">\( - R_i\)</span>, is how low below the estimate from the <span class="math notranslate nohighlight">\(i\)</span>th model we could expect to see our prediction based on how the <span class="math notranslate nohighlight">\(i\)</span>th model did on its test point. The second set, with <span class="math notranslate nohighlight">\( + R_i\)</span>, is how high above the estimate from the <span class="math notranslate nohighlight">\(i\)</span>th model we could expect to see our prediction based on how the <span class="math notranslate nohighlight">\(i\)</span>th model did on its test point. To compute our final value, we take the median of <span class="math notranslate nohighlight">\(\hat{f}(\vec{x}';\,\mathbf{X} \setminus \vec{x}_i )\)</span> and report the lower end of the interval as the 5% quantile of <span class="math notranslate nohighlight">\(q_1\)</span> and the top as the 95% quantile of <span class="math notranslate nohighlight">\(q_2\)</span>. You can see that this method combines the ensemble of prediction models given by bootstrap resampling with the error estimates from LOOCV. Let’s see an example.</p>

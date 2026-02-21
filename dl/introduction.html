@@ -503,13 +503,13 @@ document.write(`
 <div class="admonition-nonlinearity admonition">
 <p class="admonition-title">nonlinearity</p>
 <p>A function <span class="math notranslate nohighlight">\(f(\vec{x})\)</span> is linear if two conditions hold:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c623fafc-9706-4970-8212-15c563d2ecef">
-<span class="eqno">(6.1)<a class="headerlink" href="#equation-c623fafc-9706-4970-8212-15c563d2ecef" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b0620b08-676e-4a61-933b-b5f21bac12de">
+<span class="eqno">(6.1)<a class="headerlink" href="#equation-b0620b08-676e-4a61-933b-b5f21bac12de" title="Permalink to this equation">#</a></span>\[\begin{equation}
 f(\vec{x} + \vec{y}) = f(\vec{x}) + f(\vec{y})
 \end{equation}\]</div>
 <p>for all <span class="math notranslate nohighlight">\(\vec{x}\)</span> and <span class="math notranslate nohighlight">\(\vec{y}\)</span>. And</p>
-<div class="amsmath math notranslate nohighlight" id="equation-af23134e-4b16-4952-b01c-a368b4362f05">
-<span class="eqno">(6.2)<a class="headerlink" href="#equation-af23134e-4b16-4952-b01c-a368b4362f05" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-0a314632-d16c-4be2-af61-1cbec49ec31c">
+<span class="eqno">(6.2)<a class="headerlink" href="#equation-0a314632-d16c-4be2-af61-1cbec49ec31c" title="Permalink to this equation">#</a></span>\[\begin{equation}
 f(s\vec{x}) = sf(\vec{x})
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(s\)</span> is a scalar. A function is <strong>nonlinear</strong> if these conditions do not hold for some <span class="math notranslate nohighlight">\(\vec{x}\)</span>.</p>
@@ -517,8 +517,8 @@ f(s\vec{x}) = sf(\vec{x})
 <section id="what-is-a-neural-network">
 <h2><span class="section-number">6.1. </span>What is a neural network?<a class="headerlink" href="#what-is-a-neural-network" title="Link to this heading">#</a></h2>
 <p>The <em>deep</em> in deep learning means we have many layers in our neural networks. What is a neural network? Without loss of generality, we can view neural networks as 2 components: (1) a nonlinear function <span class="math notranslate nohighlight">\(g(\cdot)\)</span> which operates on our input features <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> and outputs a new set of features <span class="math notranslate nohighlight">\(\mathbf{H} = g(\mathbf{X})\)</span> and (2) a linear model like we saw in our <a class="reference internal" href="../ml/introduction.html"><span class="doc">Introduction to Machine Learning</span></a>. Our model equation for deep learning regression is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-eb26f6e0-03c4-4e05-8aac-c60eaab91b9e">
-<span class="eqno">(6.3)<a class="headerlink" href="#equation-eb26f6e0-03c4-4e05-8aac-c60eaab91b9e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-2b2c954a-4e75-4293-961d-1a150b7ee616">
+<span class="eqno">(6.3)<a class="headerlink" href="#equation-2b2c954a-4e75-4293-961d-1a150b7ee616" title="Permalink to this equation">#</a></span>\[\begin{equation}
    \hat{y} = \vec{w}g(\vec{x}) + b
 \end{equation}\]</div>
 <p>One of the main discussion points in our ML chapters was how arcane and difficult it is to choose features. Here, we have replaced our features with a set of trainable features <span class="math notranslate nohighlight">\(g(\vec{x})\)</span> and then use the same linear model as before. So how do we design <span class="math notranslate nohighlight">\(g(\vec{x})\)</span>? That is the deep learning part. <span class="math notranslate nohighlight">\(g(\vec{x})\)</span> is a differentiable function composed of <strong>layers</strong>, which are themselves differentiable functions each with trainable weights (free variables). Deep learning is a mature field and there is a set of standard layers, each with a different purpose. For example, convolution layers look at a fixed neighborhood around each element of an input tensor. Dropout layers randomly inactivate inputs as a form of regularization. The most commonly used and basic layer is the <strong>dense</strong> or <strong>fully-connected</strong> layer.</p>
@@ -527,8 +527,8 @@ f(s\vec{x}) = sf(\vec{x})
 <p>Dense means each input element affects each output element. At one point, sparse layers were popular and had a nice analogy with how a brain is connected. However, dense layers do not require deciding which input/output connections to make and sparse layers are very rare now (except incidentally sparse layers, like convolutions).</p>
 </aside>
 <p>A dense layer is defined by two things: the desired output feature shape and the <strong>activation</strong>. The equation is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2cfabfed-efeb-4f25-a4c1-d026787760a5">
-<span class="eqno">(6.4)<a class="headerlink" href="#equation-2cfabfed-efeb-4f25-a4c1-d026787760a5" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-105fefd9-72c7-4d1a-af81-0083692abcd7">
+<span class="eqno">(6.4)<a class="headerlink" href="#equation-105fefd9-72c7-4d1a-af81-0083692abcd7" title="Permalink to this equation">#</a></span>\[\begin{equation}
      \vec{h} = \sigma(\mathbf{W}\vec{x} + \vec{b})
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\mathbf{W}\)</span> is a trainable <span class="math notranslate nohighlight">\(F \times D\)</span> matrix, where <span class="math notranslate nohighlight">\(D\)</span> is the input vector (<span class="math notranslate nohighlight">\(\vec{x}\)</span>) dimension and <span class="math notranslate nohighlight">\(F\)</span> is the output vector (<span class="math notranslate nohighlight">\(\vec{h}\)</span>) dimension, <span class="math notranslate nohighlight">\(\vec{b}\)</span> is a trainable <span class="math notranslate nohighlight">\(F\)</span> dimensional vector, and <span class="math notranslate nohighlight">\(\sigma(\cdot)\)</span> is the activation function. <span class="math notranslate nohighlight">\(F\)</span>, the number of output features, is an example of a <strong>hyperparameter</strong>: it is not trainable but is a problem dependent choice. <span class="math notranslate nohighlight">\(\sigma(\cdot)\)</span> is another hyperparameter. In principle, any differentiable function that has a domain of <span class="math notranslate nohighlight">\((-\infty, \infty)\)</span> can be used for activation. However, the function should be nonlinear. If it were linear, then stacking multiple dense layers would be equivalent to one-big matrix multiplication and we’d be back at linear regression. So activations should be nonlinear. Beyond nonlinearity, we typically want activations  that can “turn on” and “off”. That is, they have an output value of zero for some domain of input values. Typically, the activation is zero, or close to, for negative inputs.</p>
@@ -656,9 +656,9 @@ x &amp; x &gt; 0\\
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[-0.1564],
-        [ 0.2028],
-        [ 0.0202]], grad_fn=&lt;AddmmBackward0&gt;)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.2727],
+        [0.1036],
+        [0.1161]], grad_fn=&lt;AddmmBackward0&gt;)
 </pre></div>
 </div>
 </div>
@@ -766,7 +766,7 @@ I’ve used PyTorch for this chapter. There are also libraries that mimic the fe
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/25fc506a220885f046ed0e16324c45deddbbe5a283b4060fd5eb8839e5f4afd7.png" src="../_images/25fc506a220885f046ed0e16324c45deddbbe5a283b4060fd5eb8839e5f4afd7.png" />
+<img alt="../_images/ddbd3869cf12a7b80b5f91a4455374080dce7bcd27922ead81df0e983d8d3105.png" src="../_images/ddbd3869cf12a7b80b5f91a4455374080dce7bcd27922ead81df0e983d8d3105.png" />
 </div>
 </div>
 <p>This performance is better than our simple linear model.</p>

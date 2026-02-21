@@ -590,8 +590,8 @@ the keys. The keys should be the same rank as the values. The keys and query det
 </table>
 </div>
 <p>The keys will be a rank 2 tensor (matrix) putting all these together. Note that these are only integers to make this example clearer, typically words are represented with floating point numbers when embedded.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4e5675d1-8040-44f1-a3a4-d1b08a13f9a7">
-<span class="eqno">(12.1)<a class="headerlink" href="#equation-4e5675d1-8040-44f1-a3a4-d1b08a13f9a7" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-5ec996a9-ee7b-4a0a-8404-227c337e57c5">
+<span class="eqno">(12.1)<a class="headerlink" href="#equation-5ec996a9-ee7b-4a0a-8404-227c337e57c5" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathbf{K} = \left[
 \begin{array}{lccccr}
 0 &amp; 2 &amp; 1 &amp; 2 &amp; -2 &amp; 0\\
@@ -600,29 +600,29 @@ the keys. The keys should be the same rank as the values. The keys and query det
 \end{array}\right]
 \end{equation}\]</div>
 <p>They keys are shape <span class="math notranslate nohighlight">\((6, 3)\)</span> because our sentence has 6 words and each word is represented with a 3 dimensional embedding vector. Let’s make our values simple, we’ll have one for each word. These values are what determine our output. Perhaps they could be the sentiment of the word: is it a positive word (“happy”) or a negative word (“angry”).</p>
-<div class="amsmath math notranslate nohighlight" id="equation-566d2317-664d-41cc-b5d7-6def3e0e87cf">
-<span class="eqno">(12.2)<a class="headerlink" href="#equation-566d2317-664d-41cc-b5d7-6def3e0e87cf" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-06a8b19f-bf2e-4eee-8a59-b81473aabdb3">
+<span class="eqno">(12.2)<a class="headerlink" href="#equation-06a8b19f-bf2e-4eee-8a59-b81473aabdb3" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathbf{V} = \left[ 0, -0.2, 0.3, 0.4, 0, 0.1\right]
 \end{equation}\]</div>
 <p>Note that the values <span class="math notranslate nohighlight">\(\mathbf{V}\)</span> should be the same rank as the keys, so its shape is interpreted as <span class="math notranslate nohighlight">\((6, 1)\)</span>. Finally, the query which should be one rank less than the keys. Our query is the word “book:”</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d210cf9b-07c4-4fe2-8b67-d64c2f209c82">
-<span class="eqno">(12.3)<a class="headerlink" href="#equation-d210cf9b-07c4-4fe2-8b67-d64c2f209c82" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-d6af753c-9783-4af1-8eeb-6eed90ff6b7b">
+<span class="eqno">(12.3)<a class="headerlink" href="#equation-d6af753c-9783-4af1-8eeb-6eed90ff6b7b" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \vec{q} = \left[0, 2, 1\right]
 \end{equation}\]</div>
 </section>
 <section id="attention-mechanism-equation">
 <h2><span class="section-number">12.2. </span>Attention Mechanism Equation<a class="headerlink" href="#attention-mechanism-equation" title="Link to this heading">#</a></h2>
 <p>The attention mechanism equation uses query and keys arguments only. It outputs a tensor one rank less than the keys, giving a scalar for each key corresponding to the attention the query should have for the key. This attention vector should be normalized. The most common attention mechanism is a dot product and softmax:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-45cebfad-ade5-45fb-a561-72bc85399e1f">
-<span class="eqno">(12.4)<a class="headerlink" href="#equation-45cebfad-ade5-45fb-a561-72bc85399e1f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ffcf1edd-da37-420f-a130-e04ec2e7d837">
+<span class="eqno">(12.4)<a class="headerlink" href="#equation-ffcf1edd-da37-420f-a130-e04ec2e7d837" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \vec{b} = \mathrm{softmax}\left(\vec{q}\cdot \mathbf{K}\right) = \mathrm{softmax}\left(\sum_j q_j k_{ij}\right)
 \end{equation}\]</div>
 <p>where index <span class="math notranslate nohighlight">\(i\)</span> is the position in the sequence and <span class="math notranslate nohighlight">\(j\)</span> is the index of the feature. Softmax is defined as</p>
 <div class="math notranslate nohighlight" id="equation-softmax">
 <span class="eqno">(12.5)<a class="headerlink" href="#equation-softmax" title="Link to this equation">#</a></span>\[\mathrm{softmax}\left(\vec{x}\right) = \frac{e^\vec{x}}{\sum_i e^ x_i}\]</div>
 <p>and ensures that <span class="math notranslate nohighlight">\(\vec{b}\)</span> is normalized. Substituting our values from the example above:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-115de35e-c61d-41b7-952b-9537a38ca155">
-<span class="eqno">(12.6)<a class="headerlink" href="#equation-115de35e-c61d-41b7-952b-9537a38ca155" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e114f1d3-56b6-45b7-99b1-d4a0ad81c5e7">
+<span class="eqno">(12.6)<a class="headerlink" href="#equation-e114f1d3-56b6-45b7-99b1-d4a0ad81c5e7" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \vec{b} = \mathrm{softmax}\left(\left[0, 2, 1\right] \times
 \left[
 \begin{array}{lccccr}
@@ -631,8 +631,8 @@ the keys. The keys should be the same rank as the values. The keys and query det
 0 &amp; 1 &amp; -2 &amp; 1 &amp; 0 &amp; 1\\
 \end{array}\right]\right) = \mathrm{softmax}\left( \left[0, 1, -4, 7, 0, 5\right]\right)
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-8d00b944-ee1d-4927-bd25-df7e74331053">
-<span class="eqno">(12.7)<a class="headerlink" href="#equation-8d00b944-ee1d-4927-bd25-df7e74331053" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-3bbef37b-d2cd-44b6-ac7b-31d05e6956c6">
+<span class="eqno">(12.7)<a class="headerlink" href="#equation-3bbef37b-d2cd-44b6-ac7b-31d05e6956c6" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \vec{b}  = \left[0, 0, 0, 0.88, 0, 0.12\right]
 \end{equation}\]</div>
 <p>I’ve rounded the numbers here, but essentially the attention vector only gives weight to the word itself (book) and the verb “read”. I made this up, remember, but it gives you an idea of how attention gives you a way to connect words. It may even remind you of our graph neural network’s idea of neighbors.</p>
@@ -640,8 +640,8 @@ the keys. The keys should be the same rank as the values. The keys and query det
 <section id="attention-reduction">
 <h2><span class="section-number">12.3. </span>Attention Reduction<a class="headerlink" href="#attention-reduction" title="Link to this heading">#</a></h2>
 <p>After computing the attention vector <span class="math notranslate nohighlight">\(\vec{b}\)</span>, this is used to compute a weighted mean over the values:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9060f938-a9fb-4568-bac6-381534bb5a3e">
-<span class="eqno">(12.8)<a class="headerlink" href="#equation-9060f938-a9fb-4568-bac6-381534bb5a3e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-13541a83-5ecc-4a37-9d36-2693367be53f">
+<span class="eqno">(12.8)<a class="headerlink" href="#equation-13541a83-5ecc-4a37-9d36-2693367be53f" title="Permalink to this equation">#</a></span>\[\begin{equation}
  \mathbf{V}\vec{b} = \left[0, 0, 0, 0.88, 0, 0.12\right] \left[ 0, -0.2, 0.3, 0.4, 0, 0.1\right]^ T = 0.36
 \end{equation}\]</div>
 <p>Conceptually, our example computed the attention-weighted sentiment of the query word “book” in our sentence. You can see that attention layers do two things: compute an attention vector with the attention mechanism and then use it to take the attention-weighted average over the values.</p>
@@ -649,8 +649,8 @@ the keys. The keys should be the same rank as the values. The keys and query det
 <section id="tensor-dot">
 <h2><span class="section-number">12.4. </span>Tensor-Dot<a class="headerlink" href="#tensor-dot" title="Link to this heading">#</a></h2>
 <p>This dot product, softmax, and reduction is called a tensor-dot and is the most common attention layer<span id="id5">[<a class="reference internal" href="#id57" title="Minh-Thang Luong, Hieu Pham, and Christopher D Manning. Effective approaches to attention-based neural machine translation. arXiv preprint arXiv:1508.04025, 2015.">LPM15</a>]</span>. One common modification is to divide by the dimension of the keys (last axis dimension). Remember the keys are not normalized. If they are random numbers, the magnitude of the output from the dot product scales with the square root of the dimension of the keys due to the central limit theorem. This can make the soft-max behave poorly, since you’re taking <span class="math notranslate nohighlight">\(e^{\vec{q} \cdot \mathbf{K}}\)</span>. Putting this all together, the equation is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ea78bafd-1fec-44a9-8868-594961585117">
-<span class="eqno">(12.9)<a class="headerlink" href="#equation-ea78bafd-1fec-44a9-8868-594961585117" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-c847a000-eccc-491d-8455-3cb5622362bb">
+<span class="eqno">(12.9)<a class="headerlink" href="#equation-c847a000-eccc-491d-8455-3cb5622362bb" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \vec{b} = \mathrm{softmax}\left(\frac{1}{\sqrt{d}}\vec{q}\cdot \mathbf{K}\right)
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(d\)</span> is the dimension of the query vector.</p>
@@ -658,8 +658,8 @@ the keys. The keys should be the same rank as the values. The keys and query det
 <section id="soft-hard-and-temperature-attention">
 <h2><span class="section-number">12.5. </span>Soft, Hard, and Temperature Attention<a class="headerlink" href="#soft-hard-and-temperature-attention" title="Link to this heading">#</a></h2>
 <p>One possible change to attention is to replace the <span class="math notranslate nohighlight">\(\mathrm{softmax}\)</span> with a one at the position of highest attention and zero at all others. This is called <strong>hard attention</strong>. The equation for hard attention is to replace softmax with a “hardmax”, defined as</p>
-<div class="amsmath math notranslate nohighlight" id="equation-5d243158-512d-4462-89cc-6181016768b9">
-<span class="eqno">(12.10)<a class="headerlink" href="#equation-5d243158-512d-4462-89cc-6181016768b9" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-529569ee-475c-49d8-a81a-c41f0794a3ee">
+<span class="eqno">(12.10)<a class="headerlink" href="#equation-529569ee-475c-49d8-a81a-c41f0794a3ee" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathrm{hardmax}\left(\vec{x}\right) = \lim_{T\rightarrow0}\frac{e^\vec{x} / T}{\sum_i e^ {x_i / T}}
 \end{equation}\]</div>
 <p>which is a mathematical way to formulate putting <span class="math notranslate nohighlight">\(1\)</span> in the position of the largest element of <span class="math notranslate nohighlight">\(\vec{x}\)</span> and a <span class="math notranslate nohighlight">\(0\)</span> at all others. The choice of <span class="math notranslate nohighlight">\(T\)</span> is for the word temperature, because this equation is similar to Boltzmann’s distribution from statistical mechanics. You can see that limit <span class="math notranslate nohighlight">\(T = 0\)</span> is the hard attention, <span class="math notranslate nohighlight">\(T = 1\)</span> is the soft attention, and <span class="math notranslate nohighlight">\(T = \infty\)</span> means uniform attention. you could tune <span class="math notranslate nohighlight">\(T\)</span> to some intermediate values as well.</p>
@@ -676,8 +676,8 @@ the keys. The keys should be the same rank as the values. The keys and query det
 <h2><span class="section-number">12.8. </span>Multi-head Attention Block<a class="headerlink" href="#multi-head-attention-block" title="Link to this heading">#</a></h2>
 <p>Inspired by the idea of convolutions with multiple filters, there is a block (group of layers) that splits to multiple parallel attentions.  These are called “multi-head attention”. If your values are shape <span class="math notranslate nohighlight">\((L, V)\)</span>, you will get back a <span class="math notranslate nohighlight">\((H, V)\)</span> tensor, where <span class="math notranslate nohighlight">\(H\)</span> is the number of parallel attention layers (heads). If there are no trainable parameters in attention layers, what’s the point of this though? Well, you must introduce weights. These are <em>square</em> weight matrices because we need all shapes to remain constant among all the attention heads.</p>
 <p>Consider an attention layer to be defined by <span class="math notranslate nohighlight">\(A(\vec{q}, \mathbf{K}, \mathbf{V})\)</span>. The multi-head attention is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3eae9da5-0400-4cde-ba41-836e9b630cf8">
-<span class="eqno">(12.11)<a class="headerlink" href="#equation-3eae9da5-0400-4cde-ba41-836e9b630cf8" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-95cd6d7e-b10e-4426-bdc7-0094ce05f404">
+<span class="eqno">(12.11)<a class="headerlink" href="#equation-95cd6d7e-b10e-4426-bdc7-0094ce05f404" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \left[A(\mathbf{W}_q^0\vec{q}, \mathbf{W}_k^0\mathbf{K}, \mathbf{W}_v^0\mathbf{V}), A(\mathbf{W}_q^1\vec{q}, \mathbf{W}_k^1\mathbf{K}, \mathbf{W}_v^1\mathbf{V}), \ldots, A(\mathbf{W}_q^H\vec{q}, \mathbf{W}_k^H\mathbf{K}, \mathbf{W}_v^H\mathbf{V})\right]
 \end{equation}\]</div>
 <p>where each element of the output vector <span class="math notranslate nohighlight">\([\ldots]\)</span> is itself an output vector from an attention layer, making <span class="math notranslate nohighlight">\(H\)</span>  <span class="math notranslate nohighlight">\((L, V)\)</span> shaped tensors. So the whole output is an <span class="math notranslate nohighlight">\((H, L, V)\)</span> tensor. The most famous example of the multi-head attention block is in transformers<span id="id6">[<a class="reference internal" href="#id56" title="Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Łukasz Kaiser, and Illia Polosukhin. Attention is all you need. In Advances in neural information processing systems, 5998–6008. 2017.">VSP+17</a>]</span> where they use self-attention multi-head attention blocks.</p>
@@ -716,8 +716,8 @@ the keys. The keys should be the same rank as the values. The keys and query det
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>b =  [0.25848917 0.14448318 0.07288236 0.13049712 0.0880503  0.1288509
- 0.04101027 0.05186214 0.01306959 0.06038084 0.01042413]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>b =  [0.00086382 0.39257001 0.01111452 0.00551835 0.04890485 0.00329942
+ 0.15204074 0.23211951 0.01126963 0.10684639 0.03545275]
 </pre></div>
 </div>
 </div>
@@ -740,7 +740,7 @@ the keys. The keys should be the same rank as the values. The keys and query det
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-0.4100068 , -0.32277626])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-0.24416607, -0.45919119])
 </pre></div>
 </div>
 </div>
@@ -773,28 +773,17 @@ the keys. The keys should be the same rank as the values. The keys and query det
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-3.46807416e-01, -6.98081061e-01,  1.50624653e+00,
-         2.46777797e+00],
-       [ 2.18693135e-01,  6.32622041e-02,  2.63570622e-02,
-         6.78200323e-01],
-       [ 1.13086153e-01,  8.15144373e-02, -1.30593532e-01,
-         2.66237350e-01],
-       [ 1.27273476e-01,  2.32171280e-01, -1.05070511e-01,
-         4.78451671e-01],
-       [ 1.60629371e-01, -5.41350345e-01,  2.96306704e-01,
-         7.68167364e-01],
-       [ 1.53379079e-01, -3.16065031e-01,  1.08541725e-01,
-         4.91767716e-01],
-       [ 5.61244532e-02,  8.16503996e-02, -2.96295168e-02,
-         4.77334565e-01],
-       [ 1.84775292e-01,  1.69788444e-02,  7.22592732e-02,
-         8.73843773e-01],
-       [ 2.77875000e-01, -2.32900167e-03,  2.65887259e-01,
-         1.30086162e+00],
-       [ 1.36256540e-01, -2.01678867e-01, -2.28931571e-02,
-         2.80680834e-01],
-       [ 1.95835079e-01, -7.04603165e-01,  2.47526195e-01,
-         7.65080613e-01]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0.34606398,  0.08418692,  0.10292361, -0.41057087],
+       [ 3.31275776, -1.33077234,  0.22535495, -0.85791704],
+       [ 0.44805928, -0.07014779, -0.16203998, -0.78726676],
+       [-0.17545868,  0.11510261, -0.08618174, -0.14001335],
+       [-0.06583299,  0.38882956,  0.16965002, -0.93237314],
+       [ 0.20254497,  0.11462856, -0.46295321, -0.16035596],
+       [ 0.0446249 ,  0.15431039,  0.24786727, -0.47753762],
+       [ 0.43072202,  0.03597579,  0.35942159, -0.45255576],
+       [ 0.75874043,  0.32996678, -0.86562798, -0.20268567],
+       [ 0.63026405,  0.27348498, -0.84049438, -0.25746836],
+       [ 0.01826962,  0.13644708, -0.2528886 , -0.56831062]])
 </pre></div>
 </div>
 </div>
@@ -825,17 +814,17 @@ the keys. The keys should be the same rank as the values. The keys and query det
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1.77365152e+02, 1.42266004e+01],
-       [9.20783285e-02, 2.11856675e-01],
-       [1.07408423e+00, 8.02472292e-01],
-       [1.11186486e-01, 2.61546223e-01],
-       [2.06733331e+00, 5.23414564e-02],
-       [1.06837077e+00, 2.41949859e-01],
-       [6.37262995e-01, 3.75696286e-02],
-       [8.75604891e-01, 5.70454697e-02],
-       [1.04280521e+00, 5.57033913e-02],
-       [2.08137099e+00, 8.18004788e-01],
-       [3.06130606e+00, 1.30712733e-01]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-0.18100351, -0.11542337],
+       [ 1.55658317, -2.62165656],
+       [ 1.21097605, -1.82860568],
+       [-1.02182487, -3.04620515],
+       [-5.27673029,  4.09713288],
+       [-0.83544891, -1.84968118],
+       [ 0.15830205, -0.53857925],
+       [ 0.36072   , -0.56229419],
+       [-2.68938171,  0.72606089],
+       [-1.71618517,  0.03753555],
+       [ 0.00665345, -0.62941397]])
 </pre></div>
 </div>
 </div>
@@ -869,17 +858,17 @@ the keys. The keys should be the same rank as the values. The keys and query det
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 8.17275821, 39.16712316],
-       [ 0.88399999,  1.38546026],
-       [ 1.50078564, -7.47046698],
-       [ 1.19059285, -0.79811405],
-       [ 0.25936467,  0.36752674],
-       [ 0.49434647,  0.28329436],
-       [ 1.62695776, -4.40143156],
-       [ 0.86283451,  1.32640819],
-       [ 1.37689542,  3.82513332],
-       [ 1.15961062, -1.48869936],
-       [ 0.758922  ,  1.06389674]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-1.58187058e-01,  1.20967596e-01],
+       [-1.09568316e+00,  2.46924213e+00],
+       [-3.77136486e-02,  4.12838756e-01],
+       [-2.51903945e-02, -1.94243942e-01],
+       [ 9.64610353e-01, -9.86832937e-01],
+       [-7.27884098e-01,  1.02893640e+00],
+       [ 3.40627590e-01, -5.86023639e-01],
+       [-5.15579303e-02, -1.02739280e-02],
+       [-4.55318328e+00,  1.29623798e+01],
+       [-3.27865483e+00,  9.24118548e+00],
+       [-3.71567359e-02,  1.95128687e-01]])
 </pre></div>
 </div>
 </div>
@@ -891,44 +880,44 @@ the keys. The keys should be the same rank as the values. The keys and query det
 <h2><span class="section-number">12.11. </span>Attention in Graph Neural Networks<a class="headerlink" href="#attention-in-graph-neural-networks" title="Link to this heading">#</a></h2>
 <p>Recall that the key attribute of a graph neural network is permutation equivariance. We used reductions like sum or mean over neighbors as the way to make the graph neural network layers be permutation equivariant. Attention layers are also permutation invariant (when not batched) and equivariant (when batched). This has made attention a popular choice for how to aggregate neighbor information. Attention layers are good at finding important neighbors and so are important with high-degree graphs (lots of neighbors). This is rare in molecules, but you can just define all atoms to be connected and then put distances as the edge attributes. Recall that graph convolution layers (GCN layer), and most GNN layers, only allow information to propagate one-bond per layer. Thus joining all atoms and using attention can give you long-range communication without so many layers. The disadvantage is that your network must now learn how to give attention to the correct bonds/atoms.</p>
 <p>Let’s see how attention fits into the Battaglia equations<span id="id8">[<a class="reference internal" href="gnn.html#id75" title="Peter W Battaglia, Jessica B Hamrick, Victor Bapst, Alvaro Sanchez-Gonzalez, Vinicius Zambaldi, Mateusz Malinowski, Andrea Tacchetti, David Raposo, Adam Santoro, Ryan Faulkner, and others. Relational inductive biases, deep learning, and graph networks. arXiv preprint arXiv:1806.01261, 2018.">BHB+18</a>]</span>. Recall that the Battaglia equations are general standard equations for defining a GNN. Attention can appear in multiple places, but as discussed above it appears when considering neighbors. Specifically, the query will be the <span class="math notranslate nohighlight">\(i\)</span>th node, and the keys/values will be some combination of neighboring node and edge features. There is no step in the Battaglia equations where this fits neatly, but we can split up the attention layer as follows. Most of the attention layer will fit into the edge update equation:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d7c5d8ac-60bd-427e-a841-45115c05fd14">
-<span class="eqno">(12.12)<a class="headerlink" href="#equation-d7c5d8ac-60bd-427e-a841-45115c05fd14" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-270ccdec-7be1-4602-a3b8-e2a299035874">
+<span class="eqno">(12.12)<a class="headerlink" href="#equation-270ccdec-7be1-4602-a3b8-e2a299035874" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \vec{e}^{'}_k = \phi^e\left( \vec{e}_k, \vec{v}_{rk}, \vec{v}_{sk}, \vec{u}\right)
 \end{equation}\]</div>
 <p>Recall that this is a general equation and our choice of <span class="math notranslate nohighlight">\(\phi^e()\)</span> defines the GNN. <span class="math notranslate nohighlight">\(\vec{e}_k\)</span> is the feature vector of edge <span class="math notranslate nohighlight">\(k\)</span>, <span class="math notranslate nohighlight">\(\vec{v}_{rk}\)</span> is the receiving node feature vector for edge <span class="math notranslate nohighlight">\(k\)</span>, <span class="math notranslate nohighlight">\(\vec{v}_{sk}\)</span> is the sending node feature vector for edge <span class="math notranslate nohighlight">\(k\)</span>, <span class="math notranslate nohighlight">\(\vec{u}\)</span> is the global graph feature vector. We will use this step for attention mechanism where the query is the receiving node <span class="math notranslate nohighlight">\(\vec{v}_{rk}\)</span> and the keys/values are composed of the senders and edges vectors. To be specific, we’ll use the approach from Zhang et al. <span id="id9">[<a class="reference internal" href="gnn.html#id81" title="Jiani Zhang, Xingjian Shi, Junyuan Xie, Hao Ma, Irwin King, and Dit-Yan Yeung. Gaan: gated attention networks for learning on large and spatiotemporal graphs. arXiv preprint arXiv:1803.07294, 2018.">ZSX+18</a>]</span> with a tensor-dot mechanism. They only considered node features and set the keys and values to be identical as the node features. However, they put trainable parameters at each layer that translated the node features in to the keys/query.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a219192e-7a92-4591-9c51-e917acc2ecdd">
-<span class="eqno">(12.13)<a class="headerlink" href="#equation-a219192e-7a92-4591-9c51-e917acc2ecdd" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-856f62e7-a004-4a59-9f94-21ff21fb0a1d">
+<span class="eqno">(12.13)<a class="headerlink" href="#equation-856f62e7-a004-4a59-9f94-21ff21fb0a1d" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \vec{q} = \mathbf{W}_q\vec{v}_{rk}
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-11414dc2-ae41-4158-9380-60ef575d8621">
-<span class="eqno">(12.14)<a class="headerlink" href="#equation-11414dc2-ae41-4158-9380-60ef575d8621" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-339ac307-b72d-4904-900e-629b2233c48c">
+<span class="eqno">(12.14)<a class="headerlink" href="#equation-339ac307-b72d-4904-900e-629b2233c48c" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathbf{K} = \mathbf{W}_k\vec{v}_{sk}
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-df44679f-cf9e-458d-8244-97845b359df5">
-<span class="eqno">(12.15)<a class="headerlink" href="#equation-df44679f-cf9e-458d-8244-97845b359df5" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b38d8be3-387e-4ddd-958e-6a1506c30b98">
+<span class="eqno">(12.15)<a class="headerlink" href="#equation-b38d8be3-387e-4ddd-958e-6a1506c30b98" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \mathbf{V} = \mathbf{W}_v\vec{v}_{sk}
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-ff6c99e4-8275-4d14-bb1f-6ec488398425">
-<span class="eqno">(12.16)<a class="headerlink" href="#equation-ff6c99e4-8275-4d14-bb1f-6ec488398425" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-4cf6cd87-1a28-4357-9860-201bf91ca60a">
+<span class="eqno">(12.16)<a class="headerlink" href="#equation-4cf6cd87-1a28-4357-9860-201bf91ca60a" title="Permalink to this equation">#</a></span>\[\begin{equation}
     \vec{b}_k = \mathrm{softmax}\left(\frac{1}{\sqrt{d}} \vec{q}\cdot \mathbf{K}\right)
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-a06afe7d-3a0e-4989-9c6a-4f052d91c83d">
-<span class="eqno">(12.17)<a class="headerlink" href="#equation-a06afe7d-3a0e-4989-9c6a-4f052d91c83d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-7c9cff19-7069-41cc-9fb0-8e5667250f14">
+<span class="eqno">(12.17)<a class="headerlink" href="#equation-7c9cff19-7069-41cc-9fb0-8e5667250f14" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \vec{e}^{'}_k = \vec{b} V
 \end{equation}\]</div>
 <p>Putting it compactly into one equation:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-74fb9bfc-9ee8-45cf-8a7d-7861c9125874">
-<span class="eqno">(12.18)<a class="headerlink" href="#equation-74fb9bfc-9ee8-45cf-8a7d-7861c9125874" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-4284a3fa-29ab-4a86-9211-92d96a34b2cd">
+<span class="eqno">(12.18)<a class="headerlink" href="#equation-4284a3fa-29ab-4a86-9211-92d96a34b2cd" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \vec{e}^{'}_k = \mathrm{softmax}\left(\frac{1}{\sqrt{d}} \mathbf{W}_q\vec{v}_{rk}\cdot \mathbf{W}_k\vec{v}_{sk}\right)\mathbf{W}_v\vec{v}_{sk}
 \end{equation}\]</div>
 <p>Now we have weighted edge feature vectors from the attention. Finally, we sum over these edge features in the edge aggregation step.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-67cb4ef6-90bb-4fbc-a2fe-49544b552d2e">
-<span class="eqno">(12.19)<a class="headerlink" href="#equation-67cb4ef6-90bb-4fbc-a2fe-49544b552d2e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-67b64fd7-2059-481a-abe5-c9f0710b4d39">
+<span class="eqno">(12.19)<a class="headerlink" href="#equation-67b64fd7-2059-481a-abe5-c9f0710b4d39" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \bar{e}^{'}_i = \rho^{e\rightarrow v}\left( E_i^{'}\right) = \sum E_i^{'}
 \end{equation}\]</div>
 <p>In Zhang et al. <span id="id10">[<a class="reference internal" href="gnn.html#id81" title="Jiani Zhang, Xingjian Shi, Junyuan Xie, Hao Ma, Irwin King, and Dit-Yan Yeung. Gaan: gated attention networks for learning on large and spatiotemporal graphs. arXiv preprint arXiv:1803.07294, 2018.">ZSX+18</a>]</span>, they used multi-headed attention as well. How would multi-headed attention work? Your edge feature matrix <span class="math notranslate nohighlight">\( E_i^{'}\)</span> now becomes an edge feature tensor, where axis 0 is edge (<span class="math notranslate nohighlight">\(k\)</span>), axis 1 is feature, and axis 2 is the head. Recall that the “head” just means which set of <span class="math notranslate nohighlight">\(\mathbf{W}^h_q, \mathbf{W}^h_k, \mathbf{W}^h_v\)</span> we used. To reduce the tensor back to the expected matrix, we simply use another weight matrix that maps from the last two axes (feature, head) down to features only. I will write-out the indices explicitly to be more clear:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-170d5f18-33b0-4b6e-a0c4-d0f05421e35e">
-<span class="eqno">(12.20)<a class="headerlink" href="#equation-170d5f18-33b0-4b6e-a0c4-d0f05421e35e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-5d7d9169-c1ef-42f4-865d-492fc166aaf7">
+<span class="eqno">(12.20)<a class="headerlink" href="#equation-5d7d9169-c1ef-42f4-865d-492fc166aaf7" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \bar{e}^{'}_{il} = \rho^{e\rightarrow v}\left( E_i^{'}\right) = \sum_k e_{ikjh}^{'}w_{jhl}
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(j\)</span> is edge feature input index, <span class="math notranslate nohighlight">\(l\)</span> is our output edge feature matrix, and <span class="math notranslate nohighlight">\(k,h,i\)</span> are defined as before. <strong>Transformer</strong> is another name for a network built on multi-headed attention, so you’ll also see transformer graph neural networks <span id="id11">[<a class="reference internal" href="#id88" title="Łukasz Maziarka, Tomasz Danel, Sławomir Mucha, Krzysztof Rataj, Jacek Tabor, and Stanisław Jastrzębski. Molecule attention transformer. arXiv preprint arXiv:2002.08264, 2020.">MDM+20</a>]</span> building.</p>

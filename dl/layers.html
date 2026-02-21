@@ -858,8 +858,8 @@ Total trainable parameters: 59,515
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/daa7881656a187d7bca03a479f4fa6803e947d21f610e01d5af642a499bb88a6.png" src="../_images/daa7881656a187d7bca03a479f4fa6803e947d21f610e01d5af642a499bb88a6.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>epoch 0 0.5452574525745257 epoch 15 0.5604336043360434
+<img alt="../_images/4638ee9078d5540b4d33d8adb86b4b9de5c5b7f54127fc96822809ea9487665f.png" src="../_images/4638ee9078d5540b4d33d8adb86b4b9de5c5b7f54127fc96822809ea9487665f.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>epoch 0 0.5468834688346883 epoch 15 0.5615176151761517
 </pre></div>
 </div>
 </div>
@@ -889,8 +889,8 @@ Total trainable parameters: 59,515
 <section id="batch-normalization">
 <h3><span class="section-number">7.6.4. </span>Batch Normalization<a class="headerlink" href="#batch-normalization" title="Link to this heading">#</a></h3>
 <p>It is arguable if batch normalization is a regularization technique – there is often debate about why it’s effective. Batch normalization is a layer that is added to a neural network with trainable weights <span id="id11">[<a class="reference internal" href="#id238" title="Sergey Ioffe and Christian Szegedy. Batch normalization: accelerating deep network training by reducing internal covariate shift. In International conference on machine learning, 448–456. PMLR, 2015.">IS15</a>]</span>. Batch normalization has a layer equation of:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-bc9039dd-1d8b-4ff8-8164-ffa5341641d6">
-<span class="eqno">(7.1)<a class="headerlink" href="#equation-bc9039dd-1d8b-4ff8-8164-ffa5341641d6" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-c99ca45b-8d4b-4c35-a01e-cc5de13c9d52">
+<span class="eqno">(7.1)<a class="headerlink" href="#equation-c99ca45b-8d4b-4c35-a01e-cc5de13c9d52" title="Permalink to this equation">#</a></span>\[\begin{equation}
 f(X) = \gamma\frac{X - \bar{X}(B)}{S(B)} + \beta
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\bar{X}\)</span> and <span class="math notranslate nohighlight">\(S\)</span> are the sample mean and variance taken across the batch axis. This has the effect of “smoothing” out the magnitudes of values seen between batches. <span class="math notranslate nohighlight">\(\gamma\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> are optional trainable parameters that can move the output mean and variance to be <span class="math notranslate nohighlight">\(\beta\)</span> and <span class="math notranslate nohighlight">\(\gamma\)</span>, respectively. Remember that activations like ReLU depend on values being near 0 (since the nonlinear part is at <span class="math notranslate nohighlight">\(x = 0\)</span>) and tanh has the most change in output around <span class="math notranslate nohighlight">\(x = 0\)</span>, so you typically want your intermediate layer outputs to be around <span class="math notranslate nohighlight">\(0\)</span>. But, <span class="math notranslate nohighlight">\(\gamma\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> allow the optimum output to be learned. At inference time you may not have batches or your batches may be a different size, so <span class="math notranslate nohighlight">\(\bar{X}\)</span> and <span class="math notranslate nohighlight">\(S\)</span> are set to the average across all batches seen in training data. A common explanation of batch normalization is that it smooths out the optimization landscape by forcing layer outputs to be approximately normal<span id="id12">[<a class="reference internal" href="#id176" title="Shibani Santurkar, Dimitris Tsipras, Andrew Ilyas, and Aleksander Mądry. How does batch normalization help optimization? In Proceedings of the 32nd international conference on neural information processing systems, 2488–2498. 2018.">STIMkadry18</a>]</span>.</p>
@@ -919,13 +919,13 @@ in <span class="math notranslate nohighlight">\(M\)</span>. Dropout forces your 
 <section id="residues">
 <h2><span class="section-number">7.7. </span>Residues<a class="headerlink" href="#residues" title="Link to this heading">#</a></h2>
 <p>One last “layer” note to mention is residues. One of the classic problems in neural network training is <strong>vanishing gradients</strong>. If your neural network is deep and many features contribute to the label, you can have very small gradients during training that make it difficult to train. This is visible as underfitting. One way this can be addressed is through careful choice of optimization and learning rates. Another way is to add “residue” connections in the neural network. Residue connections are a fancy way of saying “adding” or “concatenating” later layers with early layers. The most common way to do this is:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-71c9582b-53da-4482-8967-ef3c65eea738">
-<span class="eqno">(7.2)<a class="headerlink" href="#equation-71c9582b-53da-4482-8967-ef3c65eea738" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ca39dc97-f321-4280-8177-9a6a8cdea6b7">
+<span class="eqno">(7.2)<a class="headerlink" href="#equation-ca39dc97-f321-4280-8177-9a6a8cdea6b7" title="Permalink to this equation">#</a></span>\[\begin{equation}
 X^{i + 1} = \sigma(W^iX^i + b^i) + X^i
 \end{equation}\]</div>
 <p>This is the usual equation for a dense neural network but we’ve added the previous layer output (<span class="math notranslate nohighlight">\(X^i\)</span>) to our output. Now when you take a gradient of earlier weights from layer <span class="math notranslate nohighlight">\(i - 1\)</span>, they will appear through both the <span class="math notranslate nohighlight">\(\sigma(W^iX^i + b^i)\)</span> term via the chain rule and the <span class="math notranslate nohighlight">\(X^i\)</span> term. This goes around the activation <span class="math notranslate nohighlight">\(\sigma\)</span> and the effect of <span class="math notranslate nohighlight">\(W^i\)</span>. Note this continues at all layers and then a gradient can propagate back to earlier layers via either term. You can add the “residue” connection to the previous layer as shown here or go back even earlier. You can also be more complex and use a trainable function for how the residue term (<span class="math notranslate nohighlight">\(X^i\)</span>) can be treated. For example:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0e7a7cd7-2ae9-4a20-9ba7-1dacf7c1006f">
-<span class="eqno">(7.3)<a class="headerlink" href="#equation-0e7a7cd7-2ae9-4a20-9ba7-1dacf7c1006f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-75a98e05-10ce-4559-bf77-7cf13a7d3d4b">
+<span class="eqno">(7.3)<a class="headerlink" href="#equation-75a98e05-10ce-4559-bf77-7cf13a7d3d4b" title="Permalink to this equation">#</a></span>\[\begin{equation}
 X^{i + 1} = \sigma(W^iX^i + b^i) + W'^i X^i
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(W'^i\)</span> is a set of new trainable parameters. We have seen that there are many hyperparametes for tuning and adjusting residue connections is one of the least effective things to adjust. So don’t expect much of an improvement. However, if you’re seeing underfitting and inefficient training, perhaps it’s worth investigating.</p>
@@ -1035,8 +1035,8 @@ Total trainable parameters: 59,515
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/e91895c34c46d3aec6202f077d62b99c4c49135e5880cd166a845f34f5850c1a.png" src="../_images/e91895c34c46d3aec6202f077d62b99c4c49135e5880cd166a845f34f5850c1a.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>epoch 0 0.5495934959349593 epoch 15 0.591869918699187
+<img alt="../_images/970b5059b59118c8123753a5266961a11fdff479162ff2e4ab0a565f0aa91035.png" src="../_images/970b5059b59118c8123753a5266961a11fdff479162ff2e4ab0a565f0aa91035.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>epoch 0 0.5360433604336043 epoch 15 0.578319783197832
 </pre></div>
 </div>
 </div>
