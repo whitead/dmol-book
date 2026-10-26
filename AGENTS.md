@@ -20,9 +20,10 @@ Jupyter Book. `main` is the active branch and the base for pull requests.
 - CI uses Python 3.13 and installs the local package with `pip install -e package/`.
   The package requires Python 3.12 or newer.
 - Run `pre-commit run --all-files` for formatting and notebook output checks.
-- Run `jupyter-book build -n .` for the same no-execution structure build used
-  by the pull request check. `jupyter-book build .` executes notebooks and
-  builds the full site in `_build/html/`.
+- Run `jupyter-book build -n .` for the same build used by the pull request
+  check, with extra warnings for missing references. The `-n` flag does not
+  disable notebook execution; `_config.yml` forces execution. The HTML is
+  written to `_build/html/`.
 - Review `git status` before committing so local build artifacts and data do
   not enter a pull request.
 

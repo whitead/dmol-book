@@ -27,7 +27,7 @@ jobs:
         pip install pre-commit
         pre-commit run --all-files || ( git status --short ; git diff ; exit 1 )
 
-    - name: Build the book (structure check, no execution)
+    - name: Build the book (nitpicky reference check)
       run: jupyter-book build -n .
 
     - name: Verify Equivariant inline diagrams
