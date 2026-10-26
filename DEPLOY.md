@@ -2,15 +2,18 @@
 
 ## Deploy
 
-Deployments are manual via GitHub Actions:
+Deployments are manual via GitHub Actions. Merge changes into `main` before
+deploying; the workflow builds the ref selected when it is run.
 
 1. Go to **Actions** > **deploy-book** > **Run workflow** (or use the CLI):
 
    ```bash
-   gh workflow run deploy-jupyter-book.yml --ref v2
+   gh workflow run deploy-jupyter-book.yml --ref main
    ```
 
-2. The workflow builds the book and pushes the result to the `gh-pages` branch. The site at dmol.pub updates automatically via GitHub Pages.
+2. Wait for the **deploy-book** workflow to finish. It builds the book, pushes
+   `_build/html` to `gh-pages`, and triggers a GitHub Pages build.
+3. Check the updated page at [dmol.pub](https://dmol.pub).
 
 ## Rollback
 
@@ -37,7 +40,8 @@ Because `force_orphan` is off, the `gh-pages` branch keeps full commit history. 
 Package publishing is a separate workflow:
 
 ```bash
-gh workflow run publish-package.yml --ref v2
+gh workflow run publish-package.yml --ref main
 ```
 
-This builds and uploads the `dmol-book` package to PyPI using trusted publishing.
+This builds and uploads the `dmol-book` package to PyPI using the
+`PYPI_API_TOKEN` repository secret.

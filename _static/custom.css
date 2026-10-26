@@ -128,10 +128,12 @@ td>p {
   height: 100%;
 }
 
-/* Not sure why, but pasted images are going display:blocks(??)*/
-
-.pasted-inline>img {
-  display: inline !important;
+/* The group diagrams pasted into Equivariant prose render as bare img tags. */
+#equivariant-neural-networks p > img {
+  display: inline-block;
+  width: auto;
+  max-height: 2em;
+  vertical-align: middle;
 }
 
 /* div.sidebar,
