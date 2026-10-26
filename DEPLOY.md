@@ -11,8 +11,9 @@ deploying; the workflow builds the ref selected when it is run.
    gh workflow run deploy-jupyter-book.yml --ref main
    ```
 
-2. Wait for the **deploy-book** workflow to finish. It builds the book, pushes
-   `_build/html` to `gh-pages`, and triggers a GitHub Pages build.
+2. Wait for the **deploy-book** workflow to finish. It builds the book, checks
+   that the Equivariant glue images rendered, pushes `_build/html` to
+   `gh-pages`, and triggers a GitHub Pages build.
 3. Check the updated page at [dmol.pub](https://dmol.pub).
 
 ## Rollback
