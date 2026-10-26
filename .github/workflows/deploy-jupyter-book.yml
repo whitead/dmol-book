@@ -27,6 +27,9 @@ jobs:
     - name: Build the book
       run: jupyter-book build .
 
+    - name: Verify Equivariant glue images
+      run: python scripts/check_equivariant_images.py
+
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v4
       with:

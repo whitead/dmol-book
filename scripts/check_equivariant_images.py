@@ -2,13 +2,16 @@
 
 import json
 import re
+import sys
 from html.parser import HTMLParser
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
 NOTEBOOK = ROOT / "dl/Equivariant.ipynb"
-HTML = ROOT / "_build/html/dl/Equivariant.html"
+HTML = (
+    Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT / "_build/html/dl/Equivariant.html"
+)
 
 
 class InlineImages(HTMLParser):
@@ -17,9 +20,12 @@ class InlineImages(HTMLParser):
         self.tags = []
         self.sections = []
         self.sources = []
+        self.tracebacks = 0
 
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
+        if tag == "div" and "traceback" in attrs.get("class", "").split():
+            self.tracebacks += 1
         if tag == "section":
             self.sections.append(attrs.get("id"))
         if (
@@ -46,18 +52,17 @@ markdown = "".join(
     for cell in notebook["cells"]
     if cell["cell_type"] == "markdown"
 )
-expected = len(
-    re.findall(r"!\[[^]]+\]\(\.\./_static/images/equivariant/[^)]+\.png\)", markdown)
-)
-assert expected == 31, f"Expected 31 source diagrams, found {expected}"
+expected = len(re.findall(r"\{glue:\}`(?:hex|quad)-[^`]+`", markdown))
+assert expected == 31, f"Expected 31 glue references, found {expected}"
 
 parser = InlineImages()
 parser.feed(HTML.read_text())
 assert len(parser.sources) == expected, (
-    f"Expected {expected} inline diagrams in rendered HTML, "
+    f"Expected {expected} inline glue images in rendered HTML, "
     f"found {len(parser.sources)}"
 )
+assert parser.tracebacks == 0, f"Found {parser.tracebacks} notebook tracebacks"
 
 missing = [src for src in parser.sources if not (HTML.parent / src).is_file()]
 assert not missing, f"Rendered diagrams are missing files: {missing}"
-print(f"Verified {expected} rendered inline Equivariant diagrams and their image files")
+print(f"Verified {expected} rendered inline Equivariant glue images and their files")

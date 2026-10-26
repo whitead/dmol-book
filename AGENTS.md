@@ -24,6 +24,8 @@ Jupyter Book. `main` is the active branch and the base for pull requests.
   check, with extra warnings for missing references. The `-n` flag does not
   disable notebook execution; `_config.yml` forces execution. The HTML is
   written to `_build/html/`.
+- Run `python scripts/check_equivariant_images.py` after a build to verify
+  that the Equivariant chapter's inline glue images rendered.
 - Review `git status` before committing so local build artifacts and data do
   not enter a pull request.
 
