@@ -47,9 +47,7 @@ markdown = "".join(
     if cell["cell_type"] == "markdown"
 )
 expected = len(
-    re.findall(
-        r"!\[[^]]+\]\(\.\./_static/images/equivariant/[^)]+\.png\)", markdown
-    )
+    re.findall(r"!\[[^]]+\]\(\.\./_static/images/equivariant/[^)]+\.png\)", markdown)
 )
 assert expected == 31, f"Expected 31 source diagrams, found {expected}"
 
