@@ -3,8 +3,7 @@
 ## Project
 
 This repository builds the [Deep Learning for Molecules and Materials](https://dmol.pub)
-Jupyter Book. `main` is the active branch and the base for pull requests; the
-former `v2` branch was merged into `main`.
+Jupyter Book. `main` is the active branch and the base for pull requests.
 
 ## Source and generated files
 
