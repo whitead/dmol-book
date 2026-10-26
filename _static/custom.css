@@ -128,7 +128,7 @@ td>p {
   height: 100%;
 }
 
-/* The group diagrams pasted into Equivariant prose render as bare img tags. */
+/* Keep the Equivariant group diagrams at text size in the prose. */
 #equivariant-neural-networks p > img {
   display: inline-block;
   width: auto;
